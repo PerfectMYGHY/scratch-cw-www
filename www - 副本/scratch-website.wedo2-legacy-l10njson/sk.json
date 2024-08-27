@@ -1,0 +1,22 @@
+{
+    "wedoLegacy.intro": "LEGO® Education WeDo 2.0 je úvodná súprava vynálezu, ktorú môžete použiť na zostavenie vlastných interaktívnych strojov. Môžete spojiť programovacie bloky Scratch, aby ste mohli interagovať so svojimi výtvormi LEGO WeDo a pridať animácie na obrazovku.",
+    "wedoLegacy.requirement": "Rozšírenie LEGO WeDo 2.0 je dostupné pre Mac OSX a Windows 10+.",
+    "wedoLegacy.getStarted": "Začíname s LEGO WeDo 2.0",
+    "wedoLegacy.installTitle": "1. Nainštalujte Správcu zariadení",
+    "wedoLegacy.installText": "Správca zariadení vám umožňuje pripojiť WeDo 2.0 k Scratch pomocou Bluetooth",
+    "wedoLegacy.downloadMac": "Stiahnite si pre macOS",
+    "wedoLegacy.downloadWin": "Stiahnite si pre Windows 10+",
+    "wedoLegacy.setupTitle": "2. Nastavenie a pomoc",
+    "wedoLegacy.setupText": "Pripojte svoj WeDo 2.0 podľa krokov v <a href=\"/projects/editor/?tip_bar=ext2\">okne s tipmi</a>",
+    "wedoLegacy.setupTextHTML": "Pripojte svoj WeDo 2.0 podľa krokov v <a>okne s tipmi</a>",
+    "wedoLegacy.createTitle": "3. Vytvorte",
+    "wedoLegacy.createText": "Použite rozširujúce bloky WeDo na zapnutie svetiel, ovládanie motorov a vytvorenie interaktívneho projektu",
+    "wedoLegacy.wedo2SetupInstructions": "Pokyny na nastavenie WeDo 2.0",
+    "wedoLegacy.wedo1SetupInstructions": "Pokyny na nastavenie WeDo 1.0",
+    "wedoLegacy.starterProjects": "Štartovacie projekty WeDo 2.0",
+    "wedoLegacy.starterMotor": "Motor",
+    "wedoLegacy.starterDistance": "Senzor vzdialenosti",
+    "wedoLegacy.starterTilt": "Senzor náklonu",
+    "wedoLegacy.versionTitle": "Akú verziu máš?",
+    "wedoLegacy.versionText": "Scratch môžete použiť aj na naprogramovanie pôvodného LEGO WeDo (LEGO WeDo 1.0)."
+}

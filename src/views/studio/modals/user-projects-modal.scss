@@ -1,0 +1,141 @@
+@import "../../../colors";
+@import "../../../frameless";
+
+.user-projects-modal {
+    .user-projects-modal-title {
+        box-shadow: inset 0 -1px 0 0 $box-shadow-light-gray;
+        background-color: $ui-purple-dark;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        padding-top: .75rem;
+        width: 100%;
+        height: 3rem;
+    }
+    .user-projects-modal-nav {
+        padding: 6px 12px;
+        border-bottom: 1px solid $active-gray;
+        width: unset;
+        button {
+            cursor: pointer;
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            color: #575e75;
+            &.active {
+                background: $ui-purple-dark;
+                color: white;
+            }
+            &:active {
+                padding: .75em 1.5em;
+            }
+        }
+        button:hover {
+            background: $ui-purple-25percent;
+            border: 1px solid $ui-purple-10percent;
+        }
+    }
+    .user-projects-modal-content {
+        padding: 0 30px 8px;
+        background: #E9F1FC;
+        height: calc(100vh - 300px);
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        @media #{$intermediate-and-smaller} {
+            & { height: calc(100vh - 170px); }
+        }
+    }
+
+    .studio-projects-done-row {
+        display: flex;
+        justify-content: flex-end;
+        padding: 6px 12px;
+        border-top: 1px solid $active-gray;
+    }
+
+    .studio-projects-empty {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+    }
+
+    .studio-projects-empty-text {
+        color: hsla(215, 100%, 65%, .75);
+        max-width: 325px;
+        text-align: center;
+        line-height: 1.5rem;
+        margin-top: 1rem;
+    }
+
+    .studio-projects-spinner {
+        margin: auto;
+    }
+}
+
+.studio-tile-added {
+    border: 1px solid $ui-purple-dark !important; // Override the tile border set in studio.scss .studio-project-tile
+    box-shadow: 0 0 0 4px $ui-purple-25percent;
+}
+
+.studio-project-add-remove-image {
+    margin: 7px;
+}
+
+.studio-tile-dynamic-remove,
+.studio-tile-dynamic-add {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    background: rgba(0, 0, 0, 0.25);
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    background-clip: padding-box;
+    color: white;
+    border-radius: 100%;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    line-height: 32px;
+    align-content: center;
+    display: flex;
+    justify-content: center;
+}
+.studio-tile-dynamic-remove {
+    background: #0FBD8C;
+    background-clip: padding-box;
+    border: 3px solid rgba(15, 189, 140, 0.2);
+}
+
+.user-projects-modal-grid {
+    margin-top: 12px;
+    margin-bottom: 8px;
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    @media #{$medium} { /* Keep 3 columns to narrower width since it is in a modal */
+        & { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+    @media #{$small} {
+        & { grid-template-columns: repeat(1, minmax(0,1fr)); }
+    }
+    column-gap: 14px;
+    row-gap: 14px;
+
+    .studio-project-bottom {
+        padding: 8px 10px 8px 10px;
+    }
+    .studio-project-avatar {
+        width: 32px;
+        height: 32px;
+    }
+    .studio-project-info {
+        margin: 0;
+    }
+    .studio-project-title {
+        font-size: 12px;
+    }
+    .studio-project-username {
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,42 @@
+@import "../../colors";
+@import "../../frameless";
+
+.title-banner {
+    transition: background-image .5s ease, background-color .5s ease;
+    margin-bottom: 40px;
+    background-color: $ui-aqua;
+    background-position: center;
+    background-size: cover;
+    padding: 20px 0;
+    width: 100%;
+}
+
+.title-banner-h1, 
+.title-banner-p {
+    margin: 0 auto;
+    padding: 5px 0;
+    text-align: center;
+    color: $type-white;        
+}
+
+.title-banner-p {
+    max-width: 500px;
+}
+
+// On windows strong gets reset to font-weight 500, so make sure to override for banners
+.title-banner-strong {
+    font-weight: 700;  
+}
+
+.title-banner.mod-blue-bg {
+    background-color: $ui-blue;
+    
+    // override link color if background in ui-blue
+    a {
+        color: $ui-white;
+    }
+
+    a.mod-underline {
+        text-decoration: underline;
+    }
+}

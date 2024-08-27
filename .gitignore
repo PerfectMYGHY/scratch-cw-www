@@ -1,0 +1,38 @@
+# OSX
+.DS_Store
+
+# NPM
+/node_modules
+npm-*
+
+# Build
+/build
+
+# Locales
+# /locales
+# /intl
+/.vs
+/www - ¸±±¾
+
+# Scratch Excutable Files
+/static/desktop/Scratch Setup.exe
+/static/desktop/Scratch.dmg
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+deploy.zip
+ENV
+
+# Test
+/test/results/*
+/.nyc_output
+/coverage
+# /bin/lib/localized-urls.json
+/test/integration-cypress/node_modules
+/test/integration-cypress/cypress.env.json
+/test/integration-cypress/cypress/screenshots
+/test/integration-cypress/cypress/videos
+/test/integration-cypress/package-lock.json
+/test/integration/node_modules/*

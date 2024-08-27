@@ -1,0 +1,48 @@
+@import "../../../colors";
+@import "../../../frameless";
+
+#footer {
+    .lists {
+        display: flex;
+        text-align: center;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+
+        dl {
+            display: inline-block;
+            vertical-align: top;
+            text-align: left;
+            font-size: .8rem;
+        }
+
+        dt {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        dd {
+            display: block;
+            margin: 5px 0;
+            line-height: 1.2rem;
+
+            a {
+                font-weight: 400;
+            }
+        }
+    }
+
+    .copyright {
+        display: block;
+        width: 100%;
+        text-align: center;
+
+        p {
+            font-size: .7rem;
+        }
+    }
+
+    .language-chooser {
+        text-align: center;
+    }
+}

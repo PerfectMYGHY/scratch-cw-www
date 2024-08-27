@@ -1,0 +1,25 @@
+@import "../../colors";
+
+.commenting-status {
+    border: 1px solid $ui-blue-10percent;
+    border-radius: 8px;
+    padding: 1.75rem 3rem 2rem;
+    margin: .5rem 0 2rem;
+    background-color: $ui-blue-10percent;
+    text-align: center;
+    box-sizing: border-box;
+
+    p {
+        margin-bottom: 0;
+        line-height: 1.75rem;
+        max-width: 36rem;
+    }
+    .bottom-text {
+        font-size: .875rem;
+        width: 100%;
+    }
+    .status-icon-class {
+        width: 28px;
+        height: 28px;
+    }
+}

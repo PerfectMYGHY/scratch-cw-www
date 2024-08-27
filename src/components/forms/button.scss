@@ -1,0 +1,74 @@
+@import "../../colors";
+
+$base-bg: $ui-white;
+$fail-bg: $ui-orange;
+$pass-bg: $ui-aqua;
+
+.button {
+    display: inline-block;
+    margin: .5em 0;
+    border: 0;
+    border-radius: .5rem;
+    background-color: $ui-purple-dark;
+    cursor: pointer;
+    padding: 1em 1.25em;
+    color: $type-white;
+    font-size: .8rem;
+    font-weight: bold;
+
+    /* USER BUTTON STATES */
+    &:focus {
+        outline: none;
+    }
+
+    /* DATA BUTTON STATES */
+    &.white {
+        background-color: $base-bg;
+        color: $ui-purple-dark;
+    }
+
+    &.pass {
+        background-color: $pass-bg;
+    }
+
+    &.fail {
+        background-color: $fail-bg;
+    }
+
+    &:disabled {
+        box-shadow: none;
+    }
+
+    &.large {
+        border-radius: .25rem;
+        font-size: 1rem;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        padding: .75rem 1.25rem .8125rem;
+    }
+
+    &.icon-right img {
+        height: 1.25rem;
+        margin-bottom: -.25rem;
+        margin-left: .5rem;
+        margin-right: -.25rem;
+    }
+}
+
+.forms-close-button {
+    padding: 0;
+
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    border-radius: 1rem;
+    background-color: $active-gray;
+    cursor: pointer;
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+    line-height: 2rem;
+}
+
+.forms-close-button img {
+    padding-top: 0.5rem;
+}

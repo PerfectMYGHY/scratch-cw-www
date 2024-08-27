@@ -1,0 +1,281 @@
+#!/usr/bin/env node
+
+/*
+    Generates javascript translation files for each view from the individual language
+    json files downloaded from Transifex for each view. Each view also includes the
+    general translations.
+
+    Expects two inputs, the directory for the input json files, and an output
+    to put the generated js files into.
+
+    The input directory is to have subfolders for each view, with json files named by
+    langage code. E.g., localizations/about/fr.json
+
+    The output files are javascript files that declare objects by locale. Each locale
+    has a sub-object with FormattedMessage ids as keys, and translated strings as
+    values. If no translation was found for a string, the default english will be the
+    value.
+
+    Output Example:
+    '''
+    var message = {
+        en: {
+            'general.inAWorld': 'In a world, where bears are invisible...',
+            'general.question': 'Are there bears here?',
+            'general.answer': 'I dunno, but there could be...'
+        },
+        es: {
+            'general.inAWorld': 'En un mundo, donde hay osos invisibles',
+            'general.question': 'Are there bears here?',
+            'general.answer': 'No sé, pero es posible...'
+        }
+    }
+    '''
+*/
+var async = require('async');
+var fs = require('fs');
+const languages = require('scratch-l10n').default;
+var localizedUrls = require('./lib/localized-urls');
+var merge = require('lodash.merge');
+var defaults = require('lodash.defaults');
+var path = require('path');
+var routes = require('../src/routes.json');
+
+// -----------------------------------------------------------------------------
+// Utility function
+// -----------------------------------------------------------------------------
+
+var writeIntlFile = function (outputDir, view, translations, callback) {
+    var fileString = 'window._messages = ' + JSON.stringify(translations) + ';';
+    var fileName = outputDir + '/' + view + '.intl.js';
+    fs.writeFile(fileName, fileString, 'utf8', function (err) {
+        if (err) {
+            callback(err);
+        } else {
+            callback();
+        }
+    });
+};
+
+// -----------------------------------------------------------------------------
+// Main script
+// -----------------------------------------------------------------------------
+
+var args = process.argv.slice(2);
+
+if (!args.length) {
+    process.stdout.write('A localizations directory must be specified.\n');
+    process.exit(1);
+}
+
+var localesDir = path.resolve(__dirname, '../', args.shift());
+
+try {
+    fs.accessSync(localesDir, fs.F_OK);
+} catch (err) {
+    // Doesn't exist - create it.
+    process.stdout.write('Fatal error: No localizations directory.\n');
+    process.exit(1);
+}
+
+if (!args.length) {
+    process.stdout.write('A destination directory must be specified.\n');
+    process.exit(1);
+}
+var outputDir = path.resolve(__dirname, '../', args[0]);
+try {
+    fs.accessSync(outputDir, fs.F_OK);
+} catch (err) {
+    // Doesn't exist - create it.
+    fs.mkdirSync(outputDir);
+}
+
+// get global locale strings first.
+var globalTemplateFile = path.resolve(__dirname, '../src/l10n.json');
+
+// generate object with all translations of general strings;
+// every view includes these strings
+var generalLocales = {'en': JSON.parse(fs.readFileSync(globalTemplateFile, 'utf8'))};
+process.stdout.write("正在读取通用配置并应用...\n");
+// for ( var l in languages ) {
+for ( var l=null,i=0; i<Object.keys(languages).length; i++ ) {
+    try {
+        l = Object.keys(languages)[i];
+        var langTranslations = path.resolve(
+            __dirname,
+            '../',
+            localesDir,
+            'scratch-website.general-l10njson',
+            l + '.json'
+        );
+        fs.accessSync(langTranslations);
+        if (l !== 'en') {
+            generalLocales[l] = JSON.parse(fs.readFileSync(langTranslations, 'utf8'));
+        }
+        // process.stdout.flush();
+    process.stdout.write(`\r进度：[${'='.repeat(Math.round(((i+1)/Object.keys(languages).length*50)))}${' '.repeat(Math.round((1-(i+1)/Object.keys(languages).length)*50))}]    `);
+    } catch (err) {
+        // just use english
+        generalLocales[l] = generalLocales['en'];
+    }
+}
+process.stdout.write("\n");
+
+// default strings (en), for all views
+var defaultLocales = {
+    //e.g.
+    // 'explore: {'explore.recent': 'recent'}
+    // 'about': {'about.title': 'about Scratch'}
+    // ... etc
+};
+var views = [];
+var localizedAssetUrls = {};
+
+// Most views will have the same name for:
+//   - the view folder
+//   - the route name
+//   - the transifex resource
+// Add exceptions:
+//   - txMapping: if the name of the transifex resource is different from the route name
+var txMapping = {
+    'projects': 'preview',
+    'embed': 'preview',
+    'vernier': 'gdxfor',
+    'scratch_1.4': 'scratch_14' // transifex doesn't allow dots in resource names
+};
+// start with english default for all views
+process.stdout.write("正在结合配置...\n");
+// for (var v in routes) {
+for ( var v=null,i=0; i<Object.keys(routes).length; i++ ) {
+    v = Object.keys(routes)[i];
+    if (typeof routes[v].redirect !== 'undefined') {
+        continue;
+    }
+
+    views.push(routes[v].name);
+    try {
+        var subdir = routes[v].view.split('/');
+        subdir.pop();
+        var l10n = path.resolve(__dirname, '../src/views/' + subdir.join('/') + '/l10n.json');
+        var viewIds = JSON.parse(fs.readFileSync(l10n, 'utf8'));
+        defaultLocales[routes[v].name] = viewIds;
+    } catch (err) {
+        if (err.code !== 'ENOENT') {
+            throw err;
+        }
+
+        try {
+            fs.accessSync(path.resolve(__dirname, '../src/views/' + routes[v].view + '.jsx'));
+        } catch (err) {
+            // the config for the view is not set up correctly, so throw the error.
+            throw err;
+        }
+    }
+
+    // get asset url translations
+    try {
+        subdir = routes[v].view.split('/');
+        subdir.pop();
+        var l10nStatic = path.resolve(__dirname, '../src/views/' + subdir.join('/') + '/l10n-static.json');
+        localizedAssetUrls[routes[v].name] = {};
+
+        var viewUrls = require(l10nStatic);
+        localizedAssetUrls[routes[v].name]['en'] = viewUrls;
+        var defaultUrls = localizedUrls['en'];
+        for (var lang in languages) {
+            localizedAssetUrls[routes[v].name][lang] = {};
+            var langUrls = localizedUrls[lang] || {};
+            for (var key in viewUrls) {
+                if (langUrls.hasOwnProperty(key)) {
+                    localizedAssetUrls[routes[v].name][lang][key] = langUrls[key];
+                } else {
+                    localizedAssetUrls[routes[v].name][lang][key] = defaultUrls[key];
+                }
+            }
+        }
+    } catch (err) {
+        if (err.code !== 'MODULE_NOT_FOUND') {
+            throw err;
+        }
+
+        try {
+            fs.accessSync(path.resolve(__dirname, '../src/views/' + routes[v].view + '.jsx'));
+        } catch (err) {
+            // the config for the view is not set up correctly, so throw the error.
+            throw err;
+        }
+    }
+    // process.stdout.flush();
+    process.stdout.write(`\r进度：[${'='.repeat(Math.round(((i+1)/Object.keys(routes).length*50)))}${' '.repeat(Math.round((1-(i+1)/Object.keys(routes).length)*50))}]    `);
+}
+process.stdout.write("\n");
+
+var allLangs = Object.keys(languages);
+
+var i=0;
+process.stdout.write("正在生成数据并写入(慢在写入)...\n");
+async.forEachLimit(views, 5, function (view, cb) {
+    //start with localizedAssets, merge the view translations
+    var viewLocales = {};
+    viewLocales['en'] = merge({}, generalLocales['en'], defaultLocales[view]);
+
+    // merge view specific english strings, first then other languages
+    async.forEach(allLangs, function (isoCode, cb) {
+        var txResource = txMapping[view] || view;
+        var translationsFile = path.resolve(
+            __dirname,
+            '../',
+            localesDir,
+            'scratch-website.' + txResource + '-l10njson',
+            isoCode + '.json'
+        );
+        fs.readFile(translationsFile, 'utf8', function (err, data) {
+            if (err) {
+                if (err.code === 'ENOENT') {
+                    // ignore missing files for english, Meow, and Edible Scratch
+                    if (isoCode !== 'en') {
+                        if (isoCode !== 'cat' && isoCode !== 'yum'  && defaultLocales.hasOwnProperty(view)) {
+                            process.stdout.write('No translations for ' + view + ' ' + isoCode + ', don\'t using english\n');
+                        }
+                        // viewLocales[isoCode] = merge({}, generalLocales[isoCode], defaultLocales[view]);
+                        // defaults(viewLocales[isoCode], generalLocales['en']);
+                    }
+                    return cb();
+                } else {
+                    return cb(err);
+                }
+            }
+            try {
+                // don't overwrite english view strings
+                if (isoCode !== 'en') {
+                    viewLocales[isoCode] = merge({}, generalLocales[isoCode], JSON.parse(data));
+                    defaults(viewLocales[isoCode], viewLocales['en']);
+                }
+            } catch (e) {
+                return cb(e);
+            }
+            cb();
+        });
+    }, function (err) {  // eslint-disable-line no-unused-vars
+        // ignore translation file errors, just keep going.
+        var viewTranslations = merge({}, viewLocales, localizedAssetUrls[view]);
+        writeIntlFile(outputDir, view, viewTranslations, function (err) {
+            process.stdout.write(`\r进度：[${'='.repeat(Math.round(((i+1)/Object.keys(views).length*50)))}${' '.repeat(Math.round((1-(i+1)/Object.keys(views).length)*50))}]    `);
+            if (i == Object.keys(views).length-1){
+                process.stdout.write("\n");
+            }
+            i += 1;
+            if (err) {
+                process.stdout.write('Failed to save: ' + view + '\n');
+                return cb(err);
+            }
+        });
+    });
+    cb();
+}, function (err) {
+    if (err) {
+        process.stdout.write('Writing intl files no haz successes\n');
+        process.exit(1);
+    }
+    return;
+});

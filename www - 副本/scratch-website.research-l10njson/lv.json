@@ -1,0 +1,9 @@
+{
+    "research.title": "Scratch pētījumi",
+    "research.conductors": "Izpēti par Scratch veic Scratch Foundation komanda. Daloties projektos un piedaloties Scratch tiešsaistes kopienā, jūs palīdzat mums labāk izprast, kā cilvēki izmanto un mācās ar Scratch. Jebkuri publiski kopīgoti projekti, komentāri vai cits materiāls Scratch vietnē var tikt iekļauts pētījumu analīzēs, prezentācijās un ziņojumos. Mēs nekad neizpaužam personu identificējošu informāciju. Lai uzzinātu vairāk, lūdzu, izlasiet {ethicsCodeLink}. (Ja jums ir kādi jautājumi, lūdzu, izmantojiet veidlapu {contactLink}.)",
+    "research.collaborators": "Iepriekšējie pētniecības līdzstrādnieki ir bijuši Mūžizglītības bērnudārza grupa MIT, Yasmin Kafai Pensilvānijas Universitātes Izglītības augstskolā, Kārens Brennans Hārvardas Izglītības augstskolā, Bendžamins Mako Hills Vašingtonas Universitātē, Andrēss Monrojs Ernandess no Microsoft Research, Mimi Ito un Kristla Mārtina Kalifornijas Universitātē Īrvinā, Kvins Bērks Čārlstonas koledžā, Debora Fīldsa Jūtas štata universitātē un Kailija Peplere Indiānas universitātē. Tālāk ir atlasīti pētījumi, prezentācijas un tēzes par Scratch un Scratch tiešsaistes kopienu, kam seko Nacionālā Zinātnes fonda dotāciju saraksts, kas piešķirtas Scratch atbalstam.",
+    "research.ethicsCodeLinkText": "Scratch Foundation pētniecības ētikas kodekss",
+    "research.contactLinkText": "Sazinies ar mums",
+    "research.papers": "Scratch dokumenti un prezentācijas",
+    "research.grants": "Nacionālā Zinātnes fonda granti"
+}

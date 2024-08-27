@@ -1,0 +1,67 @@
+{
+    "studios": {
+        "isManager": {
+            "manager": true
+        },
+        "isCurator": {
+            "curator": true
+        },
+        "isInvited": {
+            "invited": true
+        },
+        "creator1": {
+            "host": 1
+        },
+        "openToAll": {
+            "openToAll": true
+        }
+    },
+    "sessions": {
+        "user1Admin": {
+            "session": {
+                "user": {
+                    "id": 1
+                },
+                "permissions": {
+                    "admin": true
+                }
+            }
+        },
+        "user1Social": {
+            "session": {
+                "user": {
+                    "id": 1,
+                    "username": "user1-username"
+                },
+                "permissions": {
+                    "social": true
+                }
+            }
+        },
+        "user1": {
+            "session": {
+                "user": {
+                    "id": 1,
+                    "username": "user1-username",
+                    "token": "user1-token"
+                },
+                "permissions": {
+                    "admin": false,
+                    "social": false
+                }
+            }
+        },
+        "user1Muted": {
+            "session": {
+                "user": {
+                    "id": 1,
+                    "username": "user1-username"
+                },
+                "permissions": {
+                    "mute_status": {"muteExpiresAt": 32515480478, "offenses": [], "showWarning": false},
+                    "social": true
+                }
+            }
+        }
+    }
+}

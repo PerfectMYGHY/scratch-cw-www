@@ -1,0 +1,13 @@
+@import "../../colors";
+@import "../../frameless";
+
+@include responsive-layout (".teacher-registration", ".slide");
+
+html,
+body {
+    background-color: $ui-purple-dark
+}
+
+.teacher-registration {
+    background-color: $ui-purple;
+}

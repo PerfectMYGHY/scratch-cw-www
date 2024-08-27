@@ -1,0 +1,22 @@
+{
+    "wedoLegacy.intro": "LEGO® Education WeDo 2.0 ir ievadizgudrojumu komplekts, ko varat izmantot, lai izveidotu savas interaktīvas mašīnas. Varat salikt kopā Scratch programmēšanas blokus, lai mijiedarbotos ar saviem LEGO WeDo darbiem un pievienotu ekrānā animācijas.",
+    "wedoLegacy.requirement": "LEGO WeDo 2.0 paplašinājums ir pieejams operētājsistēmām Mac OSX un Windows 10+.",
+    "wedoLegacy.getStarted": "Darba sākšana ar LEGO WeDo 2.0",
+    "wedoLegacy.installTitle": "1. Instalējiet ierīču pārvaldnieku",
+    "wedoLegacy.installText": "Ierīču pārvaldnieks ļauj savienot WeDo 2.0 ar Scratch, izmantojot Bluetooth",
+    "wedoLegacy.downloadMac": "Lejuplādēt macOS",
+    "wedoLegacy.downloadWin": "Lejupielādēt operētājsistēmai Windows 10+",
+    "wedoLegacy.setupTitle": "2. Iestatīšana un palīdzība",
+    "wedoLegacy.setupText": "Pievienojiet savu WeDo 2.0, veicot <a href=\"/projects/editor/?tip_bar=ext2\">padomu logā</a> norādītās darbības.",
+    "wedoLegacy.setupTextHTML": "Pievienojiet savu WeDo 2.0, veicot darbības, kas norādītas <a>padomu logā</a>",
+    "wedoLegacy.createTitle": "3. Izveidot",
+    "wedoLegacy.createText": "Izmantojiet WeDo pagarinājuma blokus, lai ieslēgtu gaismas, vadītu motorus un padarītu savu projektu interaktīvu",
+    "wedoLegacy.wedo2SetupInstructions": "WeDo 2.0 iestatīšanas instrukcijas",
+    "wedoLegacy.wedo1SetupInstructions": "WeDo 1.0 iestatīšanas instrukcijas",
+    "wedoLegacy.starterProjects": "WeDo 2.0 sākuma projekti",
+    "wedoLegacy.starterMotor": "Motors",
+    "wedoLegacy.starterDistance": "Attāluma sensors",
+    "wedoLegacy.starterTilt": "Slīpuma sensors",
+    "wedoLegacy.versionTitle": "Kura versija jums ir?",
+    "wedoLegacy.versionText": "Varat arī izmantot Scratch, lai ieprogrammētu oriģinālo LEGO WeDo (LEGO WeDo 1.0)."
+}

@@ -1,0 +1,90 @@
+@import "../../colors";
+@import "../../frameless";
+
+.validation-message {
+    $arrow-border-width: 1rem;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(16rem, 0);
+    margin-left: $arrow-border-width;
+    border: 1px solid $active-gray;
+    border-radius: 5px;
+    background-color: $ui-red-dark;
+    padding: 1rem;
+    max-width: 18.75rem;
+    min-height: 1rem;
+    overflow: visible;
+    color: $type-white;
+    z-index: 1;
+    font-weight: 500;
+
+    &:before {
+        display: block;
+        position: absolute;
+        top: 1rem;
+        left: -$arrow-border-width * 0.5;
+
+        transform: rotate(45deg);
+
+        border-bottom: 1px solid $active-gray;
+        border-left: 1px solid $active-gray;
+        border-radius: 5px;
+
+        background-color: $ui-red-dark;
+        width: $arrow-border-width;
+        height: $arrow-border-width;
+
+        content: "";
+    }
+}
+
+.validation-left {
+    $arrow-border-width: 1rem;
+    left: unset;
+    right: 0;
+    margin-left: unset;
+    margin-right: $arrow-border-width;
+    transform: translate(-16rem, 0);
+
+    &:before {
+        left: unset;
+        right: -$arrow-border-width * 0.5;
+        border-top: 1px solid $active-gray;
+        border-right: 1px solid $active-gray;
+        border-bottom: none;
+        border-left: none;
+    }
+}
+
+@media #{$intermediate-and-smaller} {
+    .validation-message {
+        position: relative;
+        transform: none;
+        margin: inherit;
+        width: 100%;
+        height: inherit;
+
+        &:before {
+            display: none;
+        }
+    }
+}
+
+.validation-error {
+    background-color: $ui-red-dark;
+
+    &:before {
+        background-color: $ui-red-dark;
+    }
+}
+
+.validation-info {
+    background-color: $ui-blue-dark;
+    box-shadow: 0 0 4px 2px rgba(0, 0, 0, .15);
+
+    &:before {
+        background-color: $ui-blue-dark;
+    }
+}

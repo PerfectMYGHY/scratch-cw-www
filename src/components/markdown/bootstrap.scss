@@ -1,0 +1,267 @@
+/** {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}*/
+
+blockquote {
+    padding: 10px 20px;
+    margin: 0 0 20px;
+    font-size: 17.5px;
+    border-left: 5px solid #eee;
+    background-color: #fff;
+}
+
+blockquote:before, blockquote:after {
+    content: "";
+}
+
+*:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+blockquote:before, blockquote:after {
+    content: "";
+}
+
+*:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+.table {
+    background-color: transparent;
+}
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+
+.table > thead > tr > th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #ddd;
+    background-color: #fff;
+}
+
+.table-striped > tbody > tr:nth-child(odd) > td, .table-striped > tbody > tr:nth-child(odd) > th {
+    background-color: #f9f9f9;
+}
+
+.table-striped > tbody > tr:nth-child(even) > td, .table-striped > tbody > tr:nth-child(even) > th {
+    background-color: #fff;
+}
+
+hr {
+    height: 0;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #888;
+}
+
+
+html,
+body,
+.full-height {
+    height: 100%;
+}
+
+/*body {
+    overflow-x: hidden;
+    padding-bottom: 160px;
+    background-color: #fbfbfb;
+}*/
+
+/* hack to allign emojies to line height */
+.emoji {
+    height: 1.2em;
+}
+
+.demo-options {
+    margin-bottom: 30px;
+}
+
+.opt__strict .not-strict {
+    opacity: 0.3;
+}
+
+.checkbox {
+    margin-right: 10px;
+}
+
+.source {
+    width: 100%;
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-size: 13px;
+    padding: 2px;
+}
+
+/*.markdown {
+    padding: 2px 10px;
+    overflow: auto;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}*/
+
+.markdown img {
+    max-width: 35%;
+}
+
+.result-src,
+.result-debug {
+    display: none;
+}
+
+.result-src-content,
+.result-debug-content {
+    white-space: pre;
+}
+
+.result-as-html .markdown {
+    display: block;
+}
+
+.result-as-html .result-src,
+.result-as-html .result-debug {
+    display: none;
+}
+
+.result-as-src .result-src {
+    display: block;
+}
+
+.result-as-src .markdown,
+.result-as-src .result-debug {
+    display: none;
+}
+
+.result-as-debug .result-debug {
+    display: block;
+}
+
+.result-as-debug .markdown,
+.result-as-debug .result-src {
+    display: none;
+}
+
+.demo-control {
+    position: absolute;
+    right: 15px;
+    top: -17px;
+    border-radius: 6px 6px 0 0;
+    font-size: 12px;
+    background-color: #ddd;
+}
+
+.demo-control a {
+    padding: 0 20px;
+}
+
+.demo-control a:first-child {
+    padding-left: 30px;
+}
+
+.demo-control a:last-child {
+    padding-right: 30px;
+}
+
+/* twbs fix */
+.hljs {
+    padding: 9.5px;
+}
+
+.hljs code {
+    white-space: pre;
+}
+
+
+.footnotes {
+    -moz-column-count: 2;
+    column-count: 2;
+}
+
+.footnotes-list {
+    padding-left: 2em;
+}
+
+/* custom container */
+.warning {
+    background-color: #ff8;
+    padding: 20px;
+    border-radius: 6px;
+}
+
+.gh-ribbon {
+    display: block;
+    position: absolute;
+    right: -60px;
+    top: 44px;
+    transform: rotate(45deg);
+    width: 230px;
+    z-index: 10000;
+    white-space: nowrap;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #686868;
+    box-shadow: 0 0 2px rgba(102,102,102,0.4);
+    padding: 1px 0;
+}
+
+.gh-ribbon a {
+    text-decoration: none !important;
+    border: 1px solid #ccc;
+    color: #fff;
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    outline: medium none;
+    padding: 4px 50px 2px;
+    text-align: center;
+}
+
+/* Override default responsiveness */
+.form-inline .radio,
+.form-inline .checkbox {
+    display: inline-block;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.form-inline .form-group {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+}
+
+.form-inline .form-control {
+    display: inline-block;
+    vertical-align: middle;
+    width: auto;
+}
+
+.markdown ul {
+    padding-left: 20px;
+}

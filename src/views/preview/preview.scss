@@ -1,0 +1,696 @@
+@import "../../colors";
+@import "../../frameless";
+
+/* stage size constants */
+$player-width: 482px;
+$player-height: 362px;
+$player-header: 44px;
+$stage-width: 480px;
+
+/* override view padding for share banner */
+#view {
+    padding: 0;
+    /*width: 100%;*/
+    width: auto;
+}
+
+.gui {
+    position: absolute;
+    top: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+
+    /* Setting min height/width makes the UI scroll below those sizes */
+    /* Copied from GUI playground index.css */
+    min-width: 1024px;
+    min-height: 640px; /* Min height to fit sprite/backdrop button */
+}
+
+.page-has-admin-panel {
+    padding-left: 20px;
+}
+
+.page-has-admin-panel.admin-panel-open {
+    padding-left: 250px;
+}
+
+.preview {
+
+    .inner {
+        margin: 0 auto;
+
+        @media #{$medium-and-smaller} {
+            // subtract page padding
+            max-width: calc(100% - 1rem);
+        }
+
+        @media #{$intermediate} {
+            width: 90%;
+            min-width: 640px;
+        }
+    }
+
+    .project-admin-panel {
+        margin-top: 51px;
+        border: 0;
+        padding: 1rem;
+        overflow: hidden;
+    }
+
+    .project-admin-panel.admin-panel-open {
+        padding: 0;
+        width: 250px;
+    }
+
+    .admin-iframe {
+        position: absolute;
+        top: 20px;
+        left: 0;
+        z-index: 1;
+        margin: 0;
+        border: 0;
+        width: 250px;
+        height: calc(100% - 30px - 51px);
+    }
+
+    .admin-iframe.modal-open,
+    .project-admin-panel.admin-panel-open.modal-open {
+        background-color: transparent;
+        width: 100%;
+    }
+
+    .project-title {
+        font-size: 1.75rem;
+        font-weight: 500;
+
+        &.has-error {
+            .validation-message {
+                right: 0;
+            }
+        }
+
+        &.no-edit {
+            /* titles of projects you don't own should not
+            show the full title if this is too long */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+
+    .project-header {
+        margin-right: 2rem;
+        min-width: 0;
+        flex-grow: 1;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-wrap: nowrap;
+
+        .inplace-input {
+            height: calc(3rem - 4px);
+        }
+
+        @media #{$medium-and-smaller} {
+            flex-direction: row;
+
+            .inplace-input {
+                width: calc(100% - 4rem);
+            }
+        }
+
+        @media #{$small} {
+            margin-right: 0;
+        }
+    }
+
+    img {
+
+        &.avatar {
+            border: 0;
+            border-radius: 5px;
+            width: 3rem;
+            height: 3rem;
+
+            &.remix {
+                margin-right: .75em;
+                width: 2rem;
+                height: 2rem;
+                align-self: flex-start;
+            }
+        }
+    }
+
+    .title {
+        margin-left: 1rem;
+        min-width: 0;
+        text-align: left;
+        font-size: .8rem;
+        flex-grow: 1;
+
+        @media #{$medium-and-smaller} {
+            // subtract margin and border
+            min-width: calc(100% - 2rem - 4px);
+        }
+    }
+
+    .validation-message {
+        $arrow-border-width: 1rem;
+        display: block;
+        position: absolute;
+        z-index: 5;
+        margin-top: $arrow-border-width;
+        border: 1px solid $active-gray;
+        border-radius: 5px;
+        padding: 1rem;
+        max-width: 18.75rem;
+        min-height: 1rem;
+        overflow: visible;
+        color: $type-white;
+        font-size: 1rem;
+
+        @media #{$medium-and-smaller} {
+            margin-top: calc($arrow-border-width / 2);
+            width: 100%;
+        }
+
+        &:before {
+            display: block;
+            position: absolute;
+            top: -.5rem;
+            left: calc(50% - calc(#{$arrow-border-width} / 2));
+            transform: rotate(135deg);
+            border-bottom: 1px solid $active-gray;
+            border-left: 1px solid $active-gray;
+            border-radius: 5px;
+            width: $arrow-border-width;
+            height: $arrow-border-width;
+            content: "";
+
+            @media #{$medium-and-smaller} {
+                display: none;
+            }
+        }
+    }
+
+    .row {
+
+        &.has-error {
+            .inplace-input,
+            .inplace-textarea {
+                border: 1px solid $ui-orange;
+            }
+        }
+
+        .col-sm-9 {
+            position: relative;
+        }
+    }
+
+    .project-buttons {
+        font-weight: bold;
+        flex-shrink: 0;
+    }
+
+    .button {
+        margin-left: 1rem;
+    }
+
+    .inplace-textarea::placeholder {
+        padding: 0;
+        text-align: start;
+    }
+
+    .comments-container {
+        padding-right: 1.5rem;
+        min-width: 65%;
+        max-width: 100%;
+        flex: 1;
+        overflow-anchor: none;
+
+        @media #{$medium-and-smaller} {
+            padding: 0;
+            width: 100%;
+        }
+
+        .comment-bubble {
+            text-align: left;
+        }
+
+        .comments-turned-off {
+            border: 1px solid $ui-blue-25percent;
+            border-radius: .5rem;
+            background: $ui-blue-10percent;
+            padding: 1.5rem 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        .comments-allowed-input {
+            margin-right: 3px;
+        }
+
+        .comment-placeholder-img {
+            width: 100%;
+        }
+    }
+
+    .remix-button,
+    .see-inside-button {
+        margin-top: 0;
+        border-radius: .25rem;
+        padding-top: .6875rem;
+        padding-right: .9375rem;
+        padding-bottom: .6875rem;
+        padding-left: .875rem;
+        height: 2.5rem;
+        font-size: .875rem;
+
+        &:before {
+            display: inline-block;
+            margin-top: -2px;
+            margin-right: .4375rem;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: contain;
+            width: 1.125rem;
+            height: 1.125rem;
+            vertical-align: middle;
+            content: "";
+        }
+    }
+
+    .remix-button {
+        background-color: $ui-aqua;
+
+        &:before {
+            background-image: url("/svgs/project/remix-white.svg");
+        }
+    }
+
+    .remix-button.disabled {
+        opacity: .6;
+    }
+
+    .remix-button.remixing {
+
+        &:before {
+            animation-name: remix-intro, remix-spin;
+            animation-duration: .25s, .75s;
+            animation-timing-function: cubic-bezier(.3, -3, .6, 3), ease-out;
+            animation-delay: 0s, .25s;
+            animation-iteration-count: 1, infinite;
+            animation-direction: normal;
+            width: 1.25rem;
+            height: 1.25rem;
+            transform-origin: 55% 55%;
+        }
+
+        @keyframes remix-intro {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes remix-spin {
+            0% {
+                transform: rotate(360deg);
+            }
+
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+    }
+
+    .see-inside-button {
+
+        &:before {
+            background-image: url("/svgs/project/see-inside-white.svg");
+        }
+    }
+
+    .preview-row {
+        margin-top: 1rem;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: nowrap;
+
+        &.force-row {
+            @media #{$medium-and-smaller} {
+                flex-direction: row;
+            }
+        }
+
+        .wrappable-item {
+            margin-bottom: .5rem;
+        }
+    }
+
+    @media #{$medium-and-smaller} {
+        .preview-row {
+            margin-top: .5rem;
+            align-items: center;
+        }
+    }
+
+    .guiPlayer {
+        display: inline-block;
+        position: relative;
+        width: $player-width;
+        z-index: 1;
+
+        $alert-bg: rgba(255, 255, 255, .85);
+
+        .project-info-alerts {
+            position: absolute;
+            z-index: 8; // Below navbar
+            margin: 60px 15px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .project-info-alert {
+            border-radius: .25rem;
+            background: $alert-bg;
+            padding: .75rem;
+            text-align: center;
+            font-size: .95rem;
+        }
+
+        &.fullscreen {
+            z-index: 200;
+        }
+
+        @media #{$small} {
+            width: 100%;
+        }
+    }
+
+    .force-center {
+        @media #{$medium-and-smaller} {
+            align-self: center;
+        }
+    }
+
+    .project-notes {
+        margin-left: 1rem;
+        height: calc(#{$player-height} + #{$player-header} - .3125rem);
+        align-items: flex-start;
+        flex: 1;
+        flex-flow: column;
+        margin-top: .3125rem;
+        overflow: auto;
+
+        @media #{$medium-and-smaller} {
+            margin-top: .5rem;
+            margin-left: 0;
+            width: 100%;
+        }
+
+        > * {
+            margin-bottom: .75rem;
+        }
+
+        > .description-block:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    .remix-credit {
+        margin-bottom: 1rem;
+        border: 1px solid $ui-blue-10percent;
+        border-radius: 8px;
+        background-color: $ui-blue-10percent;
+        padding: .75rem;
+        width: calc(100% - 1.5rem - 2px);
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: flex-start;
+        /*
+        Necessary to force Mac Safari to apply padding to the height of the
+        child elements. See https://stackoverflow.com/a/52273082/2308190
+        */
+        min-height: max-content;
+
+        @media #{$medium-and-smaller} {
+            flex-direction: row;
+            margin-bottom: .5rem;
+        }
+    }
+
+    .credit-text {
+        font-size: .875rem;
+        flex-shrink: 1;
+        text-align: left;
+        overflow: auto;
+        overflow-wrap: break-word;
+    }
+
+    .description-block {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        /*
+        necessary to fix flexbox sizing issue that caused instructions
+        to flow over the top and bottom of the project notes section.
+        see https://stackoverflow.com/a/36247448
+        */
+        min-height: 0;
+    }
+
+    .project-textlabel {
+        margin: 0 0 .5rem 0;
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    .project-description {
+        margin-bottom: .75rem;
+        border: 1px solid $ui-blue-10percent;
+        border-radius: 8px;
+        background-color: $ui-blue-10percent;
+        padding: .5rem;
+        width: calc(100% - (1rem + 2px));
+        overflow: auto;
+        white-space: pre-line;
+        font-size: 1rem;
+        line-height: 1.5rem;
+        text-align: left;
+        flex: 1;
+        overflow-wrap: break-word;
+
+        @media #{$medium-and-smaller} {
+            text-align: center;
+        }
+    }
+
+    .project-description:last-of-type {
+        margin-bottom: 0;
+    }
+
+    .project-description-form {
+        display: flex;
+        width: 100%;
+        // surprisingly, without setting height: 100% here, flex-grow causes the
+        // height to be too large
+        height: 100%;
+        // surprisingly, just having some min-height actually reduces the height
+        // of the element when it is being vertically crowded by other elements
+        min-height: 2rem;
+        // necessary to cause the element to take up the maximum height
+        // available
+        flex-grow: 1;
+    }
+
+    .project-description-edit {
+        display: flex;
+        border: 1px solid $ui-blue-10percent;
+        border-radius: 8px;
+        background-color: $ui-blue-10percent;
+        padding: .5rem;
+        width: 100%;
+        white-space: pre-line;
+        // flex-grow
+        flex: 1;
+
+        &.last {
+            margin-bottom: 0;
+        }
+
+        &.textarea-row {
+            border: 0;
+            background-color: inherit;
+            padding: 0;
+        }
+
+        &.has-error {
+            .validation-message {
+                top: 100%;
+                right: 0;
+            }
+        }
+
+        & > .grow {
+            display: flex;
+            flex: 1;
+        }
+
+        & .inplace-textarea {
+            line-height: 1.5rem; /* Override 1.75 from form styling */
+        }
+
+        ::-webkit-input-placeholder { /* Chrome <=56, Safari < 10 */
+            transition: opacity .25s;
+            opacity: 1;
+            -webkit-transition: opacity .25s;
+        }
+
+        :-moz-placeholder { /* FF 4-18 */
+            transition: opacity .25s;
+            opacity: 1;
+            -moz-transition: opacity .25s;
+        }
+
+        ::-moz-placeholder { /* FF 19-51 */
+            transition: opacity .25s;
+            opacity: 1;
+            -moz-transition: opacity .25s;
+        }
+
+        :-ms-input-placeholder { /* IE 10+ */
+            transition: opacity .25s;
+            opacity: 1;
+            -ms-transition: opacity .25s;
+        }
+
+        ::placeholder { /* Modern Browsers */
+            transition: opacity .25s;
+            opacity: 1;
+        }
+
+        *:focus::-webkit-input-placeholder {
+            opacity: 0;
+        }
+        /* Chrome <=56, Safari < 10 */
+        *:focus:-moz-placeholder {
+            opacity: 0;
+        }
+        /* FF 4-18 */
+        *:focus::-moz-placeholder {
+            opacity: 0;
+        }
+        /* FF 19-50 */
+        *:focus:-ms-input-placeholder {
+            opacity: 0;
+        }
+        /* IE 10+ */
+        *:focus::placeholder {
+            opacity: 0;
+        }
+        /* Modern Browsers */
+    }
+
+
+    .comments-header {
+        padding: 0 0 1rem 0;
+        justify-content: space-between;
+
+        h4 {
+            font-size: 1.25rem;
+        }
+    }
+
+    .project-lower-container {
+        margin-top: 1rem;
+        background-color: $ui-blue-10percent;
+        padding: 1rem 0;
+        min-height: 6rem;
+    }
+
+    .create-comment {
+        margin-bottom: 2rem;
+    }
+
+    .load-more-button {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .extension-list {
+        justify-content: flex-start;
+        flex-direction: row;
+
+        @media #{$medium-and-smaller} {
+            justify-content: center;
+        }
+    }
+
+    .remix-list,
+    .studio-list {
+        flex-direction: column;
+        width: 14.625rem;
+
+        .list-header {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        .list-header-spacer {
+            flex: 1 0 1px;
+        }
+
+        .list-title {
+            margin-left: 1rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            align-self: flex-start;
+            line-height: 110%;
+            text-align: left;
+        }
+
+        .list-header-link {
+            margin-right: 1rem;
+            align-self: flex-end;
+            font-size: .75rem;
+            line-height: 110%;
+            text-align: right;
+        }
+
+        .creator-image img {
+            max-width: 2rem;
+            max-height: 2rem;
+        }
+
+        .thumbnail-column {
+            display: inline-block;
+            width: 100%;
+            max-width: 300px;
+            /* TODO: the following can be transferred to
+            src/components/thumbnailcolumn/thumbnailcolumn.scss
+            after testing */
+            @media #{$medium-and-smaller} {
+                flex-direction: row;
+
+                .thumbnail {
+                    display: inline-block;
+                }
+            }
+        }
+
+        @media #{$medium-and-smaller} {
+            margin-top: 1rem;
+            width: 100%;
+        }
+    }
+}

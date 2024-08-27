@@ -1,0 +1,34 @@
+@import "../../colors";
+
+.formik-input {
+    height: 2.75rem;
+    border-radius: .5rem;
+    background-color: $ui-white;
+    margin-bottom: .5rem;
+    transition: all .5s ease, font-size 0s;
+    border: 1px solid $active-dark-gray;
+    padding: 0 1rem;
+    color: $type-gray;
+    font-size: .875rem;
+
+    &:focus {
+        box-shadow: 0 0 0 .25rem $ui-purple-25percent;
+        outline: none;
+        border: 1px solid $ui-purple-dark;
+        transition: all .5s ease, font-size 0s;
+    }
+
+    &.fail {
+        border: 1px solid $ui-red-dark;
+
+        &:focus {
+            box-shadow: 0 0 0 .25rem $ui-red-25percent;
+            outline: none;
+        }
+    }
+
+    &::placeholder {
+        font-style: italic;
+        color: $type-gray-60percent;
+    }
+}

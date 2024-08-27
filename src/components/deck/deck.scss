@@ -1,0 +1,27 @@
+@import "../../colors";
+@import "../../frameless";
+
+@include responsive-layout (".deck", ".slide");
+
+.deck {
+    min-height: 100vh;
+
+    .logo {
+        margin-left: 2px;
+        padding: 12px 0;
+        width: 76px;
+    }
+
+    .slide {
+        max-width: 28.75rem;
+    }
+
+    .card {
+        width: 23.75rem;    
+    }
+
+    .input {
+        width: 100%;
+    }
+
+}

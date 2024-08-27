@@ -1,0 +1,232 @@
+@import "../../../colors";
+@import "../../../frameless";
+
+#navigation {
+    // Temporary removal of staging styling for testing purposes
+    // &.staging {
+    //     .messages {
+    //         .message-count {
+    //             display: none;
+
+    //             &.show {
+    //                 background-color: $ui-blue;
+    //             }
+    //         }
+    //     }
+    // }
+
+    .logo {
+        margin-right: 10px;
+
+        a {
+            display: block;
+            transition: .15s ease all;
+            margin: 0 6px 0 0;
+            border: 0;
+
+            background-image: url("/images/logo_sm.png");
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: 95%;
+            width: 221px;
+            height: 50px;
+
+            &:hover {
+                transition: .15s ease all;
+                background-size: 100%;
+            }
+        }
+    }
+
+    .inner > ul > li {
+        &.search {
+            margin: 0 20px;
+            border-right: 0;
+            color: $type-white;
+            flex-grow: 3;
+
+            .ie9 & {
+                width: 100%;
+            }
+
+            .form {
+                margin: 0;
+            }
+
+            .row {
+                .help-block {
+                    display: none;
+                }
+            }
+
+            .input,
+            .button {
+                display: inline-block;
+                margin-top: 5px;
+                outline: none;
+                border: 0;
+                background-color: $active-gray;
+                height: 14px;
+
+                &[type=text] {
+                    transition: .15s ease background-color;
+                    padding: 0;
+                    padding-right: 10px;
+                    padding-left: 40px;
+                    width: calc(100% - 50px);
+                    height: 40px;
+                    color: $type-white;
+                    font-size: .85em;
+
+                    &::placeholder {
+                        $placeholder-transparent: rgba(255, 255, 255, .75);
+                        color: $placeholder-transparent;
+                    }
+
+                    &:focus {
+                        transition: .15s ease background-color;
+                        background-color: $active-dark-gray;
+                    }
+
+                    .ie9 & {
+                        width: 70px;
+                    }
+                }
+            }
+
+            .btn-search {
+                position: absolute;
+
+                box-shadow: none;
+                background-color: transparent;
+                background-image: url("/images/nav-search-glass.png");
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-size: 14px 14px;
+
+                width: 40px;
+                height: 40px;
+
+                &:hover {
+                    box-shadow: none;
+                }
+            }
+        }
+    }
+
+    .messages,
+    .mystuff {
+        > a {
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: 45%;
+            padding-right: 10px;
+            padding-left: 10px;
+            width: 30px;
+            overflow: hidden;
+            text-indent: 50px;
+            white-space: nowrap;
+
+            &:hover {
+                background-size: 50%;
+            }
+        }
+
+    }
+
+    .messages {
+        > a {
+            background-image: url("/images/nav-notifications.png");
+        }
+
+        .message-count {
+            display: none;
+
+            &.show {
+                display: block;
+                position: absolute;
+                top: .5rem;
+                right: .25rem;
+                border-radius: 1rem;
+                background-color: $ui-orange;
+                padding: 0 .25rem;
+                text-indent: 0;
+                line-height: 1rem;
+                color: $type-white;
+                font-size: .7rem;
+                font-weight: bold;
+            }
+        }
+    }
+
+    .mystuff {
+        > a {
+            background-image: url("/images/mystuff.png");
+        }
+    }
+}
+
+//4 columns
+@media #{$small} {
+    #navigation .inner {
+        width: $cols4;
+
+        > ul > li {
+            &.login-item {
+                margin-left: 0;
+            }
+        }
+
+        .create,
+        .discuss,
+        .explore,
+        .search,
+        .help,
+        .mystuff,
+        .profile-name {
+            display: none;
+        }
+    }
+}
+
+
+//6 columns
+@media #{$medium} {
+    #navigation .inner {
+        width: $cols6;
+
+        > ul > li {
+            &.login-item {
+                margin-left: 0;
+            }
+        }
+
+        .discuss,
+        .explore,
+        .search,
+        .mystuff,
+        .profile-name {
+            display: none;
+        }
+
+    }
+}
+
+//8 columns
+@media #{$intermediate} {
+    #navigation .inner {
+        width: $cols8;
+
+        > ul > li {
+            &.login-item {
+                margin-left: 0;
+            }
+        }
+
+        .explore,
+        .search,
+        .mystuff {
+            display: none;
+        }
+    }
+}

@@ -1,0 +1,174 @@
+@import "../../colors";
+@import "../../frameless";
+
+#view {
+    background-color: $ui-light-gray;
+    padding: 0;
+}
+
+.title-banner.mod-messages {
+    background-color: $ui-purple-dark;
+    color: $type-white;
+}
+
+.flex-row.mod-messages-title {
+    justify-content: space-between;
+}
+
+.title-banner-h1.mod-messages {
+    margin: 0;
+    text-align: left;
+}
+
+.form-control {
+    color: $type-gray;
+}
+
+.help-block {
+    display: none;
+}
+
+.messages-admin,
+.messages-social {
+    margin-bottom: 3rem;
+}
+
+.messages-social {
+    overflow-anchor: none;
+}
+
+.messages-admin-list,
+.messages-social-list {
+    padding: 0;
+    list-style-type: none;
+}
+
+.messages-header {
+    display: flex;
+    align-items: center;
+}
+
+.messages-header-unread {
+    margin-left: 1rem;
+    border-radius: 1rem;
+    background-color: $ui-red-dark;
+    padding: .25rem .5rem;
+    line-height: 1rem;
+    color: $type-white;
+}
+
+.admin-message {
+    border: 1px solid $active-dark-gray;
+    border-radius: 5px;
+    background-color: $ui-purple-25percent;
+    padding: 1rem;
+}
+
+.admin-message-header {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-message-icon {
+    vertical-align: middle;
+}
+
+.admin-message-content {
+    margin: 0;
+}
+
+.admin-message-date {
+    font-size: .8rem;
+}
+
+.button.mod-scratcher-invite-dismiss,
+.button.mod-admin-message-dismiss {
+    box-shadow: none;
+    padding: .25rem;
+    line-height: .8rem;
+
+    &:hover {
+        box-shadow: none;
+    }
+}
+
+.messages-social-list {
+    border: 1px solid $ui-border;
+    border-bottom-width: 0;
+    border-radius: 5px;
+    background-color: $ui-white;
+}
+
+.comment-message-info {
+    margin-top: 0;
+    line-height: 1.5rem;
+}
+
+.comment-text {
+    background-color: $ui-white;
+    max-width: 30.25rem;
+}
+
+.flex-row.mod-comment-message {
+    margin-bottom: .25rem;
+    align-items: flex-start;
+}
+
+.comment-message-info {
+    text-align: left;
+}
+
+.comment-message-info-img {
+    width: 40px;
+    height: 40px;
+}
+
+.messages-social-loadmore {
+    display: block;
+    margin: 1rem auto;
+    width: 58.75rem;
+}
+
+.emoji-text.mod-comment {
+    word-wrap: break-word;
+}
+
+@media #{$small} {
+    .flex-row.admin-message-header,
+    .flex-row.mod-comment-message {
+        flex-direction: row;
+    }
+
+    .comment-text {
+        max-width: 9.75rem;
+    }
+
+    .messages-social-loadmore {
+        width: $cols4;
+    }
+}
+
+@media #{$medium} {
+    .flex-row.admin-message-header,
+    .flex-row.mod-comment-message {
+        flex-direction: row;
+    }
+
+    .comment-text {
+        max-width: 19.5rem;
+    }
+
+    .messages-social-loadmore {
+        width: $cols6;
+    }
+}
+
+@media #{$intermediate} {
+    .comment-text {
+        max-width: 23.75rem;
+    }
+
+    .messages-social-loadmore {
+        width: $cols8;
+    }
+}

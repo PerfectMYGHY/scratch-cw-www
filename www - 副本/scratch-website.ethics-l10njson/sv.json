@@ -1,0 +1,11 @@
+{
+    "ethics.title": "Scratch Foundations forskningsetiska kod",
+    "ethics.intro1": "På Scratch Foundation är vårt uppdrag att ge unga människor digitala verktyg och möjligheter att föreställa sig, skapa, dela och lära sig. Scratch-plattformen är en gratis, säker, lekfull inlärningsmiljö som engagerar alla barn i att tänka kreativt, resonera systematiskt och arbeta tillsammans – väsentliga färdigheter för alla i dagens samhälle. Vi arbetar med pedagoger och familjer för att stödja barn i denna lekfulla inlärningsmiljö.",
+    "ethics.intro2": "Denna etiska kod vägleder Scratch Foundation-anställda och dotterbolag när de utför forskning och utvärdering till stöd för ansträngningarna att förbättra plattformen, deltagarnas erfarenhet, undervisnings- och läranderesultat och bidragsfinansierat arbete. Allt forskning och utvärderingsarbete vid stiftelsen följer följande principer.",
+    "ethics.principle1Title": "Princip 1: Skydda våra deltagare.",
+    "ethics.principle1": "{title} Scratch Foundations anställda och entreprenörer respekterar deltagarnas integritet och konfidentialitet. Anställda och entreprenörer kommer inte att avslöja någon personligt identifierbar information om någon deltagare utan tillstånd från deltagaren och (om en minderårig) deltagarens förälder eller vårdnadshavare. Dessutom kommer vi att undvika att skada deltagarna och försöka maximera fördelarna med deltagande. Deltagande i forskningsverksamhet är alltid frivilligt; kontakta oss på {researchEmailLink} för att välja bort.",
+    "ethics.principle2Title": "Princip 2: Led med transparens.",
+    "ethics.principle2": "{title} Vid insamling av data kommer stiftelsens personal och entreprenörer att avslöja målet, deltagandekraven (inklusive tid och ansträngning), eventuella deltaganderelaterade risker, sätt på vilka vi kommer att skydda och rapportera uppgifterna, sätt på vilka deltagare kan välja bort och relevanta Stiftelsens kontaktuppgifter.",
+    "ethics.principle3Title": "Princip 3. Omfamna dataförvaltning.",
+    "ethics.principle3": "{title} Foundations personal och entreprenörer kommer att säkerställa datasäkerhet och efterlevnad av digitala integritetspolicyer såsom (men inte begränsat till) Scratch Privacy Policy och General Data Protection Regulation (GDPR)."
+}

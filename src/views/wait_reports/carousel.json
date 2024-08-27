@@ -1,0 +1,56 @@
+[
+    {
+        "id": 1,
+        "type": "project",
+        "title": "Project",
+        "thumbnailUrl": "",
+        "author": "",
+        "href": "#",
+        "stats": {"loves": 0, "remixes": 0}
+    },
+    {
+        "id": 2,
+        "type": "project",
+        "title": "Project",
+        "thumbnailUrl": "",
+        "author": "",
+        "href": "#",
+        "stats": {"loves": 0, "remixes": 0}
+    },
+    {
+        "id": 3,
+        "type": "project",
+        "title": "Project",
+        "thumbnailUrl": "",
+        "author": "",
+        "href": "#",
+        "stats": {"loves": 0, "remixes": 0}
+    },
+    {
+        "id": 4,
+        "type": "project",
+        "title": "Project",
+        "thumbnailUrl": "",
+        "author": "",
+        "href": "#",
+        "stats": {"loves": 0, "remixes": 0}
+    },
+    {
+        "id": 5,
+        "type": "project",
+        "title": "Project",
+        "thumbnailUrl": "",
+        "author": "",
+        "href": "#",
+        "stats": {"loves": 0, "remixes": 0}
+    },
+    {
+        "id": 6,
+        "type": "project",
+        "title": "Project",
+        "thumbnailUrl": "",
+        "author": "",
+        "href": "#",
+        "stats": {"loves": 0, "remixes": 0}
+    }
+]

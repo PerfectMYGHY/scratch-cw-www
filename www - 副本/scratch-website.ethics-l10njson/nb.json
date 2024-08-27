@@ -1,0 +1,11 @@
+{
+    "ethics.title": "Scratch Foundations forskningsetiske retningslinjer",
+    "ethics.intro1": "Ved Scratch Foundation er vårt oppdrag å gi unge mennesker digitale verktøy og muligheter til å forestille seg, skape, dele og lære. Scratch-plattformen er et gratis, trygt og lekent læringsmiljø som engasjerer alle barn i kreativ tenkning, systematisk resonnement og samarbeid — essensielle ferdigheter for alle i dagens samfunn. Vi samarbeider med pedagoger og familier for å støtte barn i dette lekne læringsmiljøet.",
+    "ethics.intro2": "Dette etiske regelverket veileder Scratch Foundation-ansatte og tilknyttede personer når de utfører forskning og evaluering for å støtte arbeidet med å forbedre plattformen, deltakeropplevelsen, undervisning og læringsresultater, samt prosjekter som er finansiert av tilskudd. All forskning og evaluering ved stiftelsen følger følgende prinsipper.",
+    "ethics.principle1Title": "Prinsipp 1: Beskytt våre deltakere.",
+    "ethics.principle1": "{title} Ansatte og entreprenører i Scratch Foundation respekterer deltakernes personvern og konfidensialitet. Ansatte og entreprenører vil ikke avsløre noen personlig identifiserbar informasjon om noen deltaker uten deltakerens tillatelse og (hvis mindreårig) deltakerens forelder eller verge. I tillegg vil vi unngå å forårsake skade på deltakerne og søke å maksimere fordelene ved deltakelse. Deltakelse i forskningsaktiviteter er alltid frivillig; kontakt oss på {researchEmailLink} for å melde deg av.",
+    "ethics.principle2Title": "Prinsipp 2: Led med åpenhet.",
+    "ethics.principle2": "{title} Når vi samler inn data, vil Foundation-personell og entreprenører avsløre formålet, deltakelseskravene (inkludert tid og innsats), eventuelle risikoer knyttet til deltakelse, måter vi vil beskytte og rapportere dataene på, måter deltakere kan velge å ikke delta, og relevant kontaktinformasjon for Foundation.",
+    "ethics.principle3Title": "Prinsipp 3. Omfavn dataforvaltning.",
+    "ethics.principle3": "{title} Stiftelsens ansatte og entreprenører vil sikre datasikkerhet og overholdelse av digitale personvernregler, som (men ikke begrenset til) Scratch personvernpolicy og Generell Data Beskyttelses Forordning (GDBF)."
+}

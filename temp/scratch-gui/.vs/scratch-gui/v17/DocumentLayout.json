@@ -1,0 +1,378 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\scratch\\scratch desktop\u7A0B\u5E8F\uFF08\u65E0\u6CD5\u72EC\u7ACB\u6253\u5F00\uFF09\\\u6700\u65B0\u4F5C\u54C1\\Media Player\\gen.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\addons\\addons-l10n\\zh-cn.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\addons\\addons-l10n\\zh-cn.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\addons\\addons-l10n\\en.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\addons\\addons-l10n\\en.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inetpub\\wwwroot\\extensions\\Lily\\SoundExpanded.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inetpub\\wwwroot\\extensions\\obviousAlexC\\penPlus.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\node_modules\\scratch-vm\\src\\extension-support\\extension-manager.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:node_modules\\scratch-vm\\src\\extension-support\\extension-manager.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\lib\\tw-translations\\generated-translations.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\lib\\tw-translations\\generated-translations.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\containers\\tw-security-manager.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\containers\\tw-security-manager.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\containers\\extension-library.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\containers\\extension-library.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\inetpub\\wwwroot\\extensions\\generated-metadata\\downloader.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\containers\\library-item.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\containers\\library-item.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\node_modules\\scratch-blocks\\core\\block.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:node_modules\\scratch-blocks\\core\\block.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\node_modules\\scratch-blocks\\build.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:node_modules\\scratch-blocks\\build.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\node_modules\\scratch-blocks\\blockly_compressed_vertical.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:node_modules\\scratch-blocks\\blockly_compressed_vertical.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\lib\\tw-translations\\index.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\lib\\tw-translations\\index.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\lib\\tw-extension-gui-api.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\lib\\tw-extension-gui-api.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\webpack.config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:webpack.config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\components\\library-item\\library-item.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\components\\library-item\\library-item.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\lib\\tw-project-meta-fetcher-hoc.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\lib\\tw-project-meta-fetcher-hoc.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\lib\\project-fetcher-hoc.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\lib\\project-fetcher-hoc.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "gen.py",
+              "DocumentMoniker": "E:\\scratch\\scratch desktop\u7A0B\u5E8F\uFF08\u65E0\u6CD5\u72EC\u7ACB\u6253\u5F00\uFF09\\\u6700\u65B0\u4F5C\u54C1\\Media Player\\gen.py",
+              "ToolTip": "E:\\scratch\\scratch desktop\u7A0B\u5E8F\uFF08\u65E0\u6CD5\u72EC\u7ACB\u6253\u5F00\uFF09\\\u6700\u65B0\u4F5C\u54C1\\Media Player\\gen.py",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAACEAAAASAAAA",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEVSURBVDhPrZOhboRAEIaHhqQIJAKJQCAQCB4AXR4EiUAgkUhwGCSCF2h4AAwOCQkCiUQgqGgy3Z2Uy3FHL\u002Blxf/Jnl5n8HzsbEL6/PhCelPj\u002BCfALeMo8\u002B8Y2p7QDjONIrusafN\u002BnmiiK4LouVFUFXddBlmWgKAr1uHYATdOgLEvo\u002Bx7SNAXHcSCOYyiKApqmgTzPwbZtgl50fQdcLISGYeC6ruh5Hs7zjEmS7GbfTNlbwDRNuCwLrZIk0RqG4S64\u002BRAQBAGdgh2TamwEHIYBLctCXdcxiiKUZflvALuHyzO3qqrYti31uDiMg3jvDsDD25tvbZom\u002Bbp2B/ivefa1HxIb8dCPtAMIgnDoRzo9wqnfGQDgB6iaAPhrbB0nAAAAAElFTkSuQmCC",
+              "WhenOpened": "2024-06-01T17:15:16.176Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "en.json",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\addons\\addons-l10n\\en.json",
+              "RelativeDocumentMoniker": "src\\addons\\addons-l10n\\en.json",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\addons\\addons-l10n\\en.json",
+              "RelativeToolTip": "src\\addons\\addons-l10n\\en.json",
+              "ViewState": "AQIAAOcAAAAAAAAAAAAAAPYAAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-06-01T16:46:08.298Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "zh-cn.json",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\addons\\addons-l10n\\zh-cn.json",
+              "RelativeDocumentMoniker": "src\\addons\\addons-l10n\\zh-cn.json",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\addons\\addons-l10n\\zh-cn.json",
+              "RelativeToolTip": "src\\addons\\addons-l10n\\zh-cn.json",
+              "ViewState": "AQIAAOAAAAAAAAAAAAAAAPAAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-06-01T16:46:04.891Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "SoundExpanded.js",
+              "DocumentMoniker": "C:\\inetpub\\wwwroot\\extensions\\Lily\\SoundExpanded.js",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\..\\..\\inetpub\\wwwroot\\extensions\\Lily\\SoundExpanded.js",
+              "ToolTip": "C:\\inetpub\\wwwroot\\extensions\\Lily\\SoundExpanded.js",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\..\\..\\inetpub\\wwwroot\\extensions\\Lily\\SoundExpanded.js",
+              "ViewState": "AQIAAAsBAAAAAAAAAAAAABUBAAA8AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-06-01T13:16:51.875Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "penPlus.js",
+              "DocumentMoniker": "C:\\inetpub\\wwwroot\\extensions\\obviousAlexC\\penPlus.js",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\..\\..\\inetpub\\wwwroot\\extensions\\obviousAlexC\\penPlus.js",
+              "ToolTip": "C:\\inetpub\\wwwroot\\extensions\\obviousAlexC\\penPlus.js",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\..\\..\\inetpub\\wwwroot\\extensions\\obviousAlexC\\penPlus.js",
+              "ViewState": "AQIAAGsLAAAAAAAAAAAgwGMLAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-06-01T03:43:32.687Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "tw-security-manager.jsx",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\containers\\tw-security-manager.jsx",
+              "RelativeDocumentMoniker": "src\\containers\\tw-security-manager.jsx",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\containers\\tw-security-manager.jsx",
+              "RelativeToolTip": "src\\containers\\tw-security-manager.jsx",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAAB0AAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2024-06-01T02:48:52.091Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "extension-manager.js",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\node_modules\\scratch-vm\\src\\extension-support\\extension-manager.js",
+              "RelativeDocumentMoniker": "node_modules\\scratch-vm\\src\\extension-support\\extension-manager.js",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\node_modules\\scratch-vm\\src\\extension-support\\extension-manager.js",
+              "RelativeToolTip": "node_modules\\scratch-vm\\src\\extension-support\\extension-manager.js",
+              "ViewState": "AQIAAPMAAAAAAAAAAAAAAPYAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-05-31T17:08:07.387Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "downloader.py",
+              "DocumentMoniker": "C:\\inetpub\\wwwroot\\extensions\\generated-metadata\\downloader.py",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\..\\..\\inetpub\\wwwroot\\extensions\\generated-metadata\\downloader.py",
+              "ToolTip": "C:\\inetpub\\wwwroot\\extensions\\generated-metadata\\downloader.py",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\..\\..\\inetpub\\wwwroot\\extensions\\generated-metadata\\downloader.py",
+              "ViewState": "AQIAABUAAAAAAAAAAAAAAC4AAAAaAAAA",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEVSURBVDhPrZOhboRAEIaHhqQIJAKJQCAQCB4AXR4EiUAgkUhwGCSCF2h4AAwOCQkCiUQgqGgy3Z2Uy3FHL\u002Blxf/Jnl5n8HzsbEL6/PhCelPj\u002BCfALeMo8\u002B8Y2p7QDjONIrusafN\u002BnmiiK4LouVFUFXddBlmWgKAr1uHYATdOgLEvo\u002Bx7SNAXHcSCOYyiKApqmgTzPwbZtgl50fQdcLISGYeC6ruh5Hs7zjEmS7GbfTNlbwDRNuCwLrZIk0RqG4S64\u002BRAQBAGdgh2TamwEHIYBLctCXdcxiiKUZflvALuHyzO3qqrYti31uDiMg3jvDsDD25tvbZom\u002Bbp2B/ivefa1HxIb8dCPtAMIgnDoRzo9wqnfGQDgB6iaAPhrbB0nAAAAAElFTkSuQmCC",
+              "WhenOpened": "2024-05-31T16:25:40.705Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "extension-library.jsx",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\containers\\extension-library.jsx",
+              "RelativeDocumentMoniker": "src\\containers\\extension-library.jsx",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\containers\\extension-library.jsx",
+              "RelativeToolTip": "src\\containers\\extension-library.jsx",
+              "ViewState": "AQIAAIEAAAAAAAAAAAAAAJIAAAA/AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2024-05-31T16:16:34.287Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "block.js",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\node_modules\\scratch-blocks\\core\\block.js",
+              "RelativeDocumentMoniker": "node_modules\\scratch-blocks\\core\\block.js",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\node_modules\\scratch-blocks\\core\\block.js",
+              "RelativeToolTip": "node_modules\\scratch-blocks\\core\\block.js",
+              "ViewState": "AQIAAKEFAAAAAAAAAAAowLUFAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-05-31T15:42:33.224Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "build.py",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\node_modules\\scratch-blocks\\build.py",
+              "RelativeDocumentMoniker": "node_modules\\scratch-blocks\\build.py",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\node_modules\\scratch-blocks\\build.py",
+              "RelativeToolTip": "node_modules\\scratch-blocks\\build.py",
+              "ViewState": "AQIAAC4BAAAAAAAAAAAowDYBAAAzAAAA",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEVSURBVDhPrZOhboRAEIaHhqQIJAKJQCAQCB4AXR4EiUAgkUhwGCSCF2h4AAwOCQkCiUQgqGgy3Z2Uy3FHL\u002Blxf/Jnl5n8HzsbEL6/PhCelPj\u002BCfALeMo8\u002B8Y2p7QDjONIrusafN\u002BnmiiK4LouVFUFXddBlmWgKAr1uHYATdOgLEvo\u002Bx7SNAXHcSCOYyiKApqmgTzPwbZtgl50fQdcLISGYeC6ruh5Hs7zjEmS7GbfTNlbwDRNuCwLrZIk0RqG4S64\u002BRAQBAGdgh2TamwEHIYBLctCXdcxiiKUZflvALuHyzO3qqrYti31uDiMg3jvDsDD25tvbZom\u002Bbp2B/ivefa1HxIb8dCPtAMIgnDoRzo9wqnfGQDgB6iaAPhrbB0nAAAAAElFTkSuQmCC",
+              "WhenOpened": "2024-05-31T14:01:35.08Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "blockly_compressed_vertical.js",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\node_modules\\scratch-blocks\\blockly_compressed_vertical.js",
+              "RelativeDocumentMoniker": "node_modules\\scratch-blocks\\blockly_compressed_vertical.js",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\node_modules\\scratch-blocks\\blockly_compressed_vertical.js",
+              "RelativeToolTip": "node_modules\\scratch-blocks\\blockly_compressed_vertical.js",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-05-31T14:01:16.569Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "generated-translations.json",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\lib\\tw-translations\\generated-translations.json",
+              "RelativeDocumentMoniker": "src\\lib\\tw-translations\\generated-translations.json",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\lib\\tw-translations\\generated-translations.json",
+              "RelativeToolTip": "src\\lib\\tw-translations\\generated-translations.json",
+              "ViewState": "AQIAAFkPAAAAAAAAAAAqwGgPAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-05-31T13:06:23.76Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "index.js",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\lib\\tw-translations\\index.js",
+              "RelativeDocumentMoniker": "src\\lib\\tw-translations\\index.js",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\lib\\tw-translations\\index.js",
+              "RelativeToolTip": "src\\lib\\tw-translations\\index.js",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-05-31T13:04:28.094Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "tw-extension-gui-api.js",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\lib\\tw-extension-gui-api.js",
+              "RelativeDocumentMoniker": "src\\lib\\tw-extension-gui-api.js",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\lib\\tw-extension-gui-api.js",
+              "RelativeToolTip": "src\\lib\\tw-extension-gui-api.js",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-05-31T13:03:43.789Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "library-item.jsx",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\containers\\library-item.jsx",
+              "RelativeDocumentMoniker": "src\\containers\\library-item.jsx",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\containers\\library-item.jsx",
+              "RelativeToolTip": "src\\containers\\library-item.jsx",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAAAIwAAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2024-05-31T12:47:53.558Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "library-item.jsx",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\components\\library-item\\library-item.jsx",
+              "RelativeDocumentMoniker": "src\\components\\library-item\\library-item.jsx",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\components\\library-item\\library-item.jsx",
+              "RelativeToolTip": "src\\components\\library-item\\library-item.jsx",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAAABsAAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2024-05-31T12:45:55.613Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "webpack.config.js",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\webpack.config.js",
+              "RelativeDocumentMoniker": "webpack.config.js",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\webpack.config.js",
+              "RelativeToolTip": "webpack.config.js",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAACAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-05-31T12:32:33.306Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "tw-project-meta-fetcher-hoc.jsx",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\lib\\tw-project-meta-fetcher-hoc.jsx",
+              "RelativeDocumentMoniker": "src\\lib\\tw-project-meta-fetcher-hoc.jsx",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\lib\\tw-project-meta-fetcher-hoc.jsx",
+              "RelativeToolTip": "src\\lib\\tw-project-meta-fetcher-hoc.jsx",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAA0AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2024-05-31T12:32:17.274Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "project-fetcher-hoc.jsx",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\lib\\project-fetcher-hoc.jsx",
+              "RelativeDocumentMoniker": "src\\lib\\project-fetcher-hoc.jsx",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\PerfectMYGHY\\scratch\\node_modules\\scratch-gui\\src\\lib\\project-fetcher-hoc.jsx",
+              "RelativeToolTip": "src\\lib\\project-fetcher-hoc.jsx",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2024-05-31T12:32:06.789Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

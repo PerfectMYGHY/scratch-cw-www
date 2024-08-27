@@ -1,0 +1,9 @@
+{
+    "research.title": "Badania nad Scratchem",
+    "research.conductors": "Badania nad Scratchem są prowadzone przez zespół Scratch Foundation. Dzieląc się projektami i uczestnicząc w internetowej społeczności Scratch, pomagasz nam lepiej zrozumieć, w jaki sposób ludzie używają i uczą się Scratch. Wszelkie publicznie udostępniane projekty, komentarze lub inne materiały na stronie Scratch mogą zostać uwzględnione w analizach badawczych, prezentacjach i raportach. Nigdy nie udostępniamy danych osobowych. Aby dowiedzieć się więcej, przeczytaj {ethicsCodeLink}. (W razie pytań skorzystaj z formularza {contactLink}.)",
+    "research.collaborators": "Wśród wcześniejszych współpracowników badawczych znaleźli się grupa Lifelong Kindergarten z MIT, Yasmin Kafai z University of Pennsylvania Graduate School of Education, Karen Brennan z Harvard Graduate School of Education, Benjamin Mako Hill z University of Washington, Andrés Monroy Hernandez z Microsoft Research, Mimi Ito i Crystle Martin z University of California, Irvine, Quinn Burke z College of Charleston, Deborah Fields z Utah State University i Kylie Peppler z Indiana University. Poniżej znajdują się wybrane artykuły naukowe, prezentacje i tezy na temat Scratch i społeczności internetowej Scratch, a następnie lista grantów National Science Foundation przyznanych na wsparcie Scratch.",
+    "research.ethicsCodeLinkText": "Kodeks etyki badawczej Fundacji Scratch",
+    "research.contactLinkText": "Kontakt",
+    "research.papers": "Prace naukowe i prezentacje",
+    "research.grants": "Granty National Science Foundation"
+}

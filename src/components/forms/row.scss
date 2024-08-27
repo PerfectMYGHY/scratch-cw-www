@@ -1,0 +1,42 @@
+/*
+ * Styles for the Row component used by formsy-react-components
+ * Should be imported for each component that extends one of
+ * the formsy-react-components
+ */
+
+.row {
+    .required-symbol {
+        display: none;
+    }
+
+    label {
+        display: inline-block;
+        margin-bottom: .75rem;
+    }
+
+    &.no-label {
+        label {
+            display: none;
+        }
+    }
+}
+
+/* allow elements such as validation errors to position relative to this row */
+.row-with-tooltip {
+    position: relative;
+}
+
+.row-label {
+    margin-bottom: .75rem;
+    line-height: 1.7rem;
+}
+
+.row-inline {
+    display: flex;
+}
+
+/* override margin-bottom so placing a label next to a radio button does not
+mess up vertical alignment */
+.row-inline label {
+    margin-bottom: 0;
+}

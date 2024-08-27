@@ -1,0 +1,67 @@
+@import "../../colors";
+
+.login {
+    padding: 10px;
+    width: 200px;
+    line-height: 1.5rem;
+    white-space: normal; // override any parent, such as in gui, who sets nowrap
+    color: $type-white;
+    font-size: .8125rem;
+
+    .button {
+        padding: .75em;
+    }
+
+    .row {
+        margin-bottom: 1.25rem;
+    }
+
+    .input {
+        margin-bottom: 12px;
+        // 100% minus border and padding
+        width: calc(100% - 30px);
+        height: 2.25rem;
+    }
+
+    label {
+        padding-top: 5px;
+        font-weight: bold;
+    }
+
+    .spinner {
+        margin: 0 .8rem;
+        width: 1rem;
+        vertical-align: middle;
+    }
+    
+    .submit-row {
+        justify-content: space-between;
+        flex-direction: row; // override 'column' layout at small widths
+    }
+
+    .submit-button {
+        margin-top: 5px;
+    }
+
+    a {
+        margin: auto 0;
+        color: $ui-white;
+
+        &:link,
+        &:visited,
+        &:active {
+            color: $ui-white;
+        }
+
+        &:hover {
+            background-color: transparent;
+        }
+    }
+
+    .error {
+        border: 1px solid $active-dark-gray;
+        border-radius: 5px;
+        background-color: $ui-orange;
+        padding: .75em 1em;
+    }
+}

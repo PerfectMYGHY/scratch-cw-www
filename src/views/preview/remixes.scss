@@ -1,0 +1,41 @@
+﻿.root-project {
+    position: relative;
+    left: 20px;
+}
+
+.title {
+    position: relative;
+    left: 20px;
+}
+
+.root-project-title {
+    position: absolute;
+    top: 5px;
+    left: calc(144px + 10px);
+    font-size: 20px;
+}
+
+.root-project-author {
+    position: absolute;
+    top: 45px;
+    left: calc(144px + 10px);
+}
+
+.creator-image {
+    float: left;
+
+    img {
+        margin-right: 8px;
+        border-radius: 4px;
+        width: 32px;
+        height: 32px;
+    }
+}
+
+.load-more {
+    text-align: center;
+
+    button {
+        width: 400px;
+    }
+}

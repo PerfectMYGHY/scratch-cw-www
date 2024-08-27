@@ -1,0 +1,95 @@
+@import "../../../colors";
+@import "../../../frameless";
+
+
+.report-modal-header {
+    box-shadow: inset 0 -1px 0 0 $ui-coral-dark;
+    background-color: $ui-coral;
+}
+
+.report-modal-content {
+    margin: 1rem auto;
+    width: 80%;
+    font-size: .875rem;
+
+
+    .instructions {
+        line-height: 1.5rem;
+
+        .instructions-header {
+            font-weight: bold;
+        }
+    }
+
+    .error-text {
+        margin-top: .9375rem;
+    }
+
+    .validation-message {
+        $arrow-border-width: 1rem;
+        display: block;
+        position: relative;
+        z-index: 1;
+        margin-top: $arrow-border-width;
+
+        border: 1px solid $active-gray;
+        border-radius: 5px;
+        background-color: $ui-orange;
+        padding: 1rem;
+        min-width: 12rem;
+        min-height: 1rem;
+        overflow: visible;
+        color: $type-white;
+
+        @media #{$medium-and-smaller} {
+            position: relative;
+            margin-top: calc($arrow-border-width / 2);
+            max-width: 100%;
+        }
+
+        /* arrow on box that points to the left */
+        &:before {
+            display: block;
+            position: absolute;
+            top: -.5rem;
+            left: calc(50% - calc(#{$arrow-border-width} / 2));
+
+            transform: rotate(135deg);
+
+            border-bottom: 1px solid $active-gray;
+            border-left: 1px solid $active-gray;
+            border-radius: 5px;
+
+            background-color: $ui-orange;
+            width: $arrow-border-width;
+            height: $arrow-border-width;
+
+            content: "";
+
+            @media #{$medium-and-smaller} {
+                display: none;
+            }
+        }
+    }
+
+    ul, p {
+        font-size: .875rem;
+    }
+}
+
+.report-modal-field {
+    position: relative;
+}
+
+.form-group.has-error {
+    .textarea, select {
+        margin: 0;
+        border: 1px solid $ui-orange;
+    }
+    margin-bottom: 1rem;
+}
+
+.report-text .textarea {
+    margin-bottom: 0;
+    min-height: 8rem;
+}

@@ -1,0 +1,42 @@
+﻿@import "../../colors";
+
+.projects-list {
+    max-height: 800px;
+    overflow: auto;
+    $project-width: 144px;
+    $project-height: 108px;
+    text-align:left;
+
+    div[info=info] {
+        position: relative;
+        border-bottom: 1px solid #dddddd;
+        margin: 5px;
+        /*height: $project-height;*/
+
+        .thumbnail-image {
+            img {
+                margin-bottom: 2px;
+                border: 1px solid $ui-border;
+                width: $project-width;
+                height: $project-height;
+            }
+        }
+
+        .info {
+            position: absolute;
+            top: 0;
+            left: calc(10px + $project-width);
+        }
+    }
+
+    div.right-top {
+        float: right;
+    }
+
+    div.children {
+        float: right;
+        border-radius: 5px;
+        border: 1px dashed #554747;
+        margin-right: 10px;
+    }
+}

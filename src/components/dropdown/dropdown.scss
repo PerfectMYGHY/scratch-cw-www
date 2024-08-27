@@ -1,0 +1,93 @@
+@import "../../colors";
+@import "../../frameless";
+
+.dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    border: 1px solid $active-gray;
+    border-radius: 0 0 5px 5px;
+    background-color: $ui-purple-dark;
+    padding: 10px;
+    min-width: 9rem;
+    max-width: 16.25rem;
+    overflow: visible;
+    color: $type-white;
+    font-size: .8125rem;
+    font-weight: normal;
+
+    // Temporary removal of staging styling for testing purposes
+    // &.staging {
+    //     background-color: $ui-orange;
+    // }
+
+    &.open {
+        display: block;
+    }
+
+    a {
+        &:link,
+        &:visited,
+        &:active {
+            background-color: transparent;
+            color: $type-white;
+        }
+    }
+
+    input {
+        margin-bottom: 12px;
+        // 100% minus border and padding
+        width: calc(100% - 30px);
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    > li {
+        display: block;
+        line-height: 30px;
+
+        &.divider {
+            margin-top: 10px;
+            border-top: 1px solid $active-gray;
+        }
+
+        a {
+            display: block;
+            padding: 0 10px;
+
+            &:hover {
+                background-color: $active-gray;
+                text-decoration: none;
+            }
+        }
+    }
+
+    &.with-arrow {
+        $arrow-border-width: 14px;
+        margin-top: $arrow-border-width;
+        border-radius: 5px;
+        overflow: visible;
+
+        &:before {
+            display: block;
+            position: absolute;
+            top: -$arrow-border-width * 0.5;
+            right: 10%;
+
+            transform: rotate(45deg);
+
+            border-top: 1px solid $active-gray;
+            border-left: 1px solid $active-gray;
+            border-radius: 5px;
+
+            background-color: $ui-purple-dark;
+            width: $arrow-border-width;
+            height: $arrow-border-width;
+
+            content: "";
+        }
+    }
+}

@@ -1,0 +1,115 @@
+@import "../../colors";
+
+.thumbnail {
+    .thumbnail-image {
+        display: block;
+
+        img {
+            margin-bottom: 2px;
+            border: 1px solid $ui-border;
+        }
+    }
+
+    $extras: ".thumbnail-creator, .thumbnail-loves, .thumbnail-favorites,.thumbnail-remixes,.thumbnail-views";
+
+    .thumbnail-title,
+    #{$extras} {
+        line-height: 1.2em;
+        white-space: nowrap;
+        word-wrap: break-word;
+    }
+
+    .thumbnail-title {
+        margin-bottom: 1px;
+        font-size: .923em;
+        font-weight: 800;
+
+        a {
+            display: block;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    }
+
+    #{$extras} {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        color: $type-gray;
+        font-size: .8462em;
+
+        a {
+            display: inline;
+        }
+    }
+
+    .thumbnail-loves,
+    .thumbnail-favorites,
+    .thumbnail-remixes,
+    .thumbnail-views {
+
+        display: inline;
+        margin-right: 10px;
+
+        &:before {
+            display: inline-block;
+            margin-right: .1rem;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: contain;
+            width: .93rem;
+            height: .93rem;
+            vertical-align: text-top;
+            content: "";
+        }
+    }
+
+    .thumbnail-loves {
+        &:before {
+            background-image: url("/svgs/love/love_type-gray.svg");
+        }
+    }
+
+    .thumbnail-favorites {
+        &:before {
+            background-image: url("/svgs/favorite/favorite_type-gray.svg");
+        }
+    }
+
+    .thumbnail-remixes {
+        &:before {
+            background-image: url("/svgs/remix/remix_type-gray.svg");
+        }
+    }
+
+    .thumbnail-views {
+        &:before {
+            background-image: url("/svgs/view/view_type-gray.svg");
+        }
+    }
+
+    &.project {
+        $project-width: 144px;
+        $project-height: 108px;
+        width: $project-width;
+
+        .thumbnail-image {
+            img {
+                width: $project-width;
+                height: $project-height;
+            }
+        }
+    }
+
+    &.gallery {
+        $gallery-width: 170px;
+        $gallery-height: 100px;
+        width: $gallery-width;
+
+        img {
+            width: $gallery-width;
+            height: $gallery-height;
+        }
+    }
+}

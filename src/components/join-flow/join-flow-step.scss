@@ -1,0 +1,68 @@
+@import "../../colors";
+@import "../../frameless";
+
+.join-flow-outer-content {
+    /* hopefully this lets text expand the height of the modal, if need be */
+    min-height: 32.5rem;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    overflow-wrap: break-word;
+}
+
+.join-flow-inner-content {
+    box-shadow: none;
+    width: calc(50% + 7.84375rem);
+    /* must use padding for top, rather than margin, because margins will collapse */
+    margin: 0 auto;
+    padding: 2.3125rem 0 2.5rem;
+    font-size: .875rem;
+}
+
+.join-flow-title {
+    color: $type-gray;
+    font-size: 1.875rem;
+}
+
+.join-flow-description {
+    font-size: .875rem;
+    font-weight: bold;
+    line-height: 1.125rem;
+    margin-top: 0.78125rem;
+    margin-bottom: 1.875rem;
+    text-align: center;
+}
+
+/* overflow will only work if this class is set on parent of img, not img itself */
+.join-flow-header-image-wrapper {
+    width: 100%;
+    height: 7.5rem;
+    overflow: hidden;
+    margin: 0;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+
+    /* match the small window setting for modal as a whole */
+    @media #{$small}, #{$small-height} {
+        border-top-left-radius: 0rem;
+        border-top-right-radius: 0rem;
+    }
+}
+
+.join-flow-header-image {
+    width: 100%;
+}
+
+.join-flow-footer-message {
+    width: 100%;
+    padding: 0.875rem 1.5rem;
+    background-color: $ui-blue-25percent;
+    font-size: .75rem;
+    font-weight: 500;
+    text-align: center;
+    color: $ui-blue;
+}
+
+.join-flow-footer-message a {
+    font-weight: 500;
+}

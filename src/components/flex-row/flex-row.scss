@@ -1,0 +1,39 @@
+@import "../../frameless";
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+
+    &.column {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    &.uneven {
+        align-items: flex-start;
+
+        .short {
+            width: $cols3;
+        }
+
+        .long {
+            width: $cols8;
+            text-align: left;
+        }
+    }
+
+    @media #{$medium-and-smaller} {
+        flex-direction: column;
+
+        &.uneven {
+            .short,
+            .long {
+                margin: auto;
+                width: 90%;
+            }
+        }
+    }
+}

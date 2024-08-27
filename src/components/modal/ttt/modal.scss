@@ -1,0 +1,62 @@
+@import "../../../colors";
+@import "../../../frameless";
+
+.mod-ttt {
+    overflow: hidden;
+}
+
+.ttt-modal-header {
+    background-color: $ui-blue;
+    height: 3rem;
+}
+
+.ttt-modal-body {
+    display: flex;
+    margin: 2.5rem 3rem;
+}
+
+.mod-ttt-img {
+    border-radius: .5rem;
+    overflow: hidden;
+    height: 18rem;
+    width: 18rem;
+}
+
+.ttt-content {
+    margin-left: 2rem;
+}
+
+.ttt-content-chunk + .ttt-content-chunk {
+    margin-top: 1rem;
+    border-top: 1px solid $ui-border;
+    padding-top: 1rem;
+}
+
+.ttt-description {
+    margin-top: 0;
+}
+
+a.ttt-try-tutorial-button {
+    display: flex;
+    width: fit-content;
+    align-items: center;
+
+    & > span {
+        color: $type-white;
+    }
+    & > img {
+        margin-right: .5rem;
+    }
+}
+
+.ttt-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ttt-item {
+    display: flex;
+    img {
+        margin-right: 1rem;
+    }
+}

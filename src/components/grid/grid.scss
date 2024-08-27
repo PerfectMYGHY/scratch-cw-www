@@ -1,0 +1,127 @@
+@import "../../frameless";
+@import "../../colors";
+
+.grid {
+    display: inline-block;
+    width: 100%;
+
+    $thumbnail-width: 220px;
+    $thumbnail-inner-width: 204px;
+
+    $project-height: 208px;
+    $gallery-height: 164px;
+
+    .flex-row {
+        margin: 0 auto;
+        padding: 12px 0;
+        width: $cols12;
+        justify-content: flex-start;
+    }
+
+    .thumbnail {
+        margin: 7px;
+        border-radius: 4px;
+        box-shadow: 0 0 0 1px $active-gray;
+        background-color: $ui-white;
+        padding-bottom: 4px;
+        width: $thumbnail-width;
+
+        .thumbnail-image {
+            margin: 8px auto;
+            width: $thumbnail-inner-width;
+        }
+
+        .thumbnail-info {
+            margin: 0 auto;
+            width: $thumbnail-inner-width;
+
+            .creator-image {
+                float: left;
+
+                img {
+                    margin-right: 8px;
+                    border-radius: 4px;
+                    width: 32px;
+                    height: 32px;
+                    display: block;
+                    overflow: hidden;
+                    text-indent: 100%;
+                    white-space: nowrap;
+                }
+            }
+
+            .thumbnail-title {
+                float: left;
+                max-width: 164px;
+                text-align: left;
+
+                .thumbnail-creator a {
+                    color: $type-gray;
+                }
+            }
+        }
+
+        &.project {
+            height: $project-height;
+
+            .thumbnail-image {
+                height: 152px;
+
+                img {
+                    margin: 0 auto;
+                    border: 0;
+                    border-radius: 4px;
+                    width: $thumbnail-inner-width;
+                    height: 152px;
+                }
+            }
+        }
+
+        &.gallery {
+            height: $gallery-height;
+
+            .thumbnail-image {
+                height: 120px;
+
+                img {
+                    border: 0;
+                    border-radius: 4px;
+                    width: $thumbnail-inner-width;
+                    height: 120px;
+                }
+            }
+
+            .thumbnail-info {
+                .thumbnail-title {
+                    max-width: 204px;
+                }
+            }
+        }
+    }
+
+    &.column {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    //4 columns
+    @media #{$small} {
+        .flex-row {
+            width: $cols4;
+        }
+    }
+
+    //6 columns
+    @media #{$medium} {
+        .flex-row {
+            width: $cols6;
+        }
+    }
+
+    // 8 columns
+    @media #{$intermediate} {
+        .flex-row {
+            width: $cols9;
+        }
+    }
+}

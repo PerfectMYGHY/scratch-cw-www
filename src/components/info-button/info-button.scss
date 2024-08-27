@@ -1,0 +1,73 @@
+@import "../../colors";
+@import "../../frameless";
+
+.info-button {
+    position: relative;
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    margin-left: -.125rem;
+    margin-top: -.75rem;
+    background-image: url("/svgs/info-button/info-button.svg");
+    background-size: cover;
+    top: .6875rem;
+}
+
+.info-button-message {
+    $arrow-border-width: 1rem;
+    display: block;
+    position: absolute;
+    top: .375rem;
+    left: .5rem;
+    transform: translate(1rem, -1rem);
+    width: 16.5rem;
+    min-height: 1rem;
+    margin-left: $arrow-border-width;
+    border: 1px solid $active-gray;
+    border-radius: 5px;
+    box-shadow: 0 0 4px 2px rgba(0, 0, 0, .15);
+    padding: .75rem;
+    overflow: visible;
+    background-color: $ui-blue-dark;
+    color: $type-white;
+    line-height: 1.25rem;
+    text-align: left;
+    font-size: .875rem;
+    font-weight: 500;
+    z-index: 2;
+
+    &:before {
+        display: block;
+        position: absolute;
+        top: 1rem;
+        left: -$arrow-border-width * 0.5;
+
+        transform: rotate(45deg);
+
+        border-bottom: 1px solid $active-gray;
+        border-left: 1px solid $active-gray;
+        border-radius: 5px;
+
+        background-color: $ui-blue-dark;
+        width: $arrow-border-width;
+        height: $arrow-border-width;
+
+        content: "";
+    }
+}
+
+@media #{$intermediate-and-smaller} {
+    .info-button-message {
+        position: absolute;
+        transform: none;
+        /* since we're positioning message relative to info-button's parent,
+        we need to center this element within its width. */
+        margin: 0 calc((100% - 16.5rem) / 2);;
+        top: .125rem;
+        left: 0;
+
+        &:before {
+            display: none;
+        }
+    }
+}

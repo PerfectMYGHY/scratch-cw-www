@@ -1,0 +1,23 @@
+@import "../../colors";
+@import "../../frameless";
+
+.new_description {
+    .new_description-footer {
+        margin-top: 1.5rem;
+        text-align: center;
+    }
+
+    dl {
+        dt {
+            margin-top: 1.5rem;
+        }
+    }
+}
+
+@media #{$medium-and-smaller}{
+    .new_description-footer {
+        img {
+            display: none;
+        }
+    }
+}

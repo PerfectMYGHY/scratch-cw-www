@@ -1,0 +1,22 @@
+{
+    "wedoLegacy.intro": "LEGO® Education WeDo 2.0 este un kit de invenție introductivă pe care îl puteți folosi pentru a vă construi propriile mașini interactive. Puteți asambla blocuri de programare Scratch pentru a interacționa cu creațiile LEGO WeDo și pentru a adăuga animații pe ecran.",
+    "wedoLegacy.requirement": "Extensia LEGO WeDo 2.0 este disponibilă pentru Mac OSX și Windows 10+.",
+    "wedoLegacy.getStarted": "Noțiuni introductive cu LEGO WeDo 2.0",
+    "wedoLegacy.installTitle": "1. Instalați Device Manager",
+    "wedoLegacy.installText": "Managerul de dispozitive vă permite să conectați WeDo 2.0 la Scratch folosind Bluetooth",
+    "wedoLegacy.downloadMac": "Descărcați pentru macOS",
+    "wedoLegacy.downloadWin": "Descărcați pentru Windows 10+",
+    "wedoLegacy.setupTitle": "2. Configurare și ajutor",
+    "wedoLegacy.setupText": "Conectați-vă WeDo 2.0 urmând pașii din <a href=\"/projects/editor/?tip_bar=ext2\">Fereastra Sfaturi</a>",
+    "wedoLegacy.setupTextHTML": "Conectați-vă WeDo 2.0 urmând pașii din <a>Fereastra Sfaturi</a>",
+    "wedoLegacy.createTitle": "3. Creați",
+    "wedoLegacy.createText": "Utilizați blocurile de extensie WeDo pentru a aprinde luminile, a controla motoarele și a face proiectul interactiv",
+    "wedoLegacy.wedo2SetupInstructions": "Instrucțiuni de instalare WeDo 2.0",
+    "wedoLegacy.wedo1SetupInstructions": "Instrucțiuni de instalare WeDo 1.0",
+    "wedoLegacy.starterProjects": "Proiecte de pornire WeDo 2.0",
+    "wedoLegacy.starterMotor": "Motor",
+    "wedoLegacy.starterDistance": "Senzor de distanță",
+    "wedoLegacy.starterTilt": "Senzor de înclinare",
+    "wedoLegacy.versionTitle": "Ce versiune ai?",
+    "wedoLegacy.versionText": "De asemenea, puteți utiliza Scratch pentru a programa LEGO WeDo original (LEGO WeDo 1.0)."
+}

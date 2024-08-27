@@ -1,0 +1,19 @@
+@import "../../frameless";
+
+.join {
+    position: absolute;
+    z-index: 1000;
+    top: 12px;
+    left: 12px;
+    left: calc(25% - 221px);
+
+    .logo {
+        width: 221px;
+    }
+}
+
+@media #{$small}, #{$medium}, #{$intermediate} {
+    .join {
+        left: calc(50% - 38px);
+    }
+}

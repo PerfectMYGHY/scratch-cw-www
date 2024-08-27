@@ -1,0 +1,91 @@
+@import "../../colors";
+@import "../../frameless";
+
+.ttt-tile {
+    display: inline-block;
+    // work-around chrome bug with columns support - 1 px of next column ends up
+    // at the bottom of the previous column.
+    margin-top: 1px;
+    margin-bottom: calc(1.25rem - 1px);
+    border-radius: 1rem;
+    box-shadow: 0 0 0 1px $active-gray;
+    background-color: $ui-white;
+    width: $cols4;
+    text-align: center;
+    min-height: 18.125rem;
+}
+
+.ttt-tile-tutorial {
+    display: inline-block;
+    position: relative;
+}
+
+.ttt-tile-image {
+    border-radius: 1rem 1rem 0 0;
+    background: $ui-blue;
+    width: 100%;
+    cursor: pointer;
+}
+
+.ttt-tile-image-img {
+    display: block;
+    border-radius: 1rem 1rem 0 0;
+    width: 100%;
+}
+
+// wrapper for try button to get position correct
+.ttt-tile-image-try {
+    display: none;
+    position: absolute;
+    top: 4rem;
+    left: 50%;
+    transform: translate(-50%, 0);
+    text-align: center;
+    color: $type-white;
+}
+
+.mod-ttt-try-button {
+    border: 1px solid $ui-white;
+    background-color: transparent;
+}
+
+.ttt-tile-info {
+    position: relative;
+    cursor: pointer;
+    padding: 1rem 0;
+}
+
+.ttt-tile-tag {
+    display: inline-block;
+    position: absolute;
+    top: -1rem;
+    left: 1rem;
+    margin: .5em 0;
+    border: 0;
+    border-radius: 1rem;
+    background-color: $ui-blue;
+    padding: .25rem 1rem;
+    color: $type-white;
+    font-size: .8rem;
+    font-weight: bold;
+}
+
+.ttt-tile-title {
+    margin: .5rem auto;
+    width: calc(100% - 3rem);
+    font-size: 1rem;
+}
+
+.ttt-tile-description {
+    margin: auto;
+    width: calc(100% - 3rem);
+    font-size: .875rem;
+}
+
+.ttt-tile-open-modal {
+    display: inline-block;
+    padding: 0 .25rem;
+    width: 1rem;
+    height: 1rem;
+    vertical-align: text-bottom;
+}

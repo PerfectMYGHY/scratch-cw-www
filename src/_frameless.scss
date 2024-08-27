@@ -1,0 +1,140 @@
+/*
+    Frameless           <http://framelessgrid.com/>
+    by Joni Korpi       <http://jonikorpi.com/>
+    licensed under CC0  <http://creativecommons.org/publicdomain/zero/1.0/>
+*/
+
+
+//
+// Configuration
+//
+
+@use "sass:math";
+
+$font-size: 16px;       // Your base font-size in pixels
+$em: math.div($font-size, 1em);  // Shorthand for outputting ems
+
+$column: 60px;  // The column-width of your grid in pixels
+$gutter: 20px;  // The gutter-width of your grid in pixels
+
+
+
+//
+// Column-widths in variables, in ems
+//
+
+$cols1: math.div( 1 * ($column + $gutter) - $gutter, $em);
+$cols2: math.div( 2 * ($column + $gutter) - $gutter, $em);
+$cols3: math.div( 3 * ($column + $gutter) - $gutter, $em);
+$cols4: math.div( 4 * ($column + $gutter) - $gutter, $em);
+$cols5: math.div( 5 * ($column + $gutter) - $gutter, $em);
+$cols6: math.div( 6 * ($column + $gutter) - $gutter, $em);
+$cols7: math.div( 7 * ($column + $gutter) - $gutter, $em);
+$cols8: math.div( 8 * ($column + $gutter) - $gutter, $em);
+$cols9: math.div( 9 * ($column + $gutter) - $gutter, $em);
+$cols10: math.div(10 * ($column + $gutter) - $gutter, $em);
+$cols11: math.div(11 * ($column + $gutter) - $gutter, $em);
+$cols12: math.div(12 * ($column + $gutter) - $gutter, $em);
+
+$desktop: 942px;
+$tabletPortrait: 768px;
+$mobileIntermediate: 640px;
+$mobile: 480px;
+
+/* Media Queries */
+
+/* Width */
+/*
+* ... small | medium     | intermediate | big ...
+* ... medium-and-smaller |
+*          ... intermediate-and-smaller |
+*/
+
+$small: "only screen and (max-width : #{$mobile - 1})";
+$medium: "only screen and (min-width : #{$mobile}) and (max-width : #{$tabletPortrait - 1})";
+$intermediate: "only screen and (min-width : #{$tabletPortrait}) and (max-width : #{$desktop - 1})";
+$big: "only screen and (min-width : #{$desktop})";
+
+$medium-and-smaller: "only screen and (max-width : #{$tabletPortrait - 1})";
+$intermediate-and-smaller: "only screen and (max-width : #{$desktop - 1})";
+
+$medium-and-intermediate: "only screen and (min-width : #{$mobile}) and (max-width : #{$desktop - 1})";
+
+/* Height */
+
+$small-height: "only screen and (max-height : #{$mobile - 1})";
+$medium-height: "only screen and (min-height : #{$mobile}) and (max-height : #{$tabletPortrait - 1})";
+
+
+//
+// Column-widths in a function, in ems
+//
+
+@mixin width ($cols: 1) {
+    width: math.div($cols * ($column + $gutter) - $gutter, $em);
+}
+
+//4 columns
+@mixin submobile ($parent-selector, $child-selector) {
+    @media #{$small} {
+        #{$parent-selector} {
+            text-align: center;
+        }
+
+        #{$child-selector} {
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        @content;
+    }
+}
+
+//6 columns
+@mixin mobile ($parent-selector, $child-selector) {
+    @media #{$medium} {
+        #{$parent-selector} {
+            text-align: center;
+        }
+
+        #{$child-selector} {
+            margin: 0 auto;
+            width: $mobile;
+        }
+
+        @content;
+    }
+}
+
+//8 columns
+@mixin tablet ($parent-selector, $child-selector) {
+    @media #{$intermediate} {
+        #{$parent-selector} {
+            text-align: center;
+        }
+
+        #{$child-selector} {
+            margin: 0 auto;
+            width: $tabletPortrait;
+        }
+    }
+}
+
+//12 columns
+@mixin desktop ($parent-selector, $child-selector) {
+    @media #{$big} {
+        #{$child-selector} {
+            margin: 0 auto;
+            width: $desktop;
+        }
+    }
+}
+
+@mixin responsive-layout ($parent-selector, $child-selector) {
+    @include submobile($parent-selector, $child-selector);
+    @include mobile($parent-selector, $child-selector);
+    @include tablet($parent-selector, $child-selector);
+    @include desktop($parent-selector, $child-selector);
+}
+
+@include responsive-layout("#view", ".inner");

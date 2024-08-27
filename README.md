@@ -1,0 +1,390 @@
+# ！！重要提示
+
+需要使用我的`scratch-gui`库以替换掉默认安装的`scratch-gui`，也更方便自己开发。
+
+下载我的存储库中的`my-scratch-gui`并重命名为`scratch-gui`，将其替换掉`node_modules`下面的`scratch-gui`。
+
+唯一重要提示：
+
+默认情况下，`scratch-www`会引用`/scratch-gui/dist/`目录下的文件，当你需要重新生成时，可以这样(Windows CMD中)：
+
+```
+npm install
+set BUILD_MODE=dist
+npm run build
+```
+
+接下来运行时可能会出现下面错误：
+
+```
+ERROR in unable to locate '.../scratch/node_modules/scratch-gui/dist/*.hex' glob
+```
+
+这是正常现象，不会影响正常使用。
+
+注意：每次修改并生成后，都需要重启调试服务器！
+
+## scratch-gui
+
+注意！在修改`/dev-server/index.js`中定义的服务器地址后再`scratch-gui`中的`webpack.config.js`中也有同样定义，必须修改并重新生成。
+
+而且在`/src/setting.js`中也有地址配置，需要修改。
+
+最后，不要忘记在各个服务器里添加CORS策略的允许访问
+
+# scratch-www
+#### Standalone web client for Scratch
+
+[![Build Status](https://travis-ci.org/LLK/scratch-www.svg)](https://travis-ci.org/LLK/scratch-www)
+[![Coverage Status](https://coveralls.io/repos/github/LLK/scratch-www/badge.svg?branch=develop)](https://coveralls.io/github/LLK/scratch-www?branch=develop)
+[![Greenkeeper badge](https://badges.greenkeeper.io/LLK/scratch-www.svg)](https://greenkeeper.io/)
+
+## Overview
+
+This is Scratch’s open source web client! This is the code for much of the [Scratch website](https://scratch.mit.edu).
+
+In particular, this codebase includes code for:
+* the "project page", which shows a playable version of the project, along with the project's title, description, comments, remixes and studios; this page operates in the background when you "See inside" a project
+* the site's home page
+* the Ideas page
+* landing pages for various Scratch extensions, such as LEGO MINDSTORMS and micro:bit
+* the info page for Scratch Desktop
+* and other pages such as Credits and FAQ.
+
+### How this fits in with other Scratch repos
+
+The scratch-www project has lots of aspects of its design that are particular to our backend systems.
+To use it for your own project, you would have to look at all the places it makes backend calls, and
+create your own backend systems to perform those functions.
+
+The [scratch-gui](https://github.com/scratchfoundation/scratch-gui) project, on the other hand, is designed to be
+able to be used by anyone, without needing to create backend systems, though it also can support
+backend systems for project and asset saving.
+
+### Contributing
+
+We welcome your contributions to this codebase! You may want to start by browsing [the current
+list of open issues labeled "help wanted"](https://github.com/scratchfoundation/scratch-www/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22).
+
+Contributing to scratch-www can be more difficult than contributing to
+[scratch-gui](https://github.com/scratchfoundation/scratch-gui). This is because scratch-gui can be run on its
+own, without needing any other services to be running, while scratch-www needs to communicate
+with several backend systems that the Scratch team runs (see "How this fits in with other Scratch
+repos" above). If you are new to contributing to Scratch's source code, we suggest you start
+by becoming familiar with scratch-gui and its [list of open issues labeled "help
+wanted"](https://github.com/scratchfoundation/scratch-gui/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22).
+
+To contribute, please follow the [standard steps for contributing to a project on
+GitHub](https://github.com/firstcontributions/first-contributions).
+
+### License
+
+See the [LICENSE](https://github.com/scratchfoundation/scratch-www/blob/master/LICENSE) file in this repo.
+
+## Understanding this codebase
+
+### Guides
+
+Here are some resources to help you get acquainted with how we’re working on the Scratch codebase:
+
+* [Contributor Guidelines](https://github.com/scratchfoundation/scratch-www/blob/develop/.github/CONTRIBUTING.md)
+* [Style Guide](https://github.com/scratchfoundation/scratch-www/wiki/Style-Guide)
+* [Testing Guide](https://github.com/scratchfoundation/scratch-www/wiki/Testing-Guide-for-Bugfixes)
+* [Localization Guide](https://github.com/scratchfoundation/scratch-www/wiki/Localization-Guide)
+* [Map of the repository](https://github.com/scratchfoundation/scratch-www/wiki/Repo-Map)
+
+### Core technologies
+
+Significant core technologies this codebase uses include:
+
+#### Development technologies
+
+* [Node](https://nodejs.org/)
+* [Webpack](https://webpack.js.org/)
+* [React](https://facebook.github.io/react/)
+* [Redux](https://redux.js.org/)
+* [Sass](http://sass-lang.com/documentation/file.SASS_REFERENCE.html)
+
+#### Testing technologies
+
+Our tests use:
+
+* [Jest](https://jestjs.io/) (we are writing most new tests in Jest)
+* [Tap](https://node-tap.org/) (we are moving away from using Tap, but many tests still use it)
+* [Enzyme](https://airbnb.io/enzyme/)
+* [Selenium](https://selenium.dev/)
+
+## Developing scratch-www
+
+### Before Getting Started
+
+Make sure you have installed:
+* [node](https://docs.npmjs.com/getting-started/installing-node): version 16
+* npm (Node Package Manager): used to maintain and update packages required to build the site
+
+### Update Packages
+
+It's important to make sure that all of the dependencies are up to date because the
+scratch-www code only works with specific versions of the dependencies.
+You can update the packages by using the command:
+
+```bash
+npm install
+```
+
+#### Warnings during npm install
+
+These warnings can be safely ignored:
+
+```bash
+npm WARN react-modal@0.6.1 requires a peer of react@^0.14.0 but none was installed.
+npm WARN react-redux@4.4.0 requires a peer of react@^0.14.0 but none was installed.
+npm WARN react-redux@4.4.0 requires a peer of redux@^2.0.0 || ^3.0.0 but none was installed.
+npm WARN react-addons-test-utils@0.14.7 requires a peer of react@^0.14.7 but none was installed.
+npm WARN react-dom@0.14.8 requires a peer of react@^0.14.8 but none was installed.
+```
+
+These currently exist in static/js/lib .
+
+### To Build
+
+To compile the source code into HTML and JavaScript bundles browsers can read, you can create
+a temporary version of the site on your machine that you can access through your web browser.
+
+You can either "build" the site a single time, by running:
+
+```bash
+npm run build
+```
+
+Or, you can run a server that rebuilds the files as you edit them, by running the commands:
+
+```bash
+npm run translate
+npm start
+```
+
+*NOTE: `npm run translate` builds the intl directory. The site will build fine without it,
+but translatable text strings will not show up correctly until you have built intl.*
+
+During development, `npm start` watches any update you make to files in either
+`./static` or `./src` and triggers a rebuild of the project.  In development,
+the build is stored in memory, and not served from the `./build` directory.
+
+### Viewing the local site
+
+Once you have built the local site, using either `npm run build` or `npm start`,
+the site hosted on your local machine can be accessed by a web browser by entering
+`localhost:8333` into your browser's address bar.
+
+### Troubleshooting
+
+When running `npm start`, here are some important log messages to keep an eye out for:
+* `webpack: bundle is now VALID.` – The bundle has been loaded into memory and is now viewable in the browser. This will show up both once `npm start` has completed its setup, and also once updates you make to files have been re-compiled for viewing in the browser.
+* `webpack: bundle is now INVALID.` – If you see this, then it means you have made updates to files that are still being compiled for browser viewing. Pages will still be viewable, but they will not see any updates you made yet.
+
+### To stop npm
+
+To stop the `npm start` process which is making the site available to your web browser
+(created above in "To Build"), use `^C` (control-c) in the terminal.
+
+#### Configuration
+
+`npm start` can be configured with the following environment variables, by setting them in
+the beginning of the command, before `npm start`:
+
+| Variable        | Default                            | Description                                    |
+| --------------- | ---------------------------------- | ---------------------------------------------- |
+| `API_HOST`      | `https://api.scratch.mit.edu`      | Hostname for API requests                      |
+| `ASSET_HOST`    | `https://assets.scratch.mit.edu`   | Hostname for asset requests                    |
+| `BACKPACK_HOST` | `https://backpack.scratch.mit.edu` | Hostname for backpack requests                 |
+| `PROJECT_HOST`  | `https://projects.scratch.mit.edu` | Hostname for project requests                  |
+| `FALLBACK`      | `''`                               | Pass-through location for old site             |
+| `GTM_ID`        | `''`                               | Google Tag Manager ID                          |
+| `GTM_ENV_AUTH`  | `''`                               | Google Tag Manager env and auth info           |
+| `NODE_ENV`      | `null`                             | If not `production`, app acts like development |
+| `PORT`          | `8333`                             | Port for devserver (http://localhost:XXXX)     |
+
+*NOTE: Because by default `API_HOST=https://api.scratch.mit.edu`, please be aware that, by default, you will be seeing and interacting with real data on the Scratch website.*
+
+## Tests
+
+### Unit tests
+
+Most of our unit tests run using Jest, but older unit tests use the TAP framework.
+
+#### Run all tests
+
+To build the application and run all unit and localization tests, use the command:
+
+```bash
+npm test
+```
+
+#### Run one test
+
+To run a single unit test file from the command-line using Jest, use the command:
+
+```bash
+node_modules/.bin/jest ./test/unit/PATH/TO/FILENAME.test.js
+```
+
+*NOTE: replace `PATH/TO/FILENAME` with the actual path to the file you wish to run.*
+
+### Integration tests
+
+Our integration tests assume that a larger environment is running than just scratch-www
+on its own; for instance, many require that a test user be able to log in to the site,
+which requires backend and database support.
+
+By default, tests run against our Staging instance, but you can pass in a different
+location with the ROOT_URL environment variable (see below) if you want to run the
+tests against another location--for instance, your local build.
+
+All of our integration tests use Jest as our testing framework.
+
+#### Running the tests
+
+To run all integration tests from the command-line:
+
+```bash
+SMOKE_USERNAME=username SMOKE_PASSWORD=password ROOT_URL=https://scratch.mit.edu UNOWNED_SHARED_PROJECT_ID=# UNOWNED_UNSHARED_PROJECT_ID=# OWNED_SHARED_PROJECT_ID=# OWNED_UNSHARED_PROJECT_ID=# npm run test:integration
+```
+
+
+#### Usernames/Password for the tests
+
+The tests use multiple users with similar usernames and the same password.  They use the the username you pass in with SMOKE_USERNAME as well as the same username with a 1, 2, 3, 4, 5, and 6 (soon to be higher numbers as well) appended to the end of it.  So if you use the username "test" it will also use the username "test1", "test2", "test3", etc.  Make sure you have created accounts with this pattern and use the same password for all accounts involved.
+
+You can use any set of usernames that fit this pattern.  Each account needs to share the same password, which is passed in as SMOKE_PASSWORD.
+
+#### Environment Variables
+Several environment variables need to be passed in for the tests to run.  Most of them have defaults that point to the staging server.
+
+ * SMOKE_USERNAME             -   Root username used for tests that sign in. See the Usernames section above
+ * SMOKE_PASSWORD             -   Password for all accounts used in the tests
+ * UNOWNED_SHARED_PROJECT_ID  -   ID for a shared project owned by [testuser]2 This project should have at least one remix.  Remix it with another of the [testuser] accounts. Used in the project-page tests.
+ * OWNED_SHARED_PROJECT_ID    -   ID for a shared project owned by [testuser]6.  Used in the project-page tests.
+ * UNOWNED_UNSHARED_PROJECT_ID  - ID for an unshared project owned by [testuser]2.  It is used in tests where it is opened by [testuser]6 in the project-page tests.
+ * OWNED_UNSHARED_PROJECT_ID  -   ID for an unshared project owned by [testuser]6.  It will be opened by its owner in the project-page tests.
+ * UNOWNED_SHARED_SCRATCH2_PROJECT_ID - ID for a shared scratch2 project owned by [testuser]2.  It will be opened by [testuser]6.
+ * OWNED_UNSHARED_SCRATCH2_PROJECT_ID - ID for an unshared scratch2 project owned by [testuser]6.  It will be opened by [testuser]6.
+ * SAUCE_USERNAME             -   Username for a saucelabs account.  Only used when running tests remotely with test:integration:remote
+ * SAUCE_ACCESS_KEY           -   Access token used by the saucelabs account included. Only used when running tests remotely with test:integration:remote
+ * SMOKE_REMOTE               -   Boolean to set whether to use saucelabs to run tests remotely.  Set to true automatically when running tests with test:integration:remote, otherwise defaults to false.
+ * RATE_LIMIT_CHECK           -   A URL that triggers clearing the studio creation rate limit for very specific accounts. This is needed for the my-stuff tests to test studio creation, ensuring they run the same every time.  This needs to be setup separately.
+
+### Run a single test file
+To run a single file from the command-line using Jest:
+
+```bash
+SMOKE_USERNAME=username SMOKE_PASSWORD=password ROOT_URL=https://scratch.mit.edu node_modules/.bin/jest ./test/integration/filename.test.js
+```
+
+To run a single file from the command-line using TAP:
+
+```bash
+SMOKE_USERNAME=username SMOKE_PASSWORD=password ROOT_URL=https://scratch.mit.edu node_modules/.bin/tap ./test/integration-legacy/smoke-testing/filename.js -R classic --no-coverage --timeout=3600
+```
+
+* the `-R classic` makes tap use the old reporting style, which avoids an error with the "nyc" package
+* `--no-coverage` is because we do not use the coverage-tracking feature of tap
+* the `timeout` argument is for the length of the entire tap test-suite; if you are getting a timeout error, you may need to adjust this value (some of the Selenium tests take a while to run)
+
+#### Running Remote tests
+
+Integration tests can be run using Saucelabs, an online service that can test multiple
+browser/OS combinations remotely. (Currently, all tests are written for use for Chrome on Mac).
+
+You will need a Saucelabs account in order to use it for testing. If you have one, you can
+find your Access Key:
+1. click your username
+1. select "User Settings" from the dropdown menu
+1. near the bottom of the page is your access key
+
+To run tests using Saucelabs, run the command:
+
+```bash
+SMOKE_USERNAME=username SMOKE_PASSWORD=password SAUCE_USERNAME=saucelabsUsername SAUCE_ACCESS_KEY=saucelabsAccessKey ROOT_URL=https://scratch.mit.edu npm run test:integration:remote
+```
+
+*NOTE: Currently Jest tests will not run with Saucelabs.*
+
+#### Configuration
+
+| Variable      		| Default               | Description                                 			    |
+| ---------------------	| --------------------- | --------------------------------------------------------- |
+| `ROOT_URL`			| `scratch.ly`			| Location you want to run the tests against                |
+| `SMOKE_USERNAME`    	| `None` 				| Username for Scratch user you're signing in with to test 	|
+| `SMOKE_PASSWORD`  	| `None`                | Password for Scratch user you're signing in with to test  |
+| `SMOKE_REMOTE`        | `false`               | Tests with Sauce Labs or not. True if running test:smoke:sauce |
+| `SMOKE_HEADLESS`      | `false`               | Run browser in headless mode. Flaky at the moment         |
+| `SAUCE_USERNAME`      | `None`                | Username for your Sauce Labs account                      |
+| `SAUCE_ACCESS_KEY`    | `None`                | Access Key for Sauce Labs found under User Settings       |
+
+## To Deploy
+
+Deploying to staging or production will upload code to S3 and configure Fastly.
+
+```bash
+npm install
+virtualenv ENV
+. ENV/bin/activate
+pip install -r requirements.txt
+npm run build && npm run deploy
+```
+
+| Variable                 | Default | Description                                      |
+| ------------------------ | ------- | ------------------------------------------------ |
+| `FASTLY_SERVICE_ID`      | `''`    | Fastly service ID for `bin/configure-fastly.js`  |
+| `FASTLY_API_KEY`         | `''`    | Fastly API key for `bin/configure-fastly.js`     |
+| `FASTLY_ACTIVATE_CHANGES`| `false` | Activate changes and purge all after configuring |
+| `AWS_ACCESS_KEY_ID`      | `''`    | AWS access key id for S3                         |
+| `AWS_SECRET_ACCESS_KEY`  | `''`    | AWS secret access key for S3                     |
+| `S3_BUCKET_NAME`         | `''`    | S3 bucket name to deploy into                    |
+
+### Fastly deployment details
+
+When deploying, Fastly's API is used to clone the active VCL configuration, update just the
+relevant component with content from this repo's `routes.json` file, and activate the new VCL
+configuration.
+
+#### routes.json
+
+Much of the routes.json file is straightforward, but some fields are not obvious in their purpose.
+
+`routeAlias` helps us keep the overall length and complexity of the regex comparison code in
+Fastly from getting too large. There is one large regex which we have Fastly test the incoming
+request URL against to know if it can reply with a static file in S3; if no match is found, we
+assume we need to pass the request on to scratchr2. We could test every single route `pattern`
+regex in `routes.json`, but many are similar, so instead we just take the unique set of all
+`routeAlias` entries, which is shorter and quicker.
+
+## Windows
+
+For development on Windows, you will probably need to use a program that provides you a Unix interface.
+
+There are several options for doing this:
+
+* Use the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to run Linux inside Windows
+* Use [Cygwin](https://www.cygwin.com/)
+* Use Wubi, a Windows Installer for Ubuntu that allows you to have Ubuntu and Windows on one disk, without the need of an extra partition. There is a [version for Windows XP, Vista, or 7](https://wiki.ubuntu.com/WubiGuide) and a [version for Windows 8 or higher](https://github.com/hakuna-m/wubiuefi).
+
+In addition, you will need to install Node; [here are instructions for installing Node on WSL](https://docs.microsoft.com/en-us/windows/nodejs/setup-on-wsl2#install-nvm-nodejs-and-npm).
+
+## Current issues with developing scratch-www
+
+We're currently in the process of transitioning into this web client from Scratch's existing structure. As we transition, there are going to be some issues along the way that relate to how this client needs to interact with the existing infrastructure to work properly in production.
+
+### FALLBACK
+
+On top of migrating to using this as our web client, Scratch is also transitioning into using a new API backend, Scratch REST API (closed-source). As that is also currently in development and incomplete, we are set up to fall back to using existing Scratch endpoints if an API endpoint does not exist – which is where the `FALLBACK` comes in.
+
+Most of the issues we have currently revolve around the use of `FALLBACK`. This variable is used to specify what URL to fall back onto should a request fail within the context of this web client, or when using the `API_HOST`. If not specified in the process, it will not be used, and any request that is not made through the web client or the API will be unreachable.
+
+Setting `FALLBACK=https://scratch.mit.edu` allows the web client to retrieve data from the Scratch website in your development environment. However, because of security concerns, trying to send data to Scratch through your development environment won't work. This means the following things will be broken for the time being:
+
+* Login on the splash page (*In the process of being fixed*)
+* Some update attempts to production data made through a development version of the web client
+
+Additionally, if you set `FALLBACK=https://scratch.mit.edu`, be aware that clicking on links to parts of the website not yet migrated over (currently such as `Discuss`, `Profile`, `My Stuff`, etc.) will take you to the Scratch website itself.

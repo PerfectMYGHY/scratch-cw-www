@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\addons",
+    "\\src\\addons\\addons-l10n",
+    "\\src\\components",
+    "\\src\\components\\library-item",
+    "\\src\\containers",
+    "\\src\\lib",
+    "\\src\\lib\\tw-translations",
+    "\\src\\reducers"
+  ],
+  "SelectedNode": "\\src\\addons\\addons-l10n\\en.json",
+  "PreviewInSolutionExplorer": false
+}

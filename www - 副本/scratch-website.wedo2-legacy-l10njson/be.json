@@ -1,0 +1,22 @@
+{
+    "wedoLegacy.intro": "The LEGO® Education WeDo 2.0 гэта пачатковы набор для стварэння ўласных інтэрактыўных машымаў. Для ўзаемадзеяння з LEGO WeDo можна выкарыстоўваць блокі праграмавання Scratch і дадаваць анімацыю на экран.",
+    "wedoLegacy.requirement": "Пашырэнне LEGO WeDo 2.0 даступна для Mac OSX і Windows 10+.",
+    "wedoLegacy.getStarted": "Пачаць працу з LEGO WeDo 2.0",
+    "wedoLegacy.installTitle": "1. Усталяваць кіраванне прыладай",
+    "wedoLegacy.installText": "Кіраванне прыладай дазваляе вам злучаць WeDo 2.0 са Scratch праз Bluetooth",
+    "wedoLegacy.downloadMac": "Запампаваць для macOS",
+    "wedoLegacy.downloadWin": "Спампаваць для Windows 10+",
+    "wedoLegacy.setupTitle": "2. Налады і Дапамога",
+    "wedoLegacy.setupText": "Далучыць WeDo 2.0 выканаўшы наступныя крокі ў <a href=\"/projects/editor/?tip_bar=ext2\">Вакне падказак</a>",
+    "wedoLegacy.setupTextHTML": "Далучыць WeDo 2.0 выканаўшы наступныя крокі ў <a>Вакне падказак</a>",
+    "wedoLegacy.createTitle": "3. Стварыць",
+    "wedoLegacy.createText": "Карыстайцеся блокамі пашырэнняў WeDo для ўключэння асвятлення, кантроля рухавікамі і дадання праекту інтэрактыўнасці",
+    "wedoLegacy.wedo2SetupInstructions": "WeDo 2.0 інструкцыі па ўсталяванню",
+    "wedoLegacy.wedo1SetupInstructions": "WeDo 1.0 інструкцыі па ўсталяванню",
+    "wedoLegacy.starterProjects": "WeDo 2.0 стартавыя праекты",
+    "wedoLegacy.starterMotor": "Рухавік",
+    "wedoLegacy.starterDistance": "датчык адлегласці",
+    "wedoLegacy.starterTilt": "датчык нахілу",
+    "wedoLegacy.versionTitle": "Якая ў Вас версія?",
+    "wedoLegacy.versionText": "Таксама вы можаце выкарыстоўваць Scratch, каб запраграмаваць арыгінальны LEGO WeDo (LEGO WeDo 1.0)."
+}

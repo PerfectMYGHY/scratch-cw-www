@@ -1,0 +1,55 @@
+﻿@import "../../colors";
+
+.reports-list {
+    max-height: 800px;
+    overflow: auto;
+    $project-width: 144px;
+    $project-height: 108px;
+    text-align: left;
+
+    div[info=info] {
+        position: relative;
+        border-bottom: 1px solid #dddddd;
+        margin: 5px;
+        /*height: $project-height;*/
+        min-height: calc($project-height + 2px + 5px);
+
+        .thumbnail-image {
+            img {
+                position: absolute;
+                /*margin-bottom: 2px;*/
+                border: 1px solid $ui-border;
+                width: $project-width;
+                height: $project-height;
+            }
+        }
+
+        .info {
+            display: inline-block;
+            /*top: 0;*/
+        }
+
+        .narrow {
+            max-width: 150px;
+            margin-left: calc(10px + $project-width);
+        }
+
+        .wide {
+            max-width: calc(100% - 20px - 176px);
+        }
+    }
+
+    div.right-top {
+        float: right;
+    }
+
+    div.children {
+        /*position: absolute;*/
+        float: right;
+        border-radius: 5px;
+        border: 1px dashed #554747;
+        margin-right: 10px;
+        max-width: calc(100% - $project-width - 10px - 200px - 80px - 20px);
+        word-wrap: break-word;
+    }
+}

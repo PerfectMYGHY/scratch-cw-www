@@ -1,0 +1,657 @@
+@import "../../colors";
+@import "../../frameless";
+
+$radius: 8px;
+
+.studio-page {
+    background-color: #E9F1FC;
+
+    #view {
+        /* Reset some defaults on width and margin */
+        background-color: transparent;
+        max-width: 1240px;
+        min-width: auto;
+        margin: 50px auto;
+        display: block;
+        padding-top: 40px;
+
+        &.mod-view-admin-panel-open {
+            min-width: unset;
+            width: calc(100% - 250px);
+            margin: 50px 0px 50px 250px;
+        }
+
+        /* WAT Why does everything center at smaller widths??!! */
+        @media #{$intermediate-and-smaller} {
+            & {
+                text-align: unset !important;
+            }
+        }
+
+        .studio-shell {
+            padding: 0 20px;
+            display: grid;
+            gap: 40px;
+
+            /* Side-by-side with fixed width sidebar */
+            grid-template-columns: 300px minmax(0, 1fr);
+
+            /* Stack vertically at medium size and smaller */
+            @media #{$medium-and-smaller} {
+                & {
+                    grid-template-columns: minmax(0, 1fr);
+                }
+            }
+        }
+    }
+}
+
+.studio-deleted {
+    /* Always make this box take up all the columns */
+    grid-column: 1 / -1;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.studio-info {
+    justify-self: center;
+    width: 300px;
+    height: max-content;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+
+    .studio-info-section {
+        position: relative;
+        .validation-message {
+            margin-top: .5rem;
+            box-sizing: border-box;
+        }
+        .hidden {
+            display: none;
+        }
+    }
+
+    .studio-info-footer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .studio-info-footer-stats {
+        justify-content: flex-start;
+
+        div {
+            display: flex;
+            align-items: center;
+            margin: 0.25em;
+            img {
+                margin-right: 0.25em;
+                width: 1.5em;
+            }
+        }
+    }
+
+    .studio-info-footer-report {
+        justify-content: flex-end;
+
+        button {
+            font-size: smaller;
+            background-color: $ui-purple-dark;
+            border: 1px solid transparent;
+            border-radius: 999em;
+            color: $ui-white;
+            display: flex;
+            align-items: center;
+            padding: 0.25em;
+            padding-right: 0.75em;
+
+            &:hover {
+                background-color: $ui-purple-darker;
+            }
+
+            img {
+                margin-right: 0.25em;
+                width: 1.5em;
+            }
+        }
+    }
+
+    .studio-title {
+        font-size: 28px;
+        font-weight: 700;
+        word-wrap: break-word;
+        max-height: 8rem;
+        overflow-y: auto;
+    }
+
+    .studio-description {
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        width: 300px;
+        box-sizing: border-box;
+        height: 24rem;
+        overflow-y: scroll;
+
+        &.muted-editor {
+            @media #{$intermediate-and-smaller} {
+                height: 18rem;
+            }
+        }
+
+        &.uneditable {
+            background: $ui-blue-10percent;
+            padding: 15px 20px;
+            border-color: transparent;
+            border-radius: $radius;
+        }
+
+    }
+
+    /* Overrides for when title and description are editable textareas. These override inplace-input */
+    textarea.studio-title, textarea.studio-description {
+        padding: 5px 8px;
+        width: 300px;
+        line-height: 1.2em;
+        &:not(:focus) {
+            background: transparent;
+            border: 2px dashed $ui-dark-gray;
+            border-radius: $radius;
+        }
+    }
+
+    .studio-image {
+        width: 300px;
+        height: 195px;
+        border-radius: 8px;
+        background: white;
+        box-sizing: border-box;
+        border: 2px solid $box-shadow-light-gray;
+    }
+
+    .studio-follow-button {
+        padding-top: 14px;
+        padding-bottom: 14px;
+        font-size: 14px;
+        margin: 0;
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+.studio-section-load-error {
+    margin-top: 2rem;
+    padding: 1rem;
+    flex-direction: column;
+    text-align: center;
+}
+
+.studio-tab-nav {
+    border-bottom: 1px solid $active-dark-gray;
+    padding-bottom: 8px;
+    font-size: 14px;
+    margin: 8px;
+    li {
+        display: flex;
+        align-items: center;
+        background: white;
+        border: 1px solid $box-shadow-light-gray;
+        color: #575e75;
+        padding: 0.75em 1.25em 0.75em 1em;
+        &:active {
+            padding: calc(0.75em) calc(1.25em) calc(0.75em) calc(1em);
+        }
+        img {
+            margin-right: 0.5em;
+            width: 1.5em;
+            height: 1.5em;
+            filter: invert(0.55);
+        }
+        .tab-count {
+            font-weight: normal;
+        }
+    }
+    .active > li {
+        background: $ui-purple-dark;
+        color: white;
+        img {
+            filter: invert(0);
+        }
+    }
+    a.nav_link:hover > li {
+        background: $active-gray;
+        border: 1px solid $active-gray;
+    }
+    a.active.nav_link:hover > li {
+        background: $ui-purple-darker;
+        color: white;
+        img {
+            filter: invert(0);
+        }
+    }
+}
+
+.studio-projects, .studio-members {
+    position: relative;
+}
+
+.studio-manager-count {
+    margin-left: 1.5rem;
+    width: 4.875rem;
+    height: 2rem;
+
+    border: 1px solid $ui-purple-dark;
+    border-radius: 1rem;
+
+    font-weight: bold;
+    color: $ui-purple-dark;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.manager-threshold-message {
+    display: flex;
+    flex-direction: column;
+
+    .manager-threshold-info {
+        font-weight: bold;
+    }
+}
+
+.studio-projects-grid {
+    margin-top: 20px;
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    @media #{$intermediate-and-smaller} {
+        & { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+    column-gap: 20px;
+    row-gap: 20px;
+}
+
+.studio-grid-load-more {
+    grid-column: 1 / -1;
+    button {
+        width: 100%;
+    }
+}
+
+.studio-project-tile {
+    background: white;
+    border-radius: 8px;
+    border: 1px solid $ui-border;
+    position: relative;
+    margin: 0;
+    padding: 0;
+
+    .studio-project-image {
+        max-width: 100%;
+        background: #a0c6fc;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+    }
+    .studio-project-bottom {
+        display: flex;
+        padding: 6px 4px 6px 10px;
+        justify-content: space-between;
+    }
+    .studio-project-avatar {
+        width: 42px;
+        height: 42px;
+        border-radius: 4px;
+        object-fit: cover;
+    }
+    .studio-project-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        overflow: hidden;
+        margin: 0 8px;
+        flex-grow: 1; /* Grow to fill available space */
+        min-width: 0; /* Prevents within from expanding beyond bounds */
+    }
+    .studio-project-title {
+        color: $link-purple;
+        font-weight: 700;
+        font-size: 14px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .studio-project-username {
+        color: #575E75;
+        font-weight: 700;
+        font-size: 12px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .studio-project-remove {
+        color: $ui-blue;
+        background: transparent;
+        border: none;
+    }
+}
+
+.studio-members-grid {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    @media #{$intermediate-and-smaller} {
+        & { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+    column-gap: 20px;
+    row-gap: 20px;
+}
+
+.studio-tabs {
+    min-width: 300px;
+}
+
+.studio-member-tile {
+    background: white;
+    border-radius: 8px;
+    border: 1px solid $ui-border;
+
+    display: flex;
+    padding: 10px 6px 10px 12px;
+    justify-content: space-between;
+
+    .studio-member-image {
+        width: 42px;
+        height: 42px;
+        border-radius: 4px;
+        object-fit: cover;
+    }
+    .studio-member-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        overflow: hidden;
+        margin: 0 8px;
+        flex-grow: 1; /* Grow to fill available space */
+        min-width: 0; /* Prevents within from expanding beyond bounds */
+    }
+    .studio-member-name {
+        color: $link-purple;
+        font-weight: 700;
+        font-size: 14px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .studio-member-role {
+        color: #575E75;
+        font-weight: 400;
+        font-size: 12px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .studio-member-tile-menu-wide {
+        white-space: nowrap;
+        padding-right: 2rem !important;
+    }
+}
+
+.studio-members + .studio-members {
+    margin-top: 40px;
+}
+
+.studio-adder-section {
+    margin-top: 20px;
+
+    h3 {
+        color: $ui-purple-dark;
+    }
+
+    .studio-adder-row {
+        display: flex;
+        flex-wrap: wrap-reverse; /* so error goes below at small sizes */
+
+        .studio-adder-error {
+            position: relative;
+
+            .validation-message {
+                transform: none;
+                width: 200px;
+            }
+            @media #{$intermediate-and-smaller} {
+                & {
+                    width: 100%;
+                    margin-top: .5rem;
+                    .validation-message {
+                        max-width: 100%;
+                        width: 100%;
+                        box-sizing: border-box;
+                    }
+                }
+            }
+        }
+
+        input {
+            flex-grow: 1;
+            display: inline-block;
+            border: 1px solid $ui-border;
+            border-radius: .5rem;
+            padding: 1em 1.25em;
+            font-size: .8rem;
+            margin-inline-end: 6px;
+        }
+
+        button {
+            flex-grow: 0;
+            margin: 0;
+        }
+
+        .studio-adder-vertical-divider {
+            margin: 0 6px;
+            border: 1px solid $ui-border;
+            align-self: stretch;
+        }
+    }
+}
+
+.studio-activity {
+    .studio-messages-list {
+        border: 1px solid $ui-border;
+        border-bottom-width: 0;
+        border-radius: 5px;
+        background-color: $ui-white;
+        padding-left: 0px;
+    }
+    .studio-activity-icon {
+        opacity: 1;
+    }
+    /* Ensure that line breaks occur only the message text, not in the flex layout or date */
+    .social-message-date {
+        white-space: nowrap;
+    }
+    .flex-row.mod-social-message {
+        flex-wrap: nowrap;
+    }
+}
+
+.studio-header-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-bottom: 10px;
+
+    h2 {
+        font-size: 28px;
+    }
+}
+
+.studio-comment-placholder-img {
+    width: 100%;
+}
+
+.studio-managers-header {
+    justify-content: flex-start;
+}
+
+.studio-compose-container {
+    padding-top: 8px;
+
+    .comments-root-reply {
+        margin-top: 20px;
+    }
+
+    .load-more-button {
+        width: 100%;
+    }
+}
+
+.studio-comments-not-allowed {
+    display: flex;
+    width: 100%;
+    background: rgba(76, 151, 255, 0.15);
+    height: 80px;
+    border: 1px solid rgba(76, 151, 255, 0.15);
+    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+.studio-empty {
+    grid-column: 1 / -1; /* take up all columns */
+    text-align: center;
+
+    .studio-empty-img {
+        margin-top: 45px;
+        margin-bottom: 25px;
+    }
+
+    .studio-empty-msg {
+        font-size: 20px;
+        line-height: 30px;
+        font-style: italic;
+    }
+}
+
+.studio-invitation {
+    margin-top: 1rem;
+    padding: 1rem;
+    box-sizing: border-box;
+    min-height: 85px; /* So the box doesn't change height after being accepted */
+
+    @media #{$intermediate-and-smaller} {
+        flex-direction: column;
+        .studio-invitation-msg {
+            margin-top: .5rem;
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+.studio-info-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-radius: 4px;
+    background: $ui-blue-10percent;
+    border: 1px solid $ui-blue-25percent;
+
+    &.studio-info-box-success {
+        background: #CEF2E8;
+        border: 1px solid rgba(15, 189, 140, 0.5);
+    }
+    &.studio-info-box-error {
+        background: #FFF0DF;
+        border: 1px solid $ui-dark-orange;
+    }
+
+    .studio-info-close-button {
+        position: unset;
+    }
+}
+
+.studio-thumb-edit-button {
+    color: $link-purple;
+    font-size: 1rem;
+    font-weight: bold;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.studio-thumb-edit-img {
+    padding-right: 10px;
+}
+
+.studio-admin-panel {
+    margin-top: 51px;
+    border: 0;
+    padding: .5rem;
+    overflow: hidden;
+}
+
+.studio-admin-panel.admin-panel-open {
+    padding: 0;
+    width: 250px;
+}
+
+.admin-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    margin: 0;
+    border: 0;
+    width: 250px;
+    height: 100%;
+}
+
+/* Modification classes for different interaction states */
+.mod-fetching { /* When a field has no content to display yet */
+    position: relative;
+    min-height: 30px;
+    &::after {
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: #a0c6fc;
+        border-radius: $radius;
+    }
+    /* For elements that can't use :after, force reset some internals
+    to get the same visual (e.g. for textareas)*/
+    border-radius: $radius;
+    background: #a0c6fc !important;
+    color: #a0c6fc !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.mod-mutating { /* When a field has sent a change to the server */
+    cursor: wait !important;
+    opacity: .5;
+}
+
+.mod-clickable {
+    cursor: pointer;
+}
+
+.mod-form-error { /* When a field contains a value is causing an error */
+    border-color: $ui-orange !important;
+}
+
+.studio-curator-mute-box {
+    margin: 20px 0;
+}
