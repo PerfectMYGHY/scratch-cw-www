@@ -33,7 +33,8 @@
     "i18n:push": "./bin/tx-push-www --execute",
     "translate:urls": "node ./bin/get-localized-urls localized-urls.json",
     "translate:files": "node ./bin/build-locales ./www intl",
-    "translate": "npm run translate:urls && npm run translate:files"
+    "translate": "npm run translate:urls && npm run translate:files",
+    "init:files": "echo 正在初始化多语言文件 && npm run translate:files && echo 正在复制改编后的scratch-parser库(用时可能较长) && python copy.py scratch-parser node_modules\\scratch-parser && echo 初始化完毕"
   },
   "repository": {
     "type": "git",
@@ -63,7 +64,6 @@
     "react-router-dom": "5.3.4",
     "react-twitter-embed": "3.0.3",
     "react-use": "17.5.0",
-    "scratch-parser": "5.2.1",
     "scratch-storage": "2.3.43",
     "highlight.js": "^11.9.0",
     "@turbowarp/json": "0.1.2",

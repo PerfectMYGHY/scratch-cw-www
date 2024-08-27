@@ -1,12 +1,14 @@
 # ！！重要提示
 
-需要使用我的`scratch-gui`库以替换掉默认安装的`scratch-gui`，也更方便自己开发。
+需要使用`scratch-cw-gui`库以替换掉默认安装的`scratch-gui`。
 
-下载我的存储库中的`my-scratch-gui`并重命名为`scratch-gui`，将其替换掉`node_modules`下面的`scratch-gui`。
+下载我的存储库中的`scratch-cw-gui`并重命名为`scratch-gui`，将其替换掉`node_modules`下面的`scratch-gui`。
 
 唯一重要提示：
 
-默认情况下，`scratch-www`会引用`/scratch-gui/dist/`目录下的文件，当你需要重新生成时，可以这样(Windows CMD中)：
+1.先使用`npm install`安装所有依赖项，然后运行`npm run init:files`以初始化多语言文件和`scratch-parser`库
+
+2.默认情况下，`scratch-www`会引用`/scratch-gui/dist/`目录下的文件，当你需要重新生成时，可以这样(Windows CMD中)：
 
 ```
 npm install
