@@ -57,4 +57,4 @@ def copy_folder_with_progress(src, dst, _except:list=[]):
 
 src_folder = sys.argv[1]
 dst_folder = sys.argv[2]
-copy_folder_with_progress(src_folder, dst_folder, _except=["scratch-vm"])
+copy_folder_with_progress(src_folder, dst_folder)
