@@ -407,24 +407,6 @@ class SplashPresentation extends React.Component { // eslint-disable-line react/
                         className="splash-header"
                         key="header"
                     >
-                        {/*{this.props.shouldShowWelcome ? [*/}
-                        {/*    <Welcome*/}
-                        {/*        key="welcome"*/}
-                        {/*        messages={messages}*/}
-                        {/*        onDismiss={() => { // eslint-disable-line react/jsx-no-bind*/}
-                        {/*            this.props.onDismiss('welcome');*/}
-                        {/*        }}*/}
-                        {/*    />*/}
-                        {/*] : [*/}
-                        {/*    <WrappedActivityList*/}
-                        {/*        items={this.props.activity}*/}
-                        {/*        key="activity"*/}
-                        {/*    />*/}
-                        {/*]}*/}
-                        {/*<News*/}
-                        {/*    items={this.props.news}*/}
-                        {/*    messages={messages}*/}
-                        {/*/>*/}
                         <MyWelcome
                             key="intro"
                             messages={messages}
@@ -461,6 +443,10 @@ class SplashPresentation extends React.Component { // eslint-disable-line react/
                     {/*        */}{/*/>*/}
                     {/*    </div>*/}
                     {/*}*/}
+                    <News
+                        items={this.props.news}
+                        messages={messages}
+                    />
                     {featured.shift()}
                     {featured.shift()}
                 </div>

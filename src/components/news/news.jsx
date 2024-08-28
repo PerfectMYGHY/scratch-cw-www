@@ -4,25 +4,29 @@ const React = require('react');
 const Box = require('../box/box.jsx');
 
 require('./news.scss');
+//moreHref = "/discuss/5/"
+//moreTitle = { props.messages['general.viewAll'] }
 
 const News = props => (
     <Box
         className="news"
-        moreHref="/discuss/5/"
-        moreTitle={props.messages['general.viewAll']}
         title={props.messages['news.scratchNews']}
     >
         <ul>
             {props.items.map(item => (
                 <li key={item.id}>
                     <a href={item.url}>
-                        <img
-                            alt=""
-                            className="news-image"
-                            height="53"
-                            src={item.image}
-                            width="53"
-                        />
+                        {
+                            item.image && (
+                                <img
+                                    alt=""
+                                    className="news-image"
+                                    height="53"
+                                    src={item.image}
+                                    width="53"
+                                />
+                            )
+                        }
                         <div className="news-description">
                             <h4>{item.headline}</h4>
                             <p>{item.copy}</p>

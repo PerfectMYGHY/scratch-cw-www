@@ -77,7 +77,7 @@ class Splash extends React.Component {
     }
     getNews () {
         api({
-            uri: '/news?limit=3'
+            uri: '/news/?limit=3'
         }, (err, body, resp) => {
             if (resp.statusCode !== 200) {
                 return log.error(`Unexpected status code ${resp.statusCode} received from news request`);
