@@ -1,9 +1,9 @@
 // ENV设置
-//process.env.PROJECT_HOST = "http://192.168.8.104:8006";
-//process.env.API_HOST = "http://192.168.8.104:8006";
-//process.env.ASSET_HOST = "http://192.168.8.104:8006/assets";
-//process.env.BACKPACK_HOST = "http://192.168.8.104:8006/backpack";
-//process.env.STATIC_HOST = "http://192.168.8.104:8006/staticServer";
+// process.env.PROJECT_HOST = "http://192.168.8.104:8006";
+// process.env.API_HOST = "http://192.168.8.104:8006";
+// process.env.ASSET_HOST = "http://192.168.8.104:8006/assets";
+// process.env.BACKPACK_HOST = "http://192.168.8.104:8006/backpack";
+// process.env.STATIC_HOST = "http://192.168.8.104:8006/staticServer";
 //process.env.BASE_HOST = "http://192.168.8.104:8001";
 //process.env.PORT = 8001;
 //process.env.ROUTING_STYLE = "wildcard";
