@@ -29,11 +29,20 @@ const News = props => (
                         }
                         <div className="news-description">
                             <h4>{item.headline}</h4>
-                            <p>{item.copy}</p>
+                            <p dangerouslySetInnerHTML={{ // eslint-disable-line react/no-danger
+                                __html: item.copy
+                            }}></p>
                         </div>
                     </a>
                 </li>
             ))}
+            {props.items.length == 0 && (
+                <li key="news_noneyet">
+                    <center>
+                        {props.messages['news.noneyet']}
+                    </center>
+                </li>
+            ) }
         </ul>
     </Box>
 );
@@ -50,7 +59,8 @@ News.defaultProps = {
     items: require('./news.json'),
     messages: {
         'general.viewAll': 'View All',
-        'news.scratchNews': 'Scratch News'
+        'news.scratchNews': 'Scratch News',
+        'news.noneyet': 'None Yet'
     }
 };
 

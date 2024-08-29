@@ -336,6 +336,7 @@ class SplashPresentation extends React.Component { // eslint-disable-line react/
         const messages = {
             'general.viewAll': formatMessage({id: 'general.viewAll'}),
             'news.scratchNews': formatMessage({id: 'news.scratchNews'}),
+            'news.noneyet': formatMessage({id: 'news.noneyet'}),
             'welcome.welcomeToScratch': formatMessage({id: 'welcome.welcomeToScratch'}),
             'welcome.learn': formatMessage({id: 'welcome.learn'}),
             'welcome.tryOut': formatMessage({id: 'welcome.tryOut'}),
