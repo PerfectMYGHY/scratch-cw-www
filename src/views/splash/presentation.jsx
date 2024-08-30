@@ -404,50 +404,54 @@ class SplashPresentation extends React.Component { // eslint-disable-line react/
                 }
                 {this.props.sessionStatus === sessionActions.Status.FETCHED &&
                     Object.keys(this.props.user).length > 0 && // user is logged in
-                    <div
-                        className="splash-header"
-                        key="header"
-                    >
-                        <MyWelcome
-                            key="intro"
-                            messages={messages}
-                        />
-                    </div>
+                    //<div
+                    //    className="splash-header"
+                    //    key="header"
+                    //>
+                    //    <MyWelcome
+                    //        key="intro"
+                    //        messages={messages}
+                    //    />
+                    //</div>
+                    <MyWelcome
+                        key="intro"
+                        messages={messages}
+                    />
                 }
                 <div
                     className="inner mod-splash"
                     key="inner"
                 >
-                    {/*{this.props.sessionStatus === sessionActions.Status.FETCHED &&*/}
-                    {/*    Object.keys(this.props.user).length > 0 && // user is logged in*/}
-                    {/*    <div*/}
-                    {/*        className="splash-header"*/}
-                    {/*        key="header"*/}
-                    {/*    >*/}
-                    {/*        */}{/*{this.props.shouldShowWelcome ? [*/}
-                    {/*        */}{/*    <Welcome*/}
-                    {/*        */}{/*        key="welcome"*/}
-                    {/*        */}{/*        messages={messages}*/}
-                    {/*        */}{/*        onDismiss={() => { // eslint-disable-line react/jsx-no-bind*/}
-                    {/*        */}{/*            this.props.onDismiss('welcome');*/}
-                    {/*        */}{/*        }}*/}
-                    {/*        */}{/*    />*/}
-                    {/*        */}{/*] : [*/}
-                    {/*        */}{/*    <WrappedActivityList*/}
-                    {/*        */}{/*        items={this.props.activity}*/}
-                    {/*        */}{/*        key="activity"*/}
-                    {/*        */}{/*    />*/}
-                    {/*        */}{/*]}*/}
-                    {/*        */}{/*<News*/}
-                    {/*        */}{/*    items={this.props.news}*/}
-                    {/*        */}{/*    messages={messages}*/}
-                    {/*        */}{/*/>*/}
-                    {/*    </div>*/}
-                    {/*}*/}
-                    <News
-                        items={this.props.news}
-                        messages={messages}
-                    />
+                    {this.props.sessionStatus === sessionActions.Status.FETCHED &&
+                        Object.keys(this.props.user).length > 0 && // user is logged in
+                        //<div
+                        //    className="splash-header"
+                        //    key="header"
+                        //>
+                        //    {this.props.shouldShowWelcome ? [
+                        //        <Welcome
+                        //            key="welcome"
+                        //            messages={messages}
+                        //            onDismiss={() => { // eslint-disable-line react/jsx-no-bind
+                        //                this.props.onDismiss('welcome');
+                        //            }}
+                        //        />
+                        //    ] : [
+                        //        <WrappedActivityList
+                        //            items={this.props.activity}
+                        //            key="activity"
+                        //        />
+                        //    ]}
+                        //    <News
+                        //        items={this.props.news}
+                        //        messages={messages}
+                        //    />
+                        //</div>
+                        <News
+                            items={this.props.news}
+                            messages={messages}
+                        />
+                    }
                     {featured.shift()}
                     {featured.shift()}
                 </div>
