@@ -16,21 +16,21 @@ blockquote:before, blockquote:after {
     content: "";
 }
 
-*:before, *:after {
+/**:before, *:after {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-}
+}*/
 
 blockquote:before, blockquote:after {
     content: "";
 }
 
-*:before, *:after {
+/**:before, *:after {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-}
+}*/
 
 .table {
     border-spacing: 0;

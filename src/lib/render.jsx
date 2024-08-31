@@ -20,7 +20,7 @@ require('../main.scss');
  * @param  {object} initialState   optional initialState for store
  * @param  {bool}   enhancer  whether or not to apply redux-throttle middleware
  */
-const render = (jsx, element, reducers, initialState, enhancer, AddonHooks) => {
+const render = (jsx, element, reducers, initialState, enhancer, GUI) => {
     // Get locale and messages from global namespace (see "init.js")
     const locale = getLocale();
     let messages = {};
@@ -29,14 +29,9 @@ const render = (jsx, element, reducers, initialState, enhancer, AddonHooks) => {
     }
     
     const intlLocale = scratchLocaleToIntlLocale(locale);
-    const reducer2 = (previousState, action) => {
-        const nextState = reducer(previousState, action);
-        AddonHooks.appStateReducer(action, previousState, nextState);
-        return nextState;
-    };
     // react-intl needs Intl before rendering
     intlPolyfill(intlLocale).then(() => {
-        const store = configureStore(reducers, initialState, enhancer, AddonHooks);
+        const store = configureStore(reducers, initialState, enhancer, GUI);
 
         // Render view component
         ReactDOM.render(
@@ -46,7 +41,7 @@ const render = (jsx, element, reducers, initialState, enhancer, AddonHooks) => {
                     messages={messages}
                     textComponent="span"
                 >
-                    {typeof jsx == 'function' ? jsx(store) : jsx}
+                    {jsx}
                 </IntlProvider>
             </StoreProvider>,
             element

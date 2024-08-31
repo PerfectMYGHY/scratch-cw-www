@@ -13,7 +13,7 @@ const UnsupportedBrowser = require('./unsupported-browser.jsx');
 if (isSupportedBrowser()) {
     const ProjectView = require('./project-view.jsx');
     render(
-        store => (<ProjectView.View store={store} />),
+        <ProjectView.View />,
         document.getElementById('app'),
         {
             preview: previewActions.previewReducer,
@@ -25,7 +25,7 @@ if (isSupportedBrowser()) {
             scratchGui: ProjectView.initGuiState(ProjectView.guiInitialState)
         },
         ProjectView.guiMiddleware,
-        ProjectView.AddonHooks
+        ProjectView.GUI
     );
 } else {
     render(<Page><UnsupportedBrowser /></Page>, document.getElementById('app'));

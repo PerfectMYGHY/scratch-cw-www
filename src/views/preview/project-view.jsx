@@ -105,8 +105,6 @@ class Preview extends React.Component {
             'renderLogin',
             'setScreenFromOrientation'
         ]);
-        GUI.AddonHooks.appStateStore = props.store; // 外部渲染时传入的变量store
-        GUI.runAddons();
         const pathname = window.location.pathname.toLowerCase();
         const parts = pathname.split('/').filter(Boolean);
         // parts[0]: 'projects'
@@ -1295,4 +1293,4 @@ module.exports.guiInitialState = GUI.guiInitialState;
 module.exports.guiMiddleware = GUI.guiMiddleware;
 module.exports.initLocale = GUI.initLocale;
 module.exports.localesInitialState = GUI.localesInitialState;
-module.exports.AddonHooks = GUI.AddonHooks;
+module.exports.GUI = GUI;

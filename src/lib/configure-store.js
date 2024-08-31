@@ -4,15 +4,15 @@ const thunk = require('redux-thunk').default;
 
 //const reducer = require('../redux/reducer.js');
 
-const configureStore = (reducers, initialState, enhancer, AddonHooks) => {
+const configureStore = (reducers, initialState, enhancer, GUI) => {
     //const allReducers = reducer(reducers);
     var allReducers = null;
-    if (AddonHooks) {
+    if (GUI) {
         var reducer = require('../redux/reducer.js');
         reducer = reducer(reducers);
         allReducers = (previousState, action) => {
             const nextState = reducer(previousState, action);
-            AddonHooks.appStateReducer(action, previousState, nextState);
+            GUI.AddonHooks.appStateReducer(action, previousState, nextState);
             return nextState;
         };
     } else {
@@ -34,6 +34,12 @@ const configureStore = (reducers, initialState, enhancer, AddonHooks) => {
         initialState || {},
         enhancers
     );
+    if (GUI) {
+        GUI.AddonHooks.appStateStore = store;
+        setTimeout(() => {
+            GUI.runAddons();
+        }, 2000);
+    }
     return store;
 };
 

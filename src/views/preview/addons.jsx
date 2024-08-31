@@ -1,98 +1,22 @@
-﻿//var addons = require("../../../node_modules/scratch-gui/build/addons.jmh");
-//var addons = `<!DOCTYPE html>
-//<html>
-//  <head>
-//    <meta charset="UTF-8">
-//    <meta name="viewport" content="width=device-width, initial-scale=1">
-//    <title>Addon Settings - 更多</title>
-//    <style>
-//      body[data-splash-theme="dark"] {
-//        background: #111;
-//      }
+﻿// 引入React以使用组件及其功能
+const React = require('react');
+const ReactDOM = require('react-dom');
+// 从scratch-gui引入 导出的Scratch Addons 设置组件和 导出设置 函数
+const ScratchGUI = require("scratch-gui");
+const LoadSettings = ScratchGUI.LoadSettings;
+const onExportSettings = ScratchGUI.onExportSettings;
+// 加载Settings组件（函数返回的是一个require的结果）
+const Settings = LoadSettings().default;
+// 为了防止插件设置页面的样式与Scratch编辑器的冲突，我们不能在编辑器页面中也加载组件（同时加载样式），而是在该页面加载组件。
 
-//      noscript {
-//        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-//      }
-//    </style>
-//  </head>
-//  <body>
-//    <noscript>
-//      <h1>This page requires JavaScript</h1>
-//    </noscript>
+// 渲染组件至页面
+ReactDOM.render((
+    <Settings
+        onExportSettings={onExportSettings}
+    />
+), document.getElementById('app'));
 
-//    <script>
-//      (function() {
-//        var theme = '';
-
-//        try {
-//          var themeSetting = localStorage.getItem('tw:theme');
-//        } catch (e) {
-//          // ignore
-//        }
-//        if (themeSetting === 'light') {
-//          theme = 'light';
-//        } else if (themeSetting === 'dark') {
-//          theme = 'dark';
-//        } else if (themeSetting) {
-//          try {
-//            var parsed = JSON.parse(themeSetting);
-//            if (parsed.gui === 'dark' || parsed.gui === 'light') {
-//              theme = parsed.gui;
-//            }
-//          } catch (e) {
-//            // ignore
-//          }
-//        }
-
-//        if (!theme) {
-//          theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-//        }
-
-//        document.body.setAttribute('data-splash-theme', theme);
-//      })();
-//    </script>
-
-//    <div id="app"></div>
-//  <script src="js/vendors~addon-settings~credits~editor~embed~fullscreen~player.js"></script><script src="js/vendors~addon-settings~editor~embed~fullscreen~player.js"></script><script src="js/addon-settings.js"></script></body>
-//</html>
-//`;
-
-//addons = addons.replace('<script src="js/vendors~addon-settings~credits~editor~embed~fullscreen~player.js"></script><script src="js/vendors~addon-settings~editor~embed~fullscreen~player.js"></script><script src="js/addon-settings.js"></script>', '');
-
-//var iframe = document.createElement("iframe");
-//document.getElementById('app').appendChild(iframe);
-//iframe = addons;
-//document.getElementById('app').innerHTML = addons;
-//(function () {
-//    var theme = '';
-
-//    try {
-//        var themeSetting = localStorage.getItem('tw:theme');
-//    } catch (e) {
-//        // ignore
-//    }
-//    if (themeSetting === 'light') {
-//        theme = 'light';
-//    } else if (themeSetting === 'dark') {
-//        theme = 'dark';
-//    } else if (themeSetting) {
-//        try {
-//            var parsed = JSON.parse(themeSetting);
-//            if (parsed.gui === 'dark' || parsed.gui === 'light') {
-//                theme = parsed.gui;
-//            }
-//        } catch (e) {
-//            // ignore
-//        }
-//    }
-
-//    if (!theme) {
-//        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-//    }
-
-//    document.body.setAttribute('data-splash-theme', theme);
-//})();
-require("scratch-gui/build/js/vendors~addon-settings~credits~editor~embed~fullscreen~player.d8807f4f698703cca88b.js");
-require("scratch-gui/build/js/vendors~addon-settings~addons~editor~fullscreen~player.26a9fb885d8946555503.js");
-require("scratch-gui/build/js/addon-settings.8974332da7dcfbf9bddd.js");
-window.SplashEnd();
+// 停止显示加载界面
+//if (window.SplashEnd) {
+//    window.SplashEnd();
+//}

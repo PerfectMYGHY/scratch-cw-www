@@ -40,8 +40,8 @@ const routes = require('../src/routes.json').concat(require('../src/routes-dev.j
         i ++;
         return {
             "name": "chunks-loader",
-            "pattern": `^/projects/\\d+/js/${file}?(\\\\?.*)?$`,
-            "routeAlias": `/projects/\\d+/js/${file}?$`,
+            "pattern": `^/projects/\\d+/chunks/${file}?(\\\\?.*)?$`,
+            "routeAlias": `/projects/\\d+/chunks/${file}?$`,
             "redirect": `/scratch-gui-chunks/${file}`
         };
     })).concat(files.map((file) => {
@@ -49,8 +49,8 @@ const routes = require('../src/routes.json').concat(require('../src/routes-dev.j
         i ++;
         return {
             "name": "chunks-loader",
-            "pattern": `^/projects/\\d+/editor/js/${file}?(\\\\?.*)?$`,
-            "routeAlias": `/projects/\\d+/editor/js/${file}?$`,
+            "pattern": `^/projects/\\d+/editor/chunks/${file}?(\\\\?.*)?$`,
+            "routeAlias": `/projects/\\d+/editor/chunks/${file}?$`,
             "redirect": `/scratch-gui-chunks/${file}`
         }
     })).concat(files.map((file) => {
@@ -58,8 +58,8 @@ const routes = require('../src/routes.json').concat(require('../src/routes-dev.j
         i++;
         return {
             "name": "chunks-loader",
-            "pattern": `^/projects/editor/js/${file}?(\\\\?.*)?$`,
-            "routeAlias": `/projects/editor/js/${file}?$`,
+            "pattern": `^/projects/editor/chunks/${file}?(\\\\?.*)?$`,
+            "routeAlias": `/projects/editor/chunks/${file}?$`,
             "redirect": `/scratch-gui-chunks/${file}`
         }
     }));
