@@ -148,7 +148,7 @@ class Navigation extends React.Component {
                     </li>
                     {this.props.session.status === sessionActions.Status.FETCHED ? (
                         this.props.user ? [
-                            /*<li
+                            <li
                                 className="link right messages"
                                 key="messages"
                             >
@@ -164,7 +164,7 @@ class Navigation extends React.Component {
                                     >{this.props.unreadMessageCount} </span>
                                     <FormattedMessage id="general.messages" />
                                 </a>
-                            </li>*/,
+                            </li>,
                             <li
                                 className="link right mystuff"
                                 key="mystuff"

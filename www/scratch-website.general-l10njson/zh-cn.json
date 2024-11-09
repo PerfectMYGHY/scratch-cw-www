@@ -138,7 +138,7 @@
   "general.year": "年",
   "footer.discuss": "讨论区",
   "footer.scratchFamily": "Scratch家族",
-  "footer.donorRecognition": "Scratch能免费提供给大家，离不开{donorLink}的支持。",
+  "footer.donorRecognition": "Scratch创世界能免费提供给大家，离不开{donorLink}的支持。",
   "footer.donors": "捐赠者",
   "footer.donorList": "{donor1}、{donor2}、{donor3}和{donor4}。",
   "form.validationRequired": "必填字段",

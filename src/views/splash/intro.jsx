@@ -156,31 +156,64 @@ class Intro extends React.Component {
                         {/*</FlexRow>*/}
 
                     </FlexRow>
+                    <FlexRow className="intro-video-container">
+                        {/*{this.state.videoOpen ?*/}
+                        {/*    (*/}
+                        {/*        <Video*/}
+                        {/*            className="intro-video"*/}
+                        {/*            videoId="idx"*/}
+                        {/*        />*/}
+                        {/*    ) : (*/}
+                        {/*        <div*/}
+                        {/*            className="video-image"*/}
+                        {/*            onClick={this.handleShowVideo}*/}
+                        {/*        >*/}
+                        {/*            <img src="/svgs/intro/video-image.svg" />*/}
+                        {/*            <a*/}
+                        {/*                href="#"*/}
+                        {/*                onClick={this.handleShowVideo}*/}
+                        {/*            >*/}
+                        {/*                <div className="watch-button button">*/}
+                        {/*                    {this.props.messages['intro.watchVideo']}*/}
+                        {/*                </div>*/}
+                        {/*            </a>*/}
+                        {/*        </div>*/}
+                        {/*    )*/}
+                        {/*}*/}
+                        <div
+                            className="screenshot"
+                        >
+                            <img src="/images/editor-screenshot.png" title="Scratch创世界编辑器中，正在使用高级插件快速调试代码。" />
+                            <div>
+                                <a className="tip">Scratch创世界编辑器</a>
+                            </div>
+                        </div>
+                    </FlexRow>
                 </FlexRow>
 
-                <FlexRow className="intro-subnav">
-                    <a
-                        href="/about"
-                    >
-                        <div className="subnav-button button">
-                            {this.props.messages['intro.aboutScratch']}
-                        </div>
-                    </a>
-                    <a
-                        href="/community_guidelines"
-                    >
-                        <div className="subnav-button button">
-                            {"社区行为准则"}
-                        </div>
-                    </a>
-                    <a
-                        href="/community_mechanism"
-                    >
-                        <div className="subnav-button button">
-                            {"社区机制"}
-                        </div>
-                    </a>
-                </FlexRow>
+                {/*<FlexRow className="intro-subnav">*/}
+                {/*    <a*/}
+                {/*        href="/about"*/}
+                {/*    >*/}
+                {/*        <div className="subnav-button button">*/}
+                {/*            {this.props.messages['intro.aboutScratch']}*/}
+                {/*        </div>*/}
+                {/*    </a>*/}
+                {/*    <a*/}
+                {/*        href="/community_guidelines"*/}
+                {/*    >*/}
+                {/*        <div className="subnav-button button">*/}
+                {/*            {"社区行为准则"}*/}
+                {/*        </div>*/}
+                {/*    </a>*/}
+                {/*    <a*/}
+                {/*        href="/community_mechanism"*/}
+                {/*    >*/}
+                {/*        <div className="subnav-button button">*/}
+                {/*            {"社区机制"}*/}
+                {/*        </div>*/}
+                {/*    </a>*/}
+                {/*</FlexRow>*/}
             </TitleBanner>
         );
     }

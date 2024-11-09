@@ -156,6 +156,7 @@ input.hidden[type="file"] {
 .button {
     margin-left: 1rem;
 }
+
 .collection-user {
     margin-top: 0;
     border-radius: .25rem;
@@ -186,6 +187,41 @@ input.hidden[type="file"] {
     &:before {
         background: url(/images/icons_sm.png) no-repeat top;
         background-position: -15px -400px;
+    }
+}
+
+.uncollection-user {
+    margin-top: 0;
+    border-radius: .25rem;
+    padding-top: .6875rem;
+    padding-right: .9375rem;
+    padding-bottom: .6875rem;
+    padding-left: .875rem;
+    height: 2.5rem;
+    font-size: .875rem;
+    float: right;
+    background-color: #dfdfdf;
+    color: black;
+
+    &:before {
+        display: inline-block;
+        margin-top: -2px;
+        margin-right: .4375rem;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+        width: 1.3rem;
+        height: 1.3rem;
+        vertical-align: middle;
+        content: "";
+    }
+}
+
+.uncollection-user {
+
+    &:before {
+        background: url(/images/icons_sm.png) no-repeat top;
+        background-position: -15px -365px;
     }
 }
 

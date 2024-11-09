@@ -108,7 +108,7 @@ const Footer = props => (
                         </a>
                     </dd>*/}
                     <dd>
-                        <a href="https://www.scratchfoundation.org/donate">
+                        <a href="/sponsor">
                             <FormattedMessage id="general.donate" />
                         </a>
                     </dd>

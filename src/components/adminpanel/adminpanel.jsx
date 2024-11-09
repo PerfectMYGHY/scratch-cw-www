@@ -10,7 +10,8 @@ const AdminPanel = ({
     isOpen,
     onOpen,
     onClose,
-    hideHeader
+    hideHeader,
+    headerName
 }) => (
     <div className={classNames('admin-panel', className, {hidden: !isOpen})}>
         {isOpen ? (
@@ -22,7 +23,7 @@ const AdminPanel = ({
                     x
                 </div>
                 {!hideHeader && <div className="admin-header">
-                    <h3>Admin Panel</h3>
+                    <h3>{headerName || "管理窗口"}</h3>
                 </div>}
                 <div className="admin-content">
                     {children}

@@ -235,7 +235,7 @@ async.forEachLimit(views, 5, function (view, cb) {
                     // ignore missing files for english, Meow, and Edible Scratch
                     if (isoCode !== 'en') {
                         if (isoCode !== 'cat' && isoCode !== 'yum'  && defaultLocales.hasOwnProperty(view)) {
-                            process.stdout.write('No translations for ' + view + ' ' + isoCode + ', don\'t using english\n');
+                            // process.stdout.write('No translations for ' + view + ' ' + isoCode + ', don\'t using english\n');
                         }
                         // viewLocales[isoCode] = merge({}, generalLocales[isoCode], defaultLocales[view]);
                         // defaults(viewLocales[isoCode], generalLocales['en']);

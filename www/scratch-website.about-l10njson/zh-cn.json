@@ -37,5 +37,12 @@
   "about.supportDescription": "Scratch创世界 能免费提供离不开{donorsLink}的支持，这些支持帮助了我们为世界各地的孩子们提供思考、创造和分享的机会。你可以向Scratch创世界捐款：{donateLink}。",
   "about.donorsLinkText": "捐赠者",
   "about.donateLinkText": "此处",
-  "about.donateButton": "捐助"
+  "about.donateButton": "捐助",
+  "about.sourceCode": "源代码",
+  "about.sourceCodeDescription": "Scratch 创世界 是根据 scratch-www 等开源的库改编合并而来的。因此我们有必要在此感谢改编自的库并开源。",
+  "about.sourceCodeThanks": "感谢",
+  "about.sourceCodeThankScratchFoundation": "感谢 scratchfoundation 的 {link}",
+  "about.sourceCodeThankTurboWarp": "感谢 TurboWarp 的 {link}",
+  "about.sourceCodeOpens": "开源",
+  "about.sourceCodeOpenText": "PerfectMYGHY 的 {link}"
 }

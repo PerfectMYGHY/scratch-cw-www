@@ -4,242 +4,71 @@
     "pattern": "^/about/?$",
     "routeAlias": "/about/?$",
     "view": "about/about",
-    "title": "About"
-  },
-  {
-    "name": "annual-report",
-    "pattern": "^/annual-report/?(\\?.*)?$",
-    "routeAlias": "/annual-report/?$",
-    "view": "annual-report/2021/annual-report",
-    "title": "Annual Report 2021",
-    "intlName": "annual-report-2021",
-    "viewportWidth": "device-width"
-  },
-  {
-    "name": "annual-report-2019",
-    "pattern": "^/annual-report/2019/?(\\?.*)?$",
-    "routeAlias": "/annual-report/2019/?$",
-    "view": "annual-report/2019/annual-report",
-    "title": "Annual Report 2019",
-    "viewportWidth": "device-width"
-  },
-  {
-    "name": "annual-report-2020",
-    "pattern": "^/annual-report/2020/?(\\?.*)?$",
-    "routeAlias": "/annual-report/2020/?$",
-    "view": "annual-report/2020/annual-report",
-    "title": "Annual Report 2020",
-    "viewportWidth": "device-width"
-  },
-  {
-    "name": "annual-report-2021",
-    "pattern": "^/annual-report/2021/?(\\?.*)?$",
-    "routeAlias": "/annual-report/2021/?$",
-    "view": "annual-report/2021/annual-report",
-    "title": "Annual Report 2021",
-    "viewportWidth": "device-width"
-  },
-  {
-    "name": "camp",
-    "pattern": "^/camp/?$",
-    "routeAlias": "/camp/?$",
-    "view": "camp/camp",
-    "title": "Down Deep"
-  },
-  {
-    "name": "conference-index",
-    "pattern": "^/conference/?(\\?.*)?$",
-    "routeAlias": "/conference(?!/20[1-2][0-9])",
-    "redirect": "https://www.scratchfoundation.org/scratch-conference"
-  },
-  {
-    "name": "conference-index-2017",
-    "pattern": "^/conference/2017/?$",
-    "routeAlias": "/conference(?!/20[1-2][0-9])",
-    "view": "conference/2017/index/index",
-    "title": "Scratch Conference",
-    "viewportWidth": "device-width"
-  },
-  {
-    "name": "conference-details-2018",
-    "pattern": "^/conference/2018/:id/details/?$",
-    "routeAlias": "/conference(?!/20[1-2][0-9])",
-    "view": "conference/2018/details/details",
-    "title": "Event Details"
-  },
-  {
-    "name": "conference-expectations-2018",
-    "pattern": "^/conference/2018/expect/?$",
-    "routeAlias": "/conference(?!/20[1-2][0-9])",
-    "view": "conference/2018/expect/expect",
-    "title": "What to Expect"
-  },
-  {
-    "name": "conference-index-2018",
-    "pattern": "^/conference/2018/?$",
-    "routeAlias": "/conference(?!/20[1-2][0-9])",
-    "view": "conference/2018/index/index",
-    "title": "Scratch Conference",
-    "viewportWidth": "device-width"
-  },
-  {
-    "name": "conference-plan-2018",
-    "pattern": "^/conference/2018/plan/?$",
-    "routeAlias": "/conference(?!/20[1-2][0-9])",
-    "view": "conference/2018/plan/plan",
-    "title": "Plan Your Visit"
-  },
-  {
-    "name": "conference-schedule-2018",
-    "pattern": "^/conference/2018/schedule/?$",
-    "routeAlias": "/conference(?!/20[1-2][0-9])",
-    "view": "conference/2018/schedule/schedule",
-    "title": "Conference Schedule"
-  },
-  {
-    "name": "conference-index-2019",
-    "pattern": "^/conference/2019/?$",
-    "routeAlias": "/conference(?!/20[1-2][0-9])",
-    "view": "conference/2019/index/index",
-    "title": "Scratch Conferences",
-    "viewportWidth": "device-width"
-  },
-  {
-    "name": "conference-index-2020",
-    "pattern": "^/conference/2020/?$",
-    "routeAlias": "/conference(?!/20[1-2][0-9])",
-    "redirect": "/conference/2021"
-  },
-  {
-    "name": "conference-index-2021",
-    "pattern": "^/conference/2021/?$",
-    "routeAlias": "/conference(?!/20[1-2][0-9])",
-    "view": "conference/2021/index/index",
-    "title": "Scratch Conferences",
-    "viewportWidth": "device-width"
-  },
-  {
-    "name": "conference-index-2022",
-    "pattern": "^/conference/2022/?$",
-    "routeAlias": "/conference(?!/20[1-2][0-9])",
-    "redirect": "https://www.scratchfoundation.org/scratch-conference"
-  },
-  {
-    "name": "connect",
-    "pattern": "^/connect/?$",
-    "routeAlias": "/connect/?$",
-    "redirect": "https://eepurl.com/cws7_f"
+    "title": "关于 Scratch 创世界"
   },
   {
     "name": "contact-us",
     "pattern": "^/contact-us/?(\\?.*)?$",
     "routeAlias": "/contact-us/?",
     "view": "contact-us/contact-us",
-    "title": "Contact Us",
+    "title": "联系我们",
     "viewportWidth": "device-width"
-  },
-  {
-    "name": "cookies",
-    "pattern": "^/cookies/?$",
-    "routeAlias": "/cookies/?",
-    "view": "cookies/cookies",
-    "title": "Cookie Policy"
   },
   {
     "name": "credits",
     "pattern": "^/credits/?$",
     "routeAlias": "/info/(cards|credits|faq|donate)/?$",
     "view": "credits/credits",
-    "title": "Credits"
-  },
-  {
-    "name": "developers",
-    "pattern": "^/developers/?$",
-    "routeAlias": "/developers/?$",
-    "view": "developers/developers",
-    "title": "Developers"
-  },
-  {
-    "name": "dmca",
-    "pattern": "^/DMCA/?$",
-    "routeAlias": "/DMCA/?$",
-    "view": "dmca/dmca",
-    "title": "DMCA"
+    "title": "我们的团队"
   },
   {
     "name": "download",
     "pattern": "^/download/?(\\?.*)?$",
     "routeAlias": "/download",
     "view": "download/download",
-    "title": "Scratch Offline Editor"
-  },
-  {
-    "name": "educator-landing",
-    "pattern": "^/educators/?(\\?.*)?$",
-    "routeAlias": "/educators(?:/(faq|register|waiting))?/?(\\?.*)?$",
-    "view": "teachers/landing/landing",
-    "title": "Educators"
-  },
-  {
-    "name": "ethics",
-    "pattern": "^/code-of-ethics/?$",
-    "routeAlias": "/code-of-ethics/?$",
-    "view": "ethics/ethics",
-    "title": "Research Code of Ethics"
+    "title": "下载 Scratch 编辑器"
   },
   {
     "name": "explore",
     "pattern": "^/explore/:projects(projects|studios)/:all/?$",
     "routeAlias": "/explore(?!/ajax)",
     "view": "explore/explore",
-    "title": "Explore"
+    "title": "发现作品"
   },
   {
     "name": "faq",
     "pattern": "^/faq/?(\\?.*)?$",
     "routeAlias": "/faq",
     "view": "faq/faq",
-    "title": "FAQ"
+    "title": "常见问题"
   },
   {
     "name": "guidelines",
     "pattern": "^/community_guidelines/?$",
     "routeAlias": "/community_guidelines/?$",
     "view": "guidelines/guidelines",
-    "title": "Scratch Community Guidelines"
-  },
-  {
-    "name": "ideas",
-    "pattern": "^/ideas/?(\\?.*)?$",
-    "routeAlias": "/ideas/?\\??",
-    "view": "ideas/ideas",
-    "title": "Ideas"
-  },
-  {
-    "name": "jobs-redirect",
-    "pattern": "^/jobs/?(\\?.*)?$",
-    "redirect": "https://www.scratchfoundation.org/careers"
+    "title": "Scratch创世界社区行为准则"
   },
   {
     "name": "join",
     "pattern": "^/join/?$",
     "routeAlias": "/join/?$",
     "view": "join/join",
-    "title": "Join Scratch"
+    "title": "加入 Scratch 创世界"
   },
   {
     "name": "messages",
     "pattern": "^/messages/?$",
     "routeAlias": "/messages(?!/ajax)",
     "view": "messages/container",
-    "title": "Messages"
+    "title": "消息"
   },
   {
     "name": "projects",
     "pattern": "^/projects(/editor|(/\\d+(/editor|/fullscreen)?)?)?/?(\\?.*)?$",
     "routeAlias": "/projects/?$",
     "view": "preview/preview",
-    "title": "Scratch Project",
+    "title": "作品",
     "dynamicMetaTags": true
   },
   {
@@ -247,7 +76,7 @@
     "pattern": "^/projects/\\d+/embed/?(\\?.*)?$",
     "routeAlias": "/projects/?$",
     "view": "preview/embed",
-    "title": "Scratch Project",
+    "title": "作品",
     "dynamicMetaTags": true
   },
   {
@@ -255,7 +84,7 @@
     "pattern": "^/projects/\\d+/remixes?(\\?.*)?$",
     "routeAlias": "/projects/?$",
     "view": "preview/remixes",
-    "title": "Scratch 项目改编",
+    "title": "作品改编",
     "dynamicMetaTags": true
   },
   {
@@ -263,36 +92,29 @@
     "pattern": "^/projects/\\d+/editor/addons?(\\?.*)?$",
     "routeAlias": "/projects/?$",
     "view": "preview/addons",
-    "title": "Scratch 插件",
+    "title": "插件设置",
     "dynamicMetaTags": true
   },
   {
     "name": "addons",
     "pattern": "^/projects/\\d+/addons?(\\?.*)?$",
     "routeAlias": "/projects/?$",
-    "title": "Scratch 插件",
+    "title": "插件设置",
     "redirect": "/projects/0/editor/addons"
   },
   {
     "name": "addons",
     "pattern": "^/projects/addons?(\\?.*)?$",
     "routeAlias": "/projects/?$",
-    "title": "Scratch 插件",
+    "title": "插件设置",
     "redirect": "/projects/0/editor/addons"
   },
   {
     "name": "addons",
     "pattern": "^/projects/editor/addons?(\\?.*)?$",
     "routeAlias": "/projects/?$",
-    "title": "Scratch 插件",
+    "title": "插件设置",
     "redirect": "/projects/0/editor/addons"
-  },
-  {
-    "name": "parents",
-    "pattern": "^/parents/?(\\?.*)?$",
-    "routeAlias": "/parents/",
-    "view": "parents/parents",
-    "title": "For Parents"
   },
   {
     "name": "preview-faq-redirect",
@@ -301,39 +123,11 @@
     "redirect": "/3faq"
   },
   {
-    "name": "privacypolicy",
-    "pattern": "^/privacy_policy/?$",
-    "routeAlias": "/privacy_policy/?$",
-    "view": "privacypolicy/privacypolicy",
-    "title": "Privacy Policy"
-  },
-  {
-    "name": "privacypolicy-apps",
-    "pattern": "^/privacy_policy/apps?$",
-    "routeAlias": "/privacy_policy/apps?$",
-    "view": "privacypolicy-apps/privacypolicy-apps",
-    "title": "Privacy Policy"
-  },
-  {
-    "name": "research",
-    "pattern": "^/research/?$",
-    "routeAlias": "/research",
-    "view": "research/research",
-    "title": "Research"
-  },
-  {
     "name": "scratch_1.4",
     "pattern": "^/scratch_1.4/?$",
     "routeAlias": "/scratch_1.4",
     "view": "scratch_1.4/scratch_1.4",
     "title": "Scratch 1.4"
-  },
-  {
-    "name": "become-a-scratcher",
-    "pattern": "^/become-a-scratcher/?$",
-    "routeAlias": "/become-a-scratcher",
-    "view": "become-a-scratcher/become-a-scratcher",
-    "title": "Become a Scratcher"
   },
   {
     "name": "download-scratch2",
@@ -347,7 +141,7 @@
     "pattern": "^/download/scratch-link/?(\\?.*)?$",
     "routeAlias": "/download/scratch-link",
     "view": "download/scratch-link/download",
-    "title": "Scratch Link Download"
+    "title": "下载 Scratch Link"
   },
   {
     "name": "download-scratch-link-redirect",
@@ -360,84 +154,14 @@
     "pattern": "^/search/:projects/?$",
     "routeAlias": "/search",
     "view": "search/search",
-    "title": "Search"
+    "title": "搜索"
   },
   {
     "name": "splash",
     "pattern": "^/?$",
     "routeAlias": "/?$",
     "view": "splash/splash",
-    "title": "Imagine, Program, Share"
-  },
-  {
-    "name": "starter-projects",
-    "pattern": "^/starter-projects/?$",
-    "routeAlias": "/starter-projects/?$",
-    "view": "starter-projects/starter-projects",
-    "title": "Starter Projects"
-  },
-  {
-    "name": "starter-projects-redirect",
-    "pattern": "^/starter_projects/?$",
-    "routeAlias": "/starter_projects/?$",
-    "redirect": "/starter-projects"
-  },
-  {
-    "name": "student-complete-registration",
-    "pattern": "^/classes/complete_registration",
-    "routeAlias": "/classes/(complete_registration|.+/register/.+)",
-    "view": "studentcompleteregistration/studentcompleteregistration",
-    "title": "Complete your Registration"
-  },
-  {
-    "name": "student-registration",
-    "pattern": "^/classes/:id/register/:token",
-    "routeAlias": "/classes/(complete_registration|.+/register/.+)",
-    "view": "studentregistration/studentregistration",
-    "title": "Class Registration"
-  },
-  {
-    "name": "student-registration-token-only",
-    "pattern": "^/signup/:token",
-    "routeAlias": "/signup/.+",
-    "view": "studentregistration/studentregistration",
-    "title": "Class Registration"
-  },
-  {
-    "name": "studio",
-    "pattern": "^/studios/\\d+(/projects|/curators|/activity|/comments)?/?(\\?.*)?$",
-    "routeAlias": "/studios/?$",
-    "view": "studio/studio",
-    "title": "Scratch Studio",
-    "dynamicMetaTags": true
-  },
-  {
-    "name": "teacher-faq",
-    "pattern": "^/educators/faq/?(\\?.*)?$",
-    "routeAlias": "/educators(?:/(faq|register|waiting))?/?(\\?.*)?$",
-    "view": "teachers/faq/faq",
-    "title": "Teacher Accounts FAQ"
-  },
-  {
-    "name": "teacherregistration",
-    "pattern": "^/educators/register/?(\\?.*)?$",
-    "routeAlias": "/educators(?:/(faq|register|waiting))?/?(\\?.*)?$",
-    "view": "teacherregistration/teacherregistration",
-    "title": "Teacher Registration"
-  },
-  {
-    "name": "teacherwaitingroom",
-    "pattern": "^/educators/waiting",
-    "routeAlias": "/educators(?:/(faq|register|waiting))?/?(\\?.*)?$",
-    "view": "teacherwaitingroom/teacherwaitingroom",
-    "title": "Thank you for requesting a Scratch Teacher Account"
-  },
-  {
-    "name": "terms",
-    "pattern": "^/terms_of_use/?$",
-    "routeAlias": "/terms_of_use/?$",
-    "view": "terms/terms",
-    "title": "Scratch Terms of Use"
+    "title": "想象、编程、分享"
   },
   {
     "name": "wedo2",
@@ -500,18 +224,6 @@
     "redirect": "/faq"
   },
   {
-    "name": "donate-redirect",
-    "pattern": "^/info/donate/?",
-    "routeAlias": "/info/(cards|credits|faq|donate)/?$",
-    "redirect": "https://www.scratchfoundation.org/donate"
-  },
-  {
-    "name": "donate-redirect2",
-    "pattern": "^/donate/?$",
-    "routeAlias": "/donate/?$",
-    "redirect": "https://www.scratchfoundation.org/donate"
-  },
-  {
     "name": "download-redirect",
     "pattern": "^/scratch2download/?(\\?.*)?$",
     "routeAlias": "/scratch2download",
@@ -530,51 +242,10 @@
     "redirect": "/explore/projects/all"
   },
   {
-    "name": "explore-studios-redirect",
-    "pattern": "^/explore/studios/?$",
-    "routeAlias": "/explore(?!/ajax)",
-    "redirect": "/explore/studios/all"
-  },
-  {
-    "name": "info-cards-redirect",
-    "pattern": "^/info/cards/?$",
-    "redirect": "/ideas"
-  },
-  {
-    "name": "help-redirect",
-    "pattern": "^/help/?(\\?.*)?$",
-    "routeAlias": "/help/?(\\?.*)?$",
-    "redirect": "/ideas"
-  },
-  {
-    "name": "hoc-redirect",
-    "pattern": "^/hoc/?(\\?.*)?$",
-    "routeAlias": "/hoc/?\\??",
-    "redirect": "/ideas"
-  },
-  {
-    "name": "hoc2014-redirect",
-    "pattern": "^/hoc2014/?(\\?.*)?$",
-    "routeAlias": "/hoc2014/?\\??",
-    "redirect": "/ideas"
-  },
-  {
-    "name": "info-redirect",
-    "pattern": "^/info/?(\\?.*)?$",
-    "routeAlias": "/info/?(\\?.*)?$",
-    "redirect": "/ideas"
-  },
-  {
     "name": "register-redirect",
     "pattern": "^/accounts/standalone-registration/?$",
     "routeAlias": "/accounts/standalone-registration/",
     "redirect": "/join"
-  },
-  {
-    "name": "research-redirect",
-    "pattern": "^/info/research/?$",
-    "routeAlias": "/info/research",
-    "redirect": "/research"
   },
   {
     "name": "search-redirect",
@@ -583,33 +254,9 @@
     "redirect": "/search/projects"
   },
   {
-    "name": "sec-redirect",
-    "pattern": "^/sec/?$",
-    "routeAlias": "/sec",
-    "redirect": "https://sip.scratch.mit.edu/sec"
-  },
-  {
     "name": "splash-redirect",
     "pattern": "^///?$",
     "redirect": "/"
-  },
-  {
-    "name": "store",
-    "pattern": "^/store/?$",
-    "routeAlias": "/store",
-    "redirect": "https://scratch-foundation.myshopify.com"
-  },
-  {
-    "name": "tips-redirect",
-    "pattern": "^/tips/?(\\?.*)?$",
-    "routeAlias": "/tips/?\\??",
-    "redirect": "/ideas"
-  },
-  {
-    "name": "things-to-try-redirect",
-    "pattern": "^/go/?(\\?.*)?$",
-    "routeAlias": "/go/?\\??",
-    "redirect": "/ideas"
   },
   {
     "name": "all-tutorials-redirect",
@@ -667,16 +314,6 @@
     "redirect": "/projects/editor/?tutorial=music"
   },
   {
-    "name": "catch-tutorial-redirect",
-    "pattern": "^/catch/?$",
-    "redirect": "/ideas"
-  },
-  {
-    "name": "dance-tutorial-redirect",
-    "pattern": "^/dance/?$",
-    "redirect": "/ideas"
-  },
-  {
     "name": "fly-tutorial-redirect",
     "pattern": "^/fly/?$",
     "routeAlias": "/(makeit)?fly/?$",
@@ -694,46 +331,6 @@
     "redirect": "/projects/editor/?tutorial=imagine"
   },
   {
-    "name": "pet-tutorial-redirect",
-    "pattern": "^/pet/?$",
-    "redirect": "/ideas"
-  },
-  {
-    "name": "racegame-tutorial-redirect",
-    "pattern": "^/racegame/?$",
-    "redirect": "/ideas"
-  },
-  {
-    "name": "hide-tutorial-redirect",
-    "pattern": "^/hide/?$",
-    "redirect": "/ideas"
-  },
-  {
-    "name": "fashion-tutorial-redirect",
-    "pattern": "^/fashion/?$",
-    "redirect": "/ideas"
-  },
-  {
-    "name": "dressup-tutorial-redirect",
-    "pattern": "^/dressup/?$",
-    "redirect": "/ideas"
-  },
-  {
-    "name": "card-tutorial-redirect",
-    "pattern": "^/card/?$",
-    "redirect": "/ideas"
-  },
-  {
-    "name": "valentines-tutorial-redirect",
-    "pattern": "^/valentines/?$",
-    "redirect": "/ideas"
-  },
-  {
-    "name": "bearstack-tutorial-redirect",
-    "pattern": "^/bearstack/?$",
-    "redirect": "/ideas"
-  },
-  {
     "name": "talking-tales-tutorial-redirect",
     "pattern": "^/talking-tales/?(\\?.*)?$",
     "redirect": "/projects/editor?tutorial=talking"
@@ -744,114 +341,74 @@
     "redirect": "/projects/331474033/editor/?tutorial=code-cartoon"
   },
   {
-    "name": "favorite-tutorial-redirect",
-    "pattern": "^/favorite/?$",
-    "redirect": "/ideas"
-  },
-  {
-    "name": "hoops-tutorial-redirect",
-    "pattern": "^/hoops/?$",
-    "redirect": "/ideas"
-  },
-  {
-    "name": "soccer-tutorial-redirect",
-    "pattern": "^/soccer/?$",
-    "redirect": "/ideas"
-  },
-  {
-    "name": "codeweek-tutorial-redirect",
-    "pattern": "^/codeweekeu/?$",
-    "redirect": "/ideas"
-  },
-  {
-    "name": "madewithcode-tutorial-redirects",
-    "pattern": "^/madewithcode-(name|card)/?$",
-    "redirect": "/ideas"
-  },
-  {
-    "name": "odetocode-tutorial-redirect",
-    "pattern": "^/odetocode/?$",
-    "redirect": "/ideas"
-  },
-  {
-    "name": "makey-tutorial-redirects",
-    "pattern": "^/makey(piano|drum)?/?$",
-    "redirect": "/ideas"
-  },
-  {
-    "name": "bird-redirect",
-    "pattern": "^/bird/?$",
-    "redirect": "/ideas"
-  },
-  {
     "name": "mechanism",
     "pattern": "^/community_mechanism/?$",
     "routeAlias": "/community_mechanism/?$",
     "view": "mechanism/mechanism",
-    "title": "Scratch Community Mechanism"
+    "title": "社区机制"
   },
   {
     "name": "webmaster",
     "pattern": "^/about_webmaster/?$",
     "routeAlias": "/community_mechanism/?$",
     "view": "webmaster/webmaster",
-    "title": "Scratch Webmaster"
+    "title": "关于站长"
   },
   {
     "name": "users",
     "pattern": "^/users/\\w+/?(\\\\?.*)?$",
     "routeAlias": "/users/?$",
     "view": "users/users",
-    "title": "Scratch Users"
+    "title": "用户主页"
   },
   {
     "name": "email_change",
     "pattern": "^/accounts/email_change/?$",
     "routeAlias": "/accounts/email_change/?$",
     "view": "email_change/email_change",
-    "title": "Scratch Account Change Email"
+    "title": "更改邮箱"
   },
   {
     "name": "settings",
     "pattern": "^/accounts/settings/?$",
     "routeAlias": "/accounts/settings/?$",
     "view": "settings/settings",
-    "title": "Scratch Account Settings"
+    "title": "账户设置"
   },
   {
     "name": "password_change",
     "pattern": "^/accounts/password_change/?$",
     "routeAlias": "/accounts/password_change/?$",
     "view": "password_change/password_change",
-    "title": "Scratch Account Password Change"
+    "title": "更改密码"
   },
   {
     "name": "password_reset",
     "pattern": "^/accounts/password_reset/?$",
     "routeAlias": "/accounts/password_reset/?$",
     "view": "password_reset/password_reset",
-    "title": "Scratch Password Reset"
+    "title": "忘记密码"
   },
   {
     "name": "mystuff",
     "pattern": "^/mystuff/?$",
     "routeAlias": "/mystuff/?$",
     "view": "mystuff/mystuff",
-    "title": "Scratch Projects List"
+    "title": "我的作品"
   },
   {
     "name": "delete_account",
     "pattern": "^/accounts/delete/account/?$",
     "routeAlias": "/accounts/delete/account/?$",
     "view": "delete_account/delete_account",
-    "title": "Scratch Delete Account"
+    "title": "删除账户"
   },
   {
     "name": "my_money",
     "pattern": "^/accounts/my_money/?$",
     "routeAlias": "/accounts/my_money/?$",
     "view": "my_money/my_money",
-    "title": "Scratch Account Money"
+    "title": "我的财富"
   },
   {
     "name": "wait_projects",

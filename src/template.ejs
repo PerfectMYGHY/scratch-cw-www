@@ -34,7 +34,7 @@
     <meta name="format-detection" content="telephone=no">
 
     <% if (!htmlWebpackPlugin.options.dynamicMetaTags) { %>
-    <title>Scratch - <%= htmlWebpackPlugin.options.title %></title>
+    <title>Scratch创世界 - <%= htmlWebpackPlugin.options.title %></title>
 
     <!-- Search & Open Graph-->
     <meta name="description" content="<%= htmlWebpackPlugin.options.description %>" />
@@ -231,7 +231,7 @@
     <!-- End Google Tag Manager (noscript) -->
     <% } %>
     <noscript>
-        <p>Your browser has Javascript disabled. Please go to your browser preferences and enable Javascript in order to use Scratch.</p>
+        <p>您的浏览器已禁用Javascript或完全不支持JavaScript。请您转到您的浏览器偏好设置并启用Javascript或升级您的浏览器，以便使用Scratch创世界。</p>
     </noscript>
 
     <div class="splash-screen spash-waiting-for-js" hidden>
@@ -360,7 +360,7 @@
     <script defer src="<%= htmlWebpackPlugin.files.chunks[htmlWebpackPlugin.options.route.name].entry %>"></script>
 
     <!-- Translate title element -->
-    <% if (!htmlWebpackPlugin.options.dynamicMetaTags) { %>
+<!--    <% if (!htmlWebpackPlugin.options.dynamicMetaTags) { %>
     <script>
         var loc = window._locale || 'en';
         if (typeof window._messages !== 'undefined' && loc !== 'en') {
@@ -375,6 +375,6 @@
             }
         }
     </script>
-    <% } %>
+    <% } %>-->
 </body>
 </html>

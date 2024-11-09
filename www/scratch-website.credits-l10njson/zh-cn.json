@@ -16,7 +16,7 @@
   "credits.researchScratchEdLinkText": "ScratchEd项目",
   "credits.acknowledgementsTitle": "致谢",
   "credits.acknowledgementsContributors": "过去几年里，以下人士也对Scratch的开发和运行做出了贡献：",
-  "credits.acknowledgementsDonors": "Scratch创世界 是一个个人因兴趣爱好而开发的网站，依靠大家的支持来维持 Scratch创世界 的运行（毕竟站长经济条件不是很好，服务器耗电费什么的真的很费钱），并保证 Scratch创世纪 对所有人免费。有关给 Scratch创世界 团队赞助，请浏览{donorsLink}",
+  "credits.acknowledgementsDonors": "Scratch创世界 是一个个人因兴趣爱好而开发的网站，依靠大家的支持来维持 Scratch创世界 的运行，并保证 Scratch创世纪 对所有人免费。有关给 Scratch创世界 团队赞助，请浏览{donorsLink}",
   "credits.acknowledgementsDonorsLinkText": "赞助页",
   "credits.acknowledgementsLifelongKindergarten": "2002年，MIT 媒体实验室的{lifelongKindergartenLink}启动了 Scratch 项目，并在一年后获得了 {nsfGrantLink} 的支持。终身幼稚园组在2007年公开发布了 Scratch，并在2019年开发完成后，Scratch 团队转移到了 Scratch 基金会。由 Mitchel Resnick 教授领导的终身幼稚园组小组继续与 Scratch 团队合作，在全球范围内研究和支持有关 Scratch 的创造性学习。",
   "credits.acknowledgementsLifelongKindergartenLinkText": "终生幼儿园研究小组",
@@ -43,5 +43,9 @@
   "credits.acknowledgementsOtherContributors": "过往贡献者",
   "credits.otherContributors": "其他贡献者包括：",
   "credits.acknowledgementsSounds": "Scratch声音库使用了来自以下网站的免费素材：Adobe.com、Archive.org、FreeMusicArchive.org、FreeSound.org以及Incompetech.com。",
-  "credits.soundsThanks": "感谢Archive.org的Nina Paley；FreeMusicArchive.org的Kellee Maize、Peter Rudenko和Chris Zabriskie；还有Incompetech.com的Kevin MacLeod。感谢谢freesound.org的艺术家："
+  "credits.soundsThanks": "感谢Archive.org的Nina Paley；FreeMusicArchive.org的Kellee Maize、Peter Rudenko和Chris Zabriskie；还有Incompetech.com的Kevin MacLeod。感谢谢freesound.org的艺术家：",
+  "credits.codeWriterTitle": "Scratch 创世界 的代码主要由谁编写管理？",
+  "credits.introduceCodeWriter": "Scratch 创世界 的代码主要由{writerLink}编写管理，因此他也是网站的站长。如果对本社区有任何疑问，可以向站长邮箱{emailLink}发送邮件。",
+  "credits.webmaster": "郭泓毅",
+  "credits.email": "916881890@qq.com"
 }

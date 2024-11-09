@@ -64,6 +64,29 @@ const Credits = () => (
         >
             <div className="acknowledge-content">
                 <h2>
+                    <FormattedMessage id="credits.codeWriterTitle" />
+                </h2>
+                <p>
+                    <FormattedMessage
+                        id="credits.introduceCodeWriter"
+                        values={{
+                            writerLink: (
+                                <a
+                                    href="/users/webmaster/"
+                                    target="_blank"
+                                >
+                                    <FormattedMessage id="credits.webmaster" />
+                                </a>
+                            ),
+                            emailLink: (
+                                <a>
+                                    <FormattedMessage id="credits.email" />
+                                </a>
+                            )
+                        }}
+                    />
+                </p>
+                <h2>
                     <FormattedMessage id="credits.donorsTitle" />
                 </h2>
                 <p>
@@ -72,7 +95,7 @@ const Credits = () => (
                         values={{
                             donorsLink: (
                                 <a
-                                    href="https://www.scratchfoundation.org/supporters"
+                                    href="/sponsor"
                                     rel="noreferrer noopener"
                                     target="_blank"
                                 >

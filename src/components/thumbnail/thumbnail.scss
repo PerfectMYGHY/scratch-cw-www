@@ -48,7 +48,6 @@
     .thumbnail-favorites,
     .thumbnail-remixes,
     .thumbnail-views {
-
         display: inline;
         margin-right: 10px;
 
@@ -93,6 +92,20 @@
         $project-width: 144px;
         $project-height: 108px;
         width: $project-width;
+
+        .thumbnail-image {
+            img {
+                width: $project-width;
+                height: $project-height;
+            }
+        }
+    }
+
+    &.user {
+        $project-width: 94px;
+        $project-height: 94px;
+        width: $project-width;
+        text-align:center;
 
         .thumbnail-image {
             img {

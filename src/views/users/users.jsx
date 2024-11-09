@@ -16,18 +16,16 @@ const NotAvailable = require('../../components/not-available/not-available.jsx')
 const Markdown = require("../../components/markdown/markdown.jsx").default;
 const Carousel = require('../../components/carousel/carousel.jsx');
 const Button = require('../../components/forms/button.jsx');
+const Thumbnail = require('../../components/thumbnail/thumbnail.jsx');
+const PropTypes = require('prop-types');
+const UserBox = require('../../components/user-box/user-box.jsx');
+const UsersCarousel = require('../../components/users-carousel/users-carousel.jsx');
 
-const Cookies = require('js-cookie');
+const { connect } = require('react-redux');
+
+const setting = require('/src/setting'); // 获取设置
 
 require('./users.scss');
-
-const setting = require('/src/setting');
-
-const uname = window.location.pathname.split("/")[2];
-
-var info = {};
-var fetched = false;
-var stop = false;
 
 function requestAPI(api, data, func, typ = "POST") {
     data = new URLSearchParams(data);
@@ -47,317 +45,193 @@ function requestAPI(api, data, func, typ = "POST") {
     }
 }
 
-const UserInfo = () => {
-    var thumbnailUrl = null;
-    const image = useRef();
-    const a = useRef();
-    const changer = useRef();
-    const form = useRef();
-    const name = useRef();
-    const update = useRef();
-    const [content, setContent] = useState([]);
-    const [btn, setBtn] = useState([]);
-    const getUserHeadPhotoURL = async () => {
-        var ret = null;
-        await requestAPI("getUserHeadPhotoURL", {
-            user: info.user.username
-        }).then(function (data) {
-            if (data.state) {
-                ret = (data.type=="base"?setting.base.slice(0,-1):"")+data.url;
-            } else {
-                throw "请求失败！";
-            }
-        });
-        return ret;
-    }
-    if (!stop) {
-        stop = true;
-        fetch(`${setting.base}api/session/`, {
-            method: "POST",
-            body: JSON.stringify({
-                user: uname
-            })
-        })
-            .then(res => { return res.json() })
-            .then(data => {
-                fetched = true;
-                info = data;
-                if (!info.user) {
-                    return;
-                }
-                thumbnailUrl = data["user"]["thumbnailUrl"];
-                image.current.src = thumbnailUrl;
-                a.current.href = `/users/${info.user.username}/`;
-                name.current.innerHTML = info.user.username;
-                var dateJoined = new Date(info.user.dateJoined);
-                // 获取年份、月份和日期
-                let year = dateJoined.getFullYear(); // 获取年份（四位数）
-                let month = ('0' + (dateJoined.getMonth() + 1)).slice(-2); // 获取月份（补零）
-                let day = ('0' + dateJoined.getDate()).slice(-2); // 获取日期（补零）
-
-                // 拼接成所需格式的字符串
-                let dateString = `${year}-${month}-${day}`;
-                var timeC = dateJoined.getYear() - (new Date().getYear());
-                var dw = "年";
-                if (timeC == 0) {
-                    var timeC = dateJoined.getMonth() - (new Date().getMonth());
-                    var dw = "个月";
-                    if (timeC == 0) {
-                        var timeC = dateJoined.getDay() - (new Date().getDay());
-                        var dw = "天";
-                        if (timeC == 0) {
-                            var timeC = dateJoined.getHours() - (new Date().getHours());
-                            var dw = "时";
-                            if (timeC == 0) {
-                                var timeC = dateJoined.getMinutes() - (new Date().getMinutes());
-                                var dw = "分钟";
-                                if (timeC == 0) {
-                                    var timeC = dateJoined.getSeconds() - (new Date().getSeconds());
-                                    var dw = "秒";
-                                }
-                            }
-                        }
-                    }
-                }
-                switch (Math.round(Math.abs(dateJoined.getYear() - (new Date().getYear())) / 4)) {
-                    case 0:
-                        var des = "Scratcher 新手";
-                        break;
-                    case 1:
-                        var des = "Scratcher 熟手";
-                        break;
-                    case 2:
-                        var des = "Scratcher 高手";
-                        break;
-                    case 3:
-                        var des = "Scratcher 大师";
-                        break;
-                    default:
-                        var des = "Scratcher 博士";
-                        break;
-                }
-                var c = (
-                    <div>
-                        <p class="profile-details">
-
-                            <span class="group">
-                                {des}
-                            </span>
-                            已加入于<span title={dateString}>{Math.abs(timeC)}&nbsp;{dw}</span>前
-                            <span class="location">中国</span>
-                            <span style={{
-                                display: "block"
-                            }}>S币个数：{info.flags.money}</span>
-                        </p>
-                    </div>
-                );
-                setContent([c]);
-                setBtn([
-                    Cookies.get("user") != info.user.username && 
-                        <Button
-                            className="button collection-user"
-                        >
-                            {"关注"}
-                        </Button>
-                ]);
-                changer.current.addEventListener("mouseover", () => {
-                    form.current.className += " edit";
-                });
-                changer.current.addEventListener("mouseout", () => {
-                    form.current.className = "portrait";
-                });
-                update.current.addEventListener('change', async function (e) {
-                    var file = e.target.files[0];
-                    var username = info.user.username; // 用户名
-
-                    if (!file) {
-                        return;
-                    }
-
-                    var formData = new FormData();
-                    formData.append('photo', file);
-                    formData.append('user', username); // 添加用户名字段  
-
-                    try {
-                        const response = await fetch(setting.base + 'api/updateHeadPhoto', {
-                            method: 'POST',
-                            body: formData,
-                        });
-
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-
-                        const data = await response.json(); // 假设服务器返回JSON格式的响应  
-                        if (data.state) {
-                            (async function () {
-                                image.current.src = await getUserHeadPhotoURL();
-                            })();
-                        } else {
-                            throw "上传失败！"
-                        }
-                    } catch (error) {
-                        throw error;
-                    }
-                });
-            });
-    }
-    return (
-        <div class="box-head">
-            <form id="profile-avatar" class="portrait" ref={form}>
-                <div class="avatar" ref={changer}>
-                    <a ref={a}>
-                        <img src={thumbnailUrl} ref={image} width="55" height="55"></img>
-                            <div class="loading-img s48"></div>
-                    </a>
-
-                    {Cookies.get("user") == (info.user && info.user.username) && (
-                        <div data-control="edit">更改头像
-                            <input class="hidden" type="file" accept="image/*" name="file" ref={update}></input>
-                        </div>
-                    ) }
-
-
-                </div>
-            </form>
-            {btn.map((item) => item)}
-            <div class="header-text">
-                <h2 ref={name}>Username</h2>
-                {content.map((item) => item)}  
-            </div>
-        </div>
-    );
-};
-
-var seted = false;
-
-const Users = () => {
-    const [recently, setRecently] = useState([]);
-    const [description, setDescription] = useState([]);
-    const [shared, setShared] = useState([]);
-    const [favourites, setFavourites] = useState([]);
-    const makeHandleUpdate = (typ) => {
-        return (data) => {
-            requestAPI(`setInfo/${info.user.id}`,data);
+class Users extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            description: "",
+            recently: "",
+            shared: [],
+            favourites: [],
+            fans: [],
+            followings: [],
+            info: {}
         };
-    };
-    var timer = setInterval(function (){
-        if (!fetched || seted){
-            return;
-        }
-        clearInterval(timer);
-        seted = true;
-        if (!info.user){
-            document.getElementById('pagebox').innerHTML = "";
-            render(<NotAvailable />,document.getElementById('pagebox'));
-            return;
-        }
-        requestAPI(`getDescription/${info.user.id}`, {}, function (data) {
-            setDescription([
-                Cookies.get("user") == (info && info.user && info.user.username) ?
-                    <Formsy class="description">
-                        <InplaceInput
-                            name="description"
-                            placeholder={"介绍一下你自己，可以使用Markdown语法"}
-                            type="textarea"
-                            validationErrors={{
-                                maxLength: "内容太长"
-                            }}
-                            validations={{
-                                maxLength: 200
-                            }}
-                            value={data.description}
-                            handleUpdate={makeHandleUpdate("description")}
-                        />
-                    </Formsy>
-                :
-                    <div className="project-description textout">
-                        <Markdown getContent={(content) => {
-                            return content[0];
-                        }}>
-                            {decorateText(data.description, {
-                                usernames: true,
-                                hashtags: true,
-                                scratchLinks: true
-                            })}
-                        </Markdown>
-                    </div>
-            ]);
-            setRecently([
-                Cookies.get("user") == (info && info.user && info.user.username) ?
-                    <Formsy class="recently">
-                        <InplaceInput
-                            name="recently"
-                            placeholder={"介绍一下你最近在干什么，可以使用Markdown"}
-                            type="textarea"
-                            validationErrors={{
-                                maxLength: "内容太长"
-                            }}
-                            validations={{
-                                maxLength: 200
-                            }}
-                            value={data.recently}
-                            handleUpdate={makeHandleUpdate("recently")}
-                        />
-                    </Formsy>
-                :
-                    <div className="project-recently textout">
-                        <Markdown getContent={(content) => {
-                            return content[0];
-                        }}>
-                            {decorateText(data.recently, {
-                                usernames: true,
-                                hashtags: true,
-                                scratchLinks: true
-                            })}
-                        </Markdown>
-                    </div>
-            ]);
-        },"GET");
-        fetch(`${process.env.API_HOST}/users/${info.user.username}/shared/projects`)
-            .then(response => response.json())
-            .then((data) => {
-                setShared([
-                    data.length == 0 ? 
-                        <p>还没有</p>
-                    :
-                        <Carousel items={data} />
-                ]);
-            });
-        fetch(`${process.env.API_HOST}/users/${info.user.username}/favourites/projects`)
-            .then(response => response.json())
-            .then((data) => {
-                setFavourites([
-                    data.length == 0 ? 
-                        <p>还没有</p>
-                    :
-                        <Carousel items={data} />
-                ]);
-            });
-    },1);
-    return (
-        <div className="inner users" id="pagebox">
-            <Box
-                headContent={
-                    <UserInfo />
-                }
-            >
-                <h3>个人简介</h3>
-                {description.map((item) => item)}
-                <h3>最近</h3>
-                {recently.map((item) => item)}
-            </Box>
-            <Box title={`分享的作品`}>
-                {shared.map((item) => item)}
-            </Box>
-            <Box title={`收藏的作品`}>
-                {favourites.map((item) => item)}
-            </Box>
-            <Box title={`正在关注`}>
-                <p>还没有</p>
-            </Box>
-        </div>
-    );
-};
+        this.uname = window.location.pathname.split("/")[2];
+    }
 
-render(<Page><Users /></Page>, document.getElementById('app'));
+    setInfo = (state) => {
+        this.setState(state);
+    }
+
+    makeHandleUpdate = (typ) => {
+        return (data) => {
+            requestAPI(`setInfo/${this.state.info.user.id}`, data);
+        };
+    }
+
+    customLoadData = (state) => {
+        const base = this;
+        requestAPI(`getDescription/${state.info.user.id}`, {}, function (data) {
+            base.setState({
+                description: data.description,
+                recently: data.recently
+            });
+        }, "GET");
+        fetch(`${process.env.API_HOST}/users/${state.info.user.username}/shared/projects`)
+            .then(response => response.json())
+            .then((data) => {
+                base.setState({
+                    shared: data
+                });
+            });
+        fetch(`${process.env.API_HOST}/users/${state.info.user.username}/favourites/projects`)
+            .then(response => response.json())
+            .then((data) => {
+                base.setState({
+                    favourites: data
+                });
+            });
+        fetch(`${process.env.PROJECT_HOST}/users/${state.info.user.username}/get_fans/`)
+            .then(response => response.json())
+            .then((data) => {
+                let fans = [];
+                for (const user of data) {
+                    fans.push(<Thumbnail
+                        href={`/users/${user.user.username}/`}
+                        key={["users", user.user.id].join('.')}
+                        src={user.user.thumbnailUrl}
+                        title={user.user.username}
+                        type="user"
+                    />);
+                }
+                base.setState({
+                    fans
+                });
+            });
+        fetch(`${process.env.PROJECT_HOST}/users/${state.info.user.username}/get_following/`)
+            .then(response => response.json())
+            .then((data) => {
+                let followings = [];
+                for (const user of data) {
+                    followings.push(<Thumbnail
+                        href={`/users/${user.user.username}/`}
+                        key={["users", user.user.id].join('.')}
+                        src={user.user.thumbnailUrl}
+                        title={user.user.username}
+                        type="user"
+                    />);
+                }
+                base.setState({
+                    followings
+                });
+            });
+    }
+
+    render() {
+        return (
+            <UserBox setInfo={this.setInfo} customLoadData={this.customLoadData} uname={this.uname}>
+                <div>
+                    <h3>个人简介</h3>
+                    {this.props.username == (this.state.info && this.state.info.user && this.state.info.user.username) ?
+                        <Formsy class="description">
+                            <InplaceInput
+                                name="description"
+                                placeholder={"介绍一下你自己，可以使用Markdown语法"}
+                                type="textarea"
+                                validationErrors={{
+                                    maxLength: "内容太长"
+                                }}
+                                validations={{
+                                    maxLength: 1000
+                                }}
+                                value={this.state.description}
+                                handleUpdate={this.makeHandleUpdate("description")}
+                            />
+                        </Formsy>
+                        :
+                        <div className="project-description textout">
+                            <Markdown getContent={(content) => {
+                                return content[0];
+                            }}>
+                                {decorateText(this.state.description, {
+                                    usernames: true,
+                                    hashtags: true,
+                                    scratchLinks: true
+                                })}
+                            </Markdown>
+                        </div>
+                    }
+                    <h3>最近</h3>
+                    {this.props.username == (this.state.info && this.state.info.user && this.state.info.user.username) ?
+                        <Formsy class="recently">
+                            <InplaceInput
+                                name="recently"
+                                placeholder={"你自己最近在干什么，可以使用Markdown语法"}
+                                type="textarea"
+                                validationErrors={{
+                                    maxLength: "内容太长"
+                                }}
+                                validations={{
+                                    maxLength: 1000
+                                }}
+                                value={this.state.recently}
+                                handleUpdate={this.makeHandleUpdate("recently")}
+                            />
+                        </Formsy>
+                        :
+                        <div className="project-recently textout">
+                            <Markdown getContent={(content) => {
+                                return content[0];
+                            }}>
+                                {decorateText(this.state.recently, {
+                                    usernames: true,
+                                    hashtags: true,
+                                    scratchLinks: true
+                                })}
+                            </Markdown>
+                        </div>
+                    }
+                </div>
+                <div>
+                    <Box title={`分享的作品`}>
+                        {this.state.shared.length == 0 ?
+                            <p>还没有</p>
+                            :
+                            <Carousel items={this.state.shared} />
+                        }
+                    </Box>
+                    <Box title={`收藏的作品`}>
+                        {this.state.favourites.length == 0 ?
+                            <p>还没有</p>
+                            :
+                            <Carousel items={this.state.favourites} />
+                        }
+                    </Box>
+                    <Box title={`粉丝`}>
+                        {this.state.fans.length == 0 ?
+                            <p>还没有</p>
+                            :
+                            <UsersCarousel items={this.state.fans} type="user" />
+                        }
+                    </Box>
+                    <Box title={`正在关注`}>
+                        {this.state.followings.length == 0 ?
+                            <p>还没有</p>
+                            :
+                            <UsersCarousel items={this.state.followings} type="user" />
+                        }
+                    </Box>
+                </div>
+            </UserBox>
+        );
+    }
+}
+
+const mapStateToProps = (state) => ({
+    username: state.session && state.session.session && state.session.session.user && state.session.session.user.username
+});
+
+const ConnectedUsers = connect(mapStateToProps)(Users);
+
+render(<Page><ConnectedUsers /></Page>, document.getElementById('app'));

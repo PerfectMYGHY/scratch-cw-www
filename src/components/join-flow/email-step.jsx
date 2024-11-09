@@ -119,7 +119,7 @@ class EmailStep extends React.Component {
                         validateField
                     } = props;
                     return (
-                        <JoinFlowStep
+                        /*
                             footerContent={(
                                 <FormattedMessage
                                     id="registration.acceptTermsOfUse"
@@ -144,7 +144,8 @@ class EmailStep extends React.Component {
                                         )
                                     }}
                                 />
-                            )}
+                            )} */
+                        <JoinFlowStep
                             headerImgClass="email-step-image"
                             headerImgSrc="/images/join-flow/email-header.png"
                             innerClassName="join-flow-inner-email-step"

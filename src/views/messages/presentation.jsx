@@ -28,6 +28,8 @@ const RemixProjectMessage = require('./message-rows/remix-project.jsx');
 const ScratcherInvite = require('./message-rows/scratcher-invite.jsx');
 const StudioActivityMessage = require('./message-rows/studio-activity.jsx');
 const UserJoinMessage = require('./message-rows/user-join.jsx');
+const LookProjectMessage = require('./message-rows/look-project.jsx');
+const LookReportMessage = require('./message-rows/look-report.jsx');
 
 require('./messages.scss');
 
@@ -168,6 +170,52 @@ class SocialMessagesList extends React.Component {
                     key={key}
                 />
             );
+        //case 'newproject':
+        //    if (this.props.userInfo.permissions.admin) {
+        //        return (
+        //            <LookProjectMessage
+        //                className={className}
+        //                followDateTime={message.datetime_created}
+        //                title={message.title}
+        //                project_id={message.project_id}
+        //                key={key}
+        //            />
+        //        );
+        //    }
+        //case 'newreport':
+        //    if (this.props.userInfo.permissions.admin) {
+        //        return (
+        //            <LookReportMessage
+        //                className={className}
+        //                followDateTime={message.datetime_created}
+        //                body={message.body}
+        //                key={key}
+        //            />
+        //        );
+        //    }
+        }
+        if (this.props.userInfo.permissions.admin) {
+            switch (message.type) {
+                case 'newproject':
+                    return (
+                        <LookProjectMessage
+                            className={className}
+                            createDateTime={message.datetime_created}
+                            title={message.title}
+                            project_id={message.project_id}
+                            key={key}
+                        />
+                    );
+                case 'newreport':
+                    return (
+                        <LookReportMessage
+                            className={className}
+                            createDateTime={message.datetime_created}
+                            body={message.body}
+                            key={key}
+                        />
+                    );
+            }
         }
     }
     renderLoadMore (loadMore) {
@@ -243,7 +291,23 @@ SocialMessagesList.propTypes = {
     loadStatus: PropTypes.string,
     messages: PropTypes.arrayOf(PropTypes.object).isRequired,
     numNewMessages: PropTypes.number,
-    onLoadMoreMethod: PropTypes.func
+    onLoadMoreMethod: PropTypes.func,
+    user: PropTypes.shape({
+        id: PropTypes.number,
+        banned: PropTypes.bool,
+        vpn_required: PropTypes.bool,
+        token: PropTypes.string,
+        thumbnailUrl: PropTypes.string,
+        dateJoined: PropTypes.string,
+        email: PropTypes.string,
+        classroomId: PropTypes.string,
+        username: PropTypes.string
+    }).isRequired,
+    userInfo: PropTypes.shape({
+        user: PropTypes.object,
+        permissions: PropTypes.object,
+        flags: PropTypes.object
+    }).isRequired
 };
 
 SocialMessagesList.defaultProps = {
@@ -286,13 +350,17 @@ const MessagesPresentation = props => {
                                         label: props.intl.formatMessage({id: 'messages.activityProjects'}),
                                         value: 'projects'
                                     },
+                                    //{
+                                    //    label: props.intl.formatMessage({id: 'messages.activityStudios'}),
+                                    //    value: 'studios'
+                                    //},
+                                    //{
+                                    //    label: props.intl.formatMessage({id: 'messages.activityForums'}),
+                                    //    value: 'forums'
+                                    //},
                                     {
-                                        label: props.intl.formatMessage({id: 'messages.activityStudios'}),
-                                        value: 'studios'
-                                    },
-                                    {
-                                        label: props.intl.formatMessage({id: 'messages.activityForums'}),
-                                        value: 'forums'
+                                        label: props.intl.formatMessage({id: 'messages.activityOthers'}),
+                                        value: 'others'
                                     }
                                 ]}
                                 value={props.filter}
@@ -358,6 +426,7 @@ const MessagesPresentation = props => {
                     messages={props.messages}
                     numNewMessages={numNewSocialMessages}
                     onLoadMoreMethod={props.onLoadMoreMethod}
+                    userInfo={props.userInfo}
                 />
             </div>
         </div>
@@ -390,6 +459,11 @@ MessagesPresentation.propTypes = {
         dateJoined: PropTypes.string,
         email: PropTypes.string,
         classroomId: PropTypes.string
+    }).isRequired,
+    userInfo: PropTypes.shape({
+        user: PropTypes.object,
+        permissions: PropTypes.object,
+        flags: PropTypes.object
     }).isRequired
 };
 

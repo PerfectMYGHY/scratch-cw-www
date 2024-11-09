@@ -4,89 +4,116 @@
 
 ## 第一步：复制模板
 
-首先复制下面模板到你的node.js的代码编辑器（这里用作正式版）。建议：可以先从GitHub上下载`TurboWarp`的`scratch-vm`库的源代码，然后可以在`src/blocks`中新建文件并粘贴代码。这样一些引用的文件都可以看到。
+首先复制下面模板到你的JavaScript的代码编辑器。（注意，代码是直接在浏览器运行的，不要使用Node.js才有的特性）
 
-``` js
-const BlockType = require('../extension-support/block-type'); // scratch-vm 库中的文件，存储了积木块类型
-const ArgumentType = require('../extension-support/argument-type'); // 积木块参数类型
+``` javascript
+// Name: 扩展名称
+// ID: 扩展ID(英文数字都行)
+// Description: 扩展功能简介
+// By: 你的账号名称
 
-/* 扩展图标的data URL */
-const blockIconURI = 'data:image/svg+xml,%3Csvg id="rotate-counter-clockwise" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"%3E%3Cdefs%3E%3Cstyle%3E.cls-1%7Bfill:%233d79cc;%7D.cls-2%7Bfill:%23fff;%7D%3C/style%3E%3C/defs%3E%3Ctitle%3Erotate-counter-clockwise%3C/title%3E%3Cpath class="cls-1" d="M22.68,12.2a1.6,1.6,0,0,1-1.27.63H13.72a1.59,1.59,0,0,1-1.16-2.58l1.12-1.41a4.82,4.82,0,0,0-3.14-.77,4.31,4.31,0,0,0-2,.8,4.25,4.25,0,0,0-1.34,1.73,5.06,5.06,0,0,0,.54,4.62A5.58,5.58,0,0,0,12,17.74h0a2.26,2.26,0,0,1-.16,4.52A10.25,10.25,0,0,1,3.74,18,10.14,10.14,0,0,1,2.25,8.78,9.7,9.7,0,0,1,5.08,4.64,9.92,9.92,0,0,1,9.66,2.5a10.66,10.66,0,0,1,7.72,1.68l1.08-1.35a1.57,1.57,0,0,1,1.24-.6,1.6,1.6,0,0,1,1.54,1.21l1.7,7.37A1.57,1.57,0,0,1,22.68,12.2Z"/%3E%3Cpath class="cls-2" d="M21.38,11.83H13.77a.59.59,0,0,1-.43-1l1.75-2.19a5.9,5.9,0,0,0-4.7-1.58,5.07,5.07,0,0,0-4.11,3.17A6,6,0,0,0,7,15.77a6.51,6.51,0,0,0,5,2.92,1.31,1.31,0,0,1-.08,2.62,9.3,9.3,0,0,1-7.35-3.82A9.16,9.16,0,0,1,3.17,9.12,8.51,8.51,0,0,1,5.71,5.4,8.76,8.76,0,0,1,9.82,3.48a9.71,9.71,0,0,1,7.75,2.07l1.67-2.1a.59.59,0,0,1,1,.21L22,11.08A.59.59,0,0,1,21.38,11.83Z"/%3E%3C/svg%3E';
+(function (Scratch) { // 实际上，该文件的代码只会在加载扩展时调用
 
-/**
- * 使用扩展实例实现的示例核心块。
- * 这不是作为VM中核心块的一部分加载的，而是提供的
- * 并用作测试的一部分。
- */
-class Scratch3CoreExample { // Scratch3 + 扩展英文名
-    constructor (runtime) { // 类初始化，参数runtime为Scratch运行状态
-        /**
-         * 实例化此块包的运行时。
-         * @type {Runtime}
-         */
-        this.runtime = runtime;
+  // 定义一些公用变量、函数
+  const menuIconURI = ""; // 菜单图标数据
+  const blockIconURI = ""; // 积木图标数据
+
+  class 扩展类名 {
+    constructor() {
+      // Scratch.vm.runtime 可以得到 runtime
+    }
+    getInfo() {
+      // 该方法将返回积木块的设置
+      return {
+        id: "扩展ID",
+        name: "扩展名称",
+        docsURI: "你的扩展的说明文档URL", // 可选参数
+        menuIconURI: menuIconURI, // 菜单图标，在左侧积木分类栏显示
+        blockIconURI: blockIconURI, // 积木图标，显示在积木最左侧
+        blocks: [ // 扩展的所有积木的列表
+          {
+            opcode: "积木1的opcode",
+            blockType: Scratch.BlockType.COMMAND, // 积木类型，Scratch.BlockType记录着所有可用的类型
+            text: "积木文本",
+          },
+          { // 示例
+            opcode: "hasPermission",
+            blockType: Scratch.BlockType.BOOLEAN,
+            text: Scratch.translate("has notification permission"), // 为了审核人员添加多语言话的方便，你可以在你的积木文本周围加上Scratch.translate()
+            disableMonitor: true, // 不知道干什么的
+          },
+          {
+            opcode: "showNotification",
+            blockType: Scratch.BlockType.COMMAND,
+            text: "create notification with text [text]", // 可以使用[]来代表积木参数，其中的内容是参数ID
+            arguments: { // 该积木的参数列表
+              text: { // 上述中的[text]就代表它
+                type: Scratch.ArgumentType.STRING, // 这个参数的类型，Scratch.ArgumentType记录着所有参数类型
+                defaultValue: "Hello, world!", // 参数的默认值
+              },
+            },
+          },
+          { // 多参数用法
+            opcode: "showNotificationMore",
+            blockType: Scratch.BlockType.COMMAND,
+            text: Scratch.translate("create notification with title [title], text [text], other options [opts] (please use extension \"JSON\")"),
+            arguments: {
+              title: {
+                type: Scratch.ArgumentType.STRING,
+                defaultValue: "来自项目的通知",
+              },
+              text: {
+                type: Scratch.ArgumentType.STRING,
+                defaultValue: "Hello, world!",
+              },
+              opts: {
+                type: Scratch.ArgumentType.STRING,
+                defaultValue: "{}",
+              },
+            },
+          },
+          "---", // 使用"---"将上下两个积木隔开一点空隙，代表不同的功能
+          {
+            blockType: Scratch.BlockType.LABEL, // 使用该积木类型，出现的只是一个文本标签，相当于一个功能区的名字
+            text: Scratch.translate("advanced setting"), // 文本标签内容
+          },
+          {
+            opcode: "setOptionsItem",
+            blockType: Scratch.BlockType.COMMAND,
+            text: Scratch.translate("set the option [name] of notification to [value]"),
+            arguments: {
+              name: {
+                type: Scratch.ArgumentType.STRING,
+                defaultValue: "body", // 参数默认值，这里指菜单默认值。指代的是菜单每项的value属性
+                menu: "options", // 使用这个属性指定这个参数的菜单
+              },
+              value: {
+                type: Scratch.ArgumentType.STRING,
+                defaultValue: "",
+              },
+            },
+          },
+        ],
+        menus: { // 定义所有菜单的内容
+          options: [ // 与之前对应
+            { text: Scratch.translate("options body"), value: "body" }, // 定义菜单项的方法之一，表示显示的内容和真实的值不一致
+            "菜单2" // 表示文本和值一致
+          ],
+          menu2: "getMenu" // 如果直接使用字符串，则代表调用该扩展类的 字符串中的名称 的属性获得菜单值
+        },
+      };
     }
 
-    /**
-     * @returns {object} 此扩展及其块的元数据。
-     */
-    getInfo () {
-        return {
-            id: 'coreExample', // 扩展ID
-            name: 'CoreEx', // 此字符串不需要翻译，因为此扩展名仅用作示例。
-            menuIconURI: menuIconURI, // 菜单图标（干什么的不知道）
-            blockIconURI: blockIconURI, // 每个积木左侧的图标
-            color1: '#CF63CF', // 扩展的所有积木的背景颜色(没有则默认是绿色)
-            color2: '#C94FC9', // 扩展的所有积木的选择菜单的背景颜色(没有则默认是深绿色)
-            color3: '#BD42BD', // 3级颜色
-            color4: '#BD42BD', // 4级颜色
-            // 3、4级颜色通常和1级一样，不一样相差也不大，干啥的也不知道。
-            blocks: [
-                { // 一个按钮类型（切勿乱用，如果你真的想要一个按钮，请在发送正式版至我们的邮箱时说明！因为按钮的执行方法是内置函数，你可以另外发一份你希望的按钮处理方式的代码）
-                    func: 'MAKE_A_VARIABLE', // 按钮执行函数名（内置的，还是上面所说）
-                    blockType: BlockType.BUTTON, // 表明该积木是按钮类型（就像你在 变量 选项卡里看到的 创建变量 的按钮一样）
-                    text: '创建一个变量 (CoreEx)' // 积木名称（你可以只写简体中文，当我们收到你的插件后，我们会在此处用`React Intl`对他进行多语言化）
-                },
-                {
-                    opcode: 'exampleOpcode', // 积木的操作码（至关重要，尤其是不能与已存在的冲突）
-                    blockType: BlockType.REPORTER, // 积木类型，表示是一个有返回值的积木（就像 运动 里的 X坐标）。
-                    text: '示例积木'
-                },
-                {
-                    opcode: 'exampleWithInlineImage',
-                    blockType: BlockType.COMMAND, // 这代表积木是一个只执行的积木（就像 运动 里的 移动()步）
-                    text: '一个显示图像 [CLOCKWISE] 积木块', // 里面用英文方括号括起来的将替换为积木参数，里面是参数名，与下面属性里的对应
-                    arguments: {
-                        CLOCKWISE: {
-                            type: ArgumentType.IMAGE, // 设置参数类型，是一个显示图片的参数，意思就是把参数的地方替换为一个图片（只显示，不能选择上传）
-                            dataURI: blockIconURI // 图片的地址
-                        }
-                    }
-                }
-            ]
-        };
-    }
+    // 各个积木的实际代码的实现
+    // 函数名就是积木的opcode
+  }
 
-    /**
-     * 示例操作码只返回第一个角色的名称。
-     * @returns {string} 项目中第一个角色的名称。
-     */
-    exampleOpcode () {
-        const stage = this.runtime.getTargetForStage();
-        return stage ? stage.getName() : 'no stage yet';
-    }
-
-    exampleWithInlineImage () { // 不执行什么
-        return;
-    }
-
-}
-
-module.exports = Scratch3CoreExample;
+  Scratch.extensions.register(new 扩展类名()); // 将该扩展注册到scratch中
+})(Scratch);
 
 ```
 
-## 第二步：更改扩展图标
+## 第二步：更改扩展菜单图标、积木图标
 
 你可以使用Scratch的造型编辑器设计你的扩展图标（最后导出），更厉害的可以用`Adobe Illustrator`设计。注意，导出的是svg。
 
@@ -96,11 +123,11 @@ module.exports = Scratch3CoreExample;
 > * 然后把这个内容转换为URL编码（就比如说把空格变为`%20`）
 > * 最后在这个内容前面加上`data:image/svg+xml,`
 
-然后替换模板中的变量`blockIconURI`的值。
+然后替换模板中的变量`blockIconURI`、`menuIconURI`的值。
 
 ## 第三步：设置插件名称
 
-首先修改插件类的名字。例如：插件叫`高级音频处理`，则英文名是`AudioProcessing`，那么类名就是`Scratch3AudioProcessing`。不要忘记修改导出部分。
+首先修改插件类的名字。例如：插件叫`高级音频处理`，则英文名是`AudioProcessing`，那么类名就是`Scratch3AudioProcessing`。不要忘记修改注册部分。
 
 然后来到 `getInfo` 属性下，修改`id`属性为刚才的`AudioProcessing`（记住，是示例！不是说必须），修改`name`为`高级音频处理`（这是要显示的，所以不是英文名。并且发给我们后我们会帮您多语言化）。
 
@@ -113,7 +140,7 @@ module.exports = Scratch3CoreExample;
 | 属性 | 作用 |
 | ----:|:---- |
 | BOOLEAN   | 一个返回布尔值的积木 |
-| BUTTON | 一个类似于`创建变量`按钮的按钮，需要指定点击时执行的函数，但函数不是在此处定义，因此可以自己另外写一个文件作为按钮处理代码，发给我们时说明即可。 |
+| BUTTON | 一个类似于`创建变量`按钮的按钮，需要指定点击时执行的函数，在类里编写即可。 |
 | LABEL    | 直接在此处显示一个文字标签。就和显示每个类别名称的那个标签一样 |
 | COMMAND    | 只能执行的积木 |
 | CONDITIONAL    | 站长看不懂定义文件给的说明：可以运行也可以不运行子分支的专用命令块，无论是否运行了子分支，线程都会继续执行下一个块 |
@@ -121,7 +148,7 @@ module.exports = Scratch3CoreExample;
 | HAT    | 效果和上面一样。不过这三种有啥区别站长到现在还不明白。官方说明：有条件地启动块堆栈的帽块 |
 | LOOP    | 一种循环结构，可以让积木变得和 重复执行 一样，不过站长也不熟悉 |
 | REPORTER    | 具有返回值的积木 |
-| XML    | 高级用法，小白（包括站长）勿用。官方说明是说这可以直接使用`scratch-blocks`的积木XML来定义 |
+| XML    | 高级用法，小白（包括站长）勿用。官方说明是说这可以直接使用`scratch-blocks`的积木XML来定义一个积木块，可以使用更高级的属性 |
 
 特别说明：
 
@@ -147,6 +174,40 @@ module.exports = Scratch3CoreExample;
 | SOUND    | TurboWarp特有类型：当前角色中声音的名称 |
 
 这些站长基本都用过。最后两个新增类型的问题：会把菜单的背景色改为相应功能原来所在的类别的颜色（比如使用COSTUME，那么这个菜单的背景颜色则是 造型 类别的）
+
+参数类型几个示例截图：
+
+1.ANGLE
+
+![ANGLE类型示例](/images/make-ext/angle-example.png)
+
+2.BOOLEAN
+
+![BOOLEAN类型示例](/images/make-ext/bool-example.png)
+
+3.COLOR
+
+![COLOR类型示例](/images/make-ext/color-example.png)
+
+4.MATRIX
+
+![MATRIX类型示例](/images/make-ext/matrix-example.png)
+
+5.NOTE
+
+![NOTE类型示例](/images/make-ext/note-example.png)
+
+6.IMAGE
+
+![IMAGE类型示例](/images/make-ext/image-example.png)
+
+7.COSTUME
+
+![COSTUME类型示例](/images/make-ext/costume-example.png)
+
+8.SOUND
+
+![SOUND类型示例](/images/make-ext/sound-example.png)
 
 特殊：
 
@@ -238,9 +299,7 @@ return {
 
 ## 第五步：编写积木代码
 
-现在已经创建完积木了，需要编写积木点击时执行的代码。除了`BUTTON`类型积木外，大部分积木类型的实际代码都写在扩展的类里。如模板所示，方法名称就是积木的操作码。
-
-不过模板中是通过调用`this.runtime`扩展运行时来获取当前状态的，还有另一种方法：
+现在已经创建完积木了，需要编写积木点击时执行的代码。大部分积木类型的实际代码都写在扩展的类里。如模板所示，方法名称就是积木的操作码。
 
 ```js
     _getSoundByName(util, name) { // 一个被内部调用的方法，根据声音名称获取util中声音的数据对象
@@ -277,21 +336,57 @@ return {
 
 ## 第六步：测试
 
-现在我们为了测试，需要把正式版转为临时的测试版。
+将代码保存，然后在Scratch创世界的在线或离线编辑器上再扩展里面找到`自定义扩展`，选择`文件`选项卡，上传你的测试版代码，勾选`不使用沙盒运行扩展`，点击`加载`即可加载扩展。
 
-首先再新建一个文件，然后按照下面格式修改你的代码（扩展名以`Skins`为例）：
+## 发送给我们你的扩展
 
-```js
-(function (Scratch) {
-  const BlockType = Scratch.BlockType; // 获取积木类型
-  const ArgumentType = Scratch.ArgumentType; // 获取参数类型
-  ... // 对Skins扩展类的定义
-  Scratch.extensions.register(new Skins());
-})(Scratch);
+当你设计好你的扩展后，可以向`916881890@qq.com`发送以下信息，将你的扩展贡献给我们。
+
+注意：请不要尝试在扩展中加入任何恶意代码或不好的代码。详细请见下面的`审核要求`
+
+如果你的扩展通过了审核，将会获得40S币。
+
+```email
+主题: 向Scratch创世界提供扩展
+发送者: XXXX@XX.XXX
+接受者: 916881890@qq.com
+
+我（账户名：XXX，注册使用的邮箱：XXXX@XX.XXX）打算向Scratch创世界贡献扩展。下面是关于扩展的详细信息：
+
+名称：[扩展名]
+扩展功能描述：[描述]
+扩展ID：[扩展ID]
+
+我保证该扩展不会包含恶意代码，并愿意承担此造成的后果。
+
+标注：
+
+code.js 为扩展源代码
+
+补充说明(可选)：
+
+XXX
+
+---
+
+附件：
+
+code.js: 你的扩展代码文件
+... 其余补充文件
 ```
 
-注意：这种模式下无法获取扩展运行时，所以说过最好不要用他。
+# 审核要求
 
-保存后可以在Scratch创世界的在线或离线编辑器上再扩展里面找到`自定义扩展`，选择`文件`选项卡，上传你的测试版代码，点击`加载`即可。
+我们在接受到您发来的扩展后，将会审核其代码。如果不通过审核且您的代码包含恶意代码，我们将对您的账号标记1次违规。
 
-不过由于各种各样的原因，这个测试环境还是不稳定的。如果你真的了解`Scratch`的机制（这很复杂，你需要使用`scratch-gui`，并且修改`scratch-vm`，而里面有`Redux Store`、`React Redux`等一堆刚开始差点搞蒙站长的东西，不好理解），那么你可以尝试将正式版直接在`scratch-vm`中加入内置扩展，然后运行`scratch-gui`以调试。~~不过站长在想：你都会到这一步了，干嘛还把扩展贡献给我？~~
+匿名发送的扩展不予处理。
+
+下面是审核要求：
+
+1.与现有扩展非常相似的扩展：如果您发来的扩展与现有扩展非常相似，那么您的扩展可能会被拒绝。注意：此类不通过审核不计做违规
+
+2.包含恶意代码：如果我们发现您发来的扩展含有恶意代码，那么我们将会拒绝，并标记您的账号违规1次
+
+3.为了用户的安全，禁止使用`eval()`（防止某些人利用漏洞执行恶意代码）、`new Function()`（原因相同）等可能会导致安全问题的代码
+
+

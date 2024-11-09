@@ -5,8 +5,20 @@
         display: block;
         margin: 0;
         padding: 0;
-
         list-style: none;
+    }
+
+    .news-content {
+        height: 10.5em;
+        overflow: hidden;
+
+        & > div:first-child {
+            padding-top: 10.5em;
+        }
+
+        & > :last-child {
+            padding-bottom: 10.5em;
+        }
     }
 
     li {
@@ -34,7 +46,6 @@
 
         h4 {
             display: block;
-            
             color: $link-purple;
             font-size: .85rem;
         }
@@ -44,7 +55,6 @@
             margin: 0;
             padding: 0;
             line-height: normal;
-
             color: $type-gray;
             font-size: .85rem;
         }

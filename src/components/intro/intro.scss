@@ -10,7 +10,7 @@
     background-color: $ui-white;
 
     .intro-container {
-        min-height: 24rem;
+        /*min-height: 24rem;*/
         justify-content: space-between;
         background-color: $ui-purple-dark;
         background-size: 624px 325px;
@@ -60,7 +60,7 @@
         &:after {
             display: block;
             position: absolute;
-            bottom: .75rem;
+            bottom: -3.75rem;
             right: 10%;
             background-image: url("/svgs/intro/hat-block.svg");
             background-repeat: no-repeat;

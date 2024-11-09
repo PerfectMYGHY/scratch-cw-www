@@ -8,6 +8,8 @@ const api = require('../../lib/api');
 const intlShape = require('../../lib/intl-shape');
 const previewActions = require('../../redux/preview');
 
+const Cookies = require('js-cookie');
+
 class FormsyProjectUpdater extends React.Component {
     constructor (props) {
         super(props);
@@ -39,7 +41,10 @@ class FormsyProjectUpdater extends React.Component {
             uri: `/projects/${this.props.projectInfo.id}`,
             authentication: this.props.user.token,
             method: 'PUT',
-            json: jsonData
+            json: jsonData,
+            headers: {
+                user: Cookies.get("user")
+            }
         }, (err, body, res) => {
             if (res.statusCode === 200) {
                 this.setState({value: body[this.props.field], error: false});

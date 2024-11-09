@@ -27,7 +27,7 @@ const PeopleGrid = props => (
                         /* if userName is not given, there's no chance userId is given */
                         <Avatar
                             alt=""
-                            src={`https://uploads.scratch.mit.edu/get_image/user/default_80x80.png`}
+                            src={`https://scratch-cw.top:8005/static/default.jpg`}
                         />
                     )}
                 </div>

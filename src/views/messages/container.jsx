@@ -134,6 +134,7 @@ class Messages extends React.Component {
                 scratcherInvite={this.props.invite}
                 sessionStatus={this.props.sessionStatus}
                 user={this.props.user}
+                userInfo={this.props.userInfo}
                 onAdminDismiss={this.handleMessageDismiss}
                 onFilterClick={this.handleFilterClick}
                 onLoadMoreMethod={this.handleLoadMoreMessages}
@@ -167,6 +168,11 @@ Messages.propTypes = {
         dateJoined: PropTypes.string,
         email: PropTypes.string,
         classroomId: PropTypes.string
+    }).isRequired,
+    userInfo: PropTypes.shape({
+        user: PropTypes.object,
+        permissions: PropTypes.object,
+        flags: PropTypes.object
     }).isRequired
 };
 
@@ -174,12 +180,14 @@ Messages.defaultProps = {
     messageOffset: 0,
     numNewMessages: 0,
     sessionStatus: sessionActions.Status.NOT_FETCHED,
-    user: {}
+    user: {},
+    userInfo: {}
 };
 
 const mapStateToProps = state => ({
     sessionStatus: state.session.status,
     user: state.session.session.user,
+    userInfo: state.session.session,
     numNewMessages: state.messageCount.messageCount,
     messages: state.messages.messages.social,
     adminMessages: state.messages.messages.admin,

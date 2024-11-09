@@ -480,60 +480,59 @@ class SplashPresentation extends React.Component { // eslint-disable-line react/
                             onOpen={this.props.onOpenAdminPanel}
                         >
                             <dl>
-                                <dt>Tools</dt>
+                                <dt>
+                                    <FormattedMessage id="splash.adminpanel.backendstitle" />
+                                </dt>
                                 <dd>
                                     <ul>
                                         <li>
-                                            <a href="/scratch_admin/tickets">Ticket Queue</a>
+                                            <a href="https://www.scratch-cw.top:8005/user-data-admin/"><FormattedMessage id="splash.adminpanel.backend1name" /></a>
                                         </li>
                                         <li>
-                                            <a href="/scratch_admin/ip-search/">IP Search</a>
-                                        </li>
-                                        <li>
-                                            <a href="/scratch_admin/email-search/">Email Search</a>
+                                            <a href="https://www.scratch-cw.top:8006/project-data-admin/"><FormattedMessage id="splash.adminpanel.backend2name" /></a>
                                         </li>
                                     </ul>
                                 </dd>
-                                <dt>Homepage Cache</dt>
-                                <dd>
-                                    <ul className="cache-list">
-                                        <li>
-                                            <div className="button-row">
-                                                <span>Refresh row data:</span>
-                                                <Button
-                                                    className={this.props.refreshCacheStatus.status}
-                                                    disabled={this.props.refreshCacheStatus.disabled}
-                                                    onClick={this.props.onRefreshHomepageCache}
-                                                >
-                                                    <span>{this.props.refreshCacheStatus.content}</span>
-                                                </Button>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </dd>
-                                <dt>Page Cache</dt>
-                                <dd>
-                                    <ul className="cache-list">
-                                        <li>
-                                            <form
-                                                action="/scratch_admin/page/clear-anon-cache/"
-                                                method="post"
-                                            >
-                                                <input
-                                                    name="path"
-                                                    type="hidden"
-                                                    value="/"
-                                                />
-                                                <div className="button-row">
-                                                    <span>For anonymous users:</span>
-                                                    <Button type="submit">
-                                                        <span>Clear</span>
-                                                    </Button>
-                                                </div>
-                                            </form>
-                                        </li>
-                                    </ul>
-                                </dd>
+                                {/*<dt>Homepage Cache</dt>*/}
+                                {/*<dd>*/}
+                                {/*    <ul className="cache-list">*/}
+                                {/*        <li>*/}
+                                {/*            <div className="button-row">*/}
+                                {/*                <span>Refresh row data:</span>*/}
+                                {/*                <Button*/}
+                                {/*                    className={this.props.refreshCacheStatus.status}*/}
+                                {/*                    disabled={this.props.refreshCacheStatus.disabled}*/}
+                                {/*                    onClick={this.props.onRefreshHomepageCache}*/}
+                                {/*                >*/}
+                                {/*                    <span>{this.props.refreshCacheStatus.content}</span>*/}
+                                {/*                </Button>*/}
+                                {/*            </div>*/}
+                                {/*        </li>*/}
+                                {/*    </ul>*/}
+                                {/*</dd>*/}
+                                {/*<dt>Page Cache</dt>*/}
+                                {/*<dd>*/}
+                                {/*    <ul className="cache-list">*/}
+                                {/*        <li>*/}
+                                {/*            <form*/}
+                                {/*                action="/scratch_admin/page/clear-anon-cache/"*/}
+                                {/*                method="post"*/}
+                                {/*            >*/}
+                                {/*                <input*/}
+                                {/*                    name="path"*/}
+                                {/*                    type="hidden"*/}
+                                {/*                    value="/"*/}
+                                {/*                />*/}
+                                {/*                <div className="button-row">*/}
+                                {/*                    <span>For anonymous users:</span>*/}
+                                {/*                    <Button type="submit">*/}
+                                {/*                        <span>Clear</span>*/}
+                                {/*                    </Button>*/}
+                                {/*                </div>*/}
+                                {/*            </form>*/}
+                                {/*        </li>*/}
+                                {/*    </ul>*/}
+                                {/*</dd>*/}
                             </dl>
                         </AdminPanel>
                     )}

@@ -100,13 +100,16 @@ module.exports.setStatus = (type, status) => ({
  * Sends a request to mark one's unread messages count as cleared.
  * @return {null} returns nothing
  */
-module.exports.clearMessageCount = () => (dispatch => {
+module.exports.clearMessageCount = (username) => (dispatch => {
     dispatch(module.exports.setStatus('CLEAR_STATUS', module.exports.Status.FETCHING));
     api({
-        host: '',
+        //host: '',
         uri: '/site-api/messages/messages-clear/',
         method: 'POST',
-        useCsrf: true
+        useCsrf: true,
+        headers: {
+            'user': username
+        }
     }, (err, body) => {
         if (err) {
             dispatch(module.exports.setStatus('CLEAR_STATUS', module.exports.Status.CLEAR_ERROR));
@@ -218,7 +221,7 @@ module.exports.getMessages = (username, token, opts) => {
             dispatch(module.exports.setMessages(opts.messages.concat(body)));
             dispatch(module.exports.setMessagesOffset(opts.offset + 40));
             if (opts.clearCount) {
-                dispatch(module.exports.clearMessageCount(token)); // clear count once messages loaded
+                dispatch(module.exports.clearMessageCount(username, token)); // clear count once messages loaded
             }
         });
     };

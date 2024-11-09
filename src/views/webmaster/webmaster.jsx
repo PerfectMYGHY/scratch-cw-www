@@ -41,7 +41,7 @@ const Webmaster = () => (
             </p>
             <p>
                 {
-                    "站长会的编程语言：Python、C语言、Scratch、Node.js、Javascript、CSS、HTML、HTML5等"
+                    "站长会的编程语言：Python、C/C++、Scratch、Node.js、Javascript、CSS、HTML、HTML5等"
                 }
             </p>
             <p>

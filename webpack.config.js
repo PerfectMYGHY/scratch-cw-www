@@ -289,7 +289,7 @@ module.exports = [{
             title: route.title,
             filename: `${route.name}.html`,
             route: route,
-            dynamicMetaTags: route.dynamicMetaTags,
+            dynamicMetaTags: (false && route.dynamicMetaTags),
             isProject: route.name == "projects" || route.name == "embed" || route.name == "addons",
         }, templateConfig)))
     ).concat([

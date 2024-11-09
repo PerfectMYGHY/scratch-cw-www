@@ -36,7 +36,7 @@
     background-color: $ui-white;
 
     .intro-container {
-        min-height: 24rem;
+        /*min-height: 24rem;*/
         justify-content: space-between;
         background-color: $ui-purple-dark;
         background-size: 624px 325px;
@@ -70,6 +70,30 @@
         align-items: center;
         flex: 0 0 29rem;
 
+        .screenshot {
+            position: relative;
+
+            img {
+                width: 100%;
+                box-shadow: 0px 3px 15px #444444;
+                position: relative;
+                top: -1.625rem;
+            }
+
+            .tip {
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translate(-50%, 50%);
+                border-radius: 4px;
+                background-color: rgba(0,0,0,0.15);
+                box-shadow: 0 0 0 4px rgba(0,0,0,0.15);
+                color: $ui-white;
+                padding: .625rem .75rem;
+                font-size: 1rem;
+            }
+        }
+
         .intro-video {
             margin-right: 4rem;
         }
@@ -96,7 +120,7 @@
         &:after {
             display: block;
             position: absolute;
-            bottom: .75rem;
+            bottom: -3.75rem;
             right: 10%;
             background-image: url("/svgs/intro/hat-block.svg");
             background-repeat: no-repeat;
@@ -225,16 +249,16 @@ $tabletLandscape: 1024px;
         }
 
         .intro-video-container {
-            flex: 0 0 24rem;
+            flex: 0 0 29rem;
 
             .video-image,
             .video-player {
                 margin: 0;
             }
+
             &:after {
                 display: none;
             }
-
         }
     }
 }

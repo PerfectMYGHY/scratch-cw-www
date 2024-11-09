@@ -43,7 +43,7 @@ const DonateTopBanner = ({
                                 id="donatebanner.scratchWeek"
                                 values={{
                                     celebrationLink: (
-                                        <a href="https://sip.scratch.mit.edu/scratch-celebration/">
+                                        <a href="/sponsor">
                                             <FormattedMessage id="donatebanner.learnMore" />
                                         </a>
                                     )

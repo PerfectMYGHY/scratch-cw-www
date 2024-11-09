@@ -139,7 +139,7 @@ module.exports.handleLogIn = (formData, callback) => (dispatch => {
                         dispatch(module.exports.setCanceledDeletionOpen(true));
                     }
                 });
-                Cookies.set("user", body.username, { expires: 7 });
+                Cookies.set("user", body.token, { expires: 7 });
                 dispatch(sessionActions.refreshSession());
                 callback({success: true});
             } else {
