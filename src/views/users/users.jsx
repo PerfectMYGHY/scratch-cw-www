@@ -45,6 +45,22 @@ function requestAPI(api, data, func, typ = "POST") {
     }
 }
 
+function areObjectsEqual(obj1, obj2) {
+    return JSON.stringify(obj1) === JSON.stringify(obj2);
+}
+
+function isSubset(obj1, obj2, debug = false) {
+    if (debug) {
+        //console.log(JSON.stringify(obj1), "\n====\n", JSON.stringify(obj2), JSON.stringify(obj1) === JSON.stringify(obj2));
+    }
+    for (let key in obj1) {
+        if (!(key in obj2) || obj1[key] !== obj2[key]) {
+            return false;
+        }
+    }
+    return true;
+}
+
 class Users extends React.Component {
     constructor(props) {
         super(props);
@@ -58,10 +74,16 @@ class Users extends React.Component {
             info: {}
         };
         this.uname = window.location.pathname.split("/")[2];
+        this.loaded = false;
+        //this.description = "";
+        //this.recently = "";
     }
 
     setInfo = (state) => {
-        this.setState(state);
+        if (!isSubset(state, this.state, true)) {
+            //console.log("update");
+            this.setState(state);
+        }
     }
 
     makeHandleUpdate = (typ) => {
@@ -72,31 +94,47 @@ class Users extends React.Component {
 
     customLoadData = (state) => {
         const base = this;
-        requestAPI(`getDescription/${state.info.user.id}`, {}, function (data) {
-            base.setState({
-                description: data.description,
-                recently: data.recently
-            });
-        }, "GET");
+        if (!this.loaded) {
+            this.loaded = true;
+            //console.log("load");
+            requestAPI(`getDescription/${state.info.user.id}`, {}, function (data) {
+                //console.log("update");
+                base.setState({
+                    description: data.description,
+                    recently: data.recently
+                });
+                //base.description = data.description;
+                //base.recently = data.recently;
+            }, "GET");
+        }
         fetch(`${process.env.API_HOST}/users/${state.info.user.username}/shared/projects`)
             .then(response => response.json())
             .then((data) => {
-                base.setState({
-                    shared: data
-                });
+                if (!areObjectsEqual(base.state.shared, data)) {
+                    //console.log("update");
+                    base.setState({
+                        shared: data
+                    });
+                }
             });
         fetch(`${process.env.API_HOST}/users/${state.info.user.username}/favourites/projects`)
             .then(response => response.json())
             .then((data) => {
-                base.setState({
-                    favourites: data
-                });
+                if (!areObjectsEqual(base.state.favourites, data)) {
+                    //console.log("update");
+                    base.setState({
+                        favourites: data
+                    });
+                }
             });
         fetch(`${process.env.PROJECT_HOST}/users/${state.info.user.username}/get_fans/`)
             .then(response => response.json())
             .then((data) => {
                 let fans = [];
                 for (const user of data) {
+                    if (!user.user) {
+                        continue;
+                    }
                     fans.push(<Thumbnail
                         href={`/users/${user.user.username}/`}
                         key={["users", user.user.id].join('.')}
@@ -105,15 +143,21 @@ class Users extends React.Component {
                         type="user"
                     />);
                 }
-                base.setState({
-                    fans
-                });
+                if (!areObjectsEqual(base.state.fans, fans)) {
+                    //console.log("update");
+                    base.setState({
+                        fans
+                    });
+                }
             });
         fetch(`${process.env.PROJECT_HOST}/users/${state.info.user.username}/get_following/`)
             .then(response => response.json())
             .then((data) => {
                 let followings = [];
                 for (const user of data) {
+                    if (!user.user) {
+                        continue;
+                    }
                     followings.push(<Thumbnail
                         href={`/users/${user.user.username}/`}
                         key={["users", user.user.id].join('.')}
@@ -122,19 +166,24 @@ class Users extends React.Component {
                         type="user"
                     />);
                 }
-                base.setState({
-                    followings
-                });
+                if (!areObjectsEqual(base.state.followings, followings)) {
+                    //console.log("update");
+                    base.setState({
+                        followings
+                    });
+                }
             });
     }
 
     render() {
+        //console.log("update");
+        //console.log(this.props.username, (this.state.info && this.state.info.user && this.state.info.user.username));
         return (
             <UserBox setInfo={this.setInfo} customLoadData={this.customLoadData} uname={this.uname}>
                 <div>
                     <h3>个人简介</h3>
                     {this.props.username == (this.state.info && this.state.info.user && this.state.info.user.username) ?
-                        <Formsy class="description">
+                        <Formsy class="description" key={`DESC.${this.state.description}`}>
                             <InplaceInput
                                 name="description"
                                 placeholder={"介绍一下你自己，可以使用Markdown语法"}
@@ -151,7 +200,7 @@ class Users extends React.Component {
                         </Formsy>
                         :
                         <div className="project-description textout">
-                            <Markdown getContent={(content) => {
+                            {this.state.description ? <Markdown getContent={(content) => {
                                 return content[0];
                             }}>
                                 {decorateText(this.state.description, {
@@ -159,12 +208,12 @@ class Users extends React.Component {
                                     hashtags: true,
                                     scratchLinks: true
                                 })}
-                            </Markdown>
+                            </Markdown> : "这个人神神秘秘的，都不写个人简介。"}
                         </div>
                     }
                     <h3>最近</h3>
                     {this.props.username == (this.state.info && this.state.info.user && this.state.info.user.username) ?
-                        <Formsy class="recently">
+                        <Formsy class="recently" key={`RECET.${this.state.recently}`}>
                             <InplaceInput
                                 name="recently"
                                 placeholder={"你自己最近在干什么，可以使用Markdown语法"}
@@ -181,7 +230,7 @@ class Users extends React.Component {
                         </Formsy>
                         :
                         <div className="project-recently textout">
-                            <Markdown getContent={(content) => {
+                            {this.state.recently ? <Markdown getContent={(content) => {
                                 return content[0];
                             }}>
                                 {decorateText(this.state.recently, {
@@ -189,7 +238,7 @@ class Users extends React.Component {
                                     hashtags: true,
                                     scratchLinks: true
                                 })}
-                            </Markdown>
+                            </Markdown> : "这个人神神秘秘的，都不写最近在干什么。"}
                         </div>
                     }
                 </div>

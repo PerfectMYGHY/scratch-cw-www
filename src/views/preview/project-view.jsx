@@ -35,6 +35,8 @@ const projectCommentActions = require('../../redux/project-comment-actions.js');
 
 const frameless = require('../../lib/frameless');
 
+const { inputProjectInformation } = require('../../components/shareInput/shareInput.jsx');
+
 const GUI = require('scratch-gui');
 const IntlGUI = injectIntl(GUI.default);
 //const IntlGUI = compose(GUI.AppStateHOC)(injectIntl(GUI.default));
@@ -57,6 +59,8 @@ const setting = require('/src/setting');
 const localStorageAvailable = 'localStorage' in window && window.localStorage !== null;
 
 const xhr = require('xhr');
+
+const Notice = require('../../components/notice/notice.jsx');
 
 class Preview extends React.Component {
     constructor (props) {
@@ -639,7 +643,7 @@ class Preview extends React.Component {
             });
         }
     }
-    handleShare () {
+    handleCanShare = () => {
         this.props.shareProject(
             this.props.projectInfo.id,
             this.props.user.token
@@ -648,6 +652,9 @@ class Preview extends React.Component {
             justRemixed: false,
             justShared: true
         });
+    }
+    handleShare () {
+        inputProjectInformation(this, this.handleCanShare);
     }
     handleShareAttempt () {
         this.setState({
@@ -877,6 +884,7 @@ class Preview extends React.Component {
                         />
                     </Page> :
                     <React.Fragment>
+                        <Notice />
                         {showGUI && (
                             <IntlGUI
                                 assetHost={this.props.assetHost}

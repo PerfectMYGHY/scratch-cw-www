@@ -234,7 +234,7 @@
   "registration.validationPasswordLength": "密码至少需要6个字符",
   "registration.validationPasswordNotEquals": "密码太简单了。试试其他的密码吧。",
   "registration.validationPasswordNotUsername": "密码不能与用户名相同。",
-  "registration.validationUsernameRegexp": "用户名只能包含字母、数字、「-」和「_」。",
+  "registration.validationUsernameRegexp": "用户名只能包含字母、数字、汉字、「-」和「_」。不能有中文符号。",
   "registration.validationUsernameMinLength": "用户名至少需要3个字符",
   "registration.validationUsernameMaxLength": "用户名不能超过20个字符",
   "registration.validationUsernameExists": "用户名被占用。换一个试试？",

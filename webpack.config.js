@@ -180,7 +180,19 @@ module.exports = [{
                 ]
             },
             {
-                test: /\.scss$/,
+                test: /\.(js|jsx)$/,
+                include: [
+                    /node_modules[\\/]edge-tts/
+                ],
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env', '@babel/preset-react'],
+                    },
+                },
+            },
+            {
+                test: /\.(?:scss|css)$/,
                 use: [
                     MiniCssExtractPlugin.loader,
                     {
@@ -200,30 +212,6 @@ module.exports = [{
                         }
                     },
                     'sass-loader'
-                ]
-            },
-            {
-                test: /\.css$/,
-                exclude: /node_modules\/izitoast\/dist\/css\/\.css$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules: true,
-                            url: false
-                        }
-                    },
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            postcssOptions: {
-                                plugins: function () {
-                                    return [autoprefixer()];
-                                }
-                            }
-                        }
-                    }
                 ]
             },
             {

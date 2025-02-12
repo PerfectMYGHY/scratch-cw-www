@@ -88,7 +88,7 @@ class MarqueeNewsContent extends React.Component {
                     marquee.scrollTop = 0; // 当到达底部时，从头开始
                 }
             }
-        }, 10); // 每10毫秒执行一次
+        }, 20); // 每10毫秒执行一次
     };
 
     stopScrolling = () => {

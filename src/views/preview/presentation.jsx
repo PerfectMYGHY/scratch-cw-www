@@ -39,6 +39,8 @@ const EmailConfirmationBanner = require('../../components/dropdown-banner/email-
 const projectShape = require('./projectshape.jsx').projectShape;
 require('./preview.scss');
 
+const Notice = require('../../components/notice/notice.jsx');
+
 const frameless = require('../../lib/frameless');
 
 // disable enter key submission on formsy input fields; otherwise formsy thinks
@@ -203,12 +205,12 @@ const PreviewPresentation = ({
             />);
         } else if (!projectInfo.looked){
             banner = (<Banner
-                message={"当前项目未审核，仅临时能被看到，但未分类、决定加S币的数量。"}
+                message={"当前项目未审核，仅临时能被看到，但未分类、决定加Scratch币的数量。"}
             />);
         } else if (projectInfo.looked && projectInfo.passed){
             banner = (<Banner
                 className="banner-success"
-                message={`当前项目已审核！分类：${projectInfo.type}，质量：${projectInfo.quality}，所加S币数：${projectInfo.added}`}
+                message={`当前项目已审核！分类：${projectInfo.type}，质量：${projectInfo.quality}，所加Scratch币数：${projectInfo.added}`}
             />);
         } else if (projectInfo.looked && !projectInfo.passed){
             banner = (<Banner

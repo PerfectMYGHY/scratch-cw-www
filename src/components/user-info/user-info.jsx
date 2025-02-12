@@ -290,7 +290,7 @@ class UserInfo extends React.Component {
                             <span class="location">中国</span>
                             <span style={{
                                 display: "block"
-                            }}>S币个数：{this.props.info.flags && this.props.info.flags.money}</span>
+                            }}>Scratch币个数：{this.props.info.flags && this.props.info.flags.money}</span>
                         </p>
                     </div>
                 </div>

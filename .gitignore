@@ -36,3 +36,6 @@ ENV
 /test/integration-cypress/cypress/videos
 /test/integration-cypress/package-lock.json
 /test/integration/node_modules/*
+
+# 完全自己拥有版权自行研发的库
+/edge-tts

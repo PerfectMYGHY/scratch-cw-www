@@ -46,9 +46,9 @@ const NewDescription = () => (
                         详细见<a href="/community_mechanism">社区机制</a>
                     </em>
                 </dd>
-                <dt>{"S币"}</dt>
-                <dd>{"新用户默认有 50 个S币，它的主要用途是改编项目。"}</dd>
-                <dd>{"同时你可以通过分享本网站给别人以获得 S币 。"}<br />
+                <dt>{"Scratch币"}</dt>
+                <dd>{"新用户默认有 50 个Scratch币，它的主要用途是改编项目。"}</dd>
+                <dd>{"同时你可以通过分享本网站给别人以获得 Scratch币 。"}<br />
                     <em>
                         详细见<a href="/community_mechanism">社区机制</a>
                     </em>

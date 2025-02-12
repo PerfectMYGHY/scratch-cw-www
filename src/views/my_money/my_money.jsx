@@ -147,7 +147,7 @@ const UserInfo = () => {
                             <span class="location">中国</span>
                             <span style={{
                                 display: "block"
-                            }}>S币个数：{info.flags.money}</span>
+                            }}>Scratch币个数：{info.flags.money}</span>
                         </p>
                     </div>
                 );
@@ -263,13 +263,13 @@ const MyMoney = () => {
         }
         setContent([
             <div>
-                <p>你当前的S币个数：{info.flags.money}</p>
-                <h3>如何获得更多的S币？</h3>
-                <p>1.向朋友推荐我们的网站，复制下面邀请链接发给朋友，并让朋友注册账号，你和你的朋友可同时在原来的基础上获得20S币。</p>
-                <p>2.发布你自己的作品，可以根据管理员给你的评价获得不同数量的S币(可以见<a href="/community_mechanism">社区机制</a>)</p>
-                <p>3.捐赠我们(没有这个们)，可以根据Money数量获得不同的S币。</p>
+                <p>你当前的Scratch币个数：{info.flags.money}</p>
+                <h3>如何获得更多的Scratch币？</h3>
+                <p>1.向朋友推荐我们的网站，复制下面邀请链接发给朋友，并让朋友注册账号，你和你的朋友可同时在原来的基础上获得20Scratch币。</p>
+                <p>2.发布你自己的作品，可以根据管理员给你的评价获得不同数量的Scratch币(可以见<a href="/community_mechanism">社区机制</a>)</p>
+                <p>3.捐赠我们(没有这个们)，可以根据Money数量获得不同的Scratch币。</p>
                 <h3>向朋友转发的链接</h3>
-                <i style={{color:"red"}}>注意：请不要修改URL中的任何一点，否则万一改错了，S币可就加在别人身上了。</i>
+                <i style={{color:"red"}}>注意：请不要修改URL中的任何一点，否则万一改错了，Scratch币可就加在别人身上了。</i>
                 <p>
                     <code>{`${process.env.BASE_HOST}/join?from=${info.user.id}`}</code>
                 </p>

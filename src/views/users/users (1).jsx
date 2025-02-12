@@ -99,7 +99,7 @@ class Users extends React.Component {
                     <span className="group">{des}</span>
                     已加入于<span title={dateJoined.toISOString()}>{timeUnits}</span>
                     <span className="location">中国</span>
-                    <span style={{ display: "block" }}>S币个数：{user.flags.money}</span>
+                    <span style={{ display: "block" }}>Scratch币个数：{user.flags.money}</span>
                 </p>
             </div>
         );

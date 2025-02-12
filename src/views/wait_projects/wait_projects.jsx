@@ -150,7 +150,7 @@ const UserInfo = () => {
                             <span class="location">中国</span>
                             <span style={{
                                 display: "block"
-                            }}>S币个数：{info.flags.money}</span>
+                            }}>Scratch币个数：{info.flags.money}</span>
                         </p>
                     </div>
                 );

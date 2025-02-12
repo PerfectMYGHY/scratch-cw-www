@@ -39,7 +39,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/scratchfoundation/scratch-www.git"
+    "url": "git+https://www.github.com/scratchfoundation/scratch-cw-www.git"
   },
   "author": "Massachusetts Institute of Technology",
   "license": "BSD-3-Clause",
@@ -70,7 +70,9 @@
     "@turbowarp/json": "0.1.2",
     "url": "0.11.3",
     "@turbowarp/sb3fix": "0.2.1",
-    "buffer": "^6.0.3"
+    "buffer": "^6.0.3",
+    "toastr": "^2.1.4",
+    "sweetalert2": "^11.14.5"
   },
   "devDependencies": {
     "@babel/cli": "7.23.9",
