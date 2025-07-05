@@ -24,7 +24,7 @@ const scratchLocaleToIntlLocale = locale => {
  */
 const getLocale = () => {
     // Get locale from global namespace (see "init.js")
-    let locale = window._locale || 'en';
+    let locale = window._locale || 'zh-cn';
     if (typeof window._messages !== 'undefined') {
         if (typeof window._messages[locale] === 'undefined') {
             // Fall back on the split
@@ -32,7 +32,7 @@ const getLocale = () => {
         }
         if (typeof window._messages[locale] === 'undefined') {
             // Language appears to not be supported – fall back to 'en'
-            locale = 'en';
+            locale = 'zh-cn';
         }
     }
     return locale;

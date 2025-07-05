@@ -44,8 +44,6 @@ class Users extends React.Component {
         };
         this.uname = window.location.pathname.split('/')[2];
         this.loaded = false;
-        // this.description = "";
-        // this.recently = "";
         bindAll(this, [
             'setInfo',
             'makeHandleUpdate',

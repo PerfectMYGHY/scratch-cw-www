@@ -1,11 +1,11 @@
-@import "../../colors";
+ï»¿@import "../../colors";
 @import "../../frameless";
 
 .my_money {
     .box {
         margin-bottom: 20px;
-        box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1), /* ÇáÎ¢ÒõÓ°£¬×óÓÒÁ½±ß */
-                    0 5px 5px -5px rgba(0, 0, 0, 0.5); /* ÏÂ±ß½Ï¿íÇÒÄ£ºıµÄÒõÓ° */
+        box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1), /* è½»å¾®é˜´å½±ï¼Œå·¦å³ä¸¤è¾¹ */
+                    0 5px 5px -5px rgba(0, 0, 0, 0.5); /* ä¸‹è¾¹è¾ƒå®½ä¸”æ¨¡ç³Šçš„é˜´å½± */
     }
 
     .my_money-footer {
