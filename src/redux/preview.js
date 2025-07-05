@@ -202,13 +202,13 @@ module.exports.getProjectInfo = (id, token) => (dispatch => {
     const opts = {
         uri: `/projects/${id}`,
         headers: {
-            user: Cookies.get("user")
+            user: Cookies.get('user')
         }
     };
     if (token) {
         Object.assign(opts, {authentication: token});
     }
-    window.cannotletuserknowverb_username_forturbowarprequester = Cookies.get("user");
+    window.cannotletuserknowverb_username_forturbowarprequester = Cookies.get('user');
     dispatch(module.exports.setFetchStatus('project', module.exports.Status.FETCHING));
     api(opts, (err, body, response) => {
         if (err) {
@@ -222,6 +222,7 @@ module.exports.getProjectInfo = (id, token) => (dispatch => {
             dispatch(module.exports.setProjectInfo(null));
             return;
         }
+        console.log(body);
         dispatch(module.exports.setFetchStatus('project', module.exports.Status.FETCHED));
         dispatch(module.exports.setProjectInfo(body));
 
@@ -253,7 +254,7 @@ module.exports.getOriginalInfo = id => (dispatch => {
     api({
         uri: `/projects/${id}`,
         headers: {
-            user: Cookies.get("user")
+            user: Cookies.get('user')
         }
     }, (err, body) => {
         if (err) {
@@ -280,7 +281,7 @@ module.exports.getParentInfo = id => (dispatch => {
     api({
         uri: `/projects/${id}`,
         headers: {
-            user:Cookies.get("user")
+            user: Cookies.get('user')
         }
     }, (err, body) => {
         if (err) {
@@ -689,7 +690,7 @@ module.exports.reportProject = (id, jsonData, token) => (dispatch => {
         method: 'POST',
         useCsrf: true,
         headers: {
-            'user': Cookies.get("user")
+            user: Cookies.get('user')
         },
         json: jsonData
     }, (err, body, res) => {
@@ -711,8 +712,8 @@ module.exports.updateProjectThumbnail = (id, blob) => (dispatch => {
         },
         withCredentials: true,
         useCsrf: true,
-        body: blob,
-        //host: '' // Not handled by the API, use existing infrastructure
+        body: blob
+        // host: '' // Not handled by the API, use existing infrastructure
     }, (err, body, res) => {
         if (err || res.statusCode !== 200) {
             dispatch(module.exports.setFetchStatus('project-thumbnail', module.exports.Status.ERROR));

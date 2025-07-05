@@ -7,7 +7,7 @@ require('./box.scss');
 const Box = props => (
     <div className={classNames('box', props.className)}>
         <div className="box-header">
-            {(!props.headContent) ? (<div>
+            {(props.headContent) ? props.headContent : (<div>
                 <h4>{props.title}</h4>
                 {props.subtitle ? <h5>{props.subtitle}</h5> : null}
                 <p>
@@ -18,7 +18,7 @@ const Box = props => (
                         {props.moreTitle}
                     </a>
                 </p>
-            </div>) : props.headContent}
+            </div>)}
         </div>
 
         <div className="box-content">{props.children}</div>
@@ -32,7 +32,8 @@ Box.propTypes = {
     moreProps: PropTypes.object, // eslint-disable-line react/forbid-prop-types
     moreTitle: PropTypes.string,
     subtitle: PropTypes.string,
-    title: PropTypes.string.isRequired
+    title: PropTypes.string,
+    headContent: PropTypes.element
 };
 
 module.exports = Box;

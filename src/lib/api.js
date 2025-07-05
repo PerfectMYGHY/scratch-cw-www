@@ -88,9 +88,9 @@ module.exports = (opts, callback) => {
     if (typeof jar.get('scratchlanguage') !== 'undefined') {
         opts.headers['Accept-Language'] = `${jar.get('scratchlanguage')}, en;q=0.8`;
     }
-    //if (opts.authentication) {
+    // if (opts.authentication) {
     //    opts.headers['X-Token'] = opts.authentication;
-    //}
+    // }
     if (opts.useCsrf) {
         jar.use('scratchcsrftoken', '/csrf_token/', (err, csrftoken) => {
             if (err) return log.error('Error while retrieving CSRF token', err);

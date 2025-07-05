@@ -1,53 +1,18 @@
-﻿const FormattedMessage = require('react-intl').FormattedMessage;
-const React = require('react');
-const useRef = require('react').useRef;
-const useState = require('react').useState;
+﻿const React = require('react');
 
 const Box = require('../box/box.jsx');
 
-const Page = require('../page/www/page.jsx');
-const InplaceInput = require('../forms/inplace-input.jsx');
-const render = require('../../lib/render.jsx');
-const ReactDom = require('react-dom');
-const classNames = require('classnames');
-const Formsy = require('formsy-react').default;
-const decorateText = require('../../lib/decorate-text.jsx');
 const NotAvailable = require('../not-available/not-available.jsx');
-const Markdown = require("../markdown/markdown.jsx").default;
-const Carousel = require('../carousel/carousel.jsx');
-const Button = require('../forms/button.jsx');
-const Slider = require('react-slick').default;
-const Thumbnail = require('../thumbnail/thumbnail.jsx');
-const defaults = require('lodash.defaults');
 const PropTypes = require('prop-types');
 const UserInfo = require('../user-info/user-info.jsx');
+const bindAll = require('lodash.bindall');
 
-const frameless = require('../../lib/frameless.js');
+const {selectHasFetchedSession} = require('../../redux/session');
 
-const { connect } = require('react-redux');
-
-const setting = require('/src/setting'); // 获取设置
-
-function requestAPI(api, data, func, typ = "POST") {
-    data = new URLSearchParams(data);
-    var inf = {
-        method: typ,
-    }
-    if (typ == "POST" || typ == "PUT" || typ == "DELETE" || typ == "OPTTION") {
-        inf.body = data;
-    }
-    if (func) {
-        return fetch(setting.base + "api/" + api, inf)
-            .then(response => response.json())
-            .then(func);
-    } else {
-        return fetch(setting.base + "api/" + api, inf)
-            .then(response => response.json());
-    }
-}
+const {connect} = require('react-redux');
 
 class UserBox extends React.Component {
-    constructor(props) {
+    constructor (props) {
         super(props);
         this.state = {
             info: {},
@@ -55,19 +20,36 @@ class UserBox extends React.Component {
         };
         this.loadedData = false;
         this.interval = null;
+        bindAll(this, [
+            'loadData',
+            'startFrushLoop',
+            'handleSetInfo',
+            'handleNotFound',
+            'handleFound'
+        ]);
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate (prevProps, prevState) {
         if (!this.loadedData) {
-            if (Object.keys(this.state.info).length != 0 || this.state.notFound) {
+            if (Object.keys(this.state.info).length !== 0 || this.state.notFound) {
                 this.loadedData = true;
                 this.loadData();
                 this.startFrushLoop();
             }
         }
+        if (!this.state.notFound && !this.props.username && this.props.fetchedUsername && this.props.needLogin) {
+            this.setState({
+                notFound: true
+            });
+        }
+        if (this.state.notFound && !prevProps.username && this.props.username) {
+            this.setState({
+                notFound: false
+            });
+        }
     }
 
-    loadData = () => {
+    loadData () {
         if (this.state.notFound) {
             return;
         }
@@ -75,33 +57,52 @@ class UserBox extends React.Component {
         this.props.customLoadData(this.state);
     }
 
-    startFrushLoop = () => {
+    startFrushLoop () {
         const loadData = this.loadData;
         this.interval = setInterval(() => {
             loadData();
-        }, 1000);
+        }, 10000);
     }
 
-    handleSetInfo = (info) => {
+    handleSetInfo (info) {
         this.setState({
             info
         });
     }
 
-    handleNotFound = () => {
+    handleNotFound () {
         this.setState({
             notFound: true
-        })
+        });
     }
 
-    render() {
+    handleFound () {
+        return new Promise(resolve => {
+            this.setState({
+                notFound: false
+            }, () => {
+                resolve();
+            });
+        });
+    }
+
+    render () {
         return this.state.notFound ? (
             <NotAvailable />
         ) : (
-            <div className="inner users" id="pagebox">
+            <div
+                className="inner users"
+                id="pagebox"
+            >
                 <Box
                     headContent={
-                        <UserInfo setInfo={this.handleSetInfo} info={this.state.info} onNotFound={this.handleNotFound} uname={this.props.uname} />
+                        <UserInfo
+                            onSetInfo={this.handleSetInfo}
+                            info={this.state.info}
+                            onNotFound={this.handleNotFound}
+                            onFound={this.handleFound}
+                            uname={this.props.uname}
+                        />
                     }
                 >
                     {this.props.children && this.props.children[0]}
@@ -115,16 +116,26 @@ class UserBox extends React.Component {
 UserBox.propTypes = {
     setInfo: PropTypes.func.isRequired,
     customLoadData: PropTypes.func.isRequired,
-    children: PropTypes.array.isRequired,
-    uname: PropTypes.string.isRequired
+    children: PropTypes.arrayOf(PropTypes.element).isRequired,
+    uname: PropTypes.string.isRequired,
+    fetchedUsername: PropTypes.bool,
+    username: PropTypes.string,
+    needLogin: PropTypes.bool
 };
 
 UserBox.defaultProps = {
 
 };
 
-const mapStateToProps = (state) => ({
-    username: state.session && state.session.session && state.session.session.user && state.session.session.user.username
-});
+const mapStateToProps = state => {
+    const user = state.session && state.session.session && state.session.session.user;
+    return {
+        username: user && user.username,
+        fetchedUsername: selectHasFetchedSession(state)
+    };
+};
 
-module.exports = connect(mapStateToProps)(UserBox);
+const WrappedUserBox = connect(mapStateToProps)(UserBox);
+
+module.exports = WrappedUserBox;
+module.exports.requestAPI = UserInfo.requestAPI;

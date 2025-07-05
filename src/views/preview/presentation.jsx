@@ -8,13 +8,13 @@ const React = require('react');
 const Formsy = require('formsy-react').default;
 const classNames = require('classnames');
 
-//const GUI = require('scratch-gui');
-//const IntlGUI = injectIntl(GUI.default);
+// const GUI = require('scratch-gui');
+// const IntlGUI = injectIntl(GUI.default);
 
 const AdminPanel = require('../../components/adminpanel/adminpanel.jsx');
 const CommentingStatus = require('../../components/commenting-status/commenting-status.jsx');
 const decorateText = require('../../lib/decorate-text.jsx');
-const Markdown = require("../../components/markdown/markdown.jsx").default;
+const Markdown = require('../../components/markdown/markdown.jsx').default;
 const FlexRow = require('../../components/flex-row/flex-row.jsx');
 const Button = require('../../components/forms/button.jsx');
 const Avatar = require('../../components/avatar/avatar.jsx');
@@ -205,7 +205,7 @@ const PreviewPresentation = ({
             />);
         } else if (!projectInfo.looked){
             banner = (<Banner
-                message={"当前项目未审核，仅临时能被看到，但未分类、决定加Scratch币的数量。"}
+                message={'当前项目未审核，仅临时能被看到，但未分类、决定加Scratch币的数量。'}
             />);
         } else if (projectInfo.looked && projectInfo.passed){
             banner = (<Banner
@@ -248,7 +248,7 @@ const PreviewPresentation = ({
                     isOpen={adminPanelOpen}
                     onClose={onCloseAdminPanel}
                     onOpen={onOpenAdminPanel}
-                    hideHeader={true}
+                    hideHeader
                 >
                     <iframe
                         className={classNames('admin-iframe', {
@@ -266,9 +266,12 @@ const PreviewPresentation = ({
                         /* eslint-enable react/jsx-no-bind */
                     />}
                     {banner}
-                    <div className="inner" style={{
-                        width: `${942 - 480 + customStageSize.width < window.innerWidth ? 942 - 480 + customStageSize.width : (customStageSize.width < window.innerWidth ? window.innerWidth : customStageSize.width)}px`
-                    } }>
+                    <div
+                        className="inner"
+                        style={{
+                            width: `${942 - 480 + customStageSize.width < window.innerWidth ? 942 - 480 + customStageSize.width : (customStageSize.width < window.innerWidth ? window.innerWidth : customStageSize.width)}px`
+                        }}
+                    >
                         <FlexRow className="preview-row force-row">
                             <FlexRow className="pr">
                                 <a href={`/users/${projectInfo.author.username}/`}>
@@ -360,11 +363,11 @@ const PreviewPresentation = ({
                             <div
                                 className={classNames(
                                     'guiPlayer',
-                                    { fullscreen: isFullScreen }
+                                    {fullscreen: isFullScreen}
                                 )}
                                 style={{
-                                    width: `${customStageSize.width+2}px`
-                                } }
+                                    width: `${customStageSize.width + 2}px`
+                                }}
                             >
                                 <div className="project-info-alerts">
                                     {showCloudDataAlert && (
@@ -444,7 +447,10 @@ const PreviewPresentation = ({
                                     </div>
                                 </FlexRow>
                             </MediaQuery>
-                            <FlexRow className="project-notes" style={{ height: `calc(${customStageSize.height + 2}px + 44px - .3125rem)` }}>
+                            <FlexRow
+                                className="project-notes"
+                                style={{height: `calc(${customStageSize.height + 2}px + 44px - .3125rem)`}}
+                            >
                                 <RemixCredit projectInfo={parentInfo} />
                                 <RemixCredit projectInfo={originalInfo} />
                                 {/*  eslint-disable max-len */}
@@ -496,9 +502,9 @@ const PreviewPresentation = ({
                                                 )}
                                             </FormsyProjectUpdater> :
                                             <div className="project-description">
-                                                <Markdown getContent={(content) => {
-                                                    return content[0];
-                                                }}>
+                                                <Markdown
+                                                    getContent={content => content[0]}
+                                                >
                                                     {decorateText(projectInfo.instructions, {
                                                         usernames: false,
                                                         hashtags: false,
@@ -551,9 +557,9 @@ const PreviewPresentation = ({
                                                 )}
                                             </FormsyProjectUpdater> :
                                             <div className="project-description">
-                                                <Markdown getContent={(content) => {
-                                                    return content[0];
-                                                }}>
+                                                <Markdown
+                                                    getContent={content => content[0]}
+                                                >
                                                     {decorateText(projectInfo.description, {
                                                         usernames: false,
                                                         hashtags: false,

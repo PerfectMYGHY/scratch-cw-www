@@ -1,14 +1,14 @@
 const redux = require('redux');
-const { combineReducers } = require('redux');
+const {combineReducers} = require('redux');
 const thunk = require('redux-thunk').default;
 
-//const reducer = require('../redux/reducer.js');
+// const reducer = require('../redux/reducer.js');
 
 const configureStore = (reducers, initialState, enhancer, GUI) => {
-    //const allReducers = reducer(reducers);
-    var allReducers = null;
+    // const allReducers = reducer(reducers);
+    let allReducers = null;
     if (GUI) {
-        var reducer = require('../redux/reducer.js');
+        let reducer = require('../redux/reducer.js');
         reducer = reducer(reducers);
         allReducers = (previousState, action) => {
             const nextState = reducer(previousState, action);

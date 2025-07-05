@@ -85,7 +85,7 @@ class Navigation extends React.Component {
 
     handleSearchSubmit (formData) {
         if (formData.q.trim() === '') return; // don't submit empty searches
-        
+
         let targetUrl = '/search/projects';
         if (formData.q) {
             targetUrl += `?q=${encodeURIComponent(formData.q)}`;
@@ -118,11 +118,11 @@ class Navigation extends React.Component {
                             <FormattedMessage id="general.explore" />
                         </a>
                     </li>
-                    {/*<li className="link ideas">*/}
+                    {/* <li className="link ideas">*/}
                     {/*    <a href="/ideas">*/}
                     {/*        <FormattedMessage id="general.ideas" />*/}
                     {/*    </a>*/}
-                    {/*</li>*/}
+                    {/* </li>*/}
                     <li className="link about">
                         <a href="/about">
                             <FormattedMessage id="general.about" />
@@ -180,11 +180,6 @@ class Navigation extends React.Component {
                                 className="link right account-nav"
                                 key="account-nav"
                             >
-                                {((base) => {
-                                    if (base.props && base.props.session && base.props.session.session && base.props.session.session.flags.fh) {
-                                        base.props.handleLogOut({ preventDefault: () => { } });
-                                    }
-                                })(this)}
                                 <AccountNav
                                     classroomId={this.props.user.classroomId}
                                     isEducator={this.props.permissions.educator}
@@ -265,6 +260,7 @@ Navigation.propTypes = {
     session: PropTypes.shape({
         status: PropTypes.string
     }),
+
     setMessageCount: PropTypes.func,
     unreadMessageCount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     useScratch3Registration: PropTypes.bool,

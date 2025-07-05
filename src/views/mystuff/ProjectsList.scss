@@ -31,4 +31,16 @@
     div.right-top {
         float: right;
     }
+
+    .not-passed {
+        color: red;
+    }
+
+    .passed {
+        color: green;
+    }
+
+    .not-checked {
+        color: orange;
+    }
 }

@@ -1,4 +1,4 @@
-# OSX
+﻿# OSX
 .DS_Store
 
 # NPM
@@ -12,7 +12,7 @@ npm-*
 # /locales
 # /intl
 /.vs
-/www - ����
+/www - 副本
 
 # Scratch Excutable Files
 /static/desktop/Scratch Setup.exe
@@ -37,5 +37,8 @@ ENV
 /test/integration-cypress/package-lock.json
 /test/integration/node_modules/*
 
-# ��ȫ�Լ�ӵ�а�Ȩ�����з��Ŀ�
+# 完全自己拥有版权自行研发的库
 /edge-tts
+
+# 一些编译时自动生成的文件夹
+/static/scratch-gui-chunks

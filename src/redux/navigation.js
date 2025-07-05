@@ -126,8 +126,8 @@ module.exports.handleLogIn = (formData, callback) => (dispatch => {
         method: 'post',
         host: setting.base,
         uri: 'api/login',
-        json: formData,
-        //useCsrf: true
+        json: formData
+        // useCsrf: true
     }, (err, body) => {
         if (err) dispatch(module.exports.setLoginError(err.message));
         if (body) {
@@ -139,7 +139,7 @@ module.exports.handleLogIn = (formData, callback) => (dispatch => {
                         dispatch(module.exports.setCanceledDeletionOpen(true));
                     }
                 });
-                Cookies.set("user", body.token, { expires: 7 });
+                Cookies.set('user', body.token, {expires: 7});
                 dispatch(sessionActions.refreshSession());
                 callback({success: true});
             } else {
@@ -158,22 +158,24 @@ module.exports.handleLogIn = (formData, callback) => (dispatch => {
     });
 });
 
-module.exports.handleLogOut = () => (() => {
+module.exports.handleLogOut = () => (dispatch => {
     // POST to /accounts/logout using a dummy form instead of XHR. This ensures
     // logout only happens AFTER onbeforeunload has the chance to prevent nagivation.
-    jar.use('scratchcsrftoken', '/csrf_token/', (err, csrftoken) => {
-        if (err) return log.error('Error while retrieving CSRF token', err);
-        //const form = document.createElement('form');
-        //form.setAttribute('method', 'POST');
-        //form.setAttribute('action', '/accounts/logout/');
-        //const csrfField = document.createElement('input');
-        //csrfField.setAttribute('type', 'hidden');
-        //csrfField.setAttribute('name', 'csrfmiddlewaretoken');
-        //csrfField.setAttribute('value', csrftoken);
-        //form.appendChild(csrfField);
-        //document.body.appendChild(form);
-        //form.submit();
-        Cookies.remove("user");
-        window.location.reload();
-    });
+    // jar.use('scratchcsrftoken', '/csrf_token/', (err, csrftoken) => {
+    //     if (err) return log.error('Error while retrieving CSRF token', err);
+    //     // const form = document.createElement('form');
+    //     // form.setAttribute('method', 'POST');
+    //     // form.setAttribute('action', '/accounts/logout/');
+    //     // const csrfField = document.createElement('input');
+    //     // csrfField.setAttribute('type', 'hidden');
+    //     // csrfField.setAttribute('name', 'csrfmiddlewaretoken');
+    //     // csrfField.setAttribute('value', csrftoken);
+    //     // form.appendChild(csrfField);
+    //     // document.body.appendChild(form);
+    //     // form.submit();
+    //     Cookies.remove('user');
+    //     window.location.reload();
+    // });
+    Cookies.remove('user');
+    dispatch(sessionActions.refreshSession());
 });

@@ -5,8 +5,8 @@ const bindAll = require('lodash.bindall');
 const classNames = require('classnames');
 const React = require('react');
 const PropTypes = require('prop-types');
-const { connect } = require('react-redux');
-const { compose } = require('redux');
+const {connect} = require('react-redux');
+const {compose} = require('redux');
 const injectIntl = require('react-intl').injectIntl;
 const parser = require('scratch-parser');
 const queryString = require('query-string');
@@ -35,11 +35,11 @@ const projectCommentActions = require('../../redux/project-comment-actions.js');
 
 const frameless = require('../../lib/frameless');
 
-const { inputProjectInformation } = require('../../components/shareInput/shareInput.jsx');
+const {inputProjectInformation} = require('../../components/shareInput/shareInput.jsx');
 
 const GUI = require('scratch-gui');
 const IntlGUI = injectIntl(GUI.default);
-//const IntlGUI = compose(GUI.AppStateHOC)(injectIntl(GUI.default));
+// const IntlGUI = compose(GUI.AppStateHOC)(injectIntl(GUI.default));
 if (GUI.AddonChannels.reloadChannel) {
     GUI.AddonChannels.reloadChannel.addEventListener('message', () => {
         location.reload();
@@ -216,14 +216,14 @@ class Preview extends React.Component {
             this.pushHistory(history.state === null);
         }
 
-        //// Switching out of editor mode, refresh data that comes from project json
-        //if (this.props.playerMode && !prevProps.playerMode) {
+        // // Switching out of editor mode, refresh data that comes from project json
+        // if (this.props.playerMode && !prevProps.playerMode) {
         //    storage.setProjectToken(this.props.projectInfo.project_token);
         //    this.loadProjectData(
         //        this.state.projectId,
         //        false // Do not show cloud/username alerts again
         //    );
-        //}
+        // }
     }
     componentWillUnmount () {
         this.removeEventListeners();
@@ -257,13 +257,13 @@ class Preview extends React.Component {
     // an extra get of the project info from api.  We  do this to wait for replication
     // lag to pass.  This is intended to be a temporary fix until we use the data
     // from the create request to fill the projectInfo state.
-    handleUpdateProjectData(projectId, vmState, params) {
+    handleUpdateProjectData (projectId, vmState, params) {
         const opts = {
             body: vmState,
             // If we set json:true then the body is double-stringified, so don't
             headers: {
                 'Content-Type': 'application/json',
-                'user': Cookies.get("user"),
+                'user': Cookies.get('user')
             },
             withCredentials: true
         };
@@ -308,7 +308,7 @@ class Preview extends React.Component {
                 api({
                     uri: `/projects/${body.id}`,
                     headers: {
-                        user: Cookies.get("user")
+                        user: Cookies.get('user')
                     },
                     authentication: this.props.user.token
                 }, (err, projectInfo, response) => {
@@ -350,7 +350,7 @@ class Preview extends React.Component {
             }
         }
     }
-    loadProjectData(projectId, showAlerts) {
+    loadProjectData (projectId, showAlerts) {
         if (projectId <= 0) return 0;
         storage
             .load(storage.AssetType.Project, projectId, storage.DataFormat.JSON)
@@ -385,13 +385,13 @@ class Preview extends React.Component {
                         if (this.props.isLoggedIn) {
                             // show cloud variables log link if logged in
                             newState.extensions.push({
-                                //action: {
+                                // action: {
                                 //    l10nId: 'project.cloudDataLink',
                                 //    uri: `/cloudmonitor/${projectId}/`
-                                //},
+                                // },
                                 icon: 'clouddata.svg',
-                                l10nId: 'project.cloudVariables',
-                                //linked: true
+                                l10nId: 'project.cloudVariables'
+                                // linked: true
                             });
                         } else {
                             newState.extensions.push({
@@ -623,9 +623,9 @@ class Preview extends React.Component {
             }));
         }
     }
-    handleRemix() {
+    handleRemix () {
         // Update the state first before starting the remix to show spinner
-        this.setState({ isRemixing: true }, () => {
+        this.setState({isRemixing: true}, () => {
             this.props.remixProject();
         });
     }
@@ -652,7 +652,7 @@ class Preview extends React.Component {
             justRemixed: false,
             justShared: true
         });
-    }
+    };
     handleShare () {
         inputProjectInformation(this, this.handleCanShare);
     }
@@ -749,13 +749,13 @@ class Preview extends React.Component {
 
     handleClickAddonSettings (addonId) {
         // addonId might be a string of the addon to focus on, undefined, or an event (treat like undefined)
-        //var process = {
+        // var process = {
         //    env: {
         //        ROUTING_STYLE: "html"
         //    }
-        //};
+        // };
         const path = process.env.ROUTING_STYLE === 'wildcard' ? 'addons' : 'addons.html';
-        const url = `${window.location.pathname[window.location.pathname.length - 1] == '/' ? window.location.pathname : window.location.pathname+'/'}${path}${typeof addonId === 'string' ? `#${addonId}` : ''}`;
+        const url = `${window.location.pathname[window.location.pathname.length - 1] === '/' ? window.location.pathname : `${window.location.pathname}/`}${path}${typeof addonId === 'string' ? `#${addonId}` : ''}`;
         window.open(url);
     }
 
@@ -1084,7 +1084,7 @@ const mapStateToProps = state => {
         state.session.session.flags.has_outstanding_email_confirmation &&
         state.session.session.flags.confirm_email_banner;
     const isTotallyNormal = state.session.session.flags && selectIsTotallyNormal(state);
-    
+
     // if we don't have projectInfo, assume it's shared until we know otherwise
     const isShared = !projectInfoPresent || state.preview.projectInfo.is_published;
 

@@ -1,16 +1,18 @@
 // ENV设置
 if (!(process.env.PROJECT_HOST && process.env.API_HOST)) { // 如果未配置则使用默认
-    process.env.PROJECT_HOST = "https://scratch-cw.top:8006";
-    process.env.API_HOST = "https://scratch-cw.top:8006";
-    process.env.ASSET_HOST = "https://scratch-cw.top:8006/assets";
-    process.env.BACKPACK_HOST = "https://scratch-cw.top:8006/backpack";
-    process.env.STATIC_HOST = "https://scratch-cw.top:8006/staticServer";
-    process.env.BASE_HOST = "https://www.scratch-cw.top";
+    const PROJECT_SERVER = 'https://scratch-cw.top:8006';
+    // const PROJECT_SERVER = 'http://127.0.0.1:8006';
+    process.env.PROJECT_HOST = PROJECT_SERVER;
+    process.env.API_HOST = PROJECT_SERVER;
+    process.env.ASSET_HOST = `${PROJECT_SERVER}/assets`;
+    process.env.BACKPACK_HOST = `${PROJECT_SERVER}/backpack`;
+    process.env.STATIC_HOST = `${PROJECT_SERVER}/staticServer`;
+    process.env.BASE_HOST = 'https://www.scratch-cw.top';
     process.env.PORT = 80;
-    process.env.ROUTING_STYLE = "wildcard";
-    process.env.CLOUDDATA_HOST = "wss://scratch-cw.top:8765";
+    process.env.ROUTING_STYLE = 'wildcard';
+    process.env.CLOUDDATA_HOST = 'wss://scratch-cw.top:8765';
 
-    //process.env.VIEW = "preview/preview";
+    // process.env.VIEW = "preview/preview";
 }
 
 const defaults = require('lodash.defaults');
@@ -53,7 +55,7 @@ const getVersionId = () => {
         return Promise.resolve(process.env.WWW_VERSION);
     }
     return new Promise((resolve, reject) => {
-        gitsha({ length: 5 }, (err, sha) => {
+        gitsha({length: 5}, (err, sha) => {
             if (err) {
                 reject(err);
             } else {
@@ -66,14 +68,14 @@ const getVersionId = () => {
 // Prepare all entry points
 const entry = {
     // 'lib.min': [
-    //     'react', 
-    //     'react-dom', 
-    //     'jszip', 
-    //     'react-is', 
+    //     'react',
+    //     'react-dom',
+    //     'jszip',
+    //     'react-is',
     //     'js-cookie',
     //     'invariant',
-    //     'minilog', 
-    //     'prop-types', 
+    //     'minilog',
+    //     'prop-types',
     //     'react-intl',
     //     'react-lifecycles-compat',
     //     'react-modal',
@@ -101,7 +103,7 @@ pageRoutes.forEach(route => {
 // Adapted from https://github.com/jantimon/html-webpack-plugin/issues/1369#issuecomment-1049968234
 // Thanks, @daniel-nagy!
 class HtmlWebpackBackwardsCompatibilityPlugin {
-    apply(compiler) {
+    apply (compiler) {
         compiler
             .hooks
             .compilation
@@ -112,7 +114,7 @@ class HtmlWebpackBackwardsCompatibilityPlugin {
                     .tapAsync(
                         'HtmlWebpackBackwardsCompatibilityPlugin',
                         (data, callback) => {
-                            const { publicPath } = data.assets;
+                            const {publicPath} = data.assets;
                             const chunks = {};
 
                             for (const entryPoint of compilation.entrypoints.values()) {
@@ -147,22 +149,22 @@ module.exports = [{
         publicPath: '/'
     },
     externals: { // 配置一下包使用cdn载入
-        //'react': 'React',
-        //'react-dom': 'ReactDOM',
-        //'react-modal': 'ReactModal',
-        //'react-plotly.js': 'Plotly',
-        //'react-redux': 'ReactRedux',
-        //'react-router-dom': 'ReactRouterDOM',
-        //'react-virtualized': 'ReactVirtualized',
-        //'lodash': '_',
+        // 'react': 'React',
+        // 'react-dom': 'ReactDOM',
+        // 'react-modal': 'ReactModal',
+        // 'react-plotly.js': 'Plotly',
+        // 'react-redux': 'ReactRedux',
+        // 'react-router-dom': 'ReactRouterDOM',
+        // 'react-virtualized': 'ReactVirtualized',
+        // 'lodash': '_',
         'jszip': 'JSZip',
-        'highlight.js': 'hljs',
+        'highlight.js': 'hljs'
     },
     resolve: {
         fallback: {
             // Node modules are no longer polyfilled by default in Webpack 5, so we need to add these here
             buffer: require.resolve('buffer/'),
-            stream: require.resolve('stream-browserify'), // jszip
+            stream: require.resolve('stream-browserify') // jszip
             // "scratch-gui": require.resolve('scratch-gui/dist/scratch-gui.js') // scratch-gui
         },
         symlinks: false // Fix local development with `npm link` packages
@@ -187,9 +189,9 @@ module.exports = [{
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env', '@babel/preset-react'],
-                    },
-                },
+                        presets: ['@babel/preset-env', '@babel/preset-react']
+                    }
+                }
             },
             {
                 test: /\.(?:scss|css)$/,
@@ -233,7 +235,7 @@ module.exports = [{
                 formatjs: {
                     test: /[\\/]node_modules[\\/](@formatjs)[\\/]/,
                     name: 'formatjs',
-                    chunks: 'all',
+                    chunks: 'all'
                 },
                 scratch: {
                     test: /[\\/]node_modules[\\/](scratch-gui)[\\/]/,
@@ -248,13 +250,13 @@ module.exports = [{
                 parallel: 4,
                 terserOptions: {
                     compress: {
-                        //drop_console: true, // 移除console.log
+                        // drop_console: true, // 移除console.log
                         drop_debugger: true
                     },
                     mangle: true,
                     output: {
-                        comments: false, // 移除注释
-                    },
+                        comments: false // 移除注释
+                    }
                 },
                 extractComments: false
             })
@@ -270,7 +272,7 @@ module.exports = [{
             content: getVersionId
         }),
         new webpack.ProvidePlugin({
-            Buffer: ['buffer', 'Buffer'],
+            Buffer: ['buffer', 'Buffer']
         })
     ].concat(pageRoutes
         .map(route => new HtmlWebpackPlugin(defaults({}, {
@@ -278,13 +280,15 @@ module.exports = [{
             filename: `${route.name}.html`,
             route: route,
             dynamicMetaTags: (false && route.dynamicMetaTags),
-            isProject: route.name == "projects" || route.name == "embed" || route.name == "addons",
+            isProject: route.name == 'projects' || route.name == 'embed' || route.name == 'addons',
+            formatJSUrl: 'https://file.uhsea.com/2504/05b1b63531023d4140fca864563df85bTZ.js',
+            scratchGUIUrl: 'https://file.uhsea.com/2504/7aefe8b794d569c0e074d2801cb416209S.js'
         }, templateConfig)))
     ).concat([
         new CopyWebpackPlugin({
             patterns: [
-                { from: 'static' },
-                { from: 'intl', to: 'js' },
+                {from: 'static'},
+                {from: 'intl', to: 'js'},
                 {
                     from: 'node_modules/izitoast/dist/css/',
                     to: 'css'

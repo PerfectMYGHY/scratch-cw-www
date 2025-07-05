@@ -237,10 +237,10 @@ class SplashPresentation extends React.Component { // eslint-disable-line react/
             this.props.featuredGlobal.curator_top_projects.length > 4) {
 
             const curatorName = this.props.featuredGlobal.curator_top_projects[0].curator_name;
-                    {/*moreHref="/studios/386359/"*/}
-                    {/*moreTitle={this.props.intl.formatMessage({*/}
-                    {/*    id: 'general.learnMore'*/}
-                    {/*})}*/}
+            { /* moreHref="/studios/386359/"*/ }
+            { /* moreTitle={this.props.intl.formatMessage({*/ }
+            { /*    id: 'general.learnMore'*/ }
+            { /* })}*/ }
             rows.push(
                 <Box
                     key="curator_top_projects"
@@ -404,15 +404,15 @@ class SplashPresentation extends React.Component { // eslint-disable-line react/
                 }
                 {this.props.sessionStatus === sessionActions.Status.FETCHED &&
                     Object.keys(this.props.user).length > 0 && // user is logged in
-                    //<div
+                    // <div
                     //    className="splash-header"
                     //    key="header"
-                    //>
+                    // >
                     //    <MyWelcome
                     //        key="intro"
                     //        messages={messages}
                     //    />
-                    //</div>
+                    // </div>
                     <MyWelcome
                         key="intro"
                         messages={messages}
@@ -424,10 +424,10 @@ class SplashPresentation extends React.Component { // eslint-disable-line react/
                 >
                     {this.props.sessionStatus === sessionActions.Status.FETCHED &&
                         Object.keys(this.props.user).length > 0 && // user is logged in
-                        //<div
+                        // <div
                         //    className="splash-header"
                         //    key="header"
-                        //>
+                        // >
                         //    {this.props.shouldShowWelcome ? [
                         //        <Welcome
                         //            key="welcome"
@@ -446,7 +446,7 @@ class SplashPresentation extends React.Component { // eslint-disable-line react/
                         //        items={this.props.news}
                         //        messages={messages}
                         //    />
-                        //</div>
+                        // </div>
                         <News
                             items={this.props.news}
                             messages={messages}
@@ -493,8 +493,8 @@ class SplashPresentation extends React.Component { // eslint-disable-line react/
                                         </li>
                                     </ul>
                                 </dd>
-                                {/*<dt>Homepage Cache</dt>*/}
-                                {/*<dd>*/}
+                                {/* <dt>Homepage Cache</dt>*/}
+                                {/* <dd>*/}
                                 {/*    <ul className="cache-list">*/}
                                 {/*        <li>*/}
                                 {/*            <div className="button-row">*/}
@@ -509,9 +509,9 @@ class SplashPresentation extends React.Component { // eslint-disable-line react/
                                 {/*            </div>*/}
                                 {/*        </li>*/}
                                 {/*    </ul>*/}
-                                {/*</dd>*/}
-                                {/*<dt>Page Cache</dt>*/}
-                                {/*<dd>*/}
+                                {/* </dd>*/}
+                                {/* <dt>Page Cache</dt>*/}
+                                {/* <dd>*/}
                                 {/*    <ul className="cache-list">*/}
                                 {/*        <li>*/}
                                 {/*            <form*/}
@@ -532,7 +532,7 @@ class SplashPresentation extends React.Component { // eslint-disable-line react/
                                 {/*            </form>*/}
                                 {/*        </li>*/}
                                 {/*    </ul>*/}
-                                {/*</dd>*/}
+                                {/* </dd>*/}
                             </dl>
                         </AdminPanel>
                     )}

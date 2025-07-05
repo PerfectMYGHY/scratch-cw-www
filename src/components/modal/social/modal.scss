@@ -4,7 +4,7 @@
 .mod-social {
     min-height: 15rem;
     max-height: calc(100% - 8rem);
-    overflow: hidden;
+    overflow: auto;
 }
 
 .social-modal-header {
@@ -122,6 +122,10 @@
         height: 2.75rem;
     }
 
+    &.long-code {
+        overflow: auto;
+    }
+
     textarea {
         min-height: 4rem;
     }
@@ -129,4 +133,10 @@
 
 .social-hidden {
     opacity: 0.0;
+}
+
+.hr-in-social {
+    height: 1px;
+    width: 100%;
+    margin: 0;
 }

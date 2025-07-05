@@ -2,10 +2,10 @@
 @import "../../../frameless";
 
 
-.email-confirmation-modal{
+.important-news-modal {
     border-radius: 4px;
-    overflow: hidden;
-    max-width: 500px;
+    overflow: auto;
+    max-width: 900px;
 
     h1{
         font-size: 2rem;
@@ -16,7 +16,7 @@
         top: 5px;
         right: 5px;
     }
-    
+
     .modal-main-content{
         display: flex;
     }
@@ -35,11 +35,30 @@
     .top-close-bar{
         height: 44px;
         background-color: #0EBD8C;
+        text-align: center;
+        align-content: center;
+        color: white;
+        font-weight: bold;
     }
 
     .guide-footer{
         text-align: center;
         border-top: 1px solid rgba(77, 151, 255, 0.15);
         padding: 20px;
+        justify-content: space-between; /* 两端对齐 */
+    }
+
+    .last-button.disabled {
+        opacity: .6;
+    }
+
+    .next-button.disabled {
+        opacity: .6;
+        margin-right: 5px;
+    }
+
+    .ok-button.disabled {
+        opacity: .6;
+        margin-left: 5px;
     }
 }

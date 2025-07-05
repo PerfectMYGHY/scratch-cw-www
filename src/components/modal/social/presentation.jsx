@@ -15,15 +15,27 @@ require('./modal.scss');
 
 const SocialModalPresentation = ({
     embedHtml,
+    embedFullscreenHtmlCss,
+    embedFullscreenHtmlBody,
+    embedFullscreenHtmlJavascript,
     intl,
     isOpen,
     onCopyEmbed,
+    onCopyEmbedFullscreenCss,
+    onCopyEmbedFullscreenBody,
+    onCopyEmbedFullscreenJS,
     onCopyProjectLink,
     onRequestClose,
     projectUrl,
     setEmbedTextarea,
+    setEmbedFullscreenCssTextarea,
+    setEmbedFullscreenBodyTextarea,
+    setEmbedFullscreenJSTextarea,
     setLinkTextarea,
     showEmbedResult,
+    showEmbedFullscreenCssResult,
+    showEmbedFullscreenBodyResult,
+    showEmbedFullscreenJSResult,
     showLinkResult
 }) => {
     const title = intl.formatMessage({id: 'general.copyLink'});
@@ -77,7 +89,7 @@ const SocialModalPresentation = ({
                     </FlexRow>
                 </div>
 
-                {/* bottom row: embed */}
+                {/* middle row: embed */}
                 <div className="embed-section">
                     <FlexRow className="social-row social-spaced-row">
                         <FlexRow className="social-label-row">
@@ -113,6 +125,108 @@ const SocialModalPresentation = ({
                     </FlexRow>
                 </div>
 
+                <hr className="hr-in-social" />
+
+                {/* bottom row: embed fixed fullscreen */}
+                <div className="embed-section">
+                    <FlexRow className="social-row social-spaced-row">
+                        <FlexRow className="social-label-row">
+                            <div className="social-label-title">
+                                {intl.formatMessage({id: 'social.embedFullscreenCssLabel'})}
+                            </div>
+                            <FlexRow className="social-spaced-row social-row-right">
+                                <div
+                                    className={classNames(
+                                        'social-label-item',
+                                        'social-label-result',
+                                        {'social-hidden': !showEmbedFullscreenCssResult}
+                                    )}
+                                >
+                                    {intl.formatMessage({id: 'social.embedCopiedResultText'})}
+                                </div>
+                                <div className="social-label-item">
+                                    <a
+                                        onClick={onCopyEmbedFullscreenCss}
+                                    >
+                                        {intl.formatMessage({id: 'social.copyFullscreenCSSEmbedLinkText'})}
+                                    </a>
+                                </div>
+                            </FlexRow>
+                        </FlexRow>
+                        <textarea
+                            readOnly
+                            className="social-form social-textarea long-code"
+                            name="embed"
+                            ref={textarea => setEmbedFullscreenCssTextarea(textarea)}
+                            value={embedFullscreenHtmlCss}
+                        />
+                    </FlexRow>
+                    <FlexRow className="social-row social-spaced-row">
+                        <FlexRow className="social-label-row">
+                            <div className="social-label-title">
+                                {intl.formatMessage({id: 'social.embedFullscreenBodyLabel'})}
+                            </div>
+                            <FlexRow className="social-spaced-row social-row-right">
+                                <div
+                                    className={classNames(
+                                        'social-label-item',
+                                        'social-label-result',
+                                        {'social-hidden': !showEmbedFullscreenBodyResult}
+                                    )}
+                                >
+                                    {intl.formatMessage({id: 'social.embedCopiedResultText'})}
+                                </div>
+                                <div className="social-label-item">
+                                    <a
+                                        onClick={onCopyEmbedFullscreenBody}
+                                    >
+                                        {intl.formatMessage({id: 'social.copyFullscreenBodyEmbedLinkText'})}
+                                    </a>
+                                </div>
+                            </FlexRow>
+                        </FlexRow>
+                        <textarea
+                            readOnly
+                            className="social-form social-textarea long-code"
+                            name="embed"
+                            ref={textarea => setEmbedFullscreenBodyTextarea(textarea)}
+                            value={embedFullscreenHtmlBody}
+                        />
+                    </FlexRow>
+                    <FlexRow className="social-row social-spaced-row">
+                        <FlexRow className="social-label-row">
+                            <div className="social-label-title">
+                                {intl.formatMessage({id: 'social.embedFullscreenJSLabel'})}
+                            </div>
+                            <FlexRow className="social-spaced-row social-row-right">
+                                <div
+                                    className={classNames(
+                                        'social-label-item',
+                                        'social-label-result',
+                                        {'social-hidden': !showEmbedFullscreenJSResult}
+                                    )}
+                                >
+                                    {intl.formatMessage({id: 'social.embedCopiedResultText'})}
+                                </div>
+                                <div className="social-label-item">
+                                    <a
+                                        onClick={onCopyEmbedFullscreenJS}
+                                    >
+                                        {intl.formatMessage({id: 'social.copyFullscreenJSEmbedLinkText'})}
+                                    </a>
+                                </div>
+                            </FlexRow>
+                        </FlexRow>
+                        <textarea
+                            readOnly
+                            className="social-form social-textarea long-code"
+                            name="embed"
+                            ref={textarea => setEmbedFullscreenJSTextarea(textarea)}
+                            value={embedFullscreenHtmlJavascript}
+                        />
+                    </FlexRow>
+                </div>
+
             </ModalInnerContent>
         </Modal>
     );
@@ -120,15 +234,27 @@ const SocialModalPresentation = ({
 
 SocialModalPresentation.propTypes = {
     embedHtml: PropTypes.string,
+    embedFullscreenHtmlCss: PropTypes.string,
+    embedFullscreenHtmlBody: PropTypes.string,
+    embedFullscreenHtmlJavascript: PropTypes.string,
     intl: intlShape,
     isOpen: PropTypes.bool,
     onCopyEmbed: PropTypes.func,
+    onCopyEmbedFullscreenCss: PropTypes.func,
+    onCopyEmbedFullscreenBody: PropTypes.func,
+    onCopyEmbedFullscreenJS: PropTypes.func,
     onCopyProjectLink: PropTypes.func,
     onRequestClose: PropTypes.func,
     projectUrl: PropTypes.string,
     setEmbedTextarea: PropTypes.func,
+    setEmbedFullscreenCssTextarea: PropTypes.func,
+    setEmbedFullscreenBodyTextarea: PropTypes.func,
+    setEmbedFullscreenJSTextarea: PropTypes,
     setLinkTextarea: PropTypes.func,
     showEmbedResult: PropTypes.bool,
+    showEmbedFullscreenCssResult: PropTypes.bool,
+    showEmbedFullscreenBodyResult: PropTypes.bool,
+    showEmbedFullscreenJSResult: PropTypes.bool,
     showLinkResult: PropTypes.bool
 };
 

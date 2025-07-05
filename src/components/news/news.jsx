@@ -5,16 +5,14 @@ const defaults = require('lodash.defaults');
 const Box = require('../box/box.jsx');
 
 require('./news.scss');
-//moreHref = "/discuss/5/"
-//moreTitle = { props.messages['general.viewAll'] }
+// moreHref = "/discuss/5/"
+// moreTitle = { props.messages['general.viewAll'] }
 
-// ´´½¨Ò»¸öµÈ´ıÖ¸¶¨ÃëÊıµÄº¯Êı
-const wait = (seconds) => {
-    return new Promise(resolve => setTimeout(resolve, seconds));
-};
+// åˆ›å»ºä¸€ä¸ªç­‰å¾…æŒ‡å®šç§’æ•°çš„å‡½æ•°
+const wait = seconds => new Promise(resolve => setTimeout(resolve, seconds));
 
 
-//class MarqueeNewsContent extends React.Component {
+// class MarqueeNewsContent extends React.Component {
 //    constructor (props) {
 //        super(props);
 //        this.marqueeRef = React.createRef();
@@ -28,10 +26,10 @@ const wait = (seconds) => {
 //                const liElements = marquee.getElementsByTagName('li');
 //                const topPosition = marquee.getBoundingClientRect().top;
 
-//                // »ñÈ¡Ã¿¸öliÔªËØµÄtopÎ»ÖÃ
+//                // è·å–æ¯ä¸ªliå…ƒç´ çš„topä½ç½®
 //                const positions = Array.from(liElements).map((li) => {
 //                    const liTop = li.getBoundingClientRect().top;
-//                    return liTop - topPosition; // ¼ÆËãÏà¶ÔÓÚmarquee¶¥¶ËµÄ¾àÀë
+//                    return liTop - topPosition; // è®¡ç®—ç›¸å¯¹äºmarqueeé¡¶ç«¯çš„è·ç¦»
 //                });
 
 //                for (const dis of positions) {
@@ -61,10 +59,10 @@ const wait = (seconds) => {
 //            </marquee>
 //        );
 //    }
-//}
+// }
 
 class MarqueeNewsContent extends React.Component {
-    constructor(props) {
+    constructor (props) {
         super(props);
         this.marqueeRef = React.createRef();
         this.state = {
@@ -74,7 +72,7 @@ class MarqueeNewsContent extends React.Component {
         this.speed = this.props.speed || 1;
     }
 
-    componentDidMount() {
+    componentDidMount () {
         this.startScrolling();
         this.checkPositions();
     }
@@ -83,16 +81,16 @@ class MarqueeNewsContent extends React.Component {
         const marquee = this.marqueeRef.current;
         this.scrollInterval = setInterval(() => {
             if (this.state.isScrolling && !this.state.mouseOvering) {
-                marquee.scrollTop += this.speed; // ÒÔÃ¿´ÎÔö¼Ó1¸öÏñËØµÄËÙ¶È¹ö¶¯
+                marquee.scrollTop += this.speed; // ä»¥æ¯æ¬¡å¢åŠ 1ä¸ªåƒç´ çš„é€Ÿåº¦æ»šåŠ¨
                 if (marquee.scrollTop >= marquee.scrollHeight - marquee.clientHeight) {
-                    marquee.scrollTop = 0; // µ±µ½´ïµ×²¿Ê±£¬´ÓÍ·¿ªÊ¼
+                    marquee.scrollTop = 0; // å½“åˆ°è¾¾åº•éƒ¨æ—¶ï¼Œä»å¤´å¼€å§‹
                 }
             }
-        }, 20); // Ã¿10ºÁÃëÖ´ĞĞÒ»´Î
+        }, 20); // æ¯10æ¯«ç§’æ‰§è¡Œä¸€æ¬¡
     };
 
     stopScrolling = () => {
-        this.setState({ isScrolling: false });
+        this.setState({isScrolling: false});
         clearInterval(this.scrollInterval);
     };
 
@@ -103,23 +101,23 @@ class MarqueeNewsContent extends React.Component {
                 const liElements = marquee.getElementsByTagName('li');
                 const topPosition = marquee.getBoundingClientRect().top;
 
-                // »ñÈ¡Ã¿¸öliÔªËØµÄtopÎ»ÖÃ
-                const positions = Array.from(liElements).map((li) => {
+                // è·å–æ¯ä¸ªliå…ƒç´ çš„topä½ç½®
+                const positions = Array.from(liElements).map(li => {
                     const liTop = li.getBoundingClientRect().top;
-                    return liTop - topPosition; // ¼ÆËãÏà¶ÔÓÚmarquee¶¥¶ËµÄ¾àÀë
+                    return liTop - topPosition; // è®¡ç®—ç›¸å¯¹äºmarqueeé¡¶ç«¯çš„è·ç¦»
                 });
 
                 for (const dis of positions) {
                     if (Math.abs(dis) < 1) {
                         this.stopScrolling();
-                        await wait(1500); // µÈ´ı1.5Ãë
-                        this.setState({ isScrolling: true });
+                        await wait(1500); // ç­‰å¾…1.5ç§’
+                        this.setState({isScrolling: true});
                         this.startScrolling();
-                        await wait(100); // µÈ´ı1Ãë
+                        await wait(100); // ç­‰å¾…1ç§’
                     }
                 }
             }
-            await wait(1); // Ã¿10ºÁÃë¼ì²éÒ»´Î
+            await wait(1); // æ¯10æ¯«ç§’æ£€æŸ¥ä¸€æ¬¡
         }
     };
 
@@ -127,15 +125,15 @@ class MarqueeNewsContent extends React.Component {
         this.setState({
             mouseOvering: true
         });
-    }
+    };
 
     handleMouseOut = () => {
         this.setState({
             mouseOvering: false
         });
-    }
+    };
 
-    render() {
+    render () {
         return (
             <div
                 ref={this.marqueeRef}
@@ -143,7 +141,7 @@ class MarqueeNewsContent extends React.Component {
                 onMouseOver={this.handleMouseOver}
                 onMouseOut={this.handleMouseOut}
             >
-                <div></div>
+                <div />
                 <div>
                     {this.props.children}
                 </div>
@@ -183,9 +181,11 @@ const News = props => (
                                 }
                                 <div className="news-description">
                                     <h4>{item.headline}</h4>
-                                    <p dangerouslySetInnerHTML={{ // eslint-disable-line react/no-danger
-                                        __html: item.copy
-                                    }}></p>
+                                    <p
+                                        dangerouslySetInnerHTML={{ // eslint-disable-line react/no-danger
+                                            __html: item.copy
+                                        }}
+                                    />
                                 </div>
                             </a>
                         </li>

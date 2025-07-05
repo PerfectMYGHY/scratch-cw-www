@@ -9,6 +9,7 @@ const ErrorBoundary = require('../../errorboundary/errorboundary.jsx');
 const PrivacyBanner = require('../../privacy-banner/privacy-banner.jsx');
 
 const Notice = require('../../notice/notice.jsx');
+const ImportantNewsModal = require('../../modal/important-news/modal.jsx');
 
 const today = new Date();
 const semi = today.getDate() === 1 && today.getMonth() === 3;
@@ -29,6 +30,7 @@ const Page = ({
                 <Navigation />
             </nav>
             <PrivacyBanner />
+            <ImportantNewsModal />
             <Notice />
             <main id="view">
                 {children}
@@ -43,7 +45,11 @@ const Page = ({
             }
             <aside className="donor">
                 <div className="donor-text">
-                    <a href="http://beian.miit.gov.cn/" target="_blank">陕ICP备2022003155号-2</a>
+                    <a
+                        href="http://beian.miit.gov.cn/"
+                        target="_blank"
+                        rel="noreferrer"
+                    >陕ICP备2022003155号-2</a>
                 </div>
             </aside>
         </div>

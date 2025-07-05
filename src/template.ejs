@@ -1,12 +1,12 @@
 ﻿<!DOCTYPE html>
-<!--[if lt IE 9 ]> 
-    <html class="ie8"> 
+<!--[if lt IE 9 ]>
+    <html class="ie8">
 <![endif]-->
-<!--[if IE 9 ]> 
-    <html class="ie9"> 
+<!--[if IE 9 ]>
+    <html class="ie9">
 <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> 
-<html> 
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html>
 <!--<![endif]-->
 <head>
     <% if (htmlWebpackPlugin.options.gtm_id) { %>
@@ -43,11 +43,13 @@
     <meta property="og:url" content="https://www.scratch-cw.top/" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Scratch创世界 - <%= htmlWebpackPlugin.options.title %>" />
+    <meta name="description" content="<%= htmlWebpackPlugin.options.description %>" />
     <meta property="og:description" content="<%= htmlWebpackPlugin.options.description %>" />
     <meta property="og:image" content="<%- htmlWebpackPlugin.options.og_image %>" />
     <meta property="og:image:type" content="<%- htmlWebpackPlugin.options.og_image_type %>" />
     <meta property="og:image:width" content="<%- htmlWebpackPlugin.options.og_image_width %>" />
     <meta property="og:image:height" content="<%- htmlWebpackPlugin.options.og_image_height %>" />
+    <meta name="keywords" content="Scratch社区, Scratch创世界, Scratch, Scratch编辑器" />
     <% } %>
 
     <!-- Favicon & CSS normalize -->
@@ -354,13 +356,18 @@
     <% if (htmlWebpackPlugin.options.isProject) { %>
     <script defer src="<%= htmlWebpackPlugin.files.chunks.scratch.entry %>"></script>
     <% } %>
+<!--    <script defer src="<%= htmlWebpackPlugin.options.formatJSUrl %>"></script> &lt;!&ndash; FormatJS库 - formatjs.bundle.js &ndash;&gt;-->
+    <% if (htmlWebpackPlugin.options.isProject) { %>
+<!--    <script defer src="<%= htmlWebpackPlugin.options.scratchGUIUrl %>"></script> &lt;!&ndash; ScratchGUI库 - scratch.bundle.js &ndash;&gt;-->
+    <% } %>
+
 
     <!-- Scripts -->
     <script defer src="/js/<%= htmlWebpackPlugin.options.route.intlName || htmlWebpackPlugin.options.route.name %>.intl.js"></script>
     <script defer src="<%= htmlWebpackPlugin.files.chunks[htmlWebpackPlugin.options.route.name].entry %>"></script>
 
     <!-- Translate title element -->
-<!--    <% if (!htmlWebpackPlugin.options.dynamicMetaTags) { %>
+    <% if (!htmlWebpackPlugin.options.dynamicMetaTags) { %>
     <script>
         var loc = window._locale || 'en';
         if (typeof window._messages !== 'undefined' && loc !== 'en') {
@@ -375,6 +382,137 @@
             }
         }
     </script>
-    <% } %>-->
+    <% } %>
+    <!-- ############### 核心修改部分开始 ############### -->
+<!--    <script>-->
+<!--        (function() {-->
+<!--            // 需要严格顺序加载的脚本列表-->
+<!--            const coreScripts = [-->
+<!--                {-->
+<!--                    name: 'common',-->
+<!--                    url: '<%= htmlWebpackPlugin.files.chunks.common.entry %>',-->
+<!--                    required: true-->
+<!--                },-->
+<!--                {-->
+<!--                    name: 'formatjs',-->
+<!--                    primary: '<%= htmlWebpackPlugin.options.formatJSUrl %>',-->
+<!--                    fallback: '<%= htmlWebpackPlugin.files.chunks.formatjs.entry %>',-->
+<!--                    required: true-->
+<!--                },-->
+<!--                <% if (htmlWebpackPlugin.options.isProject) { %>-->
+<!--                {-->
+<!--                    name: 'scratch',-->
+<!--                    primary: '<%= htmlWebpackPlugin.options.scratchGUIUrl %>',-->
+<!--                    fallback: '<%= htmlWebpackPlugin.files.chunks.scratch.entry %>',-->
+<!--                    required: true-->
+<!--                },-->
+<!--                <% } %>-->
+<!--                {-->
+<!--                    name: 'intl',-->
+<!--                    url: '/js/<%= htmlWebpackPlugin.options.route.intlName || htmlWebpackPlugin.options.route.name %>.intl.js',-->
+<!--                    required: true-->
+<!--                },-->
+<!--                {-->
+<!--                    name: 'route',-->
+<!--                    url: '<%= htmlWebpackPlugin.files.chunks[htmlWebpackPlugin.options.route.name].entry %>',-->
+<!--                    required: true-->
+<!--                }-->
+<!--            ];-->
+
+<!--            // 增强版脚本加载器-->
+<!--            const loadScript = (() => {-->
+<!--                let loadCount = 0;-->
+
+<!--                return function load(url, isFallback = false) {-->
+<!--                    return new Promise((resolve, reject) => {-->
+<!--                        const script = document.createElement('script');-->
+<!--                        script.defer = true;-->
+<!--                        script.src = url;-->
+
+<!--                        // 增加加载追踪-->
+<!--                        script.dataset.loadOrder = ++loadCount;-->
+<!--                        script.dataset.isFallback = isFallback;-->
+
+<!--                        script.onload = () => {-->
+<!--                            console.log(`✅ Loaded ${isFallback ? 'fallback' : 'primary'}: ${url}`);-->
+<!--                            resolve();-->
+<!--                        };-->
+
+<!--                        script.onerror = () => {-->
+<!--                            console.error(`❌ Failed ${isFallback ? 'fallback' : 'primary'}: ${url}`);-->
+<!--                            reject(new Error(`Script load failed: ${url}`));-->
+<!--                        };-->
+
+<!--                        document.body.appendChild(script); // 保持原有 DOM 位置-->
+<!--                    });-->
+<!--                };-->
+<!--            })();-->
+
+<!--            // 严格顺序加载控制器-->
+<!--            async function loadSequentially() {-->
+<!--                const errorMessages = [];-->
+
+<!--                for (const scriptInfo of coreScripts) {-->
+<!--                    try {-->
+<!--                        if (scriptInfo.primary) {-->
+<!--                            // 双保险加载模式-->
+<!--                            try {-->
+<!--                                await loadScript(scriptInfo.primary);-->
+<!--                            } catch (primaryError) {-->
+<!--                                console.warn(`Primary failed, trying fallback for ${scriptInfo.name}`);-->
+<!--                                await loadScript(scriptInfo.fallback, true);-->
+<!--                            }-->
+<!--                        } else {-->
+<!--                            await loadScript(scriptInfo.url);-->
+<!--                        }-->
+<!--                    } catch (error) {-->
+<!--                        if (scriptInfo.required) {-->
+<!--                            errorMessages.push(`致命错误: 无法加载 ${scriptInfo.name}`);-->
+<!--                            showFatalError(errorMessages);-->
+<!--                            return; // 阻止后续加载-->
+<!--                        }-->
+<!--                    }-->
+<!--                }-->
+
+<!--                // 所有核心脚本加载完成后-->
+<!--                initPostLoadScripts();-->
+<!--            }-->
+
+<!--            // 显示致命错误-->
+<!--            function showFatalError(messages) {-->
+<!--                const errorContainer = document.querySelector('.splash-errors');-->
+<!--                errorContainer.innerHTML = messages.join('<br>');-->
+<!--                document.querySelector('.splash-screen').hidden = false;-->
+<!--                document.querySelector('.splash-error-title').hidden = false;-->
+<!--                document.querySelector('.splash-reset').hidden = false;-->
+<!--            }-->
+
+<!--            // 初始化后续脚本-->
+<!--            function initPostLoadScripts() {-->
+<!--                <% if (!htmlWebpackPlugin.options.dynamicMetaTags) { %>-->
+<!--                var loc = window._locale || 'en';-->
+<!--                if (typeof window._messages !== 'undefined' && loc !== 'en') {-->
+<!--                    if (typeof window._messages[loc] === 'undefined') {-->
+<!--                        loc = loc.split('-')[0];-->
+<!--                    }-->
+<!--                    if (typeof window._messages[loc] !== 'undefined') {-->
+<!--                        var localizedTitle = window._messages[loc]['general.' + '<%= htmlWebpackPlugin.options.title %>'.toLowerCase()] || '';-->
+<!--                        if (localizedTitle.length > 0) {-->
+<!--                            document.title = 'Scratch创世界 - ' + localizedTitle;-->
+<!--                        }-->
+<!--                    }-->
+<!--                }-->
+<!--                <% } %>-->
+<!--            }-->
+
+<!--            // 启动加载流程-->
+<!--            setTimeout(() => {-->
+<!--                loadSequentially().catch(error => {-->
+<!--                    showFatalError([`加载系统崩溃: ${error.message}`]);-->
+<!--                });-->
+<!--            }, 50); // 稍后启动以确保 polyfill 就绪-->
+<!--        })();-->
+<!--    </script>-->
+    <!-- ############### 核心修改部分结束 ############### -->
 </body>
 </html>

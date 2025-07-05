@@ -9,25 +9,46 @@ class SocialModal extends React.Component {
     constructor (props) {
         super(props);
         this.embedTextarea = {};
+        this.embedFullscreenCssTextarea = {};
+        this.embedFullscreenBodyTextarea = {};
+        this.embedFullscreenJSTextarea = {};
         this.embedCopyTimeoutId = null;
+        this.embedFullscreenCssCopyTimeoutId = null;
+        this.embedFullscreenBodyCopyTimeoutId = null;
+        this.embedFullscreenJSCopyTimeoutId = null;
         this.linkCopyTimeoutId = null;
         this.linkTextarea = {};
         this.showCopyResultTimeout = 2000;
         this.state = {
             showEmbedResult: false,
+            showEmbedFullscreenCssResult: false,
+            showEmbedFullscreenBodyResult: false,
+            showEmbedFullscreenJSResult: false,
             showLinkResult: false
         };
         bindAll(this, [
             'handleCopyEmbed',
+            'handleCopyEmbedFullscreenCss',
+            'handleCopyEmbedFullscreenBody',
+            'handleCopyEmbedFullscreenJS',
             'handleCopyProjectLink',
             'hideEmbedResult',
+            'hideEmbedFullscreenCssResult',
+            'hideEmbedFullscreenBodyResult',
+            'hideEmbedFullscreenJSResult',
             'hideLinkResult',
             'setEmbedTextarea',
+            'setEmbedFullscreenCssTextarea',
+            'setEmbedFullscreenBodyTextarea',
+            'setEmbedFullscreenJSTextarea',
             'setLinkTextarea'
         ]);
     }
     componentWillUnmount () {
         this.clearEmbedCopyResultTimeout();
+        this.hideEmbedFullscreenCssResult();
+        this.hideEmbedFullscreenBodyResult();
+        this.hideEmbedFullscreenJSResult();
         this.clearLinkCopyResultTimeout();
     }
     handleCopyEmbed () {
@@ -38,6 +59,48 @@ class SocialModal extends React.Component {
                 this.setState({showEmbedResult: true}, () => {
                     this.embedCopyTimeoutId = setTimeout(
                         this.hideEmbedResult,
+                        this.showCopyResultTimeout
+                    );
+                });
+            }
+        }
+    }
+    handleCopyEmbedFullscreenCss () {
+        if (this.embedFullscreenCssTextarea) {
+            this.embedFullscreenCssTextarea.select();
+            clipboardCopy(this.embedFullscreenCssTextarea.value);
+            if (this.state.showEmbedFullscreenCssResult === false && this.embedFullscreenCssCopyTimeoutId === null) {
+                this.setState({showEmbedFullscreenCssResult: true}, () => {
+                    this.embedFullscreenCssCopyTimeoutId = setTimeout(
+                        this.hideEmbedFullscreenCssResult,
+                        this.showCopyResultTimeout
+                    );
+                });
+            }
+        }
+    }
+    handleCopyEmbedFullscreenBody () {
+        if (this.embedFullscreenBodyTextarea) {
+            this.embedFullscreenBodyTextarea.select();
+            clipboardCopy(this.embedFullscreenBodyTextarea.value);
+            if (this.state.showEmbedFullscreenBodyResult === false && this.embedFullscreenBodyCopyTimeoutId === null) {
+                this.setState({showEmbedFullscreenBodyResult: true}, () => {
+                    this.embedFullscreenBodyCopyTimeoutId = setTimeout(
+                        this.hideEmbedFullscreenBodyResult,
+                        this.showCopyResultTimeout
+                    );
+                });
+            }
+        }
+    }
+    handleCopyEmbedFullscreenJS () {
+        if (this.embedFullscreenJSTextarea) {
+            this.embedFullscreenJSTextarea.select();
+            clipboardCopy(this.embedFullscreenJSTextarea.value);
+            if (this.state.showEmbedFullscreenJSResult === false && this.embedFullscreenJSCopyTimeoutId === null) {
+                this.setState({showEmbedFullscreenJSResult: true}, () => {
+                    this.embedFullscreenJSCopyTimeoutId = setTimeout(
+                        this.hideEmbedFullscreenJSResult,
                         this.showCopyResultTimeout
                     );
                 });
@@ -62,12 +125,36 @@ class SocialModal extends React.Component {
         this.setState({showEmbedResult: false});
         this.embedCopyTimeoutId = null;
     }
+    hideEmbedFullscreenCssResult () {
+        this.setState({showEmbedFullscreenCssResult: false});
+        this.embedFullscreenCssCopyTimeoutId = null;
+    }
+    hideEmbedFullscreenBodyResult () {
+        this.setState({showEmbedFullscreenBodyResult: false});
+        this.embedFullscreenBodyCopyTimeoutId = null;
+    }
+    hideEmbedFullscreenJSResult () {
+        this.setState({showEmbedFullscreenJSResult: false});
+        this.embedFullscreenJSCopyTimeoutId = null;
+    }
     hideLinkResult () {
         this.setState({showLinkResult: false});
         this.linkCopyTimeoutId = null;
     }
     setEmbedTextarea (textarea) {
         this.embedTextarea = textarea;
+        return textarea;
+    }
+    setEmbedFullscreenCssTextarea (textarea) {
+        this.embedFullscreenCssTextarea = textarea;
+        return textarea;
+    }
+    setEmbedFullscreenBodyTextarea (textarea) {
+        this.embedFullscreenBodyTextarea = textarea;
+        return textarea;
+    }
+    setEmbedFullscreenJSTextarea (textarea) {
+        this.embedFullscreenJSTextarea = textarea;
         return textarea;
     }
     setLinkTextarea (textarea) {
@@ -78,6 +165,24 @@ class SocialModal extends React.Component {
         if (this.embedCopyTimeoutId !== null) {
             clearTimeout(this.embedCopyTimeoutId);
             this.embedCopyTimeoutId = null;
+        }
+    }
+    clearEmbedFullscreenCssCopyResultTimeout () {
+        if (this.embedCopyFullscreenCssTimeoutId !== null) {
+            clearTimeout(this.embedCopyFullscreenCssTimeoutId);
+            this.embedCopyFullscreenCssTimeoutId = null;
+        }
+    }
+    clearEmbedFullscreenBodyCopyResultTimeout () {
+        if (this.embedCopyFullscreenBodyTimeoutId !== null) {
+            clearTimeout(this.embedCopyFullscreenBodyTimeoutId);
+            this.embedCopyFullscreenBodyTimeoutId = null;
+        }
+    }
+    clearEmbedFullscreenJSCopyResultTimeout () {
+        if (this.embedCopyFullscreenJSTimeoutId !== null) {
+            clearTimeout(this.embedCopyFullscreenJSTimeoutId);
+            this.embedCopyFullscreenJSTimeoutId = null;
         }
     }
     clearLinkCopyResultTimeout () {
@@ -91,13 +196,25 @@ class SocialModal extends React.Component {
         return (
             <SocialModalPresentation
                 embedHtml={social.embedHtml(projectId)}
+                embedFullscreenHtmlCss={social.embedFullscreenHtml(projectId).css}
+                embedFullscreenHtmlBody={social.embedFullscreenHtml(projectId).body}
+                embedFullscreenHtmlJavascript={social.embedFullscreenHtml(projectId).javascript}
                 isOpen={this.props.isOpen}
                 projectUrl={social.projectUrl(projectId)}
                 setEmbedTextarea={this.setEmbedTextarea}
+                setEmbedFullscreenCssTextarea={this.setEmbedFullscreenCssTextarea}
+                setEmbedFullscreenBodyTextarea={this.setEmbedFullscreenBodyTextarea}
+                setEmbedFullscreenJSTextarea={this.setEmbedFullscreenJSTextarea}
                 setLinkTextarea={this.setLinkTextarea}
                 showEmbedResult={this.state.showEmbedResult}
+                showEmbedFullscreenCssResult={this.state.showEmbedFullscreenCssResult}
+                showEmbedFullscreenBodyResult={this.state.showEmbedFullscreenBodyResult}
+                showEmbedFullscreenJSResult={this.state.showEmbedFullscreenJSResult}
                 showLinkResult={this.state.showLinkResult}
                 onCopyEmbed={this.handleCopyEmbed}
+                onCopyEmbedFullscreenCss={this.handleCopyEmbedFullscreenCss}
+                onCopyEmbedFullscreenBody={this.handleCopyEmbedFullscreenBody}
+                onCopyEmbedFullscreenJS={this.handleCopyEmbedFullscreenJS}
                 onCopyProjectLink={this.handleCopyProjectLink}
                 onRequestClose={this.props.onRequestClose}
             />
