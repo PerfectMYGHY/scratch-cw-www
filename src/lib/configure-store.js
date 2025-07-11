@@ -4,6 +4,8 @@ const thunk = require('redux-thunk').default;
 
 // const reducer = require('../redux/reducer.js');
 
+let currentStore = null;
+
 const configureStore = (reducers, initialState, enhancer, GUI) => {
     // const allReducers = reducer(reducers);
     let allReducers = null;
@@ -29,11 +31,12 @@ const configureStore = (reducers, initialState, enhancer, GUI) => {
         composeEnhancers(
             redux.applyMiddleware(thunk)
         );
-    const store = redux.createStore(
+    currentStore = redux.createStore(
         allReducers,
         initialState || {},
         enhancers
     );
+    const store = currentStore;
     if (GUI) {
         GUI.AddonHooks.appStateStore = store;
         setTimeout(() => {
@@ -44,3 +47,4 @@ const configureStore = (reducers, initialState, enhancer, GUI) => {
 };
 
 module.exports = configureStore;
+module.exports.getCurrentStore = () => currentStore;

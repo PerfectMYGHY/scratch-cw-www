@@ -1,6 +1,12 @@
 ﻿const React = require('react');
 const EdgeTTS = require('edge-tts').default; // 自己开发的库，用于语音转文字
-const Swal = require('sweetalert2');
+const ShareModal = require('../modal/share/modal.jsx');
+const ReactDOM = require('react-dom');
+const api = require('../../lib/api');
+
+const Cookies = require('js-cookie');
+const {getCurrentStore} = require('../../lib/configure-store.js');
+const previewActions = require('../../redux/preview');
 
 require('./shareInput.scss');
 
@@ -43,100 +49,39 @@ function mergeArrayBuffersWithDataView(li) {
 }
 
 const inputProjectInformation = (base, callback) => {
-    // 创建一个audio标签
-    const audio = document.createElement("audio");
-    // 标记是否结束
-    let stopped = false;
     // 第一步：弹出没有按钮且不能关闭的窗口，显示初始文字
-    Swal.fire({
-        title: '分享作品必知',
-        html: '<div class="custom-swal-content">' + tipText.split('\n').join('<br>') + '</div>',
-        showConfirmButton: true,
-        //allowOutsideClick: true,
-        showCancelButton: true,
-        cancelButtonText: '关闭',
-        customClass: {
-            popup: 'custom-swal-popup',
-        },
-        didOpen: async () => {
-            // EdgeTTS文字转语音对象
-            const edge_tts = new EdgeTTS(tipText);
-            // 用于提示子线程是否结束加载的标志
-            const confirmButton = Swal.getConfirmButton();
-
-            // 创建下一步按钮对象，并设置初始状态为禁用
-            const nextButton = {
-                text: '下一步（5秒后可用）',
-                disabled: true,
-                visible: true,
-                click: async () => {
-                    // 若子线程在加载音频，则标记使其停止
-                    stop = true;
-                    // 停止播放音频
-                    audio.pause();
-                    audio.src = '';
-                    // 实际关闭连接使用方法
-                    edge_tts.websocket.close();
-                    // 跳转到第二个窗口
-                    return Swal.fire({
-                        title: '警告！',
-                        text: `当你点击确定后，将会分享作品；点击取消则取消。分享后请尽快填写标题、操作说明和备注与鸣谢！`,
-                        showCancelButton: true,
-                        showConfirmButton: true,
-                        confirmButtonText: '确定',
-                        cancelButtonText: '取消',
-                        focusConfirm: true
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            callback();
-                        }
-                    });
+    ShareModal.showModal({
+        onSubmit: (data) => {
+            const store = getCurrentStore();
+            if (!store) {
+                return;
+            }
+            const {projectInfo, ...info} = data;
+            api({
+                uri: `/projects/${projectInfo.id}`,
+                method: 'PUT',
+                json: info,
+                headers: {
+                    user: Cookies.get("user")
                 }
-            };
-
-            // 设置一个定时器，5秒后启用下一步按钮，并更新按钮文本显示剩余秒数
-            let remainingSeconds = 10;
-            confirmButton.innerHTML = '下一步（正在加载...）';
-            confirmButton.disabled = true;
-
-            let [data, WordBoundary] = [[], []];
-            try {
-                [data, WordBoundary] = await edge_tts.send();
-            } catch (e) {
-                return Swal.fire({
-                    title: '发生了错误！',
-                    text: `加载音频数据时发生了错误！请将下面信息反馈给管理人员：\n错误信息：${e}`,
-                    //showCancelButton: true,
-                    showConfirmButton: true,
-                    confirmButtonText: '确定',
-                    //cancelButtonText: '取消',
-                    focusConfirm: true
-                })
-            }
-            const blob = new Blob(data);
-            const url = URL.createObjectURL(blob);
-            audio.src = url;
-            if (!stopped) {
-                audio.play();
-
-                // 启动定时器
-                confirmButton.innerHTML = nextButton.text;
-                confirmButton.onclick = nextButton.click;
-                const timer = setInterval(() => {
-                    remainingSeconds--;
-                    if (remainingSeconds === 0) {
-                        clearInterval(timer);
-                        confirmButton.disabled = false;
-                        confirmButton.innerHTML = '下一步';
-                    } else {
-                        confirmButton.innerHTML = `下一步（${remainingSeconds}秒后可用）`;
-                    }
-                }, 1000);
-            }
+            }, (err, body, res) => {
+                if (res.statusCode === 200) {
+                    const {
+                        title,
+                        instructions,
+                        description
+                    } = info;
+                    callback();
+                    store.dispatch(previewActions.updateProjectInfo({
+                        title,
+                        instructions,
+                        description
+                    }));
+                } else {
+                    throw new Error(`错误代码：${res.statusCode}`);
+                }
+            });
         }
-    }).then(() => {
-        audio.pause();
-        stopped = true;
     });
 };
 

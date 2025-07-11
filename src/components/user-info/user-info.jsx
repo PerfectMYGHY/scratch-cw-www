@@ -9,7 +9,7 @@ const {connect} = require('react-redux');
 
 const setting = require('/src/setting'); // 获取设置
 
-const requestAPI = (api, data, func, typ = 'POST') => {
+const requestAPI = (api, data, func, typ = 'POST', root) => {
     data = new URLSearchParams(data);
     const inf = {
         method: typ
@@ -18,11 +18,11 @@ const requestAPI = (api, data, func, typ = 'POST') => {
         inf.body = data;
     }
     if (func) {
-        return fetch(`${setting.base}api/${api}`, inf)
+        return fetch(`${root || setting.base}api/${api}`, inf)
             .then(response => response.json())
             .then(func);
     }
-    return fetch(`${setting.base}api/${api}`, inf)
+    return fetch(`${root || setting.base}api/${api}`, inf)
         .then(response => response.json());
 
 };

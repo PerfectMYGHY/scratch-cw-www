@@ -1,0 +1,67 @@
+@import "../../colors";
+@import "../../frameless";
+
+/* stage size constants */
+$cover-width: 480px;
+$cover-height: 360px;
+
+.cover-upload-label {
+    position: relative;
+
+    label {
+        display: block;
+        width: calc($cover-width + 2px);
+    }
+
+    .cover-preview {
+        width: $cover-width; 
+        height: $cover-height;
+        border: 1px dashed #ccc;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        position: relative;
+
+        img {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+
+        .hovering-cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0);
+            border-radius: 10px;
+            color: rgba(0, 0, 0, 0);
+            font-size: 14px;
+            text-align: center;
+            line-height: $cover-height;
+
+            &:hover {
+                background-color: rgba(0, 0, 0, 0.3);
+                color: white;
+            }
+        }
+    }
+
+    .reset-cover-button {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        padding: 4px 8px;
+        background: rgba(0,0,0,0.7);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        &:hover {
+            background: rgba(0,0,0,0.9);
+        }
+    }
+}

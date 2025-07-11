@@ -10,6 +10,7 @@ const PrivacyBanner = require('../../privacy-banner/privacy-banner.jsx');
 
 const Notice = require('../../notice/notice.jsx');
 const ImportantNewsModal = require('../../modal/important-news/modal.jsx');
+const ShareModal = require('../../modal/share/modal.jsx');
 
 const today = new Date();
 const semi = today.getDate() === 1 && today.getMonth() === 3;
@@ -31,6 +32,7 @@ const Page = ({
             </nav>
             <PrivacyBanner />
             <ImportantNewsModal />
+            <ShareModal />
             <Notice />
             <main id="view">
                 {children}

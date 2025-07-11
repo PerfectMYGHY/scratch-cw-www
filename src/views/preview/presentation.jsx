@@ -197,7 +197,7 @@ const PreviewPresentation = ({
                     message={<FormattedMessage id="project.share.sharedShort" />}
                 />);
             }
-        } else if (!isShared && !projectInfo.looked) {
+        } else if (!isShared) {
             banner = (<Banner
                 actionMessage={<FormattedMessage id="project.share.shareButton" />}
                 message={<FormattedMessage id="project.share.notShared" />}

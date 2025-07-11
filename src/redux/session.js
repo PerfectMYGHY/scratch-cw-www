@@ -1,6 +1,7 @@
 const keyMirror = require('keymirror');
 const defaults = require('lodash.defaults');
 const get = require('lodash.get');
+const Cookies = require('js-cookie');
 
 const {requestSession, requestSessionWithRetry} = require('../lib/session');
 const messageCountActions = require('./message-count.js');
@@ -86,7 +87,9 @@ const handleSessionResponse = (dispatch, body) => {
         body.user.banned &&
         banGoodListPaths.every(goodPath => window.location.pathname.indexOf(goodPath) === -1)
     ) {
-        window.location = '/accounts/banned-response/';
+        // window.location = '/accounts/banned-response/';
+        Cookies.remove('user');
+        dispatch(sessionActions.refreshSession());
         return;
     } else if (
         body.flags &&

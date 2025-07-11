@@ -6,6 +6,7 @@ const permissionsReducer = require('./permissions.js').permissionsReducer;
 const sessionReducer = require('./session.js').sessionReducer;
 const navigationReducer = require('./navigation.js').navigationReducer;
 const newsReducer = require('./news.js').newsReducer;
+const customModalReducer = require('./custom-modal.js').customModalReducer;
 
 /**
  * Returns a combined reducer to be used for a page in `render.jsx`.
@@ -24,6 +25,7 @@ module.exports = opts => {
         navigation: navigationReducer,
         permissions: permissionsReducer,
         session: sessionReducer,
-        news: newsReducer
+        news: newsReducer,
+        customModal: customModalReducer
     }));
 };

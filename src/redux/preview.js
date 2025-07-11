@@ -222,7 +222,6 @@ module.exports.getProjectInfo = (id, token) => (dispatch => {
             dispatch(module.exports.setProjectInfo(null));
             return;
         }
-        console.log(body);
         dispatch(module.exports.setFetchStatus('project', module.exports.Status.FETCHED));
         dispatch(module.exports.setProjectInfo(body));
 
