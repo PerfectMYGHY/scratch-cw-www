@@ -155,6 +155,8 @@ const News = props => (
     <Box
         className="news"
         title={props.messages['news.scratchNews']}
+        moreHref="/news/all"
+        moreTitle={props.messages['general.viewAll']}
     >
         <ul>
             {props.items.length == 0 ? (

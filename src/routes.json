@@ -451,6 +451,13 @@
     "title": "Scratch 扩展设计指南"
   },
   {
+    "name": "all-news",
+    "pattern": "^/news/all?$",
+    "routeAlias": "/news/all?$",
+    "view": "all-news/all-news",
+    "title": "所有新闻"
+  },
+  {
     "name": "404NotFound",
     "pattern": "^/404/not/found?$",
     "routeAlias": "/404/not/found?$",
