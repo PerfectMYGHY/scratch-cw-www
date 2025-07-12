@@ -60,19 +60,14 @@ class Notice extends React.Component {
             let willOpenModal = false;
             const showedOnModal = [];
             for (const item of body) {
-                const watched = Cookies.get('scratch-news') ? JSON.parse(Cookies.get('scratch-news')) : [];
-                if (watched.includes(item.id)) {
+                const watched = Cookies.get('scratch-news') ? JSON.parse(Cookies.get('scratch-news')) : {};
+                if (watched[item.id] == item.update_time) {
                     continue;
                 }
-                watched.push(item.id);
-                Cookies.set('scratch-news', JSON.stringify(watched));
+                watched[item.id] = item.update_time;
+                Cookies.set('scratch-news', JSON.stringify(watched), { expires: 20 });
                 switch (item.type) {
                 case 'info':
-                    /* item.copy, item.headline, {
-                            onclick: this.onclick,
-                            id: i,
-                            timeOut: 10000
-                        } */
                     iziToast.info({
                         title: item.headline,
                         message: item.small || item.copy,
@@ -111,7 +106,6 @@ class Notice extends React.Component {
             }
             this.setState({news: body});
             if (willOpenModal) {
-                console.log('开启吧！窗口！');
                 this.props.handleOpenModal(showedOnModal);
             }
         });

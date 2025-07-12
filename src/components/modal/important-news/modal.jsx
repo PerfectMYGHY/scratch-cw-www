@@ -108,6 +108,7 @@ class ImportantNewsModal extends React.Component {
                 showCloseButton={false}
                 useStandardSizes
                 onRequestClose={onRequestClose}
+                shouldCloseOnOverlayClick={false} // 添加此属性禁用空白区域关闭
             >
                 <div className="top-close-bar">
                     重要消息：{title}（{newsType}）
