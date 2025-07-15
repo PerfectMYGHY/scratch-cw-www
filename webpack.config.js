@@ -115,6 +115,11 @@ class HtmlWebpackBackwardsCompatibilityPlugin {
     }
 }
 
+let contentHash = '';
+if (process.env.NODE_ENV === 'production') {
+    contentHash = '.[contenthash]';
+}
+
 // Config
 module.exports = [{
     entry: entry,
@@ -122,7 +127,7 @@ module.exports = [{
     mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
     output: {
         path: path.resolve(__dirname, 'build'),
-        filename: 'js/[name].bundle.[contenthash].js',
+        filename: `js/[name].bundle${contentHash}.js`,
         publicPath: '/'
     },
     externals: { // 配置一下包使用cdn载入
@@ -219,8 +224,17 @@ module.exports = [{
                 parallel: 4,
                 terserOptions: {
                     compress: {
-                        // drop_console: true, // 移除console.log
-                        drop_debugger: true
+                        drop_debugger: true,
+                        passes: 3, // 增加压缩次数，给我狠狠的压缩！
+                        reduce_vars: true, // 优化变量
+                        dead_code: true, // 移除死代码
+                        conditionals: true,
+                        evaluate: true,
+                        booleans: true,
+                        unused: true,
+                        if_return: true,
+                        join_vars: true,
+                        pure_getters: true
                     },
                     mangle: true,
                     output: {
@@ -234,7 +248,9 @@ module.exports = [{
     },
     plugins: [
         process.env.USING_MIDDLEWARE && new ProgressBarPlugin(),
-        new MiniCssExtractPlugin(),
+        new MiniCssExtractPlugin({
+            filename: `[name]${contentHash}.css`
+        }),
         new HtmlWebpackBackwardsCompatibilityPlugin(),
         new EmitFilePlugin({
             filename: 'version.txt',
@@ -246,18 +262,19 @@ module.exports = [{
     ].concat(pageRoutes
         .map(route => new HtmlWebpackPlugin(defaults({}, {
             title: route.title,
-            filename: `${route.name}.html`,
+            filename: `${route.name}${contentHash}.html`,
             route: route,
             dynamicMetaTags: (false && route.dynamicMetaTags),
             isProject: route.name == 'projects' || route.name == 'embed' || route.name == 'addons',
-            formatJSUrl: 'https://file.uhsea.com/2504/05b1b63531023d4140fca864563df85bTZ.js',
-            scratchGUIUrl: 'https://file.uhsea.com/2504/7aefe8b794d569c0e074d2801cb416209S.js'
         }, templateConfig)))
     ).concat([
         new CopyWebpackPlugin({
             patterns: [
                 {from: 'static'},
-                {from: 'intl', to: 'js'},
+                {
+                    from: 'intl', 
+                    to: `js/[path][name]${contentHash}.js`
+                },
                 {
                     from: 'node_modules/izitoast/dist/css/',
                     to: 'css'
@@ -271,7 +288,8 @@ module.exports = [{
                     to: 'static/chunks'
                 },
                 {
-                    from: 'node_modules/scratch-gui/dist/extension-worker.js'
+                    from: 'node_modules/scratch-gui/dist/extension-worker.js',
+                    to: `extension-worker${contentHash}.js`
                 },
                 {
                     from: 'node_modules/scratch-gui/dist/extension-worker.js.map'
@@ -287,7 +305,7 @@ module.exports = [{
                 },
                 {
                     from: 'node_modules/scratch-gui/dist/chunks/*.js',
-                    to: 'static/scratch-gui-chunks'
+                    to: `scratch-gui-chunks/[name]${contentHash}.js`
                 }
             ]
         }),

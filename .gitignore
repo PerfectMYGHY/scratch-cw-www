@@ -41,4 +41,10 @@ ENV
 /edge-tts
 
 # 一些编译时自动生成的文件夹
-/static/scratch-gui-chunks
+/scratch-gui-chunks
+
+# 一些要离线应用程序安装包
+**/*.exe
+**/*.dmg
+# 存储这玩意儿的目录
+/static-desktop/

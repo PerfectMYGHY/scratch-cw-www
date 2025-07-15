@@ -34,7 +34,7 @@ const compiler = webpack(require('../webpack.config.js'));
 const handler = require('./handler');
 const log = require('./log');
 const fs = require('fs');
-const files = fs.readdirSync('static/scratch-gui-chunks');
+const files = fs.readdirSync('scratch-gui-chunks');
 var i = 0;
 process.stdout.write('正在配置规则...\n');
 const routes = require('../src/routes.json').concat(require('../src/routes-dev.json'))
