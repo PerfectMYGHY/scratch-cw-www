@@ -2,7 +2,6 @@
 if (!(process.env.PROJECT_HOST && process.env.API_HOST)) { // 如果未配置则使用默认
     const PROJECT_SERVER = 'https://projects.scratch-cw.top';
     const ASSET_SERVER = 'https://assets1.scratch-cw.top';
-    // const PROJECT_SERVER = 'http://127.0.0.1:8006';
     process.env.PROJECT_HOST = PROJECT_SERVER;
     process.env.API_HOST = PROJECT_SERVER;
     process.env.ASSET_HOST = `${ASSET_SERVER}/assets`;
@@ -12,8 +11,6 @@ if (!(process.env.PROJECT_HOST && process.env.API_HOST)) { // 如果未配置则
     process.env.PORT = 8001;
     process.env.ROUTING_STYLE = 'wildcard';
     process.env.CLOUDDATA_HOST = 'wss://cloud.scratch-cw.top:8765';
-
-    // process.env.VIEW = "preview/preview";
 }
 
 const defaults = require('lodash.defaults');
@@ -68,28 +65,7 @@ const getVersionId = () => {
 
 // Prepare all entry points
 const entry = {
-    // 'lib.min': [
-    //     'react',
-    //     'react-dom',
-    //     'jszip',
-    //     'react-is',
-    //     'js-cookie',
-    //     'invariant',
-    //     'minilog',
-    //     'prop-types',
-    //     'react-intl',
-    //     'react-lifecycles-compat',
-    //     'react-modal',
-    //     'react-onclickoutside',
-    //     'react-redux',
-    //     'react-responsive',
-    //     'react-slick',
-    //     'redux-thunk',
-    //     'redux',
-    //     'tslib',
-    //     // '@formatjs',
-    //     'scratch-l10n'
-    // ]
+    
 };
 
 pageRoutes.forEach(route => {
@@ -146,18 +122,10 @@ module.exports = [{
     mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
     output: {
         path: path.resolve(__dirname, 'build'),
-        filename: 'js/[name].bundle.js',
+        filename: 'js/[name].bundle.[contenthash].js',
         publicPath: '/'
     },
     externals: { // 配置一下包使用cdn载入
-        // 'react': 'React',
-        // 'react-dom': 'ReactDOM',
-        // 'react-modal': 'ReactModal',
-        // 'react-plotly.js': 'Plotly',
-        // 'react-redux': 'ReactRedux',
-        // 'react-router-dom': 'ReactRouterDOM',
-        // 'react-virtualized': 'ReactVirtualized',
-        // 'lodash': '_',
         'jszip': 'JSZip',
         'highlight.js': 'hljs'
     },

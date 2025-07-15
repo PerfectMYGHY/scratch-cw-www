@@ -1,7 +1,7 @@
-// setting ≈‰÷√
+Ôªø// setting ÈÖçÁΩÆ
 
 const setting = {
-    base: "https://scratch-cw.top:8005/"
+    base: "https://users.scratch-cw.top/"
 };
 
 module.exports = setting;

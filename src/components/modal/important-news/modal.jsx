@@ -122,11 +122,26 @@ class ImportantNewsModal extends React.Component {
 
                     <div
                         className="modal-text-content"
-                        dangerouslySetInnerHTML={{
-                            __html: this.state.currentNews && this.state.currentNews.copy
-                        }}
                     >
 
+                        {
+                            this.state.currentNews && this.state.currentNews.image && (
+                                <img
+                                    alt=""
+                                    className="news-image"
+                                    height="53"
+                                    src={this.state.currentNews.image}
+                                    width="53"
+                                />
+                            )
+                        }
+                        <div
+                            dangerouslySetInnerHTML={{
+                                __html: this.state.currentNews && this.state.currentNews.copy
+                            }}
+                        >
+
+                        </div>
                     </div>
                 </div>
                 <FlexRow className="guide-footer">
