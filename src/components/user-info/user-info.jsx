@@ -63,6 +63,11 @@ class UserInfo extends React.Component {
         if (!prevProps.uname && this.props.uname) {
             this.loadData();
         }
+        if (!prevProps.username && this.props.username) {
+            fetch(`${process.env.PROJECT_HOST}/users/${this.props.username}/followed/${this.props.info.user.username}/`)
+                .then(response => response.json())
+                .then(this.updateFollowingInfo.bind(this));
+        }
     }
 
     async getUserHeadPhotoURL () {
@@ -146,11 +151,6 @@ class UserInfo extends React.Component {
                     dateString,
                     timeC
                 });
-                if (this.props.username) {
-                    fetch(`${process.env.PROJECT_HOST}/users/${this.props.username}/followed/${data.user.username}/`)
-                        .then(response => response.json())
-                        .then(this.updateFollowingInfo.bind(this));
-                }
             });
     }
 
