@@ -63,7 +63,9 @@ class UserInfo extends React.Component {
         if (!prevProps.uname && this.props.uname) {
             this.loadData();
         }
-        if (!prevProps.username && this.props.username) {
+        if (!prevProps.username && this.props.username // 如果用户名改变
+            && this.props.info && this.props.info.user && this.props.info.user.username // 并且当前查看用户信息已获取
+        ) {
             fetch(`${process.env.PROJECT_HOST}/users/${this.props.username}/followed/${this.props.info.user.username}/`)
                 .then(response => response.json())
                 .then(this.updateFollowingInfo.bind(this));

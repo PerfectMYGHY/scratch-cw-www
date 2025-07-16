@@ -402,6 +402,7 @@ const PreviewPresentation = ({
                                     projectHost={projectHost}
                                     projectToken={projectInfo.project_token}
                                     projectId={projectId}
+                                    projectTitle={projectInfo.title}
                                     onGreenFlag={onGreenFlag}
                                     onProjectLoaded={onProjectLoaded}
                                     onRemixing={onRemixing}

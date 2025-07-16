@@ -775,6 +775,8 @@ class Preview extends React.Component {
             );
         }
 
+        console.log("外部：", this.props.projectInfo, this.props.projectInfo.title);
+
         return (
             <React.Fragment>
                 <Meta

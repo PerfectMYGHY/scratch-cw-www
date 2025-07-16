@@ -1,266 +1,86 @@
-﻿const FormattedMessage = require('react-intl').FormattedMessage;
+﻿import PropTypes from 'prop-types';
+
 const React = require('react');
-const useRef = require('react').useRef;
-const useState  = require('react').useState ;
 
 const Box = require('../../components/box/box.jsx');
 
+const FormattedMessage = require('react-intl').FormattedMessage;
 const Page = require('../../components/page/www/page.jsx');
 const InplaceInput = require('../../components/forms/inplace-input.jsx');
 const render = require('../../lib/render.jsx');
-const ReactDom = require('react-dom');
-const classNames = require('classnames');
 const Formsy = require('formsy-react').default;
 const decorateText = require('../../lib/decorate-text.jsx');
-const NotAvailable = require('../../components/not-available/not-available.jsx');
-const MarkdownIt = require('markdown-it');
+const Markdown = require('../../components/markdown/markdown.jsx').default;
 const Carousel = require('../../components/carousel/carousel.jsx');
-const Button = require('../../components/forms/button.jsx');
-const ReportsList = require('./ReportsList.jsx');
-const { reportOptionsShape, REPORT_OPTIONS } = require('../../components/modal/report/report-options.jsx');
+const Thumbnail = require('../../components/thumbnail/thumbnail.jsx');
+import UserBox, {requestAPI} from '../../components/user-box/user-box.jsx';
+const UsersCarousel = require('../../components/users-carousel/users-carousel.jsx');
 const Loading = require("../../components/loading_tip/Loading.jsx");
+const ReportsList = require('./ReportsList.jsx');
+const { REPORT_OPTIONS } = require('../../components/modal/report/report-options.jsx');
+const isEqual = require('lodash.isequal');
+const bindAll = require('lodash.bindall');
 
-const Cookies = require('js-cookie');
+const {connect} = require('react-redux');
 
 require('./wait_reports.scss');
 
-const setting = require('/src/setting');
-
-var uname = Cookies.get("user");
-
-var info = {};
-var fetched = false;
-var stop = false;
-
-function requestAPI(api, data, func, typ = "POST", base = setting.base) {
-    data = new URLSearchParams(data);
-    var inf = {
-        method: typ,
+const isSubset = (obj1, obj2, debug = false) => {
+    for (const key in obj1) {
+        if (!(key in obj2) || obj1[key] !== obj2[key]) {
+            return false;
+        }
     }
-    if (typ == "POST" || typ == "PUT" || typ == "DELETE" || typ == "OPTTION") {
-        inf.body = data;
-    }
-    if (func) {
-        return fetch(base + "api/" + api, inf)
-            .then(response => response.json())
-            .then(func);
-    } else {
-        return fetch(base + "api/" + api, inf)
-            .then(response => response.json());
-    }
-}
+    return true;
+};
 
-const UserInfo = () => {
-    var thumbnailUrl = null;
-    const image = useRef();
-    const a = useRef();
-    const changer = useRef();
-    const form = useRef();
-    const name = useRef();
-    const update = useRef();
-    const [content, setContent] = useState([]);
-    const [btn, setBtn] = useState([]);
-    const getUserHeadPhotoURL = async () => {
-        var ret = null;
-        await requestAPI("getUserHeadPhotoURL", {
-            user: info.user.username
-        }).then(function (data) {
-            if (data.state) {
-                ret = (data.type=="base"?setting.base.slice(0,-1):"")+data.url;
-            } else {
-                throw "请求失败！";
-            }
-        });
-        return ret;
+class WaitReports extends React.Component {
+    constructor (props) {
+        super(props);
+        this.state = {
+            reports: [],
+            info: {},
+            loading: true
+        };
+        bindAll(this, [
+            'setInfo',
+            'customLoadData'
+        ]);
     }
-    if (!stop) {
-        stop = true;
-        fetch(`${setting.base}api/session/`, {
-            method: "POST",
-            body: JSON.stringify({
-                user: uname
-            })
+
+    componentDidUpdate(prevProps, prevState) {
+        if (!prevState.loading && this.state.loading) {
+            setTimeout(() => {
+                this.loadData();
+            }, 0.2e3);
+        }
+    }
+
+    setInfo (state) {
+        if (!isSubset(state, this.state, true)) {
+            this.setState(state);
+        }
+    }
+
+    loadData() {
+        const type = (window.location.href.indexOf("#") != -1 ? window.location.href.split("#")[1] : "projects");
+        fetch(`${process.env.PROJECT_HOST}/scratch-admin/reports/${type}`,{
+            method: "POST"
         })
-            .then(res => { return res.json() })
-            .then(data => {
-                fetched = true;
-                info = data;
-                if (!info.user) {
-                    return;
-                }
-                thumbnailUrl = data["user"]["thumbnailUrl"];
-                image.current.src = thumbnailUrl;
-                console.log(image.current.src, image.current);
-                a.current.href = `/wait_reports/${info.user.username}/`;
-                name.current.innerHTML = info.user.username;
-                var dateJoined = new Date(info.user.dateJoined);
-                // 获取年份、月份和日期
-                let year = dateJoined.getFullYear(); // 获取年份（四位数）
-                let month = ('0' + (dateJoined.getMonth() + 1)).slice(-2); // 获取月份（补零）
-                let day = ('0' + dateJoined.getDate()).slice(-2); // 获取日期（补零）
-
-                // 拼接成所需格式的字符串
-                let dateString = `${year}-${month}-${day}`;
-                var timeC = dateJoined.getYear() - (new Date().getYear());
-                var dw = "年";
-                if (timeC == 0) {
-                    var timeC = dateJoined.getMonth() - (new Date().getMonth());
-                    var dw = "个月";
-                    if (timeC == 0) {
-                        var timeC = dateJoined.getDay() - (new Date().getDay());
-                        var dw = "天";
-                        if (timeC == 0) {
-                            var timeC = dateJoined.getHours() - (new Date().getHours());
-                            var dw = "时";
-                            if (timeC == 0) {
-                                var timeC = dateJoined.getMinutes() - (new Date().getMinutes());
-                                var dw = "分钟";
-                                if (timeC == 0) {
-                                    var timeC = dateJoined.getSeconds() - (new Date().getSeconds());
-                                    var dw = "秒";
-                                }
-                            }
-                        }
-                    }
-                }
-                switch (Math.round(Math.abs(dateJoined.getYear() - (new Date().getYear())) / 4)) {
-                    case 0:
-                        var des = "Scratcher 新手";
-                        break;
-                    case 1:
-                        var des = "Scratcher 熟手";
-                        break;
-                    case 2:
-                        var des = "Scratcher 高手";
-                        break;
-                    case 3:
-                        var des = "Scratcher 大师";
-                        break;
-                    default:
-                        var des = "Scratcher 博士";
-                        break;
-                }
-                var c = (
-                    <div key="user-info-info">
-                        <p class="profile-details">
-
-                            <span class="group">
-                                {des}
-                            </span>
-                            已加入于<span title={dateString}>{Math.abs(timeC)}&nbsp;{dw}</span>前
-                            <span class="location">中国</span>
-                            <span style={{
-                                display: "block"
-                            }}>Scratch币个数：{info.flags.money}</span>
-                        </p>
-                    </div>
-                );
-                setContent([c]);
-                setBtn([
-                    Cookies.get("user") != info.user.username && 
-                        <Button
-                            className="button collection-user"
-                            key = "collect"
-                        >
-                            {"关注"}
-                        </Button>
-                ]);
-                changer.current.addEventListener("mouseover", () => {
-                    form.current.className += " edit";
-                });
-                changer.current.addEventListener("mouseout", () => {
-                    form.current.className = "portrait";
-                });
-                update.current.addEventListener('change', async function (e) {
-                    var file = e.target.files[0];
-                    var username = info.user.username; // 用户名
-
-                    if (!file) {
-                        return;
-                    }
-
-                    var formData = new FormData();
-                    formData.append('photo', file);
-                    formData.append('user', username); // 添加用户名字段  
-
-                    try {
-                        const response = await fetch(setting.base + 'api/updateHeadPhoto', {
-                            method: 'POST',
-                            body: formData,
-                        });
-
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-
-                        const data = await response.json(); // 假设服务器返回JSON格式的响应  
-                        if (data.state) {
-                            (async function () {
-                                image.current.src = await getUserHeadPhotoURL();
-                            })();
-                        } else {
-                            throw "上传失败！"
-                        }
-                    } catch (error) {
-                        throw error;
-                    }
-                });
+        .then(response => response.json())
+        .then(data => {
+            this.setState({
+                reports: data,
+                loading: false
             });
+        });
     }
-    return (
-        <div class="box-head">
-            <form id="profile-avatar" class="portrait" ref={form}>
-                <div class="avatar" ref={changer}>
-                    <a ref={a}>
-                        <img src={thumbnailUrl} ref={image} width="55" height="55"></img>
-                            <div class="loading-img s48"></div>
-                    </a>
 
-
-                    <div data-control="edit">Change
-                        <input class="hidden" type="file" accept="image/*" name="file" ref={update}></input>
-                    </div>
-
-
-                </div>
-            </form>
-            {btn.map((item) => item)}
-            <div class="header-text">
-                <h2 ref={name}>Username</h2>
-                {content.map((item) => item)}  
-            </div>
-        </div>
-    );
-};
-
-var lastType = null;
-
-var urls = window.location.pathname.split("/");
-
-var notFound = false;
-
-var p_info = {
-    type: (window.location.href.indexOf("#") != -1 ? window.location.href.split("#")[1] : "projects")
-};
-
-var start_time = new Date();
-
-const WaitReports = () => {
-    const [content, setContent] = useState([<Loading />]);
-    const md = new MarkdownIt();
-    const translate = (content) => {
-        return content
-            .replace("\t", "&nbsp&nbsp&nbsp&nbsp")
-            .replace(" ", "&nbsp")
-            .replace("\n", "<br />")
-        ;
+    customLoadData (state) {
+        this.loadData();
     }
-    function Markdown({ children, getContent }) {
-        return (
-            <div dangerouslySetInnerHTML={{ __html: translate(md.render((getContent ? getContent(children) : children))) }}></div>
-        );
-    }
-    const delete_project = async (pid,cid,rid) => {
+
+    async delete_project (pid,cid,rid) {
         await fetch(`${process.env.PROJECT_HOST}/check/report/${rid}/true`, {
             method: "POST"
         });
@@ -274,25 +94,24 @@ const WaitReports = () => {
                 method: "DELETE"
             });
         },"POST",process.env.PROJECT_HOST+"/");
-    };
-    const delete_comment = (pid,cid,rid) => {
+    }
+
+    delete_comment (pid,cid,rid) {
         fetch(`${process.env.PROJECT_HOST}/proxy/comments/project/${pid}/comment/${cid}`, {
             method: "DELETE"
         });
         fetch(`${process.env.PROJECT_HOST}/proxy/reports/comments/${rid}`, {
             method: "DELETE"
         });
-    };
-    const back = (pid, cid, rid) => {
+    }
+
+    reject_comment_report (pid, cid, rid) {
         fetch(`${process.env.PROJECT_HOST}/proxy/admin/project/${pid}/comment/${cid}/undelete`, {
             method: "PUT"
-        })/*.then(() => {
-            fetch(`${process.env.PROJECT_HOST}/proxy/reports/comments/${rid}`, {
-                method: "DELETE"
-            });
-        })*/;
-    };
-    const take_project_go_back = (pid) => {
+        });
+    }
+
+    take_project_go_back (pid) {
         requestAPI(`take_project_go_back/${pid}/`,{},function (data){
             if (!data.state){
                 alert(`恢复失败！信息：${data.msg}`);
@@ -300,156 +119,139 @@ const WaitReports = () => {
                 lastType = null; // 刷新
             }
         },"POST",process.env.PROJECT_HOST+"/");
-    };
-    const fd = async (pid,rid) => {
+    }
+
+    async reject_project_report (pid,rid) {
         await fetch(`${process.env.PROJECT_HOST}/check/report/${rid}/false`, {
             method: "POST"
         });
         fetch(`${process.env.PROJECT_HOST}/proxy/reports/projects/${rid}`, {
             method: "DELETE"
         });
-    };
-    var timer = setInterval(function (){
-        if (!fetched){
-            return;
-        }
-        p_info = {
-            type: (window.location.href.indexOf("#") != -1 ? window.location.href.split("#")[1] : "projects")
-        };
-        if (lastType == p_info.type && new Date() - start_time < (notFound ? 100 : 500)){
-            return;
-        }
-        if (notFound) {
-            uname = Cookies.get("user");
-            fetch(`${setting.base}api/session/`, {
-                method: "POST",
-                body: JSON.stringify({
-                    user: uname
-                })
-            })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data);
-                    info = data;
-                });
-        }
-        //console.log(!info.user || !info.permissions.admin,info);
-        start_time = new Date();
-        lastType = p_info.type;
-        if (!info.user || !info.permissions.admin) {
-            //document.getElementById('pagebox').innerHTML = "";
-            ReactDom.unmountComponentAtNode(document.getElementById('pagebox'));
-            render(<NotAvailable />, document.getElementById('pagebox'));
-            notFound = true;
-            return;
-        } else {
-            if (notFound && info.user) {
-                ReactDom.unmountComponentAtNode(document.getElementById('pagebox'));
-                render(<Box
-                    headContent={
-                        <UserInfo key="page-user-info-title" />
-                    }
-                >
-                    <h3>相关页面(让站长懒一下)</h3>
-                    <p class="about-page">
-                        {/* onClick={()=>{setTimeout(()=>{window.location.reload()},100)}}*/}
-                        {getLinks()}
-                    </p>
-                    <h3>等待审核的页面 - {{ "all": "全部", "unchecked": "未检查的", "checked": "已检查但未通过的" }[p_info.type]}</h3>
-                    <div>
-                        {content.map((item) => item)}
-                    </div>
-                </Box>, document.getElementById('pagebox'));
-                window.location.reload();
-            }
-            if (info.user) {
-                clearInterval(timer);
-                notFound = false;
-            }
-        }
-        fetch(`${process.env.PROJECT_HOST}/scratch-admin/reports/${p_info.type}`,{
-            method: "POST"
-        })
-            .then(response => response.json())
-            .then(data => {
-                setContent([
-                    <h3>等待审核的举报 - {{ "projects": "被举报的作品", "comments": "被举报的评论" }[p_info.type]}({data.length })</h3>
-                    ,
-                    <div>
-                        {data.length > 0 ? 
-                            <ReportsList items={data} canRemove={p_info.type != "deleted"} canTake={p_info.type == "deleted"} text=""
-                                onClick={async (pid, cid, rid) => {
-                                    if (p_info.type != "deleted") {
-                                        if (p_info.type == "comments") {
-                                            await fetch(`${process.env.PROJECT_HOST}/check/report/${rid}/true`, {
-                                                method: "POST"
-                                            });
-                                        }
-                                        (p_info.type == "projects" ? delete_project : delete_comment)(pid, cid, rid);
-                                    } else if (p_info.type == "deleted") {
-                                        take_project_go_back(pid);
-                                    }
-                                }} more={(pid, item, cid, rid) => {
-                                    if (p_info.type == "projects") {
-                                        return (p_info.type == "shared" || item.public) &&
-                                            (<a onClick={() => {
-                                                fd(pid,rid);
-                                            }}>
-                                                否定该举报
-                                            </a>);
-                                    } else {
-                                        return [
-                                            <a onClick={() => {
-                                                fetch(`${process.env.PROJECT_HOST}/check/report/${rid}/false`, {
-                                                    method: "POST"
-                                                }).then(() => {
-                                                    back(pid, cid, rid);
-                                                });
-                                            }}>
-                                                否定该举报并打回
-                                            </a>
-                                        ];
-                                    }
-                                }}
-                                getChildren={p_info.type == "projects" ? ((pid, item, report) => {
-                                    return [
-                                        <p>举报类型：<FormattedMessage id={REPORT_OPTIONS.find(obj => obj.value == report.body.report_category).label.id} /></p>,
-                                        <p>举报信息：{report.body.notes}</p>
-                                    ];
-                                }) : null}
-                                btnt={p_info.type == "comments" ? "确认该举报真实性并删除" : "确认并删除"} />
-                        : <p>空空如也</p>}
-                    </div>
-                ]);
-            });
-    }, 1);
-    const getLinks = () => {
-        var ret = [];
-        var pages = { "projects": "被举报的作品", "comments": "被举报的评论" };
-        for (const page in pages) {
-            const name = pages[page];
-            ret.push(<a href={`#${page}`} onClick={() => { if (p_info.type != page) setContent([<Loading />]) }}>{name}</a>);
-        }
-        return ret;
     }
-    return (
-        <div className="inner wait_reports" id="pagebox">
-            <Box
-                headContent={
-                    <UserInfo key="page-user-info-title" />
+
+    getReportIntlIdFromReport (report) {
+        for (const option of REPORT_OPTIONS) {
+            if (option.value == report.body.report_category) { // 不可以使用===！因为value为字符串，report_category可能为数字，但只要值一致即可
+                return option.label.id;
+            }
+            if (option.subcategories) { // 最多只有2级
+                for (const sub of option.subcategories) {
+                    if (sub.value == report.body.report_category) {
+                        return sub.label.id;
+                    }
                 }
-            >
-                <h3>相关页面(让站长懒一下)</h3>
-                <p class="about-page">
-                    {/* onClick={()=>{setTimeout(()=>{window.location.reload()},100)}}*/}
-                    {getLinks()}
-                </p>
-                <div>
-                    {content.map((item) => item)}
-                </div>
-            </Box>
-        </div>
-    );
+            }
+        }
+        return '未知类型'; // ID不存在直接显示ID，这样刚好符合要求...
+    }
+
+    render() {
+        const type = (window.location.href.indexOf("#") != -1 ? window.location.href.split("#")[1] : "projects");
+        const pages = { "projects": "被举报的作品", "comments": "被举报的评论" };
+        const getLinks = () => {
+            var ret = [];
+            for (const page in pages) {
+                const name = pages[page];
+                ret.push(
+                    <a 
+                        href={`#${page}`} 
+                        onClick={() => {
+                            if (type != page) 
+                                this.setState({
+                                    loading: true
+                                });
+                        }}>
+                        {name}
+                    </a>
+                );
+            }
+            return ret;
+        }
+        // UserBox用法：children中第一个元素被放在Box内部，第二个元素放在Box下方，必须有至少两个元素，多余元素不显示
+        return (
+            <div className="inner wait_reports" id="pagebox">
+                <UserBox
+                    setInfo={this.setInfo}
+                    customLoadData={this.customLoadData}
+                    uname={this.props.username}
+                >
+                    <div>
+                        <h3>相关页面</h3>
+                        <p class="about-page">
+                            {getLinks()}
+                        </p>
+                        <div>
+                            {this.state.loading ? <Loading /> : [
+                                <h3>等待审核的举报 - {pages[type]}({this.state.reports.length})</h3>,
+                                <div>
+                                    {this.state.reports.length > 0 ? 
+                                        <ReportsList items={this.state.reports} canRemove={type != "deleted"} canTake={type == "deleted"} text=""
+                                            onClick={async (pid, cid, rid) => {
+                                                if (type != "deleted") {
+                                                    if (type == "comments") {
+                                                        await fetch(`${process.env.PROJECT_HOST}/check/report/${rid}/true`, {
+                                                            method: "POST"
+                                                        });
+                                                    }
+                                                    (type == "projects" ? this.delete_project : this.delete_comment)(pid, cid, rid);
+                                                } else if (type == "deleted") {
+                                                    this.take_project_go_back(pid);
+                                                }
+                                            }} more={(pid, item, cid, rid) => {
+                                                if (type == "projects") {
+                                                    return (type == "shared" || item.public) &&
+                                                        (<a onClick={() => {
+                                                            this.reject_project_report(pid,rid);
+                                                        }}>
+                                                            否定该举报
+                                                        </a>);
+                                                } else {
+                                                    return [
+                                                        <a onClick={() => {
+                                                            fetch(`${process.env.PROJECT_HOST}/check/report/${rid}/false`, {
+                                                                method: "POST"
+                                                            }).then(() => {
+                                                                this.reject_comment_report(pid, cid, rid);
+                                                            });
+                                                        }}>
+                                                            否定该举报并打回
+                                                        </a>
+                                                    ];
+                                                }
+                                            }}
+                                            getChildren={type == "projects" ? ((pid, item, report) => {
+                                                return [
+                                                    <p>举报类型：<FormattedMessage id={this.getReportIntlIdFromReport(report)} /></p>,
+                                                    <p>举报信息：{report.body.notes}</p>
+                                                ];
+                                            }) : null}
+                                            btnt={type == "comments" ? "确认该举报真实性并删除" : "确认并删除"} />
+                                    : <p>空空如也</p>}
+                                </div>
+                            ]}
+                        </div>
+                    </div>
+                    <div>
+
+                    </div>
+                </UserBox>
+            </div>
+        );
+    }
+}
+
+WaitReports.propTypes = {
+    username: PropTypes.string
 };
 
-render(<Page><WaitReports /></Page>, document.getElementById('app'));
+const mapStateToProps = state => {
+    const user = state.session && state.session.session && state.session.session.user;
+    return {
+        username: user && user.username
+    };
+};
+
+const ConnectedWaitReports = connect(mapStateToProps)(WaitReports);
+
+render(<Page><ConnectedWaitReports /></Page>, document.getElementById('app'));
