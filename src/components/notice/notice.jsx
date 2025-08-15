@@ -60,6 +60,9 @@ class Notice extends React.Component {
             let willOpenModal = false;
             const showedOnModal = [];
             for (const item of body) {
+                if (!this.props.userLoggedIn && item.need_login) {
+                    continue;
+                }
                 const watched = Cookies.get('scratch-news') ? JSON.parse(Cookies.get('scratch-news')) : {};
                 if (watched[item.id] == item.update_time) {
                     continue;
@@ -122,7 +125,7 @@ class Notice extends React.Component {
     };
 
     render () {
-        if (!this.sentNews && this.props.userLoggedIn) {
+        if (!this.sentNews) {
             this.getNews();
             this.sentNews = true;
         }

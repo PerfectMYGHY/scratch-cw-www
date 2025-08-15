@@ -21,8 +21,6 @@ const {selectMuteStatus, updateMuteStatus} = require('../../../redux/session.js'
 
 require('./comment.scss');
 
-const Cookies = require('js-cookie');
-
 const onUpdate = update => update;
 
 const MAX_COMMENT_LENGTH = 500;
@@ -91,9 +89,6 @@ class ComposeComment extends React.Component {
                 content: this.state.message,
                 parent_id: this.props.parentId || '',
                 commentee_id: this.props.commenteeId || ''
-            },
-            headers: {
-                user: Cookies.get("user")
             }
         }, (err, body, res) => {
             if (err || res.statusCode !== 200) {

@@ -101,6 +101,7 @@ class ImportantNewsModal extends React.Component {
         };
         const title = this.state.currentNews && this.state.currentNews.headline;
         const newsType = this.state.currentNews && typeToText[this.state.currentNews.type];
+        const other = this.state.currentNews && this.state.currentNews.need_login ? "普通新闻" : "重量级新闻";
         return (
             <Modal
                 className="important-news-modal"
@@ -111,7 +112,7 @@ class ImportantNewsModal extends React.Component {
                 shouldCloseOnOverlayClick={false} // 添加此属性禁用空白区域关闭
             >
                 <div className="top-close-bar">
-                    重要消息：{title}（{newsType}）
+                    重要消息：{title}（{newsType}）（{other}）
                 </div>
                 <div className="modal-main-content">
                     <img

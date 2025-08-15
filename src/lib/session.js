@@ -1,6 +1,5 @@
 const api = require('./api');
 const setting = require('/src/setting');
-const Cookies = require('js-cookie');
 
 module.exports = {};
 
@@ -43,20 +42,11 @@ total api calls: 4
 total delay time: 3500ms
 */
 module.exports.requestSessionWithRetry = (resolve, reject, retriesLeft, totalDelayMS) => {
-    //const cookieHeader = Object.entries(Cookies.get())
-    //    .map(([name, value]) => `${name}=${value}`)
-    //    .join('; ');  
     api({
         method: 'post',
         host: setting.base,
         uri: 'api/session/',
-        //headers: {
-        //    Cookies: cookieHeader // 设置请求头中的Cookie字段  
-        //    // 其他你需要的请求头...  
-        //}
-        json: {
-            user: Cookies.get("user"),
-        },
+        withCredentials: true
     }, (err, body, response) => {
         if (err || (response && response.statusCode === 404)) {
             return reject(err);

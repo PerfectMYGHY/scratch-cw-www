@@ -3,8 +3,6 @@ const eachLimit = require('async/eachLimit');
 const api = require('../lib/api');
 const log = require('../lib/log');
 
-const Cookies = require('js-cookie');
-
 const COMMENT_LIMIT = 20;
 const REPLY_LIMIT = 25; // Number of replies to fetch at a time
 
@@ -142,9 +140,6 @@ const reportComment = (projectId, commentId, topLevelCommentId, token) => (dispa
         authentication: token,
         withCredentials: true,
         method: 'POST',
-        headers: {
-            'user': Cookies.get("user")
-        },
         useCsrf: true
     }, (err, body, res) => {
         if (err || res.statusCode !== 200) {

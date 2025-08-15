@@ -5,6 +5,41 @@ const jar = require('./jar');
 const log = require('./log');
 const urlParams = require('./url-params');
 
+const Cookies = require('js-cookie');
+
+const CHARS = "abcdefghijklmnopqrstuvwxyz0123456789";
+
+function bytesSum(hexStr) {
+  const bytes = new Uint8Array(hexStr.match(/../g).map(h => parseInt(h, 16)));
+  return Array.from(bytes).reduce((sum, b) => sum + b, 0);
+}
+
+function caesarEncrypt(text, shift) {
+  return text.split('').map(c => {
+    const idx = CHARS.indexOf(c);
+    const newIdx = (idx + shift) % 36;
+    return CHARS[newIdx];
+  }).join('');
+}
+
+const verify = async (opts) => {
+    // 1. 获取验证Cookie
+    await fetch(`${new URL(opts.uri).origin}/api/verify/`, {
+        credentials: 'include'
+    }).then(res => res.json());
+  
+    // 2. 读取Cookie并计算
+    const verifyCode = Cookies.get('verify-code'); // 请求完verify后将产生此Cookie。
+    const byteSum = bytesSum(verifyCode);
+    const secretKey = (byteSum % 102456 * 76332) % 78093;
+    const encrypted = caesarEncrypt(verifyCode, secretKey);
+
+    // 3. 获取CSRF Token
+    return await fetch(`${new URL(opts.uri).origin}/api/csrf_token/?verifycode=${encrypted}`, {
+            credentials: 'include'
+        }).then(res => res.json());
+};
+
 /**
  * Helper method that constructs requests to the scratch api.
  * Custom arguments:
@@ -21,7 +56,8 @@ module.exports = (opts, callback) => {
         host: process.env.API_HOST,
         headers: {},
         responseType: 'json',
-        useCsrf: false
+        useCsrf: false,
+        withCredentials: true
     });
 
     if (opts.host === '') {
@@ -88,13 +124,12 @@ module.exports = (opts, callback) => {
     if (typeof jar.get('scratchlanguage') !== 'undefined') {
         opts.headers['Accept-Language'] = `${jar.get('scratchlanguage')}, en;q=0.8`;
     }
-    // if (opts.authentication) {
-    //    opts.headers['X-Token'] = opts.authentication;
-    // }
     if (opts.useCsrf) {
-        jar.use('scratchcsrftoken', '/csrf_token/', (err, csrftoken) => {
-            if (err) return log.error('Error while retrieving CSRF token', err);
-            opts.headers['X-CSRFToken'] = csrftoken;
+        verify(opts).then(data => {
+            opts.headers['X-CSRFToken'] = data.csrf_token;
+            apiRequest(opts);
+        }).catch(err => {
+            log.error('Error while retrieving CSRF token', err);
             apiRequest(opts);
         });
     } else {

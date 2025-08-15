@@ -4,7 +4,6 @@ const ShareModal = require('../modal/share/modal.jsx');
 const ReactDOM = require('react-dom');
 const api = require('../../lib/api');
 
-const Cookies = require('js-cookie');
 const {getCurrentStore} = require('../../lib/configure-store.js');
 const previewActions = require('../../redux/preview');
 
@@ -61,9 +60,7 @@ const inputProjectInformation = (base, callback) => {
                 uri: `/projects/${projectInfo.id}`,
                 method: 'PUT',
                 json: info,
-                headers: {
-                    user: Cookies.get("user")
-                }
+                withCredentials: true
             }, (err, body, res) => {
                 if (res.statusCode === 200) {
                     const {

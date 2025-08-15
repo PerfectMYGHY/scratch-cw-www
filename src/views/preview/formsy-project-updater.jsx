@@ -42,9 +42,7 @@ class FormsyProjectUpdater extends React.Component {
             authentication: this.props.user.token,
             method: 'PUT',
             json: jsonData,
-            headers: {
-                user: Cookies.get("user")
-            }
+            withCredentials: true
         }, (err, body, res) => {
             if (res.statusCode === 200) {
                 this.setState({value: body[this.props.field], error: false});

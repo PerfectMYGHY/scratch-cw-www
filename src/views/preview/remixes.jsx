@@ -35,9 +35,7 @@ class Remixes extends React.Component {
     load = async (offset=0,limit=10) => {
         const id = window.location.pathname.split("/")[2];
         let p_data = await fetch(`${process.env.PROJECT_HOST}/projects/${id}`, {
-            headers: {
-                user: Cookies.get("user"),
-            }
+            credentials: 'include',
         }).then((response) => response.json()).catch(this.onerror);
         let r_data = await fetch(`${process.env.PROJECT_HOST}/projects/${id}/remixes?offset=${offset}&limit=${limit}`).then((response) => response.json()).catch(this.onerror);
         this.setState({
