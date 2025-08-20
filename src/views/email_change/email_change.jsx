@@ -18,6 +18,7 @@ const Button = require('../../components/forms/button.jsx');
 const Thumbnail = require('../../components/thumbnail/thumbnail.jsx');
 const PropTypes = require('prop-types');
 const UserBox = require('../../components/user-box/user-box.jsx');
+const {requestAPI} = require('../../components/user-info/user-info.jsx');
 const UsersCarousel = require('../../components/users-carousel/users-carousel.jsx');
 
 const { connect } = require('react-redux');
@@ -26,23 +27,6 @@ const setting = require('/src/setting'); // 获取设置
 
 require('./email_change.scss');
 
-function requestAPI(api, data, func, typ = "POST") {
-    data = new URLSearchParams(data);
-    var inf = {
-        method: typ,
-    }
-    if (typ == "POST" || typ == "PUT" || typ == "DELETE" || typ == "OPTTION") {
-        inf.body = data;
-    }
-    if (func) {
-        return fetch(setting.base + "api/" + api, inf)
-            .then(response => response.json())
-            .then(func);
-    } else {
-        return fetch(setting.base + "api/" + api, inf)
-            .then(response => response.json());
-    }
-}
 
 class EmailChange extends React.Component {
     constructor(props) {
@@ -63,25 +47,12 @@ class EmailChange extends React.Component {
         // ...
     }
 
-    delete_account = () => {
-        var pwd = pwdRef.current.value;
-        requestAPI("delete_account", { user: info.user.id, pwd: pwd }, (data) => {
-            if (data.state) {
-                alert("账号已删除！");
-                Cookies.remove("user");
-                window.location.href = "/";
-            } else {
-                alert(`删除时出现了错误(除了密码不正确，其他任何错误都很可怕)：${data.msg}`);
-            }
-        });
-    };
-
     reset = () => {
         const pwd = this.resetPwd.current.value;
         const email = this.resetEmail.current.value;
         if (this.resetEmail.current.checkValidity()) {
             requestAPI("resetEmail", { user: this.state.info.user.username, pwd: pwd, email: email }, (data) => {
-                if (data.state) {
+                if (data.status === "success") {
                     alert("设置成功！");
                     window.location.reload();
                 } else {
@@ -97,7 +68,7 @@ class EmailChange extends React.Component {
     resend = () => {
         const pwd = this.resendPwd.current.value;
         requestAPI("resend", { user: this.state.info.user.username, pwd: pwd }, (data) => {
-            if (data.state) {
+            if (data.status === "success") {
                 alert("发送成功！请等待一会儿并查看手机邮箱。");
             } else {
                 alert(`发送失败！信息：${data.msg}`);

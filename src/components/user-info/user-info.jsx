@@ -103,7 +103,7 @@ class UserInfo extends React.Component {
         await requestAPI('getUserHeadPhotoURL', {
             user: this.props.info.user.username
         }).then(data => {
-            if (data.state) {
+            if (data.status === "success") {
                 ret = (data.type === 'base' ? setting.base.slice(0, -1) : '') + data.url;
             } else {
                 throw new Error('请求失败！');
@@ -218,7 +218,7 @@ class UserInfo extends React.Component {
                 body: formData
             });
 
-            if (data.state) {
+            if (data.status === "success") {
                 this.setState({
                     photoUpdatedCount: this.state.photoUpdatedCount + 1,
                     thumbnailUrl: await this.getUserHeadPhotoURL()

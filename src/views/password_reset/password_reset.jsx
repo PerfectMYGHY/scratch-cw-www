@@ -16,30 +16,13 @@ const NotAvailable = require('../../components/not-available/not-available.jsx')
 const MarkdownIt = require('markdown-it');
 const Carousel = require('../../components/carousel/carousel.jsx');
 const Button = require('../../components/forms/button.jsx');
+const {requestAPI} = require('../../components/user-info/user-info.jsx');
 
 const Cookies = require('js-cookie');
 
 require('./password_reset.scss');
 
 const setting = require('/src/setting');
-
-function requestAPI (api, data, func, typ = 'POST') {
-    data = new URLSearchParams(data);
-    const inf = {
-        method: typ
-    };
-    if (typ == 'POST' || typ == 'PUT' || typ == 'DELETE' || typ == 'OPTTION') {
-        inf.body = data;
-    }
-    if (func) {
-        return fetch(`${setting.base}api/${api}`, inf)
-            .then(response => response.json())
-            .then(func);
-    }
-    return fetch(`${setting.base}api/${api}`, inf)
-        .then(response => response.json());
-    
-}
 
 const PasswordReset = () => {
     const uname = useRef();
@@ -49,7 +32,7 @@ const PasswordReset = () => {
         const e = email.current.value;
         if ((e && email.current.checkValidity()) || u){
             requestAPI('resetByEmail', {uname: u, email: e}, data => {
-                if (data.state){
+                if (data.status === "success"){
                     alert('发送成功！');
                 } else {
                     alert(`发送失败！信息：${data.msg}`);

@@ -18,6 +18,7 @@ const Button = require('../../components/forms/button.jsx');
 const Thumbnail = require('../../components/thumbnail/thumbnail.jsx');
 const PropTypes = require('prop-types');
 const UserBox = require('../../components/user-box/user-box.jsx');
+const {requestAPI} = require('../../components/user-info/user-info.jsx');
 const UsersCarousel = require('../../components/users-carousel/users-carousel.jsx');
 
 const { connect } = require('react-redux');
@@ -25,24 +26,6 @@ const { connect } = require('react-redux');
 const setting = require('/src/setting'); // 获取设置
 
 require('./delete_account.scss');
-
-function requestAPI(api, data, func, typ = "POST") {
-    data = new URLSearchParams(data);
-    var inf = {
-        method: typ,
-    }
-    if (typ == "POST" || typ == "PUT" || typ == "DELETE" || typ == "OPTTION") {
-        inf.body = data;
-    }
-    if (func) {
-        return fetch(setting.base + "api/" + api, inf)
-            .then(response => response.json())
-            .then(func);
-    } else {
-        return fetch(setting.base + "api/" + api, inf)
-            .then(response => response.json());
-    }
-}
 
 class DeleteAccount extends React.Component {
     constructor(props) {
@@ -64,12 +47,12 @@ class DeleteAccount extends React.Component {
     delete_account = () => {
         var pwd = pwdRef.current.value;
         requestAPI("delete_account", { user: info.user.id, pwd: pwd }, (data) => {
-            if (data.state) {
+            if (data.status === "success") {
                 alert("账号已删除！");
                 Cookies.remove("user");
                 window.location.href = "/";
             } else {
-                alert(`删除时出现了错误(除了密码不正确，其他任何错误都很可怕)：${data.msg}`);
+                alert(`删除时出现了错误(除了密码不正确、功能暂时停用，其他任何错误都很可怕，遇到其他错误赶快找站长)：${data.msg}`);
             }
         });
     };

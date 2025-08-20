@@ -3,6 +3,7 @@ const Page = require('../../components/page/www/page.jsx');
 const render = require('../../lib/render.jsx');
 const bindAll = require('lodash.bindall');
 const UserBox = require('../../components/user-box/user-box.jsx');
+const {requestAPI} = require('../../components/user-info/user-info.jsx');
 const Button = require('../../components/forms/button.jsx');
 const createRef = require('react').createRef;
 const { connect } = require('react-redux');
@@ -10,24 +11,6 @@ const { connect } = require('react-redux');
 const setting = require('/src/setting'); // 获取设置
 
 require('./password_change.scss');
-
-function requestAPI(api, data, func, typ = "POST") {
-    data = new URLSearchParams(data);
-    var inf = {
-        method: typ,
-    }
-    if (typ == "POST" || typ == "PUT" || typ == "DELETE" || typ == "OPTTION") {
-        inf.body = data;
-    }
-    if (func) {
-        return fetch(setting.base + "api/" + api, inf)
-            .then(response => response.json())
-            .then(func);
-    } else {
-        return fetch(setting.base + "api/" + api, inf)
-            .then(response => response.json());
-    }
-}
 
 const isSubset = (obj1, obj2, debug = false) => {
     for (const key in obj1) {
@@ -71,7 +54,7 @@ class PasswordChange extends React.Component {
         const re_pwd = this.rePwd.current.value;
         if (new_pwd == re_pwd){
             requestAPI("resetPwd",{user:this.state.info.user.username,old_pwd:old_pwd,new_pwd:new_pwd},(data) => {
-                if (data.state){
+                if (data.status === "success"){
                     alert("设置成功！");
                 } else {
                     alert(`设置失败！信息：${data.msg}`);
