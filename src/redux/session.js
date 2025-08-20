@@ -1,11 +1,11 @@
 const keyMirror = require('keymirror');
 const defaults = require('lodash.defaults');
 const get = require('lodash.get');
-const Cookies = require('js-cookie');
 
 const {requestSession, requestSessionWithRetry} = require('../lib/session');
 const messageCountActions = require('./message-count.js');
 const permissionsActions = require('./permissions.js');
+const nagivationActions = require('./navigation.js');
 
 const Types = keyMirror({
     SET_SESSION: null,
@@ -87,9 +87,7 @@ const handleSessionResponse = (dispatch, body) => {
         body.user.banned &&
         banGoodListPaths.every(goodPath => window.location.pathname.indexOf(goodPath) === -1)
     ) {
-        // window.location = '/accounts/banned-response/';
-        Cookies.remove('user');
-        dispatch(sessionActions.refreshSession());
+        dispatch(nagivationActions.handleLogOut());
         return;
     } else if (
         body.flags &&

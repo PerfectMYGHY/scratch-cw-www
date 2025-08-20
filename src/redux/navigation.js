@@ -7,7 +7,6 @@ const log = require('../lib/log.js');
 const sessionActions = require('./session.js');
 
 const setting = require('/src/setting');
-const Cookies = require('js-cookie');
 
 const Types = keyMirror({
     SET_SEARCH_TERM: null,
@@ -159,25 +158,7 @@ module.exports.handleLogIn = (formData, callback) => (dispatch => {
 });
 
 module.exports.handleLogOut = () => (dispatch => {
-    // POST to /accounts/logout using a dummy form instead of XHR. This ensures
-    // logout only happens AFTER onbeforeunload has the chance to prevent nagivation.
-    // jar.use('scratchcsrftoken', '/csrf_token/', (err, csrftoken) => {
-    //     if (err) return log.error('Error while retrieving CSRF token', err);
-    //     const form = document.createElement('form');
-    //     form.setAttribute('method', 'POST');
-    //     form.setAttribute('action', '/accounts/logout/');
-    //     const csrfField = document.createElement('input');
-    //     csrfField.setAttribute('type', 'hidden');
-    //     csrfField.setAttribute('name', 'csrfmiddlewaretoken');
-    //     csrfField.setAttribute('value', csrftoken);
-    //     form.appendChild(csrfField);
-    //     document.body.appendChild(form);
-    //     form.submit();
-    //     Cookies.remove('user');
-    //     window.location.reload();
-    // });
-    // Cookies.remove('user');
-    // dispatch(sessionActions.refreshSession());
+    // 退出登录而不刷新
     api({
         method: 'post',
         host: setting.base,

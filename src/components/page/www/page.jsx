@@ -15,6 +15,8 @@ const ShareModal = require('../../modal/share/modal.jsx');
 const today = new Date();
 const semi = today.getDate() === 1 && today.getMonth() === 3;
 
+window.Recolor = {primary: "#ff4c4c"}; // 为了解决bug
+
 const Page = ({
     children,
     className,

@@ -94,7 +94,7 @@ class PasswordChange extends React.Component {
                     <p class="about-page">
                         <a href="/accounts/settings/">账号设置</a>
                         <a href="/accounts/password_change/">密码设置</a>
-                        <a href="/accounts/my_money/">邮箱设置</a>
+                        <a href="/accounts/email_change/">邮箱设置</a>
                         <a href="/accounts/my_money/">我的财富</a>
                     </p>
                     <h3>密码设置</h3>

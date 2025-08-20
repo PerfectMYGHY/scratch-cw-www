@@ -13,7 +13,7 @@ const decorateText = require('../../lib/decorate-text.jsx');
 const Markdown = require('../../components/markdown/markdown.jsx').default;
 const Carousel = require('../../components/carousel/carousel.jsx');
 const Thumbnail = require('../../components/thumbnail/thumbnail.jsx');
-import UserBox, {requestAPI} from '../../components/user-box/user-box.jsx';
+import UserBox, {requestAPI, fetch} from '../../components/user-box/user-box.jsx';
 const UsersCarousel = require('../../components/users-carousel/users-carousel.jsx');
 const Loading = require("../../components/loading_tip/Loading.jsx");
 const ReportsList = require('./ReportsList.jsx');
@@ -67,7 +67,6 @@ class WaitReports extends React.Component {
         fetch(`${process.env.PROJECT_HOST}/scratch-admin/reports/${type}`,{
             method: "POST"
         })
-        .then(response => response.json())
         .then(data => {
             this.setState({
                 reports: data,

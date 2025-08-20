@@ -262,8 +262,7 @@ class Preview extends React.Component {
             body: vmState,
             // If we set json:true then the body is double-stringified, so don't
             headers: {
-                'Content-Type': 'application/json',
-                'user': Cookies.get('user')
+                'Content-Type': 'application/json'
             },
             withCredentials: true
         };
@@ -278,22 +277,24 @@ class Preview extends React.Component {
         if (creatingProject) {
             Object.assign(opts, {
                 method: 'post',
-                url: `${this.props.projectHost}/${qs}`
+                host: this.props.projectHost,
+                uri: `/${qs}`
             });
         } else {
             Object.assign(opts, {
                 method: 'put',
-                url: `${this.props.projectHost}/${projectId}${qs}`
+                host: this.props.projectHost,
+                uri: `/${projectId}${qs}`
             });
         }
         return new Promise((resolve, reject) => {
-            xhr(opts, (err, response) => {
+            api(opts, (err, result, response) => {
                 if (err) return reject(err);
                 if (response.statusCode !== 200) return reject(response.statusCode);
                 let body;
                 try {
                     // Since we didn't set json: true, we have to parse manually
-                    body = JSON.parse(response.body);
+                    body = typeof response.body == "object" ? response.body : JSON.parse(response.body);
                 } catch (e) {
                     return reject(e);
                 }
@@ -307,10 +308,7 @@ class Preview extends React.Component {
             const fetchProjectInfo = (count, resolve) => {
                 api({
                     uri: `/projects/${body.id}`,
-                    headers: {
-                        user: Cookies.get('user')
-                    },
-                    authentication: this.props.user.token
+                    withCredentials: true
                 }, (err, projectInfo, response) => {
                     if (err) {
                         log.error(`Could not fetch project after creating: ${err}`);

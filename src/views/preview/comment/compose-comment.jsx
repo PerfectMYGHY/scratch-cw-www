@@ -56,7 +56,8 @@ class ComposeComment extends React.Component {
             muteOpen: muteExpiresAtMs > Date.now() && this.props.isReply,
             muteExpiresAtMs: muteExpiresAtMs,
             muteType: this.props.muteStatus.currentMessageType,
-            showWarning: this.props.muteStatus.showWarning ? this.props.muteStatus.showWarning : false
+            showWarning: this.props.muteStatus.showWarning ? this.props.muteStatus.showWarning : false,
+            msg: null
         };
         if (this.isMuted()) {
             this.setupMuteExpirationTimeout(muteExpiresAtMs);
@@ -101,6 +102,8 @@ class ComposeComment extends React.Component {
                 let justMuted = true;
                 let showWarning = false;
                 let muteType = null;
+                let msg = null;
+
                 if (body.status && body.status.mute_status) {
                     muteExpiresAtMs = body.status.mute_status.muteExpiresAt * 1000; // convert to ms
 
@@ -120,6 +123,9 @@ class ComposeComment extends React.Component {
                     this.setupMuteExpirationTimeout(muteExpiresAtMs);
                     this.props.dispatch(updateMuteStatus(body.status.mute_status));
                 }
+                if (body.msg) {
+                    msg = body.msg;
+                }
                 // Note: does not reset the message state
                 this.setState({
                     status: rejectedStatus,
@@ -128,7 +134,8 @@ class ComposeComment extends React.Component {
                     muteOpen: muteOpen,
                     muteExpiresAtMs: muteExpiresAtMs,
                     muteType: muteType,
-                    showWarning: showWarning
+                    showWarning: showWarning,
+                    msg: msg
                 });
                 return;
             }
@@ -343,7 +350,8 @@ class ComposeComment extends React.Component {
                                         <FormattedMessage
                                             id={`comments.${this.state.error}`}
                                             values={{
-                                                appealId: this.state.appealId
+                                                appealId: this.state.appealId,
+                                                msg: this.state.msg
                                             }}
                                         />
                                     </div>

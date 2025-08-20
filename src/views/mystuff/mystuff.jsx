@@ -4,7 +4,7 @@ const React = require('react');
 
 const Page = require('../../components/page/www/page.jsx');
 const render = require('../../lib/render.jsx');
-import UserBox, {requestAPI} from '../../components/user-box/user-box.jsx';
+import UserBox, {requestAPI, fetch} from '../../components/user-box/user-box.jsx';
 const isEqual = require('lodash.isequal');
 const ProjectsList = require('./ProjectsList.jsx');
 const Loading = require('../../components/loading_tip/Loading.jsx');
@@ -53,7 +53,6 @@ class MyStuff extends React.Component {
         fetch(`${process.env.PROJECT_HOST}/users/${state.info.user.id}/projects/${tab}`, {
             method: 'POST'
         })
-            .then(response => response.json())
             .then(data => {
                 this.setState({
                     projects: data,

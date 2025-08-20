@@ -4,26 +4,53 @@ const classNames = require('classnames');
 const Button = require('../forms/button.jsx');
 const PropTypes = require('prop-types');
 const bindAll = require('lodash.bindall');
+const api = require('../../lib/api.js');
 
 const {connect} = require('react-redux');
 
-const setting = require('/src/setting'); // 获取设置
+const setting = require('../../setting.js'); // 获取设置
 
-const requestAPI = (api, data, func, typ = 'POST', root) => {
+const fetch = (u, opts = {}) => { // 自定义使用api函数额fetch（因为内部包含CSRF Token验证）
+    return new Promise((resolve, reject) => {
+        if (opts.credentials == 'include') {
+            opts.withCredentials = true;
+            delete opts.credentials;
+        }
+        const url = new URL(u);
+        api({
+            host: url.origin,
+            uri: url.pathname,
+            ...opts
+        }, (err, body, res) => {
+            if (err) {
+                reject(err);
+            }
+            if (opts.responseType === 'json' && typeof body === 'string') {
+                try {
+                    body = JSON.parse(body);
+                } catch (e) {   
+                    reject(e);
+                }
+            }
+            resolve(body);
+        })
+    })
+}
+
+const requestAPI = (request_api, data, func, typ = 'POST', root) => {
     data = new URLSearchParams(data);
     const inf = {
         method: typ
     };
     if (typ === 'POST' || typ === 'PUT' || typ === 'DELETE' || typ === 'OPTTION') {
         inf.body = data;
+        inf.credentials = "include";
     }
+    const req = fetch(`${root || setting.base}api/${request_api}`, inf);
     if (func) {
-        return fetch(`${root || setting.base}api/${api}`, inf)
-            .then(response => response.json())
-            .then(func);
+        return req.then(func);
     }
-    return fetch(`${root || setting.base}api/${api}`, inf)
-        .then(response => response.json());
+    return req;
 
 };
 
@@ -67,8 +94,7 @@ class UserInfo extends React.Component {
             && this.props.info && this.props.info.user && this.props.info.user.username // 并且当前查看用户信息已获取
         ) {
             fetch(`${process.env.PROJECT_HOST}/users/${this.props.username}/followed/${this.props.info.user.username}/`)
-                .then(response => response.json())
-                .then(this.updateFollowingInfo.bind(this));
+                .then(this.updateFollowingInfo);
         }
     }
 
@@ -187,16 +213,11 @@ class UserInfo extends React.Component {
         formData.append('user', username); // 添加用户名字段
 
         try {
-            const response = await fetch(`${setting.base}api/updateHeadPhoto`, {
+            const data = await fetch(`${setting.base}api/updateHeadPhoto`, {
                 method: 'POST',
                 body: formData
             });
 
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-
-            const data = await response.json();
             if (data.state) {
                 this.setState({
                     photoUpdatedCount: this.state.photoUpdatedCount + 1,
@@ -217,22 +238,24 @@ class UserInfo extends React.Component {
         });
         fetch(`${setting.base}api/getInfoByUserName/`, {
             method: 'POST',
+            credentials: 'include',
             body: JSON.stringify({
                 user: this.props.uname
             })
         })
-            .then(res => res.json())
-            .then(this._fetchedData.bind(this));
+            .then(this._fetchedData);
     }
 
     handleFollowUser () {
         this.setState({
             followed: -1
         });
-        fetch(`${process.env.PROJECT_HOST}/users/${this.props.username}/follow/${this.props.info.user.username}/`)
-            .then(response => response.json())
+        fetch(`${process.env.PROJECT_HOST}/users/${this.props.username}/follow/${this.props.info.user.username}/`, {
+            method: 'POST',
+            credentials: 'include'
+        })
             .then(response => {
-                if (response.state === 'successfully') {
+                if (response.status === 'success') {
                     this.setState({
                         followed: true
                     });
@@ -241,10 +264,12 @@ class UserInfo extends React.Component {
     }
 
     handleUnFollowUser () {
-        fetch(`${process.env.PROJECT_HOST}/users/${this.props.username}/unfollow/${this.props.info.user.username}/`)
-            .then(response => response.json())
+        fetch(`${process.env.PROJECT_HOST}/users/${this.props.username}/unfollow/${this.props.info.user.username}/`, {
+            method: 'POST',
+            credentials: 'include'
+        })
             .then(response => {
-                if (response.state === 'successfully') {
+                if (response.status === 'success') {
                     this.setState({
                         followed: false
                     });
@@ -397,3 +422,4 @@ const WrappedUserInfo = connect(mapStateToProps)(UserInfo);
 
 module.exports = WrappedUserInfo;
 module.exports.requestAPI = requestAPI;
+module.exports.fetch = fetch;

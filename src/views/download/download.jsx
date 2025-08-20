@@ -109,66 +109,6 @@ class Download extends React.Component {
                     handleSetOS={this.onSetOS}
                 />
                 <InstallScratch currentOS={this.state.OS} />
-                {/*{isDownloaded(this.state.OS) && (*/}
-                {/*    <div className="download-section">*/}
-                {/*        <FlexRow className="inner column">*/}
-                {/*            <h2 className="title">*/}
-                {/*                <FormattedMessage id="download.olderVersionsTitle" />*/}
-                {/*            </h2>*/}
-                {/*            <p>*/}
-                {/*                <FormattedMessage id="download.olderVersions" />*/}
-                {/*            </p>*/}
-                {/*            <FlexRow>*/}
-                {/*                <div className="older-version">*/}
-                {/*                    <a href="/download/scratch2">*/}
-                {/*                        <img*/}
-                {/*                            alt=""*/}
-                {/*                            className="screenshot"*/}
-                {/*                            height="106"*/}
-                {/*                            src="/images/download/scratch2.png"*/}
-                {/*                            width="150"*/}
-                {/*                        />*/}
-                {/*                    </a>*/}
-                {/*                    <p>*/}
-                {/*                        <a*/}
-                {/*                            className="legacy-link"*/}
-                {/*                            href="/download/scratch2"*/}
-                {/*                        >*/}
-                {/*                            <FormattedMessage id="download.scratch2Desktop" />*/}
-                {/*                            <img*/}
-                {/*                                className="little-arrow"*/}
-                {/*                                src="/svgs/download/r-arrow.svg"*/}
-                {/*                            />*/}
-                {/*                        </a>*/}
-                {/*                    </p>*/}
-                {/*                </div>*/}
-                {/*                <div className="older-version">*/}
-                {/*                    <a href="/scratch_1.4">*/}
-                {/*                        <img*/}
-                {/*                            alt=""*/}
-                {/*                            className="screenshot"*/}
-                {/*                            height="106"*/}
-                {/*                            src="/images/download/scratch1-4.png"*/}
-                {/*                            width="150"*/}
-                {/*                        />*/}
-                {/*                    </a>*/}
-                {/*                    <p>*/}
-                {/*                        <a*/}
-                {/*                            className="legacy-link"*/}
-                {/*                            href="/scratch_1.4"*/}
-                {/*                        >*/}
-                {/*                            <FormattedMessage id="download.scratch1-4Desktop" />*/}
-                {/*                            <img*/}
-                {/*                                className="little-arrow"*/}
-                {/*                                src="/svgs/download/r-arrow.svg"*/}
-                {/*                            />*/}
-                {/*                        </a>*/}
-                {/*                    </p>*/}
-                {/*                </div>*/}
-                {/*            </FlexRow>*/}
-                {/*        </FlexRow>*/}
-                {/*    </div>*/}
-                {/*)}*/}
                 <div className="download-section faq">
                     <FlexRow className="inner column">
                         <h2 className="title">

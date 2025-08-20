@@ -5,8 +5,6 @@ const jar = require('./jar');
 const log = require('./log');
 const urlParams = require('./url-params');
 
-const Cookies = require('js-cookie');
-
 const CHARS = "abcdefghijklmnopqrstuvwxyz0123456789";
 
 function bytesSum(hexStr) {
@@ -24,18 +22,18 @@ function caesarEncrypt(text, shift) {
 
 const verify = async (opts) => {
     // 1. 获取验证Cookie
-    await fetch(`${new URL(opts.uri).origin}/api/verify/`, {
+    const {varifycode} = await fetch(`${new URL(opts.uri).origin}/api/verify/`, {
         credentials: 'include'
     }).then(res => res.json());
   
     // 2. 读取Cookie并计算
-    const verifyCode = Cookies.get('verify-code'); // 请求完verify后将产生此Cookie。
+    const verifyCode = varifycode;
     const byteSum = bytesSum(verifyCode);
     const secretKey = (byteSum % 102456 * 76332) % 78093;
     const encrypted = caesarEncrypt(verifyCode, secretKey);
 
     // 3. 获取CSRF Token
-    return await fetch(`${new URL(opts.uri).origin}/api/csrf_token/?verifycode=${encrypted}`, {
+    return await fetch(`${new URL(opts.uri).origin}/api/csrf_token/?verifycode=${verifyCode}&test=${encrypted}`, {
             credentials: 'include'
         }).then(res => res.json());
 };
@@ -56,7 +54,7 @@ module.exports = (opts, callback) => {
         host: process.env.API_HOST,
         headers: {},
         responseType: 'json',
-        useCsrf: false,
+        useCsrf: opts.method !== 'GET',
         withCredentials: true
     });
 

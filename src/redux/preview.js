@@ -4,8 +4,6 @@ const keyMirror = require('keymirror');
 const api = require('../lib/api');
 const log = require('../lib/log');
 
-const Cookies = require('js-cookie');
-
 module.exports.Status = keyMirror({
     FETCHED: null,
     NOT_FETCHED: null,
@@ -200,15 +198,11 @@ module.exports.setVisibilityInfo = visibilityInfo => ({
 
 module.exports.getProjectInfo = (id, token) => (dispatch => {
     const opts = {
-        uri: `/projects/${id}`,
-        headers: {
-            user: Cookies.get('user')
-        }
+        uri: `/projects/${id}`
     };
     if (token) {
         Object.assign(opts, {authentication: token});
     }
-    window.cannotletuserknowverb_username_forturbowarprequester = Cookies.get('user');
     dispatch(module.exports.setFetchStatus('project', module.exports.Status.FETCHING));
     api(opts, (err, body, response) => {
         if (err) {
@@ -251,10 +245,7 @@ module.exports.getVisibilityInfo = (id, ownerUsername, token) => (dispatch => {
 module.exports.getOriginalInfo = id => (dispatch => {
     dispatch(module.exports.setFetchStatus('original', module.exports.Status.FETCHING));
     api({
-        uri: `/projects/${id}`,
-        headers: {
-            user: Cookies.get('user')
-        }
+        uri: `/projects/${id}`
     }, (err, body) => {
         if (err) {
             dispatch(module.exports.setFetchStatus('original', module.exports.Status.ERROR));
@@ -278,10 +269,7 @@ module.exports.getOriginalInfo = id => (dispatch => {
 module.exports.getParentInfo = id => (dispatch => {
     dispatch(module.exports.setFetchStatus('parent', module.exports.Status.FETCHING));
     api({
-        uri: `/projects/${id}`,
-        headers: {
-            user: Cookies.get('user')
-        }
+        uri: `/projects/${id}`
     }, (err, body) => {
         if (err) {
             dispatch(module.exports.setFetchStatus('parent', module.exports.Status.ERROR));
@@ -329,7 +317,8 @@ module.exports.setFavedStatus = (faved, id, username, token) => (dispatch => {
         api({
             uri: `/projects/${id}/favorites/user/${username}`,
             authentication: token,
-            method: 'POST'
+            method: 'POST',
+            useCsrf: true
         }, (err, body) => {
             if (err) {
                 dispatch(module.exports.setError(err));
@@ -346,7 +335,8 @@ module.exports.setFavedStatus = (faved, id, username, token) => (dispatch => {
         api({
             uri: `/projects/${id}/favorites/user/${username}`,
             authentication: token,
-            method: 'DELETE'
+            method: 'DELETE',
+            useCsrf: true
         }, (err, body) => {
             if (err) {
                 dispatch(module.exports.setError(err));
@@ -688,9 +678,6 @@ module.exports.reportProject = (id, jsonData, token) => (dispatch => {
         withCredentials: true,
         method: 'POST',
         useCsrf: true,
-        headers: {
-            user: Cookies.get('user')
-        },
         json: jsonData
     }, (err, body, res) => {
         if (err || res.statusCode !== 200) {

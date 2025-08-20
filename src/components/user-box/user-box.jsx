@@ -139,3 +139,4 @@ const WrappedUserBox = connect(mapStateToProps)(UserBox);
 
 module.exports = WrappedUserBox;
 module.exports.requestAPI = UserInfo.requestAPI;
+module.exports.fetch = UserInfo.fetch;

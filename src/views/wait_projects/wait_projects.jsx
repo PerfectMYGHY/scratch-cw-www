@@ -13,7 +13,7 @@ const decorateText = require('../../lib/decorate-text.jsx');
 const Markdown = require('../../components/markdown/markdown.jsx').default;
 const Carousel = require('../../components/carousel/carousel.jsx');
 const Thumbnail = require('../../components/thumbnail/thumbnail.jsx');
-import UserBox, {requestAPI} from '../../components/user-box/user-box.jsx';
+import UserBox, {requestAPI, fetch} from '../../components/user-box/user-box.jsx';
 const UsersCarousel = require('../../components/users-carousel/users-carousel.jsx');
 const Loading = require("../../components/loading_tip/Loading.jsx");
 const ProjectsList = require('./ProjectsList.jsx');
@@ -62,11 +62,10 @@ class WaitProjects extends React.Component {
     }
 
     loadData() {
-        const type = (window.location.href.indexOf("#") != -1 ? window.location.href.split("#")[1] : "projects");
+        const type = (window.location.href.indexOf("#") != -1 ? window.location.href.split("#")[1] : "all");
         fetch(`${process.env.PROJECT_HOST}/scratch-admin/projects/not_passed/${type}`,{
             method: "POST"
         })
-            .then(response => response.json())
             .then(data => {
                 this.setState({
                     projects: data,
@@ -111,7 +110,7 @@ class WaitProjects extends React.Component {
     }
 
     render() {
-        const type = (window.location.href.indexOf("#") != -1 ? window.location.href.split("#")[1] : "projects");
+        const type = (window.location.href.indexOf("#") != -1 ? window.location.href.split("#")[1] : "all");
         const pages = {"all": "全部", "unchecked": "未检查的", "checked": "已检查但未通过的"};
         const getLinks = () => {
             var ret = [];
