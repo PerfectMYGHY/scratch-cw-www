@@ -68,7 +68,13 @@ class Notice extends React.Component {
                     continue;
                 }
                 watched[item.id] = item.update_time;
-                Cookies.set('scratch-news', JSON.stringify(watched), { expires: 20 });
+                Cookies.set('scratch-news', JSON.stringify(watched), {
+                    expires: 20,
+                    domain: '.scratch-cw.top',  // 关键配置：允许主域名和所有子域名访问
+                    path: '/',
+                    secure: true,               // 仅HTTPS环境下传输（生产环境推荐）
+                    sameSite: 'Lax'             // 防止CSRF攻击
+                });
                 switch (item.type) {
                 case 'info':
                     iziToast.info({

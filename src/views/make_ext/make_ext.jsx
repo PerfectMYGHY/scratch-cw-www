@@ -46,7 +46,7 @@ const Guidelines = () => (
                     </dd>
                     <dt>说明文件下载链接</dt>
                     <dd>
-                        <MarkdownDownLoader text="点我下载">{step_file}</MarkdownDownLoader>
+                        <MarkdownDownLoader text="点我下载" title="Scratch扩展开发指南">{step_file}</MarkdownDownLoader>
                     </dd>
                 </dl>
             </section>

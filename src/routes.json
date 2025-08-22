@@ -463,5 +463,12 @@
     "routeAlias": "/404/not/found?$",
     "view": "404NotFound/404NotFound",
     "title": "404 Not Found"
+  },
+  {
+    "name": "howtoresize",
+    "pattern": "^/howtoresize/?$",
+    "routeAlias": "/howtoresize/?$",
+    "view": "howtoresize/howtoresize",
+    "title": "如何减小素材大小"
   }
 ]

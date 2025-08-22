@@ -2991,8 +2991,8 @@ function Markdown(props) {
 }
 
 function MarkdownDownLoader(props) {
-    const { children, text, ...obj } = props;
-    return (<a href={URL.createObjectURL(new Blob([decodeBase64MarkdownUrl(children)]))} download="Scratch扩展开发指南.md">{text}</a>);
+    const { children, text, title, ...obj } = props;
+    return (<a href={URL.createObjectURL(new Blob([decodeBase64MarkdownUrl(children)]))} download={title+".md"}>{text}</a>);
 }
 
 export {
