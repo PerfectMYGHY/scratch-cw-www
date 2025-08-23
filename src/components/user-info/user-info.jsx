@@ -208,6 +208,17 @@ class UserInfo extends React.Component {
             return;
         }
 
+        // === 新增：文件大小检查 ===
+        const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB
+        if (file.size > MAX_FILE_SIZE) {
+            // 显示错误提示
+            alert(`文件太大啦！请选择小于2MB的图片。\n当前文件: ${(file.size / 1024 / 1024).toFixed(2)}MB\n就想用这个头像？如果你的头像不是动图，可以使用一些软件缩小尺寸再上传。如果你的头像是动图，可以考虑EZGIF这类工具减小体积。`);
+            
+            // 清空input，允许重新选择同一文件
+            e.target.value = '';
+            return;
+        }
+
         const formData = new FormData();
         formData.append('photo', file);
         formData.append('user', username); // 添加用户名字段

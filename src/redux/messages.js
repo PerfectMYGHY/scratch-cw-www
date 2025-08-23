@@ -103,13 +103,9 @@ module.exports.setStatus = (type, status) => ({
 module.exports.clearMessageCount = (username) => (dispatch => {
     dispatch(module.exports.setStatus('CLEAR_STATUS', module.exports.Status.FETCHING));
     api({
-        //host: '',
         uri: '/site-api/messages/messages-clear/',
         method: 'POST',
-        useCsrf: true,
-        headers: {
-            'user': username
-        }
+        useCsrf: true
     }, (err, body) => {
         if (err) {
             dispatch(module.exports.setStatus('CLEAR_STATUS', module.exports.Status.CLEAR_ERROR));

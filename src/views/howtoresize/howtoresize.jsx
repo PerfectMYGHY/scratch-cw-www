@@ -36,6 +36,10 @@ const Guidelines = () => (
                 <dl>
                     <dt>有什么方法可以找出并减小作品中太大的素材吗？</dt>
                     <dd>有，后面会给出。</dd>
+                    <dt>Scratch创世界中素材大小限制是多少？</dt>
+                    <dd>图片：2MB<br />
+                    WAV音频文件：5MB<br />
+                    其他音频文件：10MB</dd>
                 </dl>
             </section>
             <section id="step">
