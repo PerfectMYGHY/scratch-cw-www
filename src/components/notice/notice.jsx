@@ -159,7 +159,7 @@ Notice.propTypes = {
 const mapStateToProps = state => {
     const user = state.session && state.session.session && state.session.session.user;
     return {
-        userLoggedIn: user && user.username
+        userLoggedIn: Boolean(user && user.username)
     };
 };
 
