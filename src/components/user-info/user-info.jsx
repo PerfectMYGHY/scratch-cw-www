@@ -234,9 +234,9 @@ class UserInfo extends React.Component {
                     photoUpdatedCount: this.state.photoUpdatedCount + 1,
                     thumbnailUrl: await this.getUserHeadPhotoURL()
                 });
-                console.log('已经更新头像');
             } else {
-                throw new Error('上传失败！');
+                alert(`上传失败！错误信息：${data.msg}`);
+                throw new Error(`上传失败！错误信息：${data.msg}`);
             }
         } catch (error) {
             throw error;
