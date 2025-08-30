@@ -39,6 +39,14 @@ const log = console;
 
 window.DEVELOPMENT_TOOL_COOKIES_MANAGER = Cookies;
 
+const myEncode = (data) => {
+    return data; // 暂时不实现
+};
+
+const myDecode = (data) => {
+    return decodeURIComponent(data);
+};
+
 class Notice extends React.Component {
     constructor (props) {
         super(props);
@@ -46,6 +54,12 @@ class Notice extends React.Component {
             news: []
         };
         this.sentNews = false;
+    }
+
+    componentDidUpdate (prevProps) {
+        if (this.props.userLoggedIn && !prevProps.userLoggedIn) {
+            this.getNews(); // 将用户登录才能查看的新闻立刻显示出来
+        }
     }
 
     getNews () {
@@ -63,12 +77,12 @@ class Notice extends React.Component {
                 if (!this.props.userLoggedIn && item.need_login) {
                     continue;
                 }
-                const watched = Cookies.get('scratch-news') ? JSON.parse(Cookies.get('scratch-news')) : {};
+                const watched = Cookies.get('scratch-news') ? JSON.parse(myDecode(Cookies.get('scratch-news'))) : {};
                 if (watched[item.id] == item.update_time) {
                     continue;
                 }
                 watched[item.id] = item.update_time;
-                Cookies.set('scratch-news', JSON.stringify(watched), {
+                Cookies.set('scratch-news', myEncode(JSON.stringify(watched)), {
                     expires: 20,
                     domain: '.scratch-cw.top',  // 关键配置：允许主域名和所有子域名访问
                     path: '/',
