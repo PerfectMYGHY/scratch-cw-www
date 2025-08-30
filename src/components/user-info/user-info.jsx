@@ -235,10 +235,10 @@ class UserInfo extends React.Component {
                     thumbnailUrl: await this.getUserHeadPhotoURL()
                 });
             } else {
-                alert(`上传失败！错误信息：${data.msg}`);
                 throw new Error(`上传失败！错误信息：${data.msg}`);
             }
         } catch (error) {
+            alert(`上传失败！错误信息：${error.message}`);
             throw error;
         }
     }
