@@ -10,7 +10,7 @@ if (!(process.env.PROJECT_HOST && process.env.API_HOST)) { // 如果未配置则
     process.env.BASE_HOST = 'https://www.scratch-cw.top';
     process.env.PORT = 8001;
     process.env.ROUTING_STYLE = 'wildcard';
-    process.env.CLOUDDATA_HOST = 'wss://cloud.scratch-cw.top:8765';
+    process.env.CLOUDDATA_HOST = 'wss://cloud.scratch-cw.top';
 }
 
 const defaults = require('lodash.defaults');

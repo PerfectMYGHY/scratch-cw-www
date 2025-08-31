@@ -11,7 +11,7 @@ process.env.STATIC_HOST = `${PROJECT_SERVER}/staticServer`;
 process.env.BASE_HOST = 'https://www.scratch-cw.top';
 process.env.PORT = 8001;
 process.env.ROUTING_STYLE = 'wildcard';
-process.env.CLOUDDATA_HOST = 'wss://cloud.scratch-cw.top:8765';
+process.env.CLOUDDATA_HOST = 'wss://cloud.scratch-cw.top';
 process.env.USING_MIDDLEWARE = true;
 
 const express = require('express');
