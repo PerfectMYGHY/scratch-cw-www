@@ -6,7 +6,6 @@ const classNames = require('classnames');
 const React = require('react');
 const PropTypes = require('prop-types');
 const {connect} = require('react-redux');
-const {compose} = require('redux');
 const injectIntl = require('react-intl').injectIntl;
 const parser = require('scratch-parser');
 const queryString = require('query-string');
@@ -52,13 +51,8 @@ if (GUI.AddonChannels.changeChannel) {
     });
 }
 
-const users = require('/src/users');
-const Cookies = require('js-cookie');
-const setting = require('/src/setting');
 
 const localStorageAvailable = 'localStorage' in window && window.localStorage !== null;
-
-const xhr = require('xhr');
 
 const Notice = require('../../components/notice/notice.jsx');
 
@@ -151,6 +145,8 @@ class Preview extends React.Component {
         };
         /* In the beginning, if user is on mobile and landscape, go to fullscreen */
         this.setScreenFromOrientation();
+
+        this.started_addons = false;
     }
     componentDidMount () {
         this.addEventListeners();
@@ -294,7 +290,7 @@ class Preview extends React.Component {
                 let body;
                 try {
                     // Since we didn't set json: true, we have to parse manually
-                    body = typeof response.body == "object" ? response.body : JSON.parse(response.body);
+                    body = typeof response.body === 'object' ? response.body : JSON.parse(response.body);
                 } catch (e) {
                     return reject(e);
                 }
@@ -747,13 +743,10 @@ class Preview extends React.Component {
 
     handleClickAddonSettings (addonId) {
         // addonId might be a string of the addon to focus on, undefined, or an event (treat like undefined)
-        // var process = {
-        //    env: {
-        //        ROUTING_STYLE: "html"
-        //    }
-        // };
         const path = process.env.ROUTING_STYLE === 'wildcard' ? 'addons' : 'addons.html';
-        const url = `${window.location.pathname[window.location.pathname.length - 1] === '/' ? window.location.pathname : `${window.location.pathname}/`}${path}${typeof addonId === 'string' ? `#${addonId}` : ''}`;
+        const url = `${window.location.pathname[window.location.pathname.length - 1] === '/' ?
+            window.location.pathname :
+            `${window.location.pathname}/`}${path}${typeof addonId === 'string' ? `#${addonId}` : ''}`;
         window.open(url);
     }
 
@@ -789,6 +782,7 @@ class Preview extends React.Component {
                         <PreviewPresentation
                             customStageSize={this.props.customStageSize}
                             IntlGUI={IntlGUI}
+                            runAddons={GUI.runAddons}
                             addToStudioOpen={this.state.addToStudioOpen}
                             adminModalOpen={this.state.adminModalOpen}
                             adminPanelOpen={this.state.adminPanelOpen}
@@ -1044,6 +1038,10 @@ Preview.propTypes = {
         message: PropTypes.string,
         deleted: PropTypes.bool,
         reshareable: PropTypes.bool
+    }),
+    customStageSize: PropTypes.shape({
+        width: PropTypes.number,
+        height: PropTypes.number
     })
 };
 

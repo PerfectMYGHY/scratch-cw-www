@@ -8,9 +8,6 @@ const React = require('react');
 const Formsy = require('formsy-react').default;
 const classNames = require('classnames');
 
-// const GUI = require('scratch-gui');
-// const IntlGUI = injectIntl(GUI.default);
-
 const AdminPanel = require('../../components/adminpanel/adminpanel.jsx');
 const CommentingStatus = require('../../components/commenting-status/commenting-status.jsx');
 const decorateText = require('../../lib/decorate-text.jsx');
@@ -39,8 +36,6 @@ const EmailConfirmationBanner = require('../../components/dropdown-banner/email-
 const projectShape = require('./projectshape.jsx').projectShape;
 require('./preview.scss');
 
-const Notice = require('../../components/notice/notice.jsx');
-
 const frameless = require('../../lib/frameless');
 
 // disable enter key submission on formsy input fields; otherwise formsy thinks
@@ -52,6 +47,8 @@ const onKeyPress = e => {
         e.target.blur();
     }
 };
+
+let started = false;
 
 const PreviewPresentation = ({
     addToStudioOpen,
@@ -146,7 +143,8 @@ const PreviewPresentation = ({
     userOwnsProject,
     visibilityInfo,
     IntlGUI,
-    customStageSize
+    customStageSize,
+    runAddons
 }) => {
     const shareDate = ((projectInfo.history && projectInfo.history.shared)) ? projectInfo.history.shared : '';
     const revisedDate = ((projectInfo.history && projectInfo.history.modified)) ? projectInfo.history.modified : '';
@@ -233,6 +231,15 @@ const PreviewPresentation = ({
             ))}
         </FlexRow>
     );
+
+    // if (!started) {
+    //     setTimeout(() => {
+    //         // 启动TurboWarp插件
+    //         runAddons();
+    //     }, 1000);
+    //     started = true;
+    // }
+
     return (
         <div className="preview">
             {showEmailConfirmationModal && <EmailConfirmationModal
@@ -269,7 +276,12 @@ const PreviewPresentation = ({
                     <div
                         className="inner"
                         style={{
-                            width: `${942 - 480 + customStageSize.width < window.innerWidth ? 942 - 480 + customStageSize.width : (customStageSize.width < window.innerWidth ? window.innerWidth : customStageSize.width)}px`
+                            width: `${
+                                942 - 480 + customStageSize.width < window.innerWidth ?
+                                    942 - 480 + customStageSize.width :
+                                    (customStageSize.width < window.innerWidth ?
+                                        window.innerWidth : customStageSize.width)
+                            }px`
                         }}
                     >
                         <FlexRow className="preview-row force-row">
@@ -503,9 +515,7 @@ const PreviewPresentation = ({
                                                 )}
                                             </FormsyProjectUpdater> :
                                             <div className="project-description">
-                                                <Markdown
-                                                    getContent={content => content[0]}
-                                                >
+                                                <Markdown>
                                                     {decorateText(projectInfo.instructions, {
                                                         usernames: false,
                                                         hashtags: false,
@@ -558,9 +568,7 @@ const PreviewPresentation = ({
                                                 )}
                                             </FormsyProjectUpdater> :
                                             <div className="project-description">
-                                                <Markdown
-                                                    getContent={content => content[0]}
-                                                >
+                                                <Markdown>
                                                     {decorateText(projectInfo.description, {
                                                         usernames: false,
                                                         hashtags: false,
@@ -853,7 +861,13 @@ PreviewPresentation.propTypes = {
         message: PropTypes.string,
         deleted: PropTypes.bool,
         reshareable: PropTypes.bool
-    })
+    }),
+    IntlGUI: PropTypes.element,
+    customStageSize: PropTypes.shape({
+        width: PropTypes.number,
+        height: PropTypes.number
+    }),
+    runAddons: PropTypes.func
 };
 
 module.exports = injectIntl(PreviewPresentation);

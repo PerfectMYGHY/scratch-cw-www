@@ -2984,7 +2984,10 @@ function decodeBase64MarkdownUrl(dataUrl) {
 
 function Markdown(props) {
     const { children, getContent, base64Url, className, ...rest } = props;
-    const data = (getContent ? getContent(children) : children);
+    let data = (getContent ? getContent(children) : children);
+    if (data instanceof Array) {
+        data = data[0];
+    }
     return (
         <div dangerouslySetInnerHTML={{ __html: mdHtml.render((base64Url ? decodeBase64MarkdownUrl(data) : data)) }} {...rest} className={"markdown "+className}></div>
     );

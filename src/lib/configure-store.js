@@ -39,9 +39,6 @@ const configureStore = (reducers, initialState, enhancer, GUI) => {
     const store = currentStore;
     if (GUI) {
         GUI.AddonHooks.appStateStore = store;
-        setTimeout(() => {
-            GUI.runAddons();
-        }, 2000);
     }
     return store;
 };

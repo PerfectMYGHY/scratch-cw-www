@@ -60,12 +60,12 @@ class ContactUs extends React.Component {
                                 <a href="/faq"><FormattedMessage id="contactUs.faqLinkText" /></a>
                             )}}
                         /></p>
-                        {/*<h3>*/}
+                        {/* <h3>*/}
                         {/*    <FormattedMessage id="contactUs.askCommunity" />*/}
-                        {/*</h3>*/}
-                        {/*<p><FormattedMessage id="contactUs.forumsIntro" /></p>*/}
-                        {/*<p><FormattedMessage id="contactUs.forumsHelp" /></p>*/}
-                        {/*<ul>*/}
+                        {/* </h3>*/}
+                        {/* <p><FormattedMessage id="contactUs.forumsIntro" /></p>*/}
+                        {/* <p><FormattedMessage id="contactUs.forumsHelp" /></p>*/}
+                        {/* <ul>*/}
                         {/*    <li><FormattedMessage*/}
                         {/*        id="contactUs.questionsText"*/}
                         {/*        values={{questionsLink: (*/}
@@ -84,7 +84,7 @@ class ContactUs extends React.Component {
                         {/*            <a href="/discuss/3/"><FormattedMessage id="contactUs.bugsLinkText" /></a>*/}
                         {/*        )}}*/}
                         {/*    /></li>*/}
-                        {/*</ul>*/}
+                        {/* </ul>*/}
                         <h3>
                             <FormattedMessage id="contactUs.needSupport" />
                         </h3>
@@ -100,20 +100,20 @@ class ContactUs extends React.Component {
                                             subject={this.state.subject}
                                         />
                                     ),
-                                        email: (
+                                    email: (
                                         <a>916881890@qq.com</a>
                                     )}}
                                 />
                             </p>
                         )}
                     </section>
-                    {/*{!this.state.showForm && (*/}
+                    {/* {!this.state.showForm && (*/}
                     {/*    <HelpWidget*/}
                     {/*        button*/}
                     {/*        body={this.state.body}*/}
                     {/*        subject={this.state.subject}*/}
                     {/*    />*/}
-                    {/*)}*/}
+                    {/* )}*/}
                 </div>
                 <nav>
                     <ol>
@@ -121,13 +121,13 @@ class ContactUs extends React.Component {
                         <li><a href="/faq"><FormattedMessage id="contactUs.faqLinkText" /></a></li>
                     </ol>
                 </nav>
-                {/*{this.state.showForm && (*/}
+                {/* {this.state.showForm && (*/}
                 {/*    <HelpForm*/}
                 {/*        body={this.state.body}*/}
                 {/*        subject={this.state.subject}*/}
                 {/*        title={this.props.intl.formatMessage({id: 'contactUs.contactScratch'})}*/}
                 {/*    />*/}
-                {/*)}*/}
+                {/* )}*/}
             </InformationPage>
         );
     }

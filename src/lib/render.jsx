@@ -19,6 +19,7 @@ require('../main.scss');
  * @param  {array}  reducers  list of view-specific reducers
  * @param  {object} initialState   optional initialState for store
  * @param  {bool}   enhancer  whether or not to apply redux-throttle middleware
+ * @param  {object} GUI       ScratchGUI库文件
  */
 const render = (jsx, element, reducers, initialState, enhancer, GUI) => {
     // Get locale and messages from global namespace (see "init.js")
