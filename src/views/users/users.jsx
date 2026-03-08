@@ -21,7 +21,7 @@ const {connect} = require('react-redux');
 
 require('./users.scss');
 
-const isSubset = (obj1, obj2, debug = false) => {
+const isSubset = (obj1, obj2) => {
     for (const key in obj1) {
         if (!(key in obj2) || obj1[key] !== obj2[key]) {
             return false;
@@ -58,7 +58,7 @@ class Users extends React.Component {
         }
     }
 
-    makeHandleUpdate (typ) {
+    makeHandleUpdate () {
         return data => {
             requestAPI(`setInfo/${this.state.info.user.id}`, data);
         };
@@ -104,8 +104,9 @@ class Users extends React.Component {
                         href={`/users/${user.user.username}/`}
                         key={['users', user.user.id].join('.')}
                         src={user.user.thumbnailUrl}
-                        title={user.user.username}
+                        title={user.user.nickname}
                         type="user"
+                        alt={`${user.user.nickname}(${user.user.username})`}
                     />);
                 }
                 if (!isEqual(this.state.fans, fans)) {
@@ -126,8 +127,9 @@ class Users extends React.Component {
                         href={`/users/${user.user.username}/`}
                         key={['users', user.user.id].join('.')}
                         src={user.user.thumbnailUrl}
-                        title={user.user.username}
+                        title={user.user.nickname}
                         type="user"
+                        alt={`${user.user.nickname}(${user.user.username})`}
                     />);
                 }
                 if (!isEqual(this.state.followings, followings)) {

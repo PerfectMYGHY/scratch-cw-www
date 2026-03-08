@@ -224,8 +224,8 @@ class Search extends React.Component {
                                         <FormattedMessage id="general.projects" />
                                     </div>
                                 )
-                            },
-                            //{
+                            }// ,
+                            // {
                             //    name: 'studios',
                             //    onTrigger: () => {
                             //        const termText = this.encodeSearchTerm();
@@ -252,7 +252,7 @@ class Search extends React.Component {
                             //            <FormattedMessage id="general.studios" />
                             //        </div>
                             //    )
-                            //}
+                            // }
                         ]}
                         activeTabName={this.state.tab}
                     />

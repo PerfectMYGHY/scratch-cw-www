@@ -80,7 +80,11 @@ const Thumbnail = props => {
             </a>
         );
     } else {
-        imgElement = <img src={props.src} />;
+        imgElement = (<img
+            src={props.src}
+            alt={props.alt}
+            title={props.alt}
+        />);
         titleElement = props.title;
     }
 
@@ -92,7 +96,12 @@ const Thumbnail = props => {
                 className="thumbnail-creator"
                 key="creator"
             >
-                <a href={`/users/${props.creator}/`}>{props.creator}</a>
+                <a
+                    href={`/users/${props.creator}/`}
+                    alt={props.creator}
+                >
+                    {props.creator_nickname}
+                </a>
             </div>
         );
     }
@@ -135,6 +144,7 @@ Thumbnail.propTypes = {
     avatar: PropTypes.string,
     className: PropTypes.string,
     creator: PropTypes.string,
+    creator_nickname: PropTypes.string,
     favorites: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     href: PropTypes.string,
     linkTitle: PropTypes.bool,

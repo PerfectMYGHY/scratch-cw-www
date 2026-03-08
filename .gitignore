@@ -13,6 +13,9 @@ npm-*
 /intl
 /.vs
 /www - 副本
+/.ideak
+
+/backup/
 
 # Scratch Excutable Files
 /static/desktop/Scratch Setup.exe

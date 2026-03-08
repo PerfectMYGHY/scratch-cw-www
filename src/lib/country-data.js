@@ -411,10 +411,6 @@ const countryInfo = module.exports.countryInfo = [
         name: 'Honduras',
         code: 'hn'
     },
-    //{
-    //    name: 'Hong Kong',
-    //    code: 'hk'
-    //},
     {
         name: 'Hungary',
         code: 'hu'
@@ -541,10 +537,6 @@ const countryInfo = module.exports.countryInfo = [
         name: 'Luxembourg',
         code: 'lu'
     },
-    //{
-    //    name: 'Macao',
-    //    code: 'mo'
-    //},
     {
         name: 'Madagascar',
         code: 'mg'
@@ -892,10 +884,6 @@ const countryInfo = module.exports.countryInfo = [
         name: 'Syria',
         code: 'sy'
     },
-    //{
-    //    name: 'Taiwan',
-    //    code: 'tw'
-    //},
     {
         name: 'Tajikistan',
         code: 'tj'

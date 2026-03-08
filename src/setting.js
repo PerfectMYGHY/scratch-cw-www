@@ -1,7 +1,7 @@
 ﻿// setting 配置
 
 const setting = {
-    base: "https://users.scratch-cw.top/"
+    base: `${process.env.USER_HOST}/`
 };
 
 module.exports = setting;

@@ -29,6 +29,8 @@ class UsernameStep extends React.Component {
             'validatePasswordConfirmIfPresent',
             'validateUsernameIfPresent',
             'validateUsernameRemotelyWithCache',
+            'validateNicknameIfPresent',
+            'validateNicknameRemotelyWithCache',
             'validateForm'
         ]);
         this.state = {
@@ -38,6 +40,7 @@ class UsernameStep extends React.Component {
         // keeps us from submitting multiple requests for same data.
         this.usernameRemoteCache = Object.create(null);
         this.passwordRemoteCache = Object.create(null);
+        this.nicknameRemoteCache = Object.create(null);
     }
     componentDidMount () {
         // Send info to analytics when we aren't on the standalone page.
@@ -95,6 +98,40 @@ class UsernameStep extends React.Component {
             }
         );
     }
+    validateNicknameRemotelyWithCache (nickname) {
+        if (typeof this.nicknameRemoteCache[nickname] === 'object') {
+            return Promise.resolve(this.nicknameRemoteCache[nickname]);
+        }
+        // nickname is not in our cache
+        return validate.validateNicknameRemotely(nickname).then(
+            remoteResult => {
+                // cache result, if it successfully heard back from server
+                if (remoteResult.requestSucceeded) {
+                    this.nicknameRemoteCache[nickname] = remoteResult;
+                }
+                return remoteResult;
+            }
+        );
+    }
+    validateNicknameIfPresent (nickname) {
+        if (!nickname) return null; // skip validation if nickname is blank
+    
+        // 先本地验证
+        const localResult = validate.validateNicknameLocally(nickname);
+        if (!localResult.valid) {
+            return Promise.resolve(this.props.intl.formatMessage({id: localResult.errMsgId}));
+        }
+        
+        // 再远程验证（带缓存）
+        return this.validateNicknameRemotelyWithCache(nickname).then(
+            remoteResult => {
+                if (remoteResult.valid === false) {
+                    return this.props.intl.formatMessage({id: remoteResult.errMsgId});
+                }
+                return null;
+            }
+        );
+    }
     // memoize remote requests for weak password check
     validatePasswordRemotelyWithCache (password) {
         if (typeof this.passwordRemoteCache[password] === 'object') {
@@ -143,6 +180,10 @@ class UsernameStep extends React.Component {
         if (!usernameResult.valid) {
             errors.username = this.props.intl.formatMessage({id: usernameResult.errMsgId});
         }
+        const nicknameResult = validate.validateNicknameLocally(values.nickname);
+        if (!nicknameResult.valid) {
+            errors.nickname = this.props.intl.formatMessage({id: nicknameResult.errMsgId});
+        }
         const passwordResult = validate.validatePasswordLocally(values.password, values.username);
         if (!passwordResult.valid) {
             errors.password = this.props.intl.formatMessage({id: passwordResult.errMsgId});
@@ -164,6 +205,7 @@ class UsernameStep extends React.Component {
             <Formik
                 initialValues={{
                     username: '',
+                    nickname: '',
                     password: '',
                     passwordConfirm: '',
                     showPassword: true
@@ -225,6 +267,35 @@ class UsernameStep extends React.Component {
                                     onFocus={() => this.handleFocused('username')}
                                     /* eslint-enable react/jsx-no-bind */
                                     onSetRef={this.handleSetUsernameRef}
+                                />
+                                <div className="join-flow-input-title">
+                                    {this.props.intl.formatMessage({id: 'registration.createNickname'})}
+                                </div>
+                                <FormikInput
+                                    autoCapitalize="off"
+                                    autoComplete="off"
+                                    autoCorrect="off"
+                                    className={classNames(
+                                        'join-flow-input'
+                                    )}
+                                    error={errors.nickname}
+                                    id="nickname"
+                                    name="nickname"
+                                    placeholder={this.props.intl.formatMessage({id: 'general.nickname'})}
+                                    spellCheck={false}
+                                    toolTip={this.state.focused === 'nickname' && !touched.nickname &&
+                                        this.props.intl.formatMessage({id: 'registration.nicknameAdviceShort'})}
+                                    validate={this.validateNicknameIfPresent}
+                                    validationClassName="validation-full-width-input"
+                                    /* eslint-disable react/jsx-no-bind */
+                                    onBlur={() => validateField('nickname')}
+                                    onChange={e => {
+                                        setFieldValue('nickname', e.target.value.substring(0, 30));
+                                        setFieldTouched('nickname');
+                                        setFieldError('nickname', null);
+                                    }}
+                                    onFocus={() => this.handleFocused('nickname')}
+                                    /* eslint-enable react/jsx-no-bind */
                                 />
                                 <div className="join-flow-password-section">
                                     <div className="join-flow-input-title">

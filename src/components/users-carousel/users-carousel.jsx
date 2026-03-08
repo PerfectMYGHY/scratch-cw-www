@@ -6,7 +6,7 @@ const classNames = require('classnames');
 
 const frameless = require('../../lib/frameless.js');
 
-const UsersCarousel = (props) => {
+const UsersCarousel = props => {
     defaults(props.settings, {
         centerMode: false,
         dots: false,

@@ -58,7 +58,7 @@
         max-width: 100%;
     }
 
-    .validation-country {
+    .validation-province {
         top: .5rem;
     }
 
@@ -104,12 +104,12 @@
     }
 }
 
-.select .join-flow-select-country {
+.select .join-flow-select-province {
     width: 100%;
     margin: 0 auto;
 }
 
-.country-step-image {
+.province-step-image {
     background-color: $ui-purple;
 }
 
@@ -148,7 +148,7 @@
     padding-bottom: 1rem;
 }
 
-.join-flow-inner-country-step {
+.join-flow-inner-province-step {
     padding-top: 0;
     padding-bottom: 2.5rem;
 }
@@ -197,7 +197,7 @@
     margin-top: .5rem;
 }
 
-.join-flow-country-title {
+.join-flow-province-title {
     margin-top: 0;
     margin-bottom: 1.75rem;
 }

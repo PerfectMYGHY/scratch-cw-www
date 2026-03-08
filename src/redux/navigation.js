@@ -127,7 +127,8 @@ module.exports.handleLogIn = (formData, callback) => (dispatch => {
         uri: 'api/login',
         json: formData,
         useCsrf: true,
-        withCredentials: true
+        withCredentials: true,
+        afterCleanCsrfCache: true
     }, (err, body) => {
         if (err) dispatch(module.exports.setLoginError(err.message));
         if (body) {
@@ -165,7 +166,7 @@ module.exports.handleLogOut = () => (dispatch => {
         uri: 'api/logout',
         useCsrf: true,
         withCredentials: true
-    }, (err, body) => {
+    }, (err) => {
         if (err) return log.error('Error while logging out', err);
         dispatch(sessionActions.refreshSession());
     });

@@ -73,6 +73,7 @@ const Carousel = props => {
                 return (
                     <Thumbnail
                         creator={item.creator}
+                        creator_nickname={item.creator_nickname}
                         href={href}
                         key={[props.type, item.id].join('.')}
                         loves={item.love_count}
@@ -82,6 +83,7 @@ const Carousel = props => {
                         src={item.thumbnail_url}
                         title={item.title}
                         type={item.type}
+                        alt={`${item.title}(by ${item.creator})`}
                     />
                 );
             })}

@@ -18,6 +18,7 @@ const Grid = props => (
                         <Thumbnail
                             avatar={thumbnailUrl(item.author.id)}
                             creator={item.author.username}
+                            creator_nickname={item.author.nickname}
                             favorites={item.stats.favorites}
                             href={href}
                             key={key}

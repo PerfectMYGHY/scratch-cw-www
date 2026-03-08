@@ -188,7 +188,7 @@ class Navigation extends React.Component {
                                     isAdmin={this.props.permissions.admin}
                                     profileUrl={this.getProfileUrl()}
                                     thumbnailUrl={this.props.user.thumbnailUrl}
-                                    username={this.props.user.username}
+                                    nickname={this.props.user.nickname}
                                     onClick={this.props.handleToggleAccountNav}
                                     onClickLogout={this.props.handleLogOut}
                                     onClose={this.props.handleCloseAccountNav}
@@ -267,7 +267,8 @@ Navigation.propTypes = {
     user: PropTypes.shape({
         classroomId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
         thumbnailUrl: PropTypes.string,
-        username: PropTypes.string
+        username: PropTypes.string,
+        nickname: PropTypes.string
     })
 };
 

@@ -11,8 +11,23 @@ module.exports.validateUsernameLocally = username => {
         return {valid: false, errMsgId: 'registration.validationUsernameMaxLength'};
     } else if (/\s/i.test(username)) {
         return {valid: false, errMsgId: 'registration.validationUsernameSpaces'};
-    } else if (!/^[a-zA-Z0-9_\u4e00-\u9fa5-]+$/.test(username)) {
+    } else if (!/^[a-zA-Z0-9_-]+$/.test(username)) {
         return {valid: false, errMsgId: 'registration.validationUsernameRegexp'};
+    }
+    return {valid: true};
+};
+
+module.exports.validateNicknameLocally = nickname => {
+    if (!nickname || nickname === '') {
+        return {valid: false, errMsgId: 'general.required'};
+    } else if (nickname.length < 3) {
+        return {valid: false, errMsgId: 'registration.validationNicknameMinLength'};
+    } else if (nickname.length > 20) {
+        return {valid: false, errMsgId: 'registration.validationNicknameMaxLength'};
+    } else if (/\s/i.test(nickname)) {
+        return {valid: false, errMsgId: 'registration.validationNicknameSpaces'};
+    } else if (!/^[a-zA-Z0-9_\u4e00-\u9fa5-]+$/.test(nickname)) {
+        return {valid: false, errMsgId: 'registration.validationNicknameRegexp'};
     }
     return {valid: true};
 };
@@ -43,6 +58,37 @@ module.exports.validateUsernameRemotely = username => (
             case 'invalid username':
             default:
                 resolve({requestSucceeded: true, valid: false, errMsgId: 'registration.validationUsernameNotAllowed'});
+            }
+        });
+    })
+);
+
+module.exports.validateNicknameRemotely = nickname => (
+    new Promise(resolve => {
+        api({
+            uri: `/accounts/checknickname/${nickname}/` // 注意接口地址
+        }, (err, body, res) => {
+            if (err || res.statusCode !== 200) {
+                resolve({requestSucceeded: false, valid: false, errMsgId: 'general.error'});
+            }
+            // 解析响应（和用户名一样的格式）
+            let msg = '';
+            if (body && body.msg) msg = body.msg;
+            else if (body && body[0]) msg = body[0].msg;
+            
+            switch (msg) {
+            case 'valid nickname':
+                resolve({requestSucceeded: true, valid: true});
+                break;
+            case 'nickname exists':
+                resolve({requestSucceeded: true, valid: false, errMsgId: 'registration.validationNicknameExists'});
+                break;
+            case 'bad nickname': // 包含敏感词
+                resolve({requestSucceeded: true, valid: false, errMsgId: 'registration.validationNicknameNotAllowed'});
+                break;
+            case 'invalid nickname':
+            default:
+                resolve({requestSucceeded: true, valid: false, errMsgId: 'registration.validationNicknameNotAllowed'});
             }
         });
     })
@@ -133,7 +179,6 @@ module.exports.validateEmailLocally = email => {
 module.exports.validateEmailRemotely = email => (
     new Promise(resolve => {
         api({
-            //host: '', // not handled by API; use existing infrastructure
             params: {email: email},
             uri: '/accounts/check_email/'
         }, (err, body, res) => {

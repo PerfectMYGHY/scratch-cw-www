@@ -1,8 +1,23 @@
 // ENV设置
-if (!(process.env.PROJECT_HOST && process.env.API_HOST)) { // 如果未配置则使用默认
+if (process.env.USING_DEV_SERVER) {
+    const DEV_PORT = process.env.DEV_PORT || 8000;
+    const PROJECT_SERVER = `http://127.0.0.1:${DEV_PORT}`;
+    const ASSET_SERVER = `http://127.0.0.1:${DEV_PORT}`;
+    process.env.PROJECT_HOST = PROJECT_SERVER;
+    process.env.USER_HOST = `http://127.0.0.1:${DEV_PORT}`;
+    process.env.API_HOST = PROJECT_SERVER;
+    process.env.ASSET_HOST = `${ASSET_SERVER}/assets`;
+    process.env.BACKPACK_HOST = `${PROJECT_SERVER}/backpack`;
+    process.env.STATIC_HOST = `${PROJECT_SERVER}/staticServer`;
+    process.env.BASE_HOST = 'https://www.scratch-cw.top';
+    process.env.PORT = 8001;
+    process.env.ROUTING_STYLE = 'wildcard';
+    process.env.CLOUDDATA_HOST = 'wss://cloud.scratch-cw.top';
+} else if (!(process.env.PROJECT_HOST && process.env.API_HOST)) { // 如果未配置则使用默认
     const PROJECT_SERVER = 'https://projects.scratch-cw.top';
     const ASSET_SERVER = 'https://assets1.scratch-cw.top';
     process.env.PROJECT_HOST = PROJECT_SERVER;
+    process.env.USER_HOST = 'https://users.scratch-cw.top';
     process.env.API_HOST = PROJECT_SERVER;
     process.env.ASSET_HOST = `${ASSET_SERVER}/assets`;
     process.env.BACKPACK_HOST = `${PROJECT_SERVER}/backpack`;
@@ -12,6 +27,8 @@ if (!(process.env.PROJECT_HOST && process.env.API_HOST)) { // 如果未配置则
     process.env.ROUTING_STYLE = 'wildcard';
     process.env.CLOUDDATA_HOST = 'wss://cloud.scratch-cw.top';
 }
+
+const DEFAULT_RSK = '6Lf6kK4UAAAAABKTyvdSqgcSVASEnMrCquiAkjVW';
 
 const defaults = require('lodash.defaults');
 const gitsha = require('git-bundle-sha');
@@ -216,6 +233,14 @@ module.exports = [{
                     name: 'scratch',
                     chunks: 'all',
                     enforce: true
+                },
+                // 把 scratch-cw-verify 单独打包成一个 chunk
+                verifyChunk: {
+                    name: 'verifyChunk',
+                    test: /[\\/]node_modules[\\/]scratch-cw-verify[\\/]/,
+                    chunks: 'all',
+                    priority: 10, // 高优先级
+                    enforce: true // 强制打包
                 }
             }
         },
@@ -265,14 +290,14 @@ module.exports = [{
             filename: `${route.name}${contentHash}.html`,
             route: route,
             dynamicMetaTags: (false && route.dynamicMetaTags),
-            isProject: route.name == 'projects' || route.name == 'embed' || route.name == 'addons',
+            isProject: route.name === 'projects' || route.name === 'embed' || route.name === 'addons'
         }, templateConfig)))
     ).concat([
         new CopyWebpackPlugin({
             patterns: [
                 {from: 'static'},
                 {
-                    from: 'intl', 
+                    from: 'intl',
                     to: `js/[path][name]${contentHash}.js`
                 },
                 {
@@ -312,11 +337,12 @@ module.exports = [{
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': `"${process.env.NODE_ENV || 'development'}"`,
             'process.env.API_HOST': `"${process.env.API_HOST || 'https://api.scratch.mit.edu'}"`,
-            'process.env.RECAPTCHA_SITE_KEY': `"${process.env.RECAPTCHA_SITE_KEY || '6Lf6kK4UAAAAABKTyvdSqgcSVASEnMrCquiAkjVW'}"`,
+            'process.env.RECAPTCHA_SITE_KEY': `"${process.env.RECAPTCHA_SITE_KEY || DEFAULT_RSK}"`,
             'process.env.ASSET_HOST': `"${process.env.ASSET_HOST || 'https://assets.scratch.mit.edu'}"`,
             'process.env.BACKPACK_HOST': `"${process.env.BACKPACK_HOST || 'https://backpack.scratch.mit.edu'}"`,
             'process.env.CLOUDDATA_HOST': `"${process.env.CLOUDDATA_HOST || 'clouddata.scratch.mit.edu'}"`,
             'process.env.PROJECT_HOST': `"${process.env.PROJECT_HOST || 'https://projects.scratch.mit.edu'}"`,
+            'process.env.USER_HOST': `"${process.env.USER_HOST || 'https://users.scratch-cw.top'}"`,
             'process.env.STATIC_HOST': `"${process.env.STATIC_HOST || 'https://uploads.scratch.mit.edu'}"`,
             'process.env.SCRATCH_ENV': `"${process.env.SCRATCH_ENV || 'development'}"`,
             'process.env.BASE_HOST': `"${process.env.BASE_HOST}"`,

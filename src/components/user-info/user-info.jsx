@@ -10,32 +10,30 @@ const {connect} = require('react-redux');
 
 const setting = require('../../setting.js'); // 获取设置
 
-const fetch = (u, opts = {}) => { // 自定义使用api函数额fetch（因为内部包含CSRF Token验证）
-    return new Promise((resolve, reject) => {
-        if (opts.credentials == 'include') {
-            opts.withCredentials = true;
-            delete opts.credentials;
+const fetch = (u, opts = {}) => new Promise((resolve, reject) => {
+    if (opts.credentials === 'include') {
+        opts.withCredentials = true;
+        delete opts.credentials;
+    }
+    const url = new URL(u);
+    api({
+        host: url.origin,
+        uri: url.pathname,
+        ...opts
+    }, (err, body) => {
+        if (err) {
+            reject(err);
         }
-        const url = new URL(u);
-        api({
-            host: url.origin,
-            uri: url.pathname,
-            ...opts
-        }, (err, body, res) => {
-            if (err) {
-                reject(err);
+        if (opts.responseType === 'json' && typeof body === 'string') {
+            try {
+                body = JSON.parse(body);
+            } catch (e) {
+                reject(e);
             }
-            if (opts.responseType === 'json' && typeof body === 'string') {
-                try {
-                    body = JSON.parse(body);
-                } catch (e) {   
-                    reject(e);
-                }
-            }
-            resolve(body);
-        })
-    })
-}
+        }
+        resolve(body);
+    });
+});
 
 const requestAPI = (request_api, data, func, typ = 'POST', root) => {
     data = new URLSearchParams(data);
@@ -44,7 +42,7 @@ const requestAPI = (request_api, data, func, typ = 'POST', root) => {
     };
     if (typ === 'POST' || typ === 'PUT' || typ === 'DELETE' || typ === 'OPTTION') {
         inf.body = data;
-        inf.credentials = "include";
+        inf.credentials = 'include';
     }
     const req = fetch(`${root || setting.base}api/${request_api}`, inf);
     if (func) {
@@ -86,12 +84,12 @@ class UserInfo extends React.Component {
         }
     }
 
-    componentDidUpdate (prevProps, prevState) {
+    componentDidUpdate (prevProps) {
         if (!prevProps.uname && this.props.uname) {
             this.loadData();
         }
-        if (!prevProps.username && this.props.username // 如果用户名改变
-            && this.props.info && this.props.info.user && this.props.info.user.username // 并且当前查看用户信息已获取
+        if (!prevProps.username && this.props.username && // 如果用户名改变
+            this.props.info && this.props.info.user && this.props.info.user.username // 并且当前查看用户信息已获取
         ) {
             fetch(`${process.env.PROJECT_HOST}/users/${this.props.username}/followed/${this.props.info.user.username}/`)
                 .then(this.updateFollowingInfo);
@@ -103,7 +101,7 @@ class UserInfo extends React.Component {
         await requestAPI('getUserHeadPhotoURL', {
             user: this.props.info.user.username
         }).then(data => {
-            if (data.status === "success") {
+            if (data.status === 'success') {
                 ret = (data.type === 'base' ? setting.base.slice(0, -1) : '') + data.url;
             } else {
                 throw new Error('请求失败！');
@@ -135,19 +133,19 @@ class UserInfo extends React.Component {
                 const dateString = `${year}-${month}-${day}`;
                 let timeC = dateJoined.getYear() - (new Date().getYear());
                 let dw = '年';
-                if (timeC == 0) {
+                if (timeC === 0) {
                     timeC = dateJoined.getMonth() - (new Date().getMonth());
                     dw = '个月';
-                    if (timeC == 0) {
+                    if (timeC === 0) {
                         timeC = dateJoined.getDay() - (new Date().getDay());
                         dw = '天';
-                        if (timeC == 0) {
+                        if (timeC === 0) {
                             timeC = dateJoined.getHours() - (new Date().getHours());
                             dw = '时';
-                            if (timeC == 0) {
+                            if (timeC === 0) {
                                 timeC = dateJoined.getMinutes() - (new Date().getMinutes());
                                 dw = '分钟';
-                                if (timeC == 0) {
+                                if (timeC === 0) {
                                     timeC = dateJoined.getSeconds() - (new Date().getSeconds());
                                     dw = '秒';
                                 }
@@ -229,7 +227,7 @@ class UserInfo extends React.Component {
                 body: formData
             });
 
-            if (data.status === "success") {
+            if (data.status === 'success') {
                 this.setState({
                     photoUpdatedCount: this.state.photoUpdatedCount + 1,
                     thumbnailUrl: await this.getUserHeadPhotoURL()
@@ -339,13 +337,13 @@ class UserInfo extends React.Component {
                     this.state.followed !== -1 && this.state.followed &&
                     <Button
                         className="button uncollection-user"
-                        onClick={this.handleUnFollowUser.bind(this)}
+                        onClick={this.handleUnFollowUser}
                     >
                         {'取消关注'}
                     </Button>
                 }
                 <div className="header-text">
-                    <h2>{this.props.info.user && this.props.info.user.username}</h2>
+                    <h2>{this.props.info.user && this.props.info.user.nickname}</h2>
                     <div>
                         <p className="profile-details">
 
@@ -377,6 +375,7 @@ UserInfo.propTypes = {
             banned: PropTypes.bool,
             should_vpn: PropTypes.bool,
             username: PropTypes.string,
+            nickname: PropTypes.string,
             token: PropTypes.string,
             thumbnailUrl: PropTypes.string,
             dateJoined: PropTypes.string,

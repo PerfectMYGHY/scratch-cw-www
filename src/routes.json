@@ -356,7 +356,7 @@
   },
   {
     "name": "users",
-    "pattern": "^/users/\\w+/?(\\\\?.*)?$",
+    "pattern": "^/users/[a-zA-Z0-9_-]+/?(\\\\?.*)?$",
     "routeAlias": "/users/?$",
     "view": "users/users",
     "title": "用户主页"

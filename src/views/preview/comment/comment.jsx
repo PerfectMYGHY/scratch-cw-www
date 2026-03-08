@@ -156,7 +156,7 @@ class Comment extends React.Component {
                             className="username"
                             href={`/users/${author.username}`}
                         >
-                            {author.username}{author.scratchteam ? '*' : ''}
+                            {author.nickname}{author.scratchteam ? '*' : ''}
                         </a>
                         <div className="action-list">
                             {visible ? (
@@ -278,7 +278,8 @@ Comment.propTypes = {
         id: PropTypes.number,
         image: PropTypes.string,
         scratchteam: PropTypes.bool,
-        username: PropTypes.string
+        username: PropTypes.string,
+        nickname: PropTypes.string
     }),
     canDelete: PropTypes.bool,
     canDeleteWithoutConfirm: PropTypes.bool,

@@ -13,13 +13,15 @@ import FlexRow from '../../flex-row/flex-row.jsx';
 import Modal from '../base/modal.jsx';
 require('./modal.scss');
 
+const TIMER_COUNT = 10;
+
 class ImportantNewsModal extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            counter: -1,
+            counter: -1, // future me! 这里必须是-1，后面改为0，这样定时器才能成功触发！
             currentNews: {},
-            timerTime: 10,
+            timerTime: TIMER_COUNT,
             newsReadState: []
         };
         bindAll(this, [
@@ -29,7 +31,7 @@ class ImportantNewsModal extends React.Component {
         this.timer = null;
     }
 
-    componentDidUpdate (prevProps, prevState, snapshot) {
+    componentDidUpdate (prevProps, prevState) {
         if (!isEqual(this.props.news, {}) && !isEqual(this.state.currentNews, this.props.news[this.state.counter])) {
             this.setState({
                 currentNews: this.props.news[this.state.counter],
@@ -47,7 +49,7 @@ class ImportantNewsModal extends React.Component {
                 }
             } else {
                 this.setState({
-                    timerTime: 10
+                    timerTime: TIMER_COUNT
                 });
                 if (this.timer) {
                     clearInterval(this.timer);
@@ -101,7 +103,7 @@ class ImportantNewsModal extends React.Component {
         };
         const title = this.state.currentNews && this.state.currentNews.headline;
         const newsType = this.state.currentNews && typeToText[this.state.currentNews.type];
-        const other = this.state.currentNews && this.state.currentNews.need_login ? "普通新闻" : "重量级新闻";
+        const other = this.state.currentNews && this.state.currentNews.need_login ? '普通新闻' : '重量级新闻';
         return (
             <Modal
                 className="important-news-modal"
@@ -140,9 +142,7 @@ class ImportantNewsModal extends React.Component {
                             dangerouslySetInnerHTML={{
                                 __html: this.state.currentNews && this.state.currentNews.copy
                             }}
-                        >
-
-                        </div>
+                        />
                     </div>
                 </div>
                 <FlexRow className="guide-footer">

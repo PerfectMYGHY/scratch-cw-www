@@ -5,38 +5,7 @@ const jar = require('./jar');
 const log = require('./log');
 const urlParams = require('./url-params');
 
-const CHARS = "abcdefghijklmnopqrstuvwxyz0123456789";
-
-function bytesSum(hexStr) {
-  const bytes = new Uint8Array(hexStr.match(/../g).map(h => parseInt(h, 16)));
-  return Array.from(bytes).reduce((sum, b) => sum + b, 0);
-}
-
-function caesarEncrypt(text, shift) {
-  return text.split('').map(c => {
-    const idx = CHARS.indexOf(c);
-    const newIdx = (idx + shift) % 36;
-    return CHARS[newIdx];
-  }).join('');
-}
-
-const verify = async (opts) => {
-    // 1. 获取验证Cookie
-    const {varifycode} = await fetch(`${new URL(opts.uri).origin}/api/verify/`, {
-        credentials: 'include'
-    }).then(res => res.json());
-  
-    // 2. 读取Cookie并计算
-    const verifyCode = varifycode;
-    const byteSum = bytesSum(verifyCode);
-    const secretKey = (byteSum % 102456 * 76332) % 78093;
-    const encrypted = caesarEncrypt(verifyCode, secretKey);
-
-    // 3. 获取CSRF Token
-    return await fetch(`${new URL(opts.uri).origin}/api/csrf_token/?verifycode=${verifyCode}&test=${encrypted}`, {
-            credentials: 'include'
-        }).then(res => res.json());
-};
+const verify = require('scratch-cw-verify');
 
 /**
  * Helper method that constructs requests to the scratch api.
@@ -55,7 +24,8 @@ module.exports = (opts, callback) => {
         headers: {},
         responseType: 'json',
         useCsrf: opts.method !== 'GET',
-        withCredentials: true
+        withCredentials: true,
+        afterCleanCsrfCache: false
     });
 
     if (opts.host === '') {
@@ -76,7 +46,7 @@ module.exports = (opts, callback) => {
         opts.headers['Content-Type'] = 'application/x-www-form-urlencoded';
     }
 
-    const apiRequest = options => {
+    const apiRequest = (options, cb2) => {
         if (options.host !== '') {
             if ('withCredentials' in new XMLHttpRequest()) {
                 options.useXDR = false;
@@ -116,6 +86,9 @@ module.exports = (opts, callback) => {
                 // do nothing
             }
             callback(err, body, res);
+            if (cb2) {
+                cb2();
+            }
         });
     };
 
@@ -123,13 +96,19 @@ module.exports = (opts, callback) => {
         opts.headers['Accept-Language'] = `${jar.get('scratchlanguage')}, en;q=0.8`;
     }
     if (opts.useCsrf) {
-        verify(opts).then(data => {
+        verify(opts).then(data => new Promise(resolve => {
             opts.headers['X-CSRFToken'] = data.csrf_token;
-            apiRequest(opts);
-        }).catch(err => {
-            log.error('Error while retrieving CSRF token', err);
-            apiRequest(opts);
-        });
+            apiRequest(opts, () => {
+                resolve();
+            });
+            if (opts.afterCleanCsrfCache) {
+                verify.clean_cache();
+            }
+        }))
+            .catch(err => {
+                log.error('Error while retrieving CSRF token', err);
+                apiRequest(opts);
+            });
     } else {
         apiRequest(opts);
     }

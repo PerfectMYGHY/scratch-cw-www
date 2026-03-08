@@ -1,21 +1,13 @@
 ﻿import PropTypes from 'prop-types';
 
-const React = require('react');
-
-const Box = require('../../components/box/box.jsx');
+import React, {createRef} from 'react';
 
 const Page = require('../../components/page/www/page.jsx');
-const InplaceInput = require('../../components/forms/inplace-input.jsx');
 const render = require('../../lib/render.jsx');
-const Formsy = require('formsy-react').default;
-const decorateText = require('../../lib/decorate-text.jsx');
-const Markdown = require('../../components/markdown/markdown.jsx').default;
-const Carousel = require('../../components/carousel/carousel.jsx');
-const Thumbnail = require('../../components/thumbnail/thumbnail.jsx');
-import UserBox, {requestAPI} from '../../components/user-box/user-box.jsx';
-const UsersCarousel = require('../../components/users-carousel/users-carousel.jsx');
-const isEqual = require('lodash.isequal');
+const Button = require('../../components/forms/button.jsx');
+import UserBox from '../../components/user-box/user-box.jsx';
 const bindAll = require('lodash.bindall');
+const {requestAPI} = require('../../components/user-info/user-info.jsx');
 
 const {connect} = require('react-redux');
 
@@ -29,8 +21,14 @@ class Settings extends React.Component {
         };
         bindAll(this, [
             'setInfo',
-            'customLoadData'
+            'customLoadData',
+            'handleUsernameChange',
+            'handleNicknameChange'
         ]);
+        this.uc_username_ref = createRef();
+        this.uc_password_ref = createRef();
+        this.nc_nickname_ref = createRef();
+        this.nc_password_ref = createRef();
     }
 
     setInfo () {
@@ -39,6 +37,30 @@ class Settings extends React.Component {
 
     customLoadData () {
 
+    }
+
+    handleUsernameChange () {
+        const username = this.uc_username_ref.current.value;
+        const password = this.uc_password_ref.current.value;
+        requestAPI('username/change/', {username: username, password: password}, data => {
+            if (data.status === 'success') {
+                alert('设置用户名成功！刷新页面即可生效！');
+            } else {
+                alert(`设置用户名失败，信息：${data.msg}`);
+            }
+        });
+    }
+
+    handleNicknameChange () {
+        const nickname = this.nc_nickname_ref.current.value;
+        const password = this.nc_password_ref.current.value;
+        requestAPI('nickname/change/', {username: nickname, password: password}, data => {
+            if (data.status === 'success') {
+                alert('设置用户名成功！刷新页面即可生效！');
+            } else {
+                alert(`设置用户名失败，信息：${data.msg}`);
+            }
+        });
     }
 
     render () {
@@ -60,7 +82,49 @@ class Settings extends React.Component {
                     <div>
                         <h3>账号信息</h3>
                         <p>用户名：{this.props.username}</p>
-                        <i>功能正在制作中...</i>
+                        <p>用户昵称：{this.props.nickname}</p>
+                        <hr />
+                        <h3>修改用户名</h3>
+                        <p>
+                            <label htmlFor="new_username">新的用户名：</label>
+                            <input
+                                name="new_username"
+                                id="new_username"
+                                ref={this.uc_username_ref}
+                            />
+                        </p>
+                        <p>
+                            <label htmlFor="uc_password">密码确认：</label>
+                            <input
+                                name="uc_password"
+                                id="uc_password"
+                                ref={this.uc_password_ref}
+                            />
+                        </p>
+                        <Button onClick={this.handleUsernameChange}>
+                            确定
+                        </Button>
+                        <hr />
+                        <h3>修改昵称</h3>
+                        <p>
+                            <label htmlFor="new_nickname">新的昵称：</label>
+                            <input
+                                name="new_nickname"
+                                id="new_nickname"
+                                ref={this.nc_nickname_ref}
+                            />
+                        </p>
+                        <p>
+                            <label htmlFor="nc_password">密码确认：</label>
+                            <input
+                                name="nc_password"
+                                id="nc_password"
+                                ref={this.nc_password_ref}
+                            />
+                        </p>
+                        <Button onClick={this.handleNicknameChange}>
+                            确定
+                        </Button>
                         <hr />
                         <h3>注销账号</h3>
                         <p>
@@ -80,13 +144,15 @@ class Settings extends React.Component {
 }
 
 Settings.propTypes = {
-    username: PropTypes.string
+    username: PropTypes.string,
+    nickname: PropTypes.string
 };
 
 const mapStateToProps = state => {
     const user = state.session && state.session.session && state.session.session.user;
     return {
-        username: user && user.username
+        username: user && user.username,
+        nickname: user && user.nickname
     };
 };
 

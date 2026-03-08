@@ -143,8 +143,7 @@ const PreviewPresentation = ({
     userOwnsProject,
     visibilityInfo,
     IntlGUI,
-    customStageSize,
-    runAddons
+    customStageSize
 }) => {
     const shareDate = ((projectInfo.history && projectInfo.history.shared)) ? projectInfo.history.shared : '';
     const revisedDate = ((projectInfo.history && projectInfo.history.modified)) ? projectInfo.history.modified : '';
@@ -232,14 +231,6 @@ const PreviewPresentation = ({
         </FlexRow>
     );
 
-    // if (!started) {
-    //     setTimeout(() => {
-    //         // 启动TurboWarp插件
-    //         runAddons();
-    //     }, 1000);
-    //     started = true;
-    // }
-
     return (
         <div className="preview">
             {showEmailConfirmationModal && <EmailConfirmationModal
@@ -323,7 +314,7 @@ const PreviewPresentation = ({
                                             </FormsyProjectUpdater>
                                             {'by '}
                                             <a href={`/users/${projectInfo.author.username}`}>
-                                                {projectInfo.author.username}
+                                                {projectInfo.author.nickname}
                                             </a>
                                         </React.Fragment> :
                                         <React.Fragment>
@@ -333,7 +324,7 @@ const PreviewPresentation = ({
                                             >{projectInfo.title}</div>
                                             {'by '}
                                             <a href={`/users/${projectInfo.author.username}`}>
-                                                {projectInfo.author.username}
+                                                {projectInfo.author.nickname}
                                             </a>
                                         </React.Fragment>
                                     }

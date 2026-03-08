@@ -344,6 +344,7 @@
     <!-- Vendor & Initialize (Session & Localization)-->
     <script defer src="<%= htmlWebpackPlugin.files.chunks.common.entry %>"></script>
     <script defer src="<%= htmlWebpackPlugin.files.chunks.formatjs.entry %>"></script>
+    <script defer src="<%= htmlWebpackPlugin.files.chunks.verifyChunk.entry %>"></script>
     <% if (htmlWebpackPlugin.options.isProject) { %>
     <script defer src="<%= htmlWebpackPlugin.files.chunks.scratch.entry %>"></script>
     <% } %>

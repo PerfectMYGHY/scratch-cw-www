@@ -1,17 +1,6 @@
 // ENV设置
 
-// process.env.VIEW = "preview/preview";
-const PROJECT_SERVER = 'https://projects.scratch-cw.top';
-const ASSET_SERVER = 'https://assets1.scratch-cw.top';
-process.env.PROJECT_HOST = PROJECT_SERVER;
-process.env.API_HOST = PROJECT_SERVER;
-process.env.ASSET_HOST = `${ASSET_SERVER}/assets`;
-process.env.BACKPACK_HOST = `${PROJECT_SERVER}/backpack`;
-process.env.STATIC_HOST = `${PROJECT_SERVER}/staticServer`;
-process.env.BASE_HOST = 'https://www.scratch-cw.top';
-process.env.PORT = 8001;
-process.env.ROUTING_STYLE = 'wildcard';
-process.env.CLOUDDATA_HOST = 'wss://cloud.scratch-cw.top';
+process.env.USING_DEV_SERVER = true;
 process.env.USING_MIDDLEWARE = true;
 
 const express = require('express');

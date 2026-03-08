@@ -17,7 +17,7 @@ const AccountNav = ({
     isAdmin,
     profileUrl,
     thumbnailUrl,
-    username,
+    nickname,
     onClick,
     onClickLogout,
     onClose
@@ -37,7 +37,7 @@ const AccountNav = ({
                 src={thumbnailUrl}
             />
             <span className="profile-name">
-                {username}
+                {nickname}
             </span>
         </a>
         <Dropdown
@@ -76,12 +76,12 @@ const AccountNav = ({
                 </a>
             </li>
             {isAdmin && [
-                <li>
+                <li key="admin-wait-projects">
                     <a href="/scratch-admin/wait/projects/">
                         A:查看待审核项目
                     </a>
                 </li>,
-                <li>
+                <li key="admin-wait-reports">
                     <a href="/scratch-admin/wait/reports/">
                         A:查看待审核的举报
                     </a>
@@ -109,7 +109,8 @@ AccountNav.propTypes = {
     onClose: PropTypes.func,
     profileUrl: PropTypes.string,
     thumbnailUrl: PropTypes.string,
-    username: PropTypes.string
+    nickname: PropTypes.string,
+    isAdmin: PropTypes.bool
 };
 
 module.exports = injectIntl(AccountNav);
