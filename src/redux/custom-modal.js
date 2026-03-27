@@ -5,7 +5,9 @@ const Types = keyMirror({
     // ShareModal
     OPEN_SHARE_MODAL: null,
     CLOSE_SHARE_MODAL: null,
-    SET_SHARE_MODAL_OPTIONS: null
+    SET_SHARE_MODAL_OPTIONS: null,
+    // CoverUploader
+    SET_CURRENT_COVER_URL: null
 });
 
 module.exports.Status = keyMirror({
@@ -16,7 +18,8 @@ module.exports.Status = keyMirror({
 module.exports.getInitialState = () => ({
     // ShareModal
     share_modal: module.exports.Status.MODAL_CLOSED,
-    current_options: {}
+    current_options: {},
+    cover: ''
 });
 
 module.exports.customModalReducer = (state, action) => {
@@ -31,12 +34,14 @@ module.exports.customModalReducer = (state, action) => {
         return defaults({share_modal: module.exports.Status.MODAL_CLOSED}, state);
     case Types.SET_SHARE_MODAL_OPTIONS:
         return defaults({current_options: action.options}, state);
+    case Types.SET_CURRENT_COVER_URL:
+        return defaults({cover: action.options}, state);
     default:
         return state;
     }
 };
 
-module.exports.openShareModal = (options) => ({
+module.exports.openShareModal = options => ({
     type: Types.OPEN_SHARE_MODAL,
     options
 });
@@ -45,8 +50,13 @@ module.exports.closeShareModal = () => ({
     type: Types.CLOSE_SHARE_MODAL
 });
 
-module.exports.setShareModalOptions = (options) => ({
+module.exports.setShareModalOptions = options => ({
     type: Types.SET_SHARE_MODAL_OPTIONS,
+    options
+});
+
+module.exports.setCoverURL = options => ({
+    type: Types.SET_CURRENT_COVER_URL,
     options
 });
 

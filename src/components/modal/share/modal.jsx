@@ -1,23 +1,22 @@
 const React = require('react');
-const ReactDOM = require('react-dom');
 const Modal = require('../base/modal.jsx');
-const ModalTitle = require('../base/modal-title.jsx');
 const ModalInnerContent = require('../base/modal-inner-content.jsx');
-const classNames = require('classnames');
 const Button = require('../../forms/button.jsx');
-const { createRef } = require('react');
+const {createRef} = require('react');
 const {connect} = require('react-redux');
 const bindAll = require('lodash.bindall');
-const isEqual = require('lodash.isequal');
 const PropTypes = require('prop-types');
-const {openShareModal, closeShareModal, getShareModalIsOpen, getShareModalOptions} = require('../../../redux/custom-modal.js');
+const {
+    openShareModal, closeShareModal, getShareModalIsOpen, getShareModalOptions
+} = require('../../../redux/custom-modal.js');
 const {getCurrentStore} = require('../../../lib/configure-store.js');
 const CoverUploader = require('../../cover-uploader/cover-uploader.jsx');
+const previewActions = require('../../../redux/preview');
 
 require('./modal.scss');
 
 class ShareModal extends React.Component {
-    constructor(props) {
+    constructor (props) {
         super(props);
         this.state = {
             coverPreview: null,
@@ -27,21 +26,23 @@ class ShareModal extends React.Component {
         this.instructionsRef = createRef();
         this.descriptionRef = createRef();
         this.classesRef = createRef();
-        this.coverUploaderRef = createRef();
         bindAll(this, [
-            
+            'handleFormSubmit',
+            'handleSubmit',
+            'handleClose'
         ]);
     }
 
-    componentDidMount() {
+    componentDidMount () {
+        this.changeAvailable = true;
+    }
+
+    componentDidUpdate () {
         
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        
-    }
-
-    componentWillUnmount() {
+    componentWillUnmount () {
+        this.changeAvailable = false;
         this.props.closeShareModal();
     }
 
@@ -55,7 +56,7 @@ class ShareModal extends React.Component {
         const instructions = this.instructionsRef.current.value;
         const description = this.descriptionRef.current.value;
         const classes = this.classesRef.current.value;
-        const coverImage = CoverUploader.getResult();
+        const coverImage = this.props.coverURL; // 使用当前封面URL
         // 提交逻辑实现
         if (this.props.options.onSubmit) {
             this.props.options.onSubmit({
@@ -67,10 +68,20 @@ class ShareModal extends React.Component {
                 projectInfo: this.props.projectInfo
             });
         }
+        this.props.onUpdate({
+            title,
+            instructions,
+            description
+        });
         this.handleClose();
     };
 
-    render() {
+    handleFormSubmit (e) {
+        e.preventDefault();
+        this.handleSubmit();
+    }
+
+    render () {
         const {isOpen, projectInfo} = this.props;
 
         return (
@@ -91,12 +102,13 @@ class ShareModal extends React.Component {
                         <div className="modal-text-content">
                             您现在要分享您的作品，为了保证高质量搜随、推送，方便审核、用户使用，请您填写以下信息：
                         </div>
-                        <form onSubmit={(e) => {
-                            e.preventDefault();
-                            this.handleSubmit();
-                        }}>
+                        <form onSubmit={this.handleFormSubmit}>
                             <div className="share-modal-form-group">
-                                <label htmlFor="title" className="main-label" required>作品标题</label>
+                                <label
+                                    htmlFor="title"
+                                    className="main-label"
+                                    required
+                                >作品标题</label>
                                 <div className="share-modal-form-input">
                                     <input
                                         type="text"
@@ -110,7 +122,11 @@ class ShareModal extends React.Component {
                                 </div>
                             </div>
                             <div className="share-modal-form-group">
-                                <label htmlFor="instructions" className="main-label" required>操作说明</label>
+                                <label
+                                    htmlFor="instructions"
+                                    className="main-label"
+                                    required
+                                >操作说明</label>
                                 <div className="share-modal-form-input">
                                     <textarea
                                         id="instructions"
@@ -123,7 +139,10 @@ class ShareModal extends React.Component {
                                 </div>
                             </div>
                             <div className="share-modal-form-group">
-                                <label htmlFor="description" className="main-label">备注与鸣谢</label>
+                                <label
+                                    htmlFor="description"
+                                    className="main-label"
+                                >备注与鸣谢</label>
                                 <div className="share-modal-form-input">
                                     <textarea
                                         id="description"
@@ -135,7 +154,10 @@ class ShareModal extends React.Component {
                                 </div>
                             </div>
                             <div className="share-modal-form-group">
-                                <label htmlFor="labels" className="main-label">作品标签</label>
+                                <label
+                                    htmlFor="labels"
+                                    className="main-label"
+                                >作品标签</label>
                                 <div className="share-modal-form-input">
                                     <input
                                         type="text"
@@ -148,18 +170,20 @@ class ShareModal extends React.Component {
                                 </div>
                             </div>
                             <div className="share-modal-form-group">
-                                <label className="main-label" required>作品封面：</label>
+                                <label
+                                    className="main-label"
+                                    required
+                                >作品封面：</label>
                                 <div className="share-modal-form-input">
                                     <CoverUploader
                                         isOpen={isOpen}
-                                        ref={this.coverUploaderRef}
                                         projectInfo={projectInfo}
                                     >
                                         <small className="share-modal-hint">点击可更换封面图片</small>
                                     </CoverUploader>
                                 </div>
                             </div>
-                            <div className='modal-button-content'>
+                            <div className="modal-button-content">
                                 <Button
                                     className="cancel-button"
                                     onClick={this.handleClose}
@@ -223,7 +247,9 @@ ShareModal.propTypes = {
     closeShareModal: func,
     options: shape({
         onSubmit: func
-    })
+    }),
+    coverURL: string,
+    onUpdate: func
 };
 
 ShareModal.defaultProps = {
@@ -232,16 +258,18 @@ ShareModal.defaultProps = {
     options: {}
 };
 
-const mapStateToProps = state => {
-    return {
-        projectInfo: state.preview && state.preview.projectInfo,
-        isOpen: getShareModalIsOpen(state),
-        options: getShareModalOptions(state)
-    };
-};
+const mapStateToProps = state => ({
+    projectInfo: state.preview && state.preview.projectInfo,
+    isOpen: getShareModalIsOpen(state),
+    options: getShareModalOptions(state),
+    coverURL: state.customModal.cover
+});
 
 const mapDispatchToProps = dispatch => ({
-    closeShareModal: () => dispatch(closeShareModal())
+    closeShareModal: () => dispatch(closeShareModal()),
+    onUpdate: info => {
+        dispatch(previewActions.updateProjectInfo(info));
+    }
 });
 
 const WrappedShareModal = connect(
@@ -252,8 +280,7 @@ const WrappedShareModal = connect(
 module.exports = WrappedShareModal;
 
 // 获取全局Store并启动分享模态框
-module.exports.showModal = (options) => {
-    console.log("显示！", options);
+module.exports.showModal = options => {
     const store = getCurrentStore();
     if (store) {
         store.dispatch(openShareModal(options));

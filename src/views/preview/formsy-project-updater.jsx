@@ -8,8 +8,6 @@ const api = require('../../lib/api');
 const intlShape = require('../../lib/intl-shape');
 const previewActions = require('../../redux/preview');
 
-const Cookies = require('js-cookie');
-
 class FormsyProjectUpdater extends React.Component {
     constructor (props) {
         super(props);
@@ -22,7 +20,7 @@ class FormsyProjectUpdater extends React.Component {
             error: false
         };
     }
-    componentDidUpdate () {
+    componentDidUpdate (prevProps) {
         if (this.state.error !== false) {
             const errorMessageId = this.state.error === 400 ?
                 'project.inappropriateUpdate' : 'general.notAvailableHeadline';
@@ -32,6 +30,12 @@ class FormsyProjectUpdater extends React.Component {
                 })
             });
         }
+        
+        // 检测更新
+        if (prevProps.projectInfo[this.props.field] !== this.props.projectInfo[this.props.field] &&
+            this.state.value !== this.props.projectInfo[this.props.field]) {
+            this.setState({value: this.props.projectInfo[this.props.field]});
+        }
     }
     handleUpdate (jsonData) {
         // Ignore updates that would not change the value
@@ -39,7 +43,6 @@ class FormsyProjectUpdater extends React.Component {
 
         api({
             uri: `/projects/${this.props.projectInfo.id}`,
-            authentication: this.props.user.token,
             method: 'PUT',
             json: jsonData,
             withCredentials: true
