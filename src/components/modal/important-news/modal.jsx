@@ -139,7 +139,7 @@ class ImportantNewsModal extends React.Component {
                             )
                         }
                         <div
-                            dangerouslySetInnerHTML={{
+                            dangerouslySetInnerHTML={{ // eslint-disable-line react/no-danger
                                 __html: this.state.currentNews && this.state.currentNews.copy
                             }}
                         />

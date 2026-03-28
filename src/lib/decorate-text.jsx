@@ -15,7 +15,8 @@ module.exports = (text, opts) => {
     opts = opts || {
         usernames: true,
         hashtags: true,
-        scratchLinks: true
+        scratchLinks: true,
+        newlines: true
     };
 
     let replacedText = [text];
@@ -34,9 +35,7 @@ module.exports = (text, opts) => {
     /*
         Ported from the python...
         "Oh boy a giant regex!" Said nobody ever.
-        (^|\s)(https?://(?:[\w-]+\.)*scratch\.mit\.edu(?:/(?:\S*[\w:/#[\]@\$&\'()*+=])?)?(?![^?!,:;\w\s]\S))
-        (^|\s)
-            Only begin capturing after a space, or at the beginning of a word
+        (https?://(?:[\w-]+\.)*scratch\.mit\.edu(?:/(?:\S*[\w:/#[\]@\$&\'()*+=])?)?(?![^?!,:;\w\s]\S))
         https?
             URLs beginning with http or https
         ://(?:[\w-]+\.)*scratch\.mit\.edu
@@ -46,13 +45,13 @@ module.exports = (text, opts) => {
         (?:\S*[\w:/#[\]@\$&\'()*+=])?
             optionally that slash is followed by anything that's not a space, until
             that string is followed by URL-valid characters that aren't punctuation
-        (?![^?!,:;\w\s]\S))
+        (?![^?!,:;\w\s\u4e00-\u9fff\u3000-\u303f\uFF00-\uFFEF]\S))
             Don't capture if this string is embedded in another string (e.g., the
             beginning of a non-scratch URL), but allow punctuation
     */
     if (opts.scratchLinks) {
         // eslint-disable-next-line max-len
-        const linkRegexp = /((?:^|\s)https?:\/\/(?:[\w-]+\.)*(?:scratch\.mit\.edu|scratch-wiki\.info)(?:\/(?:\S*[\w:/#[\]@$&'()*+=])?)?(?![^?!,:;\w\s]\S))/g;
+        const linkRegexp = /(https?:\/\/(?:[\w-]+\.)*(?:scratch-cw\.top)(?:\/(?:\S*[\w:/#[\]@$&'()*+=])?)?(?![^?!,:;\w\s\u4e00-\u9fff\u3000-\u303f\uFF00-\uFFEF]\S))/g;
         replacedText = reactStringReplace(replacedText, linkRegexp, (match, i) => (
             <a
                 href={match}
@@ -63,11 +62,18 @@ module.exports = (text, opts) => {
 
     // Match hashtags
     if (opts.hashtags) {
-        replacedText = reactStringReplace(replacedText, /#([\w-]+)/g, (match, i) => (
+        replacedText = reactStringReplace(replacedText, /#([\w\u4e00-\u9fa5-]+)/g, (match, i) => (
             <a
                 href={`/search/projects?q=${match}`}
                 key={match + i}
             >#{match}</a>
+        ));
+    }
+
+    // Match newlines
+    if (opts.newlines) {
+        replacedText = reactStringReplace(replacedText, /(\n)/g, (match, i) => (
+            <br key={`br-${i}`} />
         ));
     }
 

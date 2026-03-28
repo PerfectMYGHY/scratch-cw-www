@@ -27,7 +27,10 @@ const getReplies = (projectId, commentIds, offset, ownerUsername, isAdmin, token
     const fetchedReplies = {};
     eachLimit(commentIds, 10, (parentId, callback) => {
         api({
-            uri: `${isAdmin ? '/pinfo/admin' : `/users/${ownerUsername}`}/projects/${projectId}/comments/${parentId}/replies`,
+            uri: `${
+                isAdmin ? '/pinfo/admin' :
+                    `/users/${ownerUsername}`
+            }/projects/${projectId}/comments/${parentId}/replies`,
             authentication: token ? token : null,
             params: {offset: offset || 0, limit: REPLY_LIMIT}
         }, (err, body, res) => {

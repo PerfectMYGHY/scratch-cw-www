@@ -149,7 +149,10 @@ class ComposeComment extends React.Component {
             });
 
             // Add the username, which isn't included right now from scratch-api
-            if (body.author) body.author.username = this.props.user.username;
+            if (body.author) {
+                body.author.username = this.props.user.username;
+                body.author.nickname = this.props.user.nickname;
+            }
 
             this.props.onAddComment(body);
         });
@@ -450,6 +453,7 @@ ComposeComment.propTypes = {
     user: PropTypes.shape({
         id: PropTypes.number,
         username: PropTypes.string,
+        nickname: PropTypes.string,
         token: PropTypes.string,
         thumbnailUrl: PropTypes.string
     })

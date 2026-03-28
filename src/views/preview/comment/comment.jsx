@@ -136,7 +136,8 @@ class Comment extends React.Component {
         commentText = decorateText(commentText, {
             scratchLinks: true,
             usernames: true,
-            hashtags: false
+            hashtags: true,
+            newlines: true
         });
 
         return (
