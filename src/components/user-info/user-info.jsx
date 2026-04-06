@@ -20,7 +20,7 @@ const fetch = (u, opts = {}) => new Promise((resolve, reject) => {
         host: url.origin,
         uri: url.pathname,
         ...opts
-    }, (err, body) => {
+    }, (err, body, res) => {
         if (err) {
             reject(err);
         }
@@ -30,6 +30,9 @@ const fetch = (u, opts = {}) => new Promise((resolve, reject) => {
             } catch (e) {
                 reject(e);
             }
+        }
+        if (res.statusCode >= 400) {
+            reject(new Error(`HTTP ${res.statusCode}: ${body}`));
         }
         resolve(body);
     });

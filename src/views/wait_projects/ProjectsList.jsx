@@ -1,5 +1,4 @@
 ﻿const React = require('react');
-const Thumbnail = require('../../components/thumbnail/thumbnail.jsx');
 const Button = require('../../components/forms/button.jsx');
 
 require('./ProjectsList.scss');

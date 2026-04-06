@@ -200,18 +200,19 @@ const PreviewPresentation = ({
                 message={<FormattedMessage id="project.share.notShared" />}
                 onAction={canShare ? onShare : onShareAttempt}
             />);
-        } else if (!projectInfo.looked){
+        } else if (!projectInfo.reviewed){
             banner = (<Banner
                 message={'当前项目未审核，仅临时能被看到，但未分类、决定加Scratch币的数量。'}
             />);
-        } else if (projectInfo.looked && projectInfo.passed){
+        } else if (projectInfo.reviewed && projectInfo.passed){
             banner = (<Banner
                 className="banner-success"
                 message={`当前项目已审核！分类：${projectInfo.type}，质量：${projectInfo.quality}，所加Scratch币数：${projectInfo.added}`}
             />);
-        } else if (projectInfo.looked && !projectInfo.passed){
+        } else if (projectInfo.reviewed && !projectInfo.passed){
             banner = (<Banner
-                message={`！！审核未通过！！请关注你的邮箱以与管理员沟通原因！现在你的项目暂时不可见。`}
+                className="banner-danger"
+                message={`！！审核未通过！！请查看该作品的评论区并与管理员沟通原因！现在你的项目暂时不可见。`}
             />);
         }
     }

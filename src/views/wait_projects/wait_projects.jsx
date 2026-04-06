@@ -2,29 +2,19 @@
 
 const React = require('react');
 
-const Box = require('../../components/box/box.jsx');
-
-const FormattedMessage = require('react-intl').FormattedMessage;
 const Page = require('../../components/page/www/page.jsx');
-const InplaceInput = require('../../components/forms/inplace-input.jsx');
 const render = require('../../lib/render.jsx');
-const Formsy = require('formsy-react').default;
-const decorateText = require('../../lib/decorate-text.jsx');
-const Markdown = require('../../components/markdown/markdown.jsx').default;
-const Carousel = require('../../components/carousel/carousel.jsx');
-const Thumbnail = require('../../components/thumbnail/thumbnail.jsx');
 import UserBox, {requestAPI, fetch} from '../../components/user-box/user-box.jsx';
-const UsersCarousel = require('../../components/users-carousel/users-carousel.jsx');
-const Loading = require("../../components/loading_tip/Loading.jsx");
+const Loading = require('../../components/loading_tip/Loading.jsx');
 const ProjectsList = require('./ProjectsList.jsx');
-const isEqual = require('lodash.isequal');
 const bindAll = require('lodash.bindall');
+const NotAvailable = require('../../components/not-available/not-available.jsx');
 
 const {connect} = require('react-redux');
 
 require('./wait_projects.scss');
 
-const isSubset = (obj1, obj2, debug = false) => {
+const isSubset = (obj1, obj2) => {
     for (const key in obj1) {
         if (!(key in obj2) || obj1[key] !== obj2[key]) {
             return false;
@@ -39,7 +29,8 @@ class WaitProjects extends React.Component {
         this.state = {
             projects: [],
             info: {},
-            loading: true
+            loading: true,
+            error: false
         };
         bindAll(this, [
             'setInfo',
@@ -61,36 +52,43 @@ class WaitProjects extends React.Component {
         }
     }
 
-    loadData() {
-        const type = (window.location.href.indexOf("#") != -1 ? window.location.href.split("#")[1] : "all");
-        fetch(`${process.env.PROJECT_HOST}/scratch-admin/projects/not_passed/${type}`,{
-            method: "POST"
+    loadData () {
+        const type = (window.location.href.indexOf('#') === -1 ? 'all' : window.location.href.split('#')[1]);
+        fetch(`${process.env.PROJECT_HOST}/scratch-admin/projects/not_passed/${type}`, {
+            method: 'POST'
         })
             .then(data => {
                 this.setState({
                     projects: data,
-                    loading: false
+                    loading: false,
+                    error: false
+                });
+            })
+            .catch(() => {
+                this.setState({
+                    loading: false,
+                    error: true
                 });
             });
 
     }
 
-    customLoadData (state) {
+    customLoadData () {
         this.loadData();
     }
 
     delete_project (pid) {
-        requestAPI(`delete_project/${pid}/`,{},function (data){
-            if (!data.state){
-                alert(`删除失败！信息：${data.msg}`);
-            } else {
+        requestAPI(`delete_project/${pid}/`, {}, data => {
+            if (data.state){
                 lastType = null; // 刷新
+            } else {
+                alert(`删除失败！信息：${data.msg}`);
             }
-        },"POST",process.env.PROJECT_HOST+"/");
+        }, "POST", process.env.PROJECT_HOST + "/");
     }
     
     take_project_go_back (pid) {
-        requestAPI(`take_project_go_back/${pid}/`,{},function (data){
+        requestAPI(`take_project_go_back/${pid}/`, {}, function (data){
             if (!data.state){
                 alert(`恢复失败！信息：${data.msg}`);
             } else {
@@ -132,7 +130,9 @@ class WaitProjects extends React.Component {
             return ret;
         }
         // UserBox用法：children中第一个元素被放在Box内部，第二个元素放在Box下方，必须有至少两个元素，多余元素不显示
-        return (
+        return this.state.error ? (
+            <NotAvailable />
+        ) : (
             <div className="inner wait_reports" id="pagebox">
                 <UserBox
                     setInfo={this.setInfo}
@@ -166,17 +166,30 @@ class WaitProjects extends React.Component {
                                         }}
                                         getChildren={(pid,item)=>{
                                             return [
-                                                item.looked ? <p style={{
+                                                item.reviewed ? <p style={{
                                                     color: "red"
                                                 }}>审核未通过</p> : <p class="orange-color">未审核</p>
                                                 ,
-                                                item.liked && 
+                                                item.has_similar_project && 
                                                 <div>
                                                     <p style={{
                                                         color: "red"
                                                     }}>
                                                         程序审核发现重复：
-                                                        <a href={`/projects/${item.liked_project}/`} target="_blank">{item.liked_project}</a>
+                                                        <a href={`/projects/${item.similar_project.id}/`} target="_blank">{item.similar_project.title}</a>
+                                                    </p>
+                                                </div>,
+                                                item.auto_check_info && 
+                                                <div>
+                                                    <p style={{
+                                                        color: "red"
+                                                    }}>
+                                                        审核时出现错误:
+                                                    </p>
+                                                    <p style={{
+                                                        color: "red"
+                                                    }}>
+                                                        {item.auto_check_info}
                                                     </p>
                                                 </div>
                                             ];
