@@ -12,6 +12,18 @@
             margin-top: 1.5rem;
         }
     }
+
+    table {
+        width: 100%;
+        
+        tr {
+            text-align: center;
+        }
+    }
+
+    .red-item {
+        color: red;
+    }
 }
 
 @media #{$medium-and-smaller}{
