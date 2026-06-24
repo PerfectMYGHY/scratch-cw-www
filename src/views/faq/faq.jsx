@@ -31,14 +31,6 @@ const Faq = injectIntl(props => (
                         )}}
                     /></dd>
 
-                    {/*<dt><FormattedMessage id="faq.whoUsesScratchTitle" /></dt>*/}
-                    {/*<dd><FormattedMessage*/}
-                    {/*    id="faq.whoUsesScratchBody"*/}
-                    {/*    values={{scratchJrLink: (*/}
-                    {/*        <a href="https://www.scratchjr.org">ScratchJr</a>*/}
-                    {/*    )}}*/}
-                    {/*/></dd>*/}
-
                     <dt><FormattedMessage id="faq.whyAreDifferentTitle" /></dt>
                     <dd><FormattedMessage id="faq.whyAreDifferentBody" /></dd>
 
@@ -86,32 +78,7 @@ const Faq = injectIntl(props => (
                         )}}
                     /></dd>
 
-                    {/*<dt><FormattedMessage id="faq.scratchCostTitle" /></dt>*/}
-                    {/*<dd><FormattedMessage*/}
-                    {/*    id="faq.scratchCostBody"*/}
-                    {/*    values={{donateLink: (*/}
-                    {/*        <a href="https://www.scratchfoundation.org/donate">*/}
-                    {/*            <FormattedMessage id="faq.donateLinkText" />*/}
-                    {/*        </a>*/}
-                    {/*    )}}*/}
-                    {/*/></dd>*/}
-
                     <dt><FormattedMessage id="faq.mediaLabTitle" /></dt>
-                    {/*<dd><FormattedMessage*/}
-                    {/*    id="faq.mediaLabBody"*/}
-                    {/*    values={{*/}
-                    {/*        llkLink: (*/}
-                    {/*            <a href="https://llk.media.mit.edu/">*/}
-                    {/*                <FormattedMessage id="faq.llkLinkText" />*/}
-                    {/*            </a>*/}
-                    {/*        ),*/}
-                    {/*        mediaLabLink: (*/}
-                    {/*            <a href="https://www.media.mit.edu/">*/}
-                    {/*                <FormattedMessage id="faq.mediaLabLinkText" />*/}
-                    {/*            </a>*/}
-                    {/*        )*/}
-                    {/*    }}*/}
-                    {/*/></dd>*/}
                     <dd><FormattedMessage id="faq.mediaLabBody"/></dd>
                 </dl>
             </section>
@@ -121,35 +88,6 @@ const Faq = injectIntl(props => (
                 <dl>
                     <dt><FormattedMessage id="faq.aboutScratch3Title" /></dt>
                     <dd><FormattedMessage id="faq.aboutScratch3Body" /></dd>
-                    {/*<dt><FormattedMessage id="faq.reportBugsScratch3Title" /></dt>*/}
-                    {/*<dd><FormattedMessage*/}
-                    {/*    id="faq.reportBugsScratch3Body"*/}
-                    {/*    values={{forumsLink: (*/}
-                    {/*        <a href="https://scratch.mit.edu/discuss/3/">*/}
-                    {/*            <FormattedMessage id="faq.forumsLinkText" />*/}
-                    {/*        </a>*/}
-                    {/*    )}}*/}
-                    {/*/></dd>*/}
-                    {/*<dt><FormattedMessage id="faq.languagesScratch3Title" /></dt>*/}
-                    {/*<dd>*/}
-                    {/*    <FormattedMessage id="faq.languagesScratch3Body1" />*/}
-                    {/*    <br /><br />*/}
-                    {/*    <FormattedMessage*/}
-                    {/*        id="faq.languagesScratch3Body2"*/}
-                    {/*        values={{*/}
-                    {/*            transifexLink: (*/}
-                    {/*                <a href="https://www.transifex.com/llk/scratch-editor/">*/}
-                    {/*                    <FormattedMessage id="faq.transifexLinkText" />*/}
-                    {/*                </a>*/}
-                    {/*            ),*/}
-                    {/*            emailLink: (*/}
-                    {/*                <a href="mailto:translate@scratch.mit.edu">*/}
-                    {/*                    translate@scratch.mit.edu*/}
-                    {/*                </a>*/}
-                    {/*            )*/}
-                    {/*        }}*/}
-                    {/*    />*/}
-                    {/*</dd>*/}
                     <dt><FormattedMessage id="faq.removedBlocksScratch3Title" /></dt>
                     <dd>
                         <FormattedMessage
@@ -272,8 +210,6 @@ const Faq = injectIntl(props => (
                             </a>
                         )}}
                     /></dd>
-                    {/*<dt><FormattedMessage id="faq.newScratcherTitle" /></dt>*/}
-                    {/*<dd><FormattedMessage id="faq.newScratcherBody" /></dd>*/}
                     <dt><FormattedMessage id="faq.multipleAccountTitle" /></dt>
                     <dd><FormattedMessage
                         id="faq.multipleAccountBody"
@@ -293,7 +229,23 @@ const Faq = injectIntl(props => (
                         )}}
                     /></dd>
                     <dt><FormattedMessage id="faq.changeUsernameTitle" /></dt>
-                    <dd><FormattedMessage id="faq.changeUsernameBody" /></dd>
+                    <dd><FormattedMessage
+                        id="faq.changeUsernameBody"
+                        values={{changeUsernameLink: (
+                            <a href="/accounts/settings/">
+                                <FormattedMessage id="faq.accountSettingsLinkText" />
+                            </a>
+                        )}}
+                    /></dd>
+                    <dt><FormattedMessage id="faq.changeNicknameTitle" /></dt>
+                    <dd><FormattedMessage
+                        id="faq.changeNicknameBody"
+                        values={{changeNicknameLink: (
+                            <a href="/accounts/settings/">
+                                <FormattedMessage id="faq.accountSettingsLinkText" />
+                            </a>
+                        )}}
+                    /></dd>
                     <dt><FormattedMessage id="faq.shareInfoTitle" /></dt>
                     <dd><FormattedMessage id="faq.shareInfoBody" /></dd>
                     <dt><FormattedMessage id="faq.deleteAccountTitle" /></dt>
@@ -428,15 +380,18 @@ const Faq = injectIntl(props => (
                     <dt><FormattedMessage id="faq.howToAddExtensionsTitle" /></dt>
                     <dd><FormattedMessage id="faq.howToAddExtensionsBody" /></dd>
                     <dt><FormattedMessage id="faq.createExtensionsTitle" /></dt>
-                    <dd><FormattedMessage id="faq.createExtensionsBody" values={{
-                        makeExt: (
-                            <a href="/makeExt">
-                                <FormattedMessage id="faq.makeExt" />
-                            </a>
-                        )
-                    }} /></dd>
-                    {/*<dt><FormattedMessage id="faq.scratchXTitle" /></dt>*/}
-                    {/*<dd><FormattedMessage id="faq.scratchXBody" /></dd>*/}
+                    <dd>
+                        <FormattedMessage
+                            id="faq.createExtensionsBody"
+                            values={{
+                                makeExt: (
+                                    <a href="/makeExt">
+                                        <FormattedMessage id="faq.makeExt" />
+                                    </a>
+                                )
+                            }}
+                        />
+                    </dd>
                 </dl>
             </section>
             <section id="clouddata">
@@ -457,8 +412,6 @@ const Faq = injectIntl(props => (
                     <dd><FormattedMessage id="faq.makeCloudVarBody" /></dd>
                     <dt><FormattedMessage id="faq.changeCloudVarTitle" /></dt>
                     <dd><FormattedMessage id="faq.changeCloudVarBody" /></dd>
-                    {/*<dt><FormattedMessage id="faq.newScratcherCloudTitle" /></dt>*/}
-                    {/*<dd><FormattedMessage id="faq.newScratcherCloudBody" /></dd>*/}
                     <dt><FormattedMessage id="faq.multiplayerTitle" /></dt>
                     <dd>
                         <FormattedMessage id="faq.multiplayerBody" /><br /><br />
@@ -475,72 +428,6 @@ const Faq = injectIntl(props => (
                     </dd>
                 </dl>
             </section>
-            {/*<section id="schools">*/}
-            {/*    <span className="nav-spacer" />*/}
-            {/*    <h2><FormattedMessage id="faq.schoolsTitle" /></h2>*/}
-            {/*    <dl>*/}
-            {/*        <dt><FormattedMessage id="faq.howTitle" /></dt>*/}
-            {/*        <dd><FormattedMessage*/}
-            {/*            id="faq.howBody"*/}
-            {/*            values={{educatorsLink: (*/}
-            {/*                <a href="/educators">*/}
-            {/*                    <FormattedMessage id="faq.educatorsLinkText" />*/}
-            {/*                </a>*/}
-            {/*            )}}*/}
-            {/*        /></dd>*/}
-            {/*        <dt><FormattedMessage id="faq.noInternetTitle" /></dt>*/}
-            {/*        <dd><FormattedMessage*/}
-            {/*            id="faq.noInternetBody"*/}
-            {/*            values={{downloadLink: (*/}
-            {/*                <a href="/download">*/}
-            {/*                    <FormattedMessage id="faq.scratchApp" />*/}
-            {/*                </a>*/}
-            {/*            )}}*/}
-            {/*        /></dd>*/}
-            {/*        <dt><FormattedMessage id="faq.communityTitle" /></dt>*/}
-            {/*        <dd><FormattedMessage*/}
-            {/*            id="faq.communityBody"*/}
-            {/*            values={{cgLink: (*/}
-            {/*                <a href="/community_guidelines">*/}
-            {/*                    <FormattedMessage id="general.guidelines" />*/}
-            {/*                </a>*/}
-            {/*            )}}*/}
-            {/*        /></dd>*/}
-            {/*        <dt><FormattedMessage id="faq.teacherAccountTitle" /></dt>*/}
-            {/*        <dd><FormattedMessage*/}
-            {/*            id="faq.teacherAccountBody"*/}
-            {/*            values={{eduFaqLink: (*/}
-            {/*                <a href="/educators/faq">*/}
-            {/*                    <FormattedMessage id="faq.eduFaqLinkText" />*/}
-            {/*                </a>*/}
-            {/*            )}}*/}
-            {/*        /></dd>*/}
-            {/*        <dt><FormattedMessage id="faq.requestTitle" /></dt>*/}
-            {/*        <dd><FormattedMessage*/}
-            {/*            id="faq.requestBody"*/}
-            {/*            values={{educatorsLink: (*/}
-            {/*                <a href="/educators">*/}
-            {/*                    <FormattedMessage id="faq.educatorsLinkText" />*/}
-            {/*                </a>*/}
-            {/*            )}}*/}
-            {/*        /></dd>*/}
-            {/*        <dt><FormattedMessage id="faq.dataTitle" /></dt>*/}
-            {/*        <dd><FormattedMessage id="faq.dataBody" /></dd>*/}
-            {/*        <dt><FormattedMessage id="faq.lawComplianceTitle" /></dt>*/}
-            {/*        <dd>*/}
-            {/*            <FormattedMessage id="faq.lawComplianceBody1" />*/}
-            {/*            <br /><br />*/}
-            {/*            <FormattedMessage*/}
-            {/*                id="faq.lawComplianceBody2"*/}
-            {/*                values={{downloadLink: (*/}
-            {/*                    <a href="/download">*/}
-            {/*                        <FormattedMessage id="faq.scratchApp" />*/}
-            {/*                    </a>*/}
-            {/*                )}}*/}
-            {/*            />*/}
-            {/*        </dd>*/}
-            {/*    </dl>*/}
-            {/*</section>*/}
         </div>
         <nav>
             <ol>
@@ -556,7 +443,6 @@ const Faq = injectIntl(props => (
                     <FormattedMessage id="faq.scratchExtensionsTitle" />
                 </a></li>
                 <li><a href="#clouddata"><FormattedMessage id="faq.cloudDataTitle" /></a></li>
-                {/*<li><a href="#schools"><FormattedMessage id="faq.schoolsTitle" /></a></li>*/}
             </ol>
         </nav>
     </InformationPage>

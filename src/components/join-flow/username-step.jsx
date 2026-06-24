@@ -236,6 +236,7 @@ class UsernameStep extends React.Component {
                             title={this.props.intl.formatMessage({id: 'general.joinScratch'})}
                             waiting={isSubmitting}
                             onSubmit={handleSubmit}
+                            loginedInUser={this.props.loginedInUser}
                         >
                             <div>
                                 <div className="join-flow-input-title">
@@ -391,7 +392,8 @@ class UsernameStep extends React.Component {
 UsernameStep.propTypes = {
     intl: intlShape,
     onNextStep: PropTypes.func,
-    sendAnalytics: PropTypes.func.isRequired
+    sendAnalytics: PropTypes.func.isRequired,
+    loginedInUser: PropTypes.bool
 };
 
 const IntlUsernameStep = injectIntl(UsernameStep);

@@ -30,7 +30,7 @@ const Webmaster = () => (
             <p>
                 <strong>
                     {
-                        "今年 " + Math.round((new Date() - new Date(2011, 3, 31, 21, 30, 30)) / (1000 * 60 * 60 * 24 * 365)) + " 岁"
+                        "今年 " + (new Date().getFullYear() - 2011) + " 岁"
                     }
                 </strong>
             </p>

@@ -59,11 +59,11 @@ const ProjectInfo = ({item, canRemove, canTake, text, onClick, onGetMore}) => {
                 <br />
                 {onGetMore(item.id, item)}
                 <br />
-                {item.public && (item.looked && !item.passed ? (
+                {item.public && (item.reviewed && !item.passed ? (
                     <span className="not-passed">
                         未通过审核！
                     </span>
-                ) : (item.looked ? (
+                ) : (item.reviewed ? (
                     <span className="passed">
                         审核通过！
                     </span>
@@ -115,7 +115,7 @@ ProjectInfo.propTypes = {
         type: PropTypes.string,
         quality: PropTypes.string,
         added: PropTypes.number,
-        looked: PropTypes.bool,
+        reviewed: PropTypes.bool,
         liked: PropTypes.bool,
         liked_project: PropTypes.number,
         remix: PropTypes.shape({

@@ -20,7 +20,8 @@ const JoinFlowStep = ({
     onSubmit,
     title,
     titleClassName,
-    waiting
+    waiting,
+    loginedInUser
 }) => (
     <form
         autoComplete="off"
@@ -55,6 +56,15 @@ const JoinFlowStep = ({
                             )}
                             title={title}
                         />
+                    )}
+                    {loginedInUser && (
+                        <div
+                            style={{
+                                color: 'red'
+                            }}
+                        >
+                            注意：您现在已经登录，请确保您不是失误进入本页面，重复注册您想要的账号。如果您退出登录再进入本页面，此提示就会消失。
+                        </div>
                     )}
                     {description && (
                         <div
@@ -96,7 +106,8 @@ JoinFlowStep.propTypes = {
     onSubmit: PropTypes.func,
     title: PropTypes.string,
     titleClassName: PropTypes.string,
-    waiting: PropTypes.bool
+    waiting: PropTypes.bool,
+    loginedInUser: PropTypes.bool
 };
 
 module.exports = JoinFlowStep;

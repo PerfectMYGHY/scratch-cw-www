@@ -54,7 +54,9 @@ class UserBox extends React.Component {
             return;
         }
         this.props.setInfo(this.state);
-        this.props.customLoadData(this.state);
+        if (this.props.customLoadData) {
+            this.props.customLoadData(this.state);
+        }
     }
 
     startFrushLoop () {

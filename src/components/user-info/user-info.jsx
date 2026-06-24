@@ -18,7 +18,7 @@ const fetch = (u, opts = {}) => new Promise((resolve, reject) => {
     const url = new URL(u);
     api({
         host: url.origin,
-        uri: url.pathname,
+        uri: url.pathname + url.search,
         ...opts
     }, (err, body, res) => {
         if (err) {

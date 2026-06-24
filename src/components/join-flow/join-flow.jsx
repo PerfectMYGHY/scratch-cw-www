@@ -256,6 +256,7 @@ class JoinFlow extends React.Component {
                         <UsernameStep
                             sendAnalytics={this.sendAnalytics}
                             onNextStep={this.handleAdvanceStep}
+                            loginedInUser={this.props.loginedInUser}
                         />
                         <ProvinceStep
                             sendAnalytics={this.sendAnalytics}
@@ -295,7 +296,8 @@ JoinFlow.propTypes = {
     createProjectOnComplete: PropTypes.bool,
     intl: intlShape,
     onCompleteRegistration: PropTypes.func,
-    refreshSessionWithRetry: PropTypes.func
+    refreshSessionWithRetry: PropTypes.func,
+    loginedInUser: PropTypes.bool
 };
 
 const IntlJoinFlow = injectIntl(JoinFlow);
@@ -312,7 +314,9 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => Object.assign(
 );
 
 const ConnectedJoinFlow = connect(
-    () => ({}),
+    state => ({
+        loginedInUser: Boolean(state.session && state.session.session && state.session.session.user)
+    }),
     mapDispatchToProps,
     mergeProps
 )(IntlJoinFlow);
