@@ -7,49 +7,134 @@
     $project-height: 108px;
     text-align: left;
 
-    div[info=info] {
+    // 每个举报项
+    .report-item {
         position: relative;
-        border-bottom: 1px solid #dddddd;
+        border-bottom: 1px solid $ui-border;
         margin: 5px;
-        /*height: $project-height;*/
         min-height: calc($project-height + 2px + 5px);
+        padding-bottom: 5px;
 
+        // 缩略图（作品举报）
         .thumbnail-image {
             img {
                 position: absolute;
-                /*margin-bottom: 2px;*/
                 border: 1px solid $ui-border;
                 width: $project-width;
                 height: $project-height;
+                object-fit: cover;
             }
         }
 
+        // 信息区域
         .info {
             display: inline-block;
-            /*top: 0;*/
         }
 
+        // 作品信息（窄）
         .narrow {
             max-width: 150px;
             margin-left: calc(10px + $project-width);
+            
+            a {
+                display: block;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                color: $link-purple;
+            }
         }
 
+        // 评论信息（宽）
         .wide {
             max-width: calc(100% - 20px - 176px);
+            margin-left: calc(10px + $project-width);
+            
+            p {
+                margin: 4px 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            
+            a {
+                color: $link-purple;
+            }
+        }
+
+        // 右侧操作按钮
+        .right-top {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: right;
+            
+            a {
+                cursor: pointer;
+                color: $ui-blue;
+                text-decoration: underline;
+                
+                &:hover {
+                    color: $ui-blue-dark;
+                }
+            }
+            
+            br {
+                display: none;
+            }
+        }
+
+        // 额外信息（举报类型、举报内容等）
+        .children {
+            float: right;
+            clear: both;
+            border-radius: 5px;
+            border: 1px dashed $ui-dark-gray;
+            padding: 5px 10px;
+            margin: 5px 10px 5px 0;
+            max-width: calc(100% - $project-width - 10px - 200px - 80px - 20px);
+            word-wrap: break-word;
+            background: $ui-light-gray;
+            
+            p {
+                margin: 4px 0;
+                font-size: 14px;
+                color: $type-gray;
+            }
+        }
+
+        // 清除浮动
+        &::after {
+            content: '';
+            display: table;
+            clear: both;
         }
     }
 
-    div.right-top {
-        float: right;
+    // 空状态
+    &.empty {
+        text-align: center;
+        color: $ui-dark-gray;
+        padding: 40px 0;
     }
+}
 
-    div.children {
-        /*position: absolute;*/
-        float: right;
-        border-radius: 5px;
-        border: 1px dashed #554747;
-        margin-right: 10px;
-        max-width: calc(100% - $project-width - 10px - 200px - 80px - 20px);
-        word-wrap: break-word;
+// 响应式处理
+@media (max-width: 768px) {
+    .reports-list {
+        .report-item {
+            .narrow {
+                max-width: 100px;
+            }
+            
+            .wide {
+                max-width: calc(100% - 20px - 120px);
+            }
+            
+            .children {
+                max-width: calc(100% - 20px - 120px);
+            }
+        }
     }
 }

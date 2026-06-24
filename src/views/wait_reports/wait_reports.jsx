@@ -1,239 +1,425 @@
-﻿import PropTypes from 'prop-types';
+﻿/* eslint-disable react/jsx-no-bind */
+/* eslint-disable react/jsx-handler-names */
+import PropTypes from 'prop-types';
 
 const React = require('react');
 
-const Box = require('../../components/box/box.jsx');
-
-const FormattedMessage = require('react-intl').FormattedMessage;
 const Page = require('../../components/page/www/page.jsx');
-const InplaceInput = require('../../components/forms/inplace-input.jsx');
 const render = require('../../lib/render.jsx');
-const Formsy = require('formsy-react').default;
-const decorateText = require('../../lib/decorate-text.jsx');
-const Markdown = require('../../components/markdown/markdown.jsx').default;
-const Carousel = require('../../components/carousel/carousel.jsx');
-const Thumbnail = require('../../components/thumbnail/thumbnail.jsx');
 import UserBox, {requestAPI, fetch} from '../../components/user-box/user-box.jsx';
-const UsersCarousel = require('../../components/users-carousel/users-carousel.jsx');
-const Loading = require("../../components/loading_tip/Loading.jsx");
+const Loading = require('../../components/loading_tip/Loading.jsx');
 const ReportsList = require('./ReportsList.jsx');
-const { REPORT_OPTIONS } = require('../../components/modal/report/report-options.jsx');
+const {REPORT_OPTIONS} = require('../../components/modal/report/report-options.jsx');
 const isEqual = require('lodash.isequal');
 const bindAll = require('lodash.bindall');
+const iziToast = require('izitoast');
+const {FormattedMessage} = require('react-intl');
+const NotAvailable = require('../../components/not-available/not-available.jsx');
 
 const {connect} = require('react-redux');
 
 require('./wait_reports.scss');
 
-const isSubset = (obj1, obj2, debug = false) => {
-    for (const key in obj1) {
-        if (!(key in obj2) || obj1[key] !== obj2[key]) {
-            return false;
-        }
-    }
-    return true;
-};
+const LIMIT = 10;
 
 class WaitReports extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
+            loading: true,
             reports: [],
             info: {},
-            loading: true
+            error: false,
+            tab: (window.location.href.indexOf('#') === -1 ? 'projects' : window.location.href.split('#')[1]),
+            offset: 0,
+            hasMore: true,
+            loadingMore: false
         };
         bindAll(this, [
             'setInfo',
-            'customLoadData'
+            'loadData',
+            'handleLoadMore',
+            'switchTab',
+            'deleteProject',
+            'deleteComment',
+            'takeProjectBack',
+            'rejectProjectReport',
+            'rejectCommentReport',
+            'handleReportAction',
+            'handleGetMore',
+            'getChildren',
+            'getReportIntlIdFromReport'
         ]);
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (!prevState.loading && this.state.loading) {
-            setTimeout(() => {
-                this.loadData();
-            }, 0.2e3);
+    componentDidMount () {
+        this.loadData({reset: true});
+    }
+
+    componentDidUpdate (prevProps, prevState) {
+        if (prevState.tab !== this.state.tab) {
+            this.loadData({reset: true});
+        }
+        if (!isEqual(this.state.info, prevState.info)) {
+            this.loadData({reset: true});
         }
     }
 
     setInfo (state) {
-        if (!isSubset(state, this.state, true)) {
-            this.setState(state);
+        if (!isEqual(state.info, this.state.info)) {
+            this.setState({info: state.info});
         }
     }
 
-    loadData() {
-        const type = (window.location.href.indexOf("#") != -1 ? window.location.href.split("#")[1] : "projects");
-        fetch(`${process.env.PROJECT_HOST}/scratch-admin/reports/${type}`,{
-            method: "POST"
+    loadData ({reset = false, append = false} = {}) {
+        const tab = this.state.tab;
+        const offset = reset ? 0 : this.state.offset;
+
+        this.setState({
+            loading: !!reset,
+            loadingMore: !!append
+        });
+
+        fetch(`${process.env.PROJECT_HOST}/scratch-admin/reports/${tab}?offset=${offset}&limit=${LIMIT}`, {
+            method: 'POST'
         })
-        .then(data => {
+            .then(data => {
+                const newReports = append ? [...this.state.reports, ...data] : data;
+                this.setState({
+                    reports: newReports,
+                    loading: false,
+                    loadingMore: false,
+                    offset: offset + data.length,
+                    hasMore: data.length === LIMIT,
+                    error: false
+                });
+            })
+            .catch(() => {
+                this.setState({
+                    loading: false,
+                    loadingMore: false,
+                    error: true
+                });
+            });
+    }
+
+    handleLoadMore () {
+        if (this.state.loadingMore || !this.state.hasMore) return;
+        this.loadData({append: true});
+    }
+
+    switchTab (tab) {
+        if (this.state.tab !== tab) {
             this.setState({
-                reports: data,
-                loading: false
+                tab: tab,
+                reports: [],
+                offset: 0,
+                hasMore: true,
+                loading: true,
+                error: false
             });
-        });
+        }
     }
 
-    customLoadData (state) {
-        this.loadData();
-    }
+    // ----- 举报操作 -----
 
-    async delete_project (pid,cid,rid) {
-        await fetch(`${process.env.PROJECT_HOST}/check/report/${rid}/true`, {
-            method: "POST"
-        });
-        requestAPI(`delete_project/${pid}/`,{},function (data){
-            if (!data.state){
-                alert(`删除失败！信息：${data.msg}`);
-            } else {
-                lastType = null; // 刷新
-            }
-            fetch(`${process.env.PROJECT_HOST}/proxy/reports/projects/${rid}`, {
-                method: "DELETE"
+    async deleteProject (pid, cid, rid) {
+        try {
+            await fetch(`${process.env.PROJECT_HOST}/check/report/${rid}/true`, {
+                method: 'POST'
             });
-        },"POST",process.env.PROJECT_HOST+"/");
+            
+            requestAPI(`delete_project/${pid}/`, {}, data => {
+                if (data.state) {
+                    this.setState(prevState => ({
+                        reports: prevState.reports.filter(r => r.id !== rid)
+                    }));
+                    iziToast.success({
+                        title: '处理成功',
+                        message: '已删除作品并处理举报',
+                        timeout: 3000
+                    });
+                } else {
+                    iziToast.error({
+                        title: '删除失败',
+                        message: `错误信息：${data.msg}`,
+                        timeout: 5000
+                    });
+                }
+            }, 'POST', `${process.env.PROJECT_HOST}/`);
+            
+            await fetch(`${process.env.PROJECT_HOST}/proxy/reports/projects/${rid}`, {
+                method: 'DELETE'
+            });
+        } catch (e) {
+            iziToast.error({
+                title: '操作失败',
+                message: '网络错误，请重试',
+                timeout: 5000
+            });
+        }
     }
 
-    delete_comment (pid,cid,rid) {
-        fetch(`${process.env.PROJECT_HOST}/proxy/comments/project/${pid}/comment/${cid}`, {
-            method: "DELETE"
-        });
-        fetch(`${process.env.PROJECT_HOST}/proxy/reports/comments/${rid}`, {
-            method: "DELETE"
-        });
+    async deleteComment (pid, cid, rid) {
+        try {
+            await fetch(`${process.env.PROJECT_HOST}/check/report/${rid}/true`, {
+                method: 'POST'
+            });
+            
+            await fetch(`${process.env.PROJECT_HOST}/proxy/comments/project/${pid}/comment/${cid}`, {
+                method: 'DELETE'
+            });
+            
+            await fetch(`${process.env.PROJECT_HOST}/proxy/reports/comments/${rid}`, {
+                method: 'DELETE'
+            });
+            
+            this.setState(prevState => ({
+                reports: prevState.reports.filter(r => r.id !== rid)
+            }));
+            
+            iziToast.success({
+                title: '处理成功',
+                message: '已删除评论并处理举报',
+                timeout: 3000
+            });
+        } catch (e) {
+            iziToast.error({
+                title: '操作失败',
+                message: '网络错误，请重试',
+                timeout: 5000
+            });
+        }
     }
 
-    reject_comment_report (pid, cid, rid) {
-        fetch(`${process.env.PROJECT_HOST}/proxy/admin/project/${pid}/comment/${cid}/undelete`, {
-            method: "PUT"
-        });
-    }
-
-    take_project_go_back (pid) {
-        requestAPI(`take_project_go_back/${pid}/`,{},function (data){
-            if (!data.state){
-                alert(`恢复失败！信息：${data.msg}`);
+    takeProjectBack (pid) {
+        requestAPI(`take_project_go_back/${pid}/`, {}, data => {
+            if (data.state) {
+                this.setState(prevState => ({
+                    reports: prevState.reports.filter(r => r.project?.id !== pid)
+                }));
+                iziToast.success({
+                    title: '恢复成功',
+                    message: '作品已从回收站恢复',
+                    timeout: 3000
+                });
             } else {
-                lastType = null; // 刷新
+                iziToast.error({
+                    title: '恢复失败',
+                    message: `错误信息：${data.msg}`,
+                    timeout: 5000
+                });
             }
-        },"POST",process.env.PROJECT_HOST+"/");
+        }, 'POST', `${process.env.PROJECT_HOST}/`);
     }
 
-    async reject_project_report (pid,rid) {
-        await fetch(`${process.env.PROJECT_HOST}/check/report/${rid}/false`, {
-            method: "POST"
-        });
-        fetch(`${process.env.PROJECT_HOST}/proxy/reports/projects/${rid}`, {
-            method: "DELETE"
-        });
+    async rejectProjectReport (pid, rid) {
+        try {
+            await fetch(`${process.env.PROJECT_HOST}/check/report/${rid}/false`, {
+                method: 'POST'
+            });
+            
+            await fetch(`${process.env.PROJECT_HOST}/proxy/reports/projects/${rid}`, {
+                method: 'DELETE'
+            });
+            
+            this.setState(prevState => ({
+                reports: prevState.reports.filter(r => r.id !== rid)
+            }));
+            
+            iziToast.success({
+                title: '处理成功',
+                message: '已否定该举报',
+                timeout: 3000
+            });
+        } catch (e) {
+            iziToast.error({
+                title: '操作失败',
+                message: '网络错误，请重试',
+                timeout: 5000
+            });
+        }
+    }
+
+    async rejectCommentReport (pid, cid, rid) {
+        try {
+            await fetch(`${process.env.PROJECT_HOST}/check/report/${rid}/false`, {
+                method: 'POST'
+            });
+            
+            await fetch(`${process.env.PROJECT_HOST}/proxy/admin/project/${pid}/comment/${cid}/undelete`, {
+                method: 'PUT'
+            });
+            
+            this.setState(prevState => ({
+                reports: prevState.reports.filter(r => r.id !== rid)
+            }));
+            
+            iziToast.success({
+                title: '处理成功',
+                message: '已否定举报并恢复评论',
+                timeout: 3000
+            });
+        } catch (e) {
+            iziToast.error({
+                title: '操作失败',
+                message: '网络错误，请重试',
+                timeout: 5000
+            });
+        }
+    }
+
+    // 统一处理举报操作
+    handleReportAction (pid, cid, rid) {
+        const tab = this.state.tab;
+        if (tab === 'projects') {
+            this.deleteProject(pid, cid, rid);
+        } else if (tab === 'comments') {
+            this.deleteComment(pid, cid, rid);
+        }
+    }
+
+    // 更多操作（对接 ReportsList 的 more 回调）
+    handleGetMore (pid, report, cid, rid) {
+        const tab = this.state.tab;
+        if (tab === 'projects') {
+            return (
+                <a onClick={() => this.rejectProjectReport(pid, rid)}>
+                    否定该举报
+                </a>
+            );
+        } else if (tab === 'comments') {
+            return (
+                <a onClick={() => this.rejectCommentReport(pid, cid, rid)}>
+                    否定该举报并打回
+                </a>
+            );
+        }
+        return null;
+    }
+
+    // 额外信息（对接 ReportsList 的 getChildren 回调）
+    getChildren (pid, report) {
+        if (!report) return null;
+        return [
+            <p key="category">
+                举报类型：<FormattedMessage id={this.getReportIntlIdFromReport(report)} />
+            </p>,
+            <p key="notes">举报信息：{report.body?.notes || '无'}</p>
+        ];
     }
 
     getReportIntlIdFromReport (report) {
+        const category = report.body?.report_category;
         for (const option of REPORT_OPTIONS) {
-            if (option.value == report.body.report_category) { // 不可以使用===！因为value为字符串，report_category可能为数字，但只要值一致即可
+            // eslint-disable-next-line eqeqeq
+            if (option.value == category) {
                 return option.label.id;
             }
-            if (option.subcategories) { // 最多只有2级
+            if (option.subcategories) {
                 for (const sub of option.subcategories) {
-                    if (sub.value == report.body.report_category) {
+                    // eslint-disable-next-line eqeqeq
+                    if (sub.value == category) {
                         return sub.label.id;
                     }
                 }
             }
         }
-        return '未知类型'; // ID不存在直接显示ID，这样刚好符合要求...
+        return '未知类型';
     }
 
-    render() {
-        const type = (window.location.href.indexOf("#") != -1 ? window.location.href.split("#")[1] : "projects");
-        const pages = { "projects": "被举报的作品", "comments": "被举报的评论" };
-        const getLinks = () => {
-            var ret = [];
-            for (const page in pages) {
-                const name = pages[page];
-                ret.push(
-                    <a 
-                        href={`#${page}`} 
-                        onClick={() => {
-                            if (type != page) 
-                                this.setState({
-                                    loading: true
-                                });
-                        }}>
-                        {name}
-                    </a>
-                );
-            }
-            return ret;
+    render () {
+        const tabToText = {
+            projects: '被举报的作品',
+            comments: '被举报的评论'
+        };
+        const {tab, reports, loading, loadingMore, hasMore, error} = this.state;
+
+        if (error) {
+            return <NotAvailable />;
         }
-        // UserBox用法：children中第一个元素被放在Box内部，第二个元素放在Box下方，必须有至少两个元素，多余元素不显示
+
         return (
-            <div className="inner wait_reports" id="pagebox">
+            <div
+                className="inner wait_reports"
+                id="pagebox"
+            >
                 <UserBox
                     setInfo={this.setInfo}
-                    customLoadData={this.customLoadData}
                     uname={this.props.username}
                 >
                     <div>
                         <h3>相关页面</h3>
-                        <p class="about-page">
-                            {getLinks()}
+                        <p className="about-page">
+                            {Object.keys(tabToText).map(key => (
+                                <a
+                                    key={key}
+                                    href={`#${key}`}
+                                    onClick={() => this.switchTab(key)}
+                                >
+                                    {tabToText[key]}
+                                </a>
+                            ))}
                         </p>
                         <div>
-                            {this.state.loading ? <Loading /> : [
-                                <h3>等待审核的举报 - {pages[type]}({this.state.reports.length})</h3>,
-                                <div>
-                                    {this.state.reports.length > 0 ? 
-                                        <ReportsList items={this.state.reports} canRemove={type != "deleted"} canTake={type == "deleted"} text=""
-                                            onClick={async (pid, cid, rid) => {
-                                                if (type != "deleted") {
-                                                    if (type == "comments") {
-                                                        await fetch(`${process.env.PROJECT_HOST}/check/report/${rid}/true`, {
-                                                            method: "POST"
-                                                        });
-                                                    }
-                                                    (type == "projects" ? this.delete_project : this.delete_comment)(pid, cid, rid);
-                                                } else if (type == "deleted") {
-                                                    this.take_project_go_back(pid);
-                                                }
-                                            }} more={(pid, item, cid, rid) => {
-                                                if (type == "projects") {
-                                                    return (type == "shared" || item.public) &&
-                                                        (<a onClick={() => {
-                                                            this.reject_project_report(pid,rid);
-                                                        }}>
-                                                            否定该举报
-                                                        </a>);
-                                                } else {
-                                                    return [
-                                                        <a onClick={() => {
-                                                            fetch(`${process.env.PROJECT_HOST}/check/report/${rid}/false`, {
-                                                                method: "POST"
-                                                            }).then(() => {
-                                                                this.reject_comment_report(pid, cid, rid);
-                                                            });
-                                                        }}>
-                                                            否定该举报并打回
+                            {loading ? (
+                                <Loading />
+                            ) : (
+                                <>
+                                    <h3>等待审核的举报 - {tabToText[tab]}({reports.length})</h3>
+                                    <div>
+                                        {reports.length > 0 ? (
+                                            <>
+                                                <ReportsList
+                                                    items={reports}
+                                                    canRemove={false}
+                                                    canTake={false}
+                                                    text=""
+                                                    onClick={this.handleReportAction}
+                                                    more={this.handleGetMore}
+                                                    getChildren={this.getChildren}
+                                                    btnt={tab === 'comments' ? '确认该举报真实性并删除' : '确认并删除'}
+                                                />
+                                                {hasMore && (
+                                                    <div style={{textAlign: 'center', marginTop: 20, marginBottom: 20}}>
+                                                        <a
+                                                            onClick={this.handleLoadMore}
+                                                            style={{
+                                                                display: 'inline-block',
+                                                                padding: '8px 24px',
+                                                                background: '#f0f0f0',
+                                                                borderRadius: 4,
+                                                                color: '#333',
+                                                                textDecoration: 'none'
+                                                            }}
+                                                            aria-disabled={loadingMore}
+                                                        >
+                                                            {loadingMore ? '正在加载...' : '加载更多'}
                                                         </a>
-                                                    ];
-                                                }
-                                            }}
-                                            getChildren={type == "projects" ? ((pid, item, report) => {
-                                                return [
-                                                    <p>举报类型：<FormattedMessage id={this.getReportIntlIdFromReport(report)} /></p>,
-                                                    <p>举报信息：{report.body.notes}</p>
-                                                ];
-                                            }) : null}
-                                            btnt={type == "comments" ? "确认该举报真实性并删除" : "确认并删除"} />
-                                    : <p>空空如也</p>}
-                                </div>
-                            ]}
+                                                    </div>
+                                                )}
+                                                {!hasMore && reports.length > 0 && (
+                                                    <p
+                                                        style={{
+                                                            textAlign: 'center',
+                                                            color: '#999',
+                                                            marginTop: 20,
+                                                            marginBottom: 20
+                                                        }}
+                                                    >
+                                                        — 已加载全部 —
+                                                    </p>
+                                                )}
+                                            </>
+                                        ) : (
+                                            <p>空空如也</p>
+                                        )}
+                                    </div>
+                                </>
+                            )}
                         </div>
                     </div>
-                    <div>
-
-                    </div>
+                    <div />
                 </UserBox>
             </div>
         );
