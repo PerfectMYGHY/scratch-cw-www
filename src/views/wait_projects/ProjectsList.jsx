@@ -19,13 +19,14 @@ const ProjectInfo = ({item,canRemove,canTake,text,onClick,more,getChildren}) => 
                 href={`/projects/${item.id}/`}
                 key="imgElement"
                 target="_blank"
+                rel="noreferrer"
             >
                 <img
                     alt={item.title}
                     src={item.image}
                 />
             </a>
-            <div class="info">
+            <div className="info">
                 <a href={`/projects/${item.id}/`} target="_blank">{item.title}</a>
                 <p>最后修改日期：{mt}</p>
                 <Button onClick={()=>{
@@ -34,12 +35,14 @@ const ProjectInfo = ({item,canRemove,canTake,text,onClick,more,getChildren}) => 
                     打开编辑器页面
                 </Button>
             </div>
-            <div class="right-top">
-                <a onClick={()=>{
-                    if (onClick){
-                        onClick(item.id);
-                    }
-                }}>
+            <div className="right-top">
+                <a
+                    onClick={()=>{
+                        if (onClick){
+                            onClick(item.id);
+                        }
+                    }}
+                >
                     {canRemove && "删除"}
                     {canTake && "恢复"}
                     {text && text}
@@ -47,7 +50,7 @@ const ProjectInfo = ({item,canRemove,canTake,text,onClick,more,getChildren}) => 
                 <br />
                 {more(item.id,item)}
             </div>
-            <div class="children">
+            <div className="children">
                 {getChildren && getChildren(item.id,item)}
             </div>
         </div>

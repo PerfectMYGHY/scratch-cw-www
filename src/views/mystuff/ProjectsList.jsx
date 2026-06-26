@@ -1,10 +1,11 @@
 ﻿const React = require('react');
-const Thumbnail = require('../../components/thumbnail/thumbnail.jsx');
 const Button = require('../../components/forms/button.jsx');
 
 import PropTypes from 'prop-types';
 
 require('./ProjectsList.scss');
+
+const getStatus = require('../../components/grab/grab-status.jsx');
 
 const ProjectInfo = ({item, canRemove, canTake, text, onClick, onGetMore}) => {
     let mt = new Date(item.history.modified);
@@ -16,7 +17,9 @@ const ProjectInfo = ({item, canRemove, canTake, text, onClick, onGetMore}) => {
     // 拼接成所需格式的字符串
     mt = `${year}-${month}-${day}`;
     return (
-        <div info="info">
+        <div
+            info="info"
+        >
             <a
                 className="thumbnail-image"
                 href={`/projects/${item.id}/`}
@@ -59,19 +62,7 @@ const ProjectInfo = ({item, canRemove, canTake, text, onClick, onGetMore}) => {
                 <br />
                 {onGetMore(item.id, item)}
                 <br />
-                {item.public && (item.reviewed && !item.passed ? (
-                    <span className="not-passed">
-                        未通过审核！
-                    </span>
-                ) : (item.reviewed ? (
-                    <span className="passed">
-                        审核通过！
-                    </span>
-                ) : (
-                    <span className="not-checked">
-                        还未审核
-                    </span>
-                )))}
+                {item.public && getStatus(item)}
             </div>
         </div>
     );
@@ -109,13 +100,14 @@ ProjectInfo.propTypes = {
             loves: PropTypes.number,
             favorites: PropTypes.number,
             remixes: PropTypes.number,
-            passed: PropTypes.bool
         }),
-        passed: PropTypes.bool,
+        reviewing: PropTypes.bool,
+        approved: PropTypes.bool,
+        pending: PropTypes.bool,
+        escalated: PropTypes.bool,
         type: PropTypes.string,
         quality: PropTypes.string,
         added: PropTypes.number,
-        reviewed: PropTypes.bool,
         liked: PropTypes.bool,
         liked_project: PropTypes.number,
         remix: PropTypes.shape({

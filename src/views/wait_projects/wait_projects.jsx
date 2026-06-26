@@ -12,6 +12,7 @@ const ProjectsList = require('./ProjectsList.jsx');
 const bindAll = require('lodash.bindall');
 const NotAvailable = require('../../components/not-available/not-available.jsx');
 const iziToast = require('izitoast');
+const classNames = require('classnames');
 
 const {connect} = require('react-redux');
 
@@ -19,11 +20,14 @@ require('./wait_projects.scss');
 
 const LIMIT = 10; // 每页数量，与后端约定一致
 
+const getStatus = require('../../components/grab/grab-status.jsx');
+
 class WaitProjects extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
             loading: true,
+            loadingReset: false,
             projects: [],
             info: {},
             error: false,
@@ -42,7 +46,9 @@ class WaitProjects extends React.Component {
             'cancelSharing',
             'handleProjectButtonClick',
             'handleGetMore',
-            'getChildren'
+            'getChildren',
+            'getGrab',
+            'handleReload'
         ]);
     }
 
@@ -76,16 +82,16 @@ class WaitProjects extends React.Component {
     }
 
     // 加载数据（支持重置和追加）
-    loadData ({reset = false, append = false} = {}) {
+    loadData ({reset = false, append = false, limit = LIMIT} = {}) {
         const tab = this.state.tab;
         const offset = reset ? 0 : this.state.offset;
 
         this.setState({
-            loading: !!reset,
+            loadingReset: !!reset,
             loadingMore: !!append
         });
 
-        fetch(`${process.env.PROJECT_HOST}/scratch-admin/projects/not_passed/${tab}?offset=${offset}&limit=${LIMIT}`, {
+        fetch(`${process.env.PROJECT_HOST}/scratch-admin/projects/not_passed/${tab}?offset=${offset}&limit=${limit}`, {
             method: 'POST'
         })
             .then(data => {
@@ -95,15 +101,17 @@ class WaitProjects extends React.Component {
                 
                 this.setState({
                     projects: newProjects,
+                    loadingReset: false,
                     loading: false,
                     loadingMore: false,
                     offset: offset + data.length,
-                    hasMore: data.length === LIMIT,
+                    hasMore: data.length === limit,
                     error: false
                 });
             })
             .catch(() => {
                 this.setState({
+                    loadingReset: false,
                     loading: false,
                     loadingMore: false,
                     error: true
@@ -203,30 +211,45 @@ class WaitProjects extends React.Component {
         );
     }
 
+    getGrab (pid) {
+        return () => {
+            requestAPI(`grab/?pid=${pid}`, {}, data => {
+                if (data.status === 'success') {
+                    this.loadData({reset: true, limit: this.state.projects.length});
+                } else {
+                    iziToast.error({
+                        title: '抢单失败',
+                        message: `错误信息：${data.msg}`,
+                        timeout: 5000
+                    });
+                    this.loadData({reset: true, limit: this.state.projects.length});
+                }
+            }, 'POST', `${process.env.PROJECT_HOST}/`);
+        };
+    }
+
+    handleReload () {
+        this.loadData({reset: true});
+    }
+
     // 渲染每个项目的额外信息（审核状态、重复提醒等）
     getChildren (pid, item) {
-        const children = [];
+        const children = [item.grabbed ? (item.grabbed_by_you ? (
+            <button disabled>
+                您已抢此单
+            </button>
+        ) : (
+            <button disabled>
+                此单已被抢
+            </button>
+        )) : (
+            <button onClick={this.getGrab(pid)}>
+                抢单
+            </button>
+        ), (<br key="grabbing_button_br" />)];
         
         // 审核状态
-        if (item.reviewed) {
-            children.push(
-                <p
-                    key="reviewed"
-                    style={{color: 'red'}}
-                >
-                    审核未通过
-                </p>
-            );
-        } else {
-            children.push(
-                <p
-                    key="unreviewed"
-                    className="orange-color"
-                >
-                    未审核
-                </p>
-            );
-        }
+        children.push(getStatus(item));
         
         // 重复项目提示
         if (item.has_similar_project) {
@@ -262,8 +285,8 @@ class WaitProjects extends React.Component {
     render () {
         const tabToText = {
             all: '全部',
-            unchecked: '未检查的',
-            checked: '已检查但未通过的'
+            unchecked: '未审核的',
+            checked: '已查看的'
         };
         const {tab, projects, loading, loadingMore, hasMore, error} = this.state;
 
@@ -299,8 +322,26 @@ class WaitProjects extends React.Component {
                                 <Loading />
                             ) : (
                                 <>
-                                    <h3>等待审核的页面 - {tabToText[tab]}({projects.length})</h3>
-                                    <div>
+                                    <h3>
+                                        等待审核的页面 - {tabToText[tab]}
+                                        <a
+                                            onClick={this.handleReload}
+                                            style={{
+                                                marginLeft: '5px'
+                                            }}
+                                        >
+                                            刷新
+                                        </a>
+                                    </h3>
+                                    <div className="loading-parent">
+                                        <div
+                                            className={classNames({
+                                                'inner-loading-overlay': true,
+                                                'loading': this.state.loadingReset
+                                            })}
+                                        >
+                                            <div className="spinner" />
+                                        </div>
                                         {projects.length > 0 ? (
                                             <>
                                                 <ProjectsList
@@ -332,20 +373,15 @@ class WaitProjects extends React.Component {
                                                     </div>
                                                 )}
                                                 {!hasMore && projects.length > 0 && (
-                                                    <p
-                                                        style={{
-                                                            textAlign: 'center',
-                                                            color: '#999',
-                                                            marginTop: 20,
-                                                            marginBottom: 20
-                                                        }}
-                                                    >
+                                                    <p className="bottom-tip">
                                                         — 已加载全部 —
                                                     </p>
                                                 )}
                                             </>
                                         ) : (
-                                            <p>空空如也</p>
+                                            <p className="bottom-tip">
+                                                — 空空如也 —
+                                            </p>
                                         )}
                                     </div>
                                 </>

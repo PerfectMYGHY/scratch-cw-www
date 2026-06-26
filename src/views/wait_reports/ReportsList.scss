@@ -48,7 +48,10 @@
         // 评论信息（宽）
         .wide {
             max-width: calc(100% - 20px - 176px);
-            margin-left: calc(10px + $project-width);
+
+            &.project {
+                margin-left: calc(10px + $project-width);
+            }
             
             p {
                 margin: 4px 0;
@@ -74,6 +77,8 @@
                 cursor: pointer;
                 color: $ui-blue;
                 text-decoration: underline;
+
+                margin: 0 5px;
                 
                 &:hover {
                     color: $ui-blue-dark;

@@ -48,8 +48,6 @@ const onKeyPress = e => {
     }
 };
 
-let started = false;
-
 const PreviewPresentation = ({
     addToStudioOpen,
     adminModalOpen,
@@ -200,19 +198,27 @@ const PreviewPresentation = ({
                 message={<FormattedMessage id="project.share.notShared" />}
                 onAction={canShare ? onShare : onShareAttempt}
             />);
-        } else if (!projectInfo.reviewed){
-            banner = (<Banner
-                message={'当前项目未审核，仅临时能被看到，但未分类、决定加Scratch币的数量。'}
-            />);
-        } else if (projectInfo.reviewed && projectInfo.passed){
+        } else if (projectInfo.approved) {
             banner = (<Banner
                 className="banner-success"
                 message={`当前项目已审核！分类：${projectInfo.type}，质量：${projectInfo.quality}，所加Scratch币数：${projectInfo.added}`}
             />);
-        } else if (projectInfo.reviewed && !projectInfo.passed){
+        } else if (projectInfo.pending) {
+            banner = (<Banner
+                message={'当前项目审核暂缓中，请等待审核员审核。'}
+            />);
+        } else if (projectInfo.escalated) {
+            banner = (<Banner
+                message={'当前项目审核已转争议，请等待站长裁决。'}
+            />);
+        } else if (projectInfo.reviewing) {
             banner = (<Banner
                 className="banner-danger"
-                message={`！！审核未通过！！请查看该作品的评论区并与管理员沟通原因！现在你的项目暂时不可见。`}
+                message={`当前项目审核已被驳回，驳回原因：${projectInfo.reject_reason}`}
+            />);
+        } else {
+            banner = (<Banner
+                message={'当前项目还在审核中，请等待审核员审核。'}
             />);
         }
     }

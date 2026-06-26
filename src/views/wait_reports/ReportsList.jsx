@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 const React = require('react');
 const Button = require('../../components/forms/button.jsx');
+const classNames = require('classnames');
 
 require('./ReportsList.scss');
 
@@ -106,7 +107,13 @@ const ReportItem = ({
             
             {/* 评论信息（评论举报） */}
             {isCommentReport && (
-                <div className="info wide">
+                <div
+                    className={classNames({
+                        info: true,
+                        wide: true,
+                        project: isProjectReport
+                    })}
+                >
                     <p>
                         来自：
                         <a

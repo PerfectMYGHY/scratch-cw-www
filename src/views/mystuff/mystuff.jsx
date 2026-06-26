@@ -252,7 +252,7 @@ class MyStuff extends React.Component {
                             <Loading />
                         ) : (
                             <>
-                                <h3>{tabToText[tab]}({projects.length})</h3>
+                                <h3>{tabToText[tab]}</h3>
                                 <div>
                                     {projects.length > 0 ? (
                                         <>

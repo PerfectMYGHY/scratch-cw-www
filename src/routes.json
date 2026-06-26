@@ -348,6 +348,13 @@
     "title": "社区机制"
   },
   {
+    "name": "reviewer",
+    "pattern": "^/reviewer_recruiting/?$",
+    "routeAlias": "/reviewer_recruiting/?$",
+    "view": "reviewer/reviewer",
+    "title": "审核员招募"
+  },
+  {
     "name": "webmaster",
     "pattern": "^/about_webmaster/?$",
     "routeAlias": "/community_mechanism/?$",
