@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-max-props-per-line */
 const bindAll = require('lodash.bindall');
 const connect = require('react-redux').connect;
 const PropTypes = require('prop-types');
@@ -28,58 +29,14 @@ class Intro extends React.Component {
         return (
             <TitleBanner className="intro-banner">
                 <FlexRow className="intro-container">
-                    {/*<FlexRow className="intro-content column">*/}
-                    {/*    <h1 className="intro-header">*/}
-                    {/*        <span>{this.props.messages['intro.tagLine1']}</span>*/}
-                    {/*        <br />*/}
-                    {/*        <span>{this.props.messages['intro.tagLine2']}</span>*/}
-                    {/*    </h1>*/}
-                    {/*    <FlexRow className="intro-buttons">*/}
-                    {/*        <a*/}
-                    {/*            className="intro-button create-button button"*/}
-                    {/*            href="/create"*/}
-                    {/*        >*/}
-                    {/*            {this.props.messages['intro.startCreating']}*/}
-                    {/*        </a>*/}
-                    {/*        <a*/}
-                    {/*            className="intro-button join-button button"*/}
-                    {/*            href="#"*/}
-                    {/*            onClick={this.props.handleClickRegistration}*/}
-                    {/*        >*/}
-                    {/*            {this.props.messages['intro.join']}*/}
-                    {/*        </a>*/}
-                    {/*    </FlexRow>*/}
-
-                    {/*</FlexRow>*/}
-                    {/*<FlexRow className="intro-video-container">*/}
-                    {/*    {this.state.videoOpen ?*/}
-                    {/*        (*/}
-                    {/*            <Video*/}
-                    {/*                className="intro-video"*/}
-                    {/*                videoId="idx"*/}
-                    {/*            />*/}
-                    {/*        ) : (*/}
-                    {/*            <div*/}
-                    {/*                className="video-image"*/}
-                    {/*                onClick={this.handleShowVideo}*/}
-                    {/*            >*/}
-                    {/*                <img src="/svgs/intro/video-image.svg" />*/}
-                    {/*                <a*/}
-                    {/*                    href="#"*/}
-                    {/*                    onClick={this.handleShowVideo}*/}
-                    {/*                >*/}
-                    {/*                    <div className="watch-button button">*/}
-                    {/*                        {this.props.messages['intro.watchVideo']}*/}
-                    {/*                    </div>*/}
-                    {/*                </a>*/}
-                    {/*            </div>*/}
-                    {/*        )*/}
-                    {/*    }*/}
-                    {/*</FlexRow>*/}
                     <FlexRow className="welcome-logo">
                         <div>
                             <a href="/">
-                                <img src="/images/logo_sm.png" width="330px"></img>
+                                <img
+                                    src="/images/logo_sm.png"
+                                    title="Scratch创世界"
+                                    width="330px"
+                                />
                             </a>
                         </div>
                     </FlexRow>
@@ -108,13 +65,6 @@ class Intro extends React.Component {
                             >
                                 发现作品
                             </a>
-                            {/*<a*/}
-                            {/*    className="intro-button join-button button"*/}
-                            {/*    href="#"*/}
-                            {/*    onClick={this.props.handleClickRegistration}*/}
-                            {/*>*/}
-                            {/*    {this.props.messages['intro.join']}*/}
-                            {/*</a>*/}
                         </FlexRow>
 
                     </FlexRow>
@@ -127,59 +77,9 @@ class Intro extends React.Component {
                             <a href="/credits" className="welcome-link">我们的团队</a>
                             <a href="/new_description" className="welcome-link">新手简介</a>
                         </p>
-                        {/*<FlexRow className="intro-buttons">*/}
-                        {/*    <a*/}
-                        {/*        className="intro-button create-button button"*/}
-                        {/*        href="/create"*/}
-                        {/*    >*/}
-                        {/*        {this.props.messages['intro.startCreating']}*/}
-                        {/*    </a>*/}
-                        {/*    <a*/}
-                        {/*        className="intro-button mystuff-button button"*/}
-                        {/*        href="/mystuff"*/}
-                        {/*    >*/}
-                        {/*        我的东西*/}
-                        {/*    </a>*/}
-                        {/*    <a*/}
-                        {/*        className="intro-button explore-button button"*/}
-                        {/*        href="/explore/projects/all"*/}
-                        {/*    >*/}
-                        {/*        发现作品*/}
-                        {/*    </a>*/}
-                        {/*    */}{/*<a*/}
-                        {/*    */}{/*    className="intro-button join-button button"*/}
-                        {/*    */}{/*    href="#"*/}
-                        {/*    */}{/*    onClick={this.props.handleClickRegistration}*/}
-                        {/*    */}{/*>*/}
-                        {/*    */}{/*    {this.props.messages['intro.join']}*/}
-                        {/*    */}{/*</a>*/}
-                        {/*</FlexRow>*/}
 
                     </FlexRow>
                     <FlexRow className="intro-video-container">
-                        {/*{this.state.videoOpen ?*/}
-                        {/*    (*/}
-                        {/*        <Video*/}
-                        {/*            className="intro-video"*/}
-                        {/*            videoId="idx"*/}
-                        {/*        />*/}
-                        {/*    ) : (*/}
-                        {/*        <div*/}
-                        {/*            className="video-image"*/}
-                        {/*            onClick={this.handleShowVideo}*/}
-                        {/*        >*/}
-                        {/*            <img src="/svgs/intro/video-image.svg" />*/}
-                        {/*            <a*/}
-                        {/*                href="#"*/}
-                        {/*                onClick={this.handleShowVideo}*/}
-                        {/*            >*/}
-                        {/*                <div className="watch-button button">*/}
-                        {/*                    {this.props.messages['intro.watchVideo']}*/}
-                        {/*                </div>*/}
-                        {/*            </a>*/}
-                        {/*        </div>*/}
-                        {/*    )*/}
-                        {/*}*/}
                         <div
                             className="screenshot"
                         >
@@ -190,37 +90,12 @@ class Intro extends React.Component {
                         </div>
                     </FlexRow>
                 </FlexRow>
-
-                {/*<FlexRow className="intro-subnav">*/}
-                {/*    <a*/}
-                {/*        href="/about"*/}
-                {/*    >*/}
-                {/*        <div className="subnav-button button">*/}
-                {/*            {this.props.messages['intro.aboutScratch']}*/}
-                {/*        </div>*/}
-                {/*    </a>*/}
-                {/*    <a*/}
-                {/*        href="/community_guidelines"*/}
-                {/*    >*/}
-                {/*        <div className="subnav-button button">*/}
-                {/*            {"社区行为准则"}*/}
-                {/*        </div>*/}
-                {/*    </a>*/}
-                {/*    <a*/}
-                {/*        href="/community_mechanism"*/}
-                {/*    >*/}
-                {/*        <div className="subnav-button button">*/}
-                {/*            {"社区机制"}*/}
-                {/*        </div>*/}
-                {/*    </a>*/}
-                {/*</FlexRow>*/}
             </TitleBanner>
         );
     }
 }
 
 Intro.propTypes = {
-    handleClickRegistration: PropTypes.func,
     messages: PropTypes.shape({
         'intro.aboutScratch': PropTypes.string,
         'intro.forEducators': PropTypes.string,

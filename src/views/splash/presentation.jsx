@@ -215,32 +215,13 @@ class SplashPresentation extends React.Component { // eslint-disable-line react/
                 })}
             >
                 <LegacyCarousel items={this.props.featuredGlobal.community_featured_projects} />
-            </Box>/* ,
-            <Box
-                key="community_featured_studios"
-                title={this.props.intl.formatMessage({
-                    id: 'splash.featuredStudios'
-                })}
-            >
-                <LegacyCarousel
-                    items={this.props.featuredGlobal.community_featured_studios}
-                    settings={{
-                        slidesToShow: 4,
-                        slidesToScroll: 4,
-                        lazyLoad: false
-                    }}
-                />
-            </Box> */
+            </Box>
         ];
 
         if (this.props.featuredGlobal.curator_top_projects &&
             this.props.featuredGlobal.curator_top_projects.length > 4) {
 
             const curatorName = this.props.featuredGlobal.curator_top_projects[0].curator_name;
-            { /* moreHref="/studios/386359/"*/ }
-            { /* moreTitle={this.props.intl.formatMessage({*/ }
-            { /*    id: 'general.learnMore'*/ }
-            { /* })}*/ }
             rows.push(
                 <Box
                     key="curator_top_projects"
@@ -404,15 +385,6 @@ class SplashPresentation extends React.Component { // eslint-disable-line react/
                 }
                 {this.props.sessionStatus === sessionActions.Status.FETCHED &&
                     Object.keys(this.props.user).length > 0 && // user is logged in
-                    // <div
-                    //    className="splash-header"
-                    //    key="header"
-                    // >
-                    //    <MyWelcome
-                    //        key="intro"
-                    //        messages={messages}
-                    //    />
-                    // </div>
                     <MyWelcome
                         key="intro"
                         messages={messages}
@@ -424,29 +396,6 @@ class SplashPresentation extends React.Component { // eslint-disable-line react/
                 >
                     {this.props.sessionStatus === sessionActions.Status.FETCHED &&
                         Object.keys(this.props.user).length > 0 && // user is logged in
-                        // <div
-                        //    className="splash-header"
-                        //    key="header"
-                        // >
-                        //    {this.props.shouldShowWelcome ? [
-                        //        <Welcome
-                        //            key="welcome"
-                        //            messages={messages}
-                        //            onDismiss={() => { // eslint-disable-line react/jsx-no-bind
-                        //                this.props.onDismiss('welcome');
-                        //            }}
-                        //        />
-                        //    ] : [
-                        //        <WrappedActivityList
-                        //            items={this.props.activity}
-                        //            key="activity"
-                        //        />
-                        //    ]}
-                        //    <News
-                        //        items={this.props.news}
-                        //        messages={messages}
-                        //    />
-                        // </div>
                         <News
                             items={this.props.news}
                             messages={messages}
@@ -490,46 +439,6 @@ class SplashPresentation extends React.Component { // eslint-disable-line react/
                                         </li>
                                     </ul>
                                 </dd>
-                                {/* <dt>Homepage Cache</dt>*/}
-                                {/* <dd>*/}
-                                {/*    <ul className="cache-list">*/}
-                                {/*        <li>*/}
-                                {/*            <div className="button-row">*/}
-                                {/*                <span>Refresh row data:</span>*/}
-                                {/*                <Button*/}
-                                {/*                    className={this.props.refreshCacheStatus.status}*/}
-                                {/*                    disabled={this.props.refreshCacheStatus.disabled}*/}
-                                {/*                    onClick={this.props.onRefreshHomepageCache}*/}
-                                {/*                >*/}
-                                {/*                    <span>{this.props.refreshCacheStatus.content}</span>*/}
-                                {/*                </Button>*/}
-                                {/*            </div>*/}
-                                {/*        </li>*/}
-                                {/*    </ul>*/}
-                                {/* </dd>*/}
-                                {/* <dt>Page Cache</dt>*/}
-                                {/* <dd>*/}
-                                {/*    <ul className="cache-list">*/}
-                                {/*        <li>*/}
-                                {/*            <form*/}
-                                {/*                action="/scratch_admin/page/clear-anon-cache/"*/}
-                                {/*                method="post"*/}
-                                {/*            >*/}
-                                {/*                <input*/}
-                                {/*                    name="path"*/}
-                                {/*                    type="hidden"*/}
-                                {/*                    value="/"*/}
-                                {/*                />*/}
-                                {/*                <div className="button-row">*/}
-                                {/*                    <span>For anonymous users:</span>*/}
-                                {/*                    <Button type="submit">*/}
-                                {/*                        <span>Clear</span>*/}
-                                {/*                    </Button>*/}
-                                {/*                </div>*/}
-                                {/*            </form>*/}
-                                {/*        </li>*/}
-                                {/*    </ul>*/}
-                                {/* </dd>*/}
                             </dl>
                         </AdminPanel>
                     )}

@@ -1,65 +1,13 @@
 const PropTypes = require('prop-types');
 const React = require('react');
-const defaults = require('lodash.defaults');
 
 const Box = require('../box/box.jsx');
 
 require('./news.scss');
-// moreHref = "/discuss/5/"
-// moreTitle = { props.messages['general.viewAll'] }
 
 // 创建一个等待指定秒数的函数
 const wait = seconds => new Promise(resolve => setTimeout(resolve, seconds));
 
-
-// class MarqueeNewsContent extends React.Component {
-//    constructor (props) {
-//        super(props);
-//        this.marqueeRef = React.createRef();
-//        this.checkPositions();
-//    }
-
-//    checkPositions = async () => {
-//        while (true) {
-//            const marquee = this.marqueeRef.current;
-//            if (marquee) {
-//                const liElements = marquee.getElementsByTagName('li');
-//                const topPosition = marquee.getBoundingClientRect().top;
-
-//                // 获取每个li元素的top位置
-//                const positions = Array.from(liElements).map((li) => {
-//                    const liTop = li.getBoundingClientRect().top;
-//                    return liTop - topPosition; // 计算相对于marquee顶端的距离
-//                });
-
-//                for (const dis of positions) {
-//                    if (Math.abs(dis) < 1) {
-//                        console.log("stop");
-//                        marquee.stop();
-//                        await wait(1.5);
-//                        console.log("start");
-//                        marquee.start();
-//                        await wait(1);
-//                    }
-//                }
-//            }
-//            await wait(0.01);
-//        }
-//    };
-
-//    render() {
-//        return (
-//            <marquee
-//                ref={this.marqueeRef}
-//                behavior="scroll"
-//                direction="up"
-//                className="news-content"
-//            >
-//                {this.props.children}
-//            </marquee>
-//        );
-//    }
-// }
 
 class MarqueeNewsContent extends React.Component {
     constructor (props) {
