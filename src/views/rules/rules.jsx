@@ -6,12 +6,12 @@ const Box = require('../../components/box/box.jsx');
 const Page = require('../../components/page/www/page.jsx');
 const render = require('../../lib/render.jsx');
 
-require('./mechanism.scss');
+require('./rules.scss');
 
-const Mechanism = () => (
-    <div className="inner mechanism">
+const Rules = () => (
+    <div className="inner rules">
         <Box
-            title="社区机制"
+            title="社区规则"
         >
             <p>
                 Scratch创世界 对每个作品、评论等都有严格的管理措施。
@@ -162,6 +162,82 @@ const Mechanism = () => (
                     - 转载作品的质量等级最高只能评为中级（详见上方表格说明）。
                 </dd>
 
+                <dt>精选作品评选规范</dt>
+                <dd>
+                    <strong>一、评选原则</strong><br />
+                    - 精选作品是<strong>高质量中的佼佼者</strong>，不是所有高质量作品都配得上“精选”<br />
+                    - 审核员拥有直接评选权，但站长会<strong>不定期抽查</strong>首页精选内容<br />
+                    - 宁缺毋滥，精选代表社区最高创作水平
+                </dd>
+                <dd>
+                    <strong>二、评选标准</strong><br />
+                    从以下四个维度对作品进行评分（1-5 分），须满足 <strong>至少 3 个维度 ≥ 3 分</strong>，且<strong>所有维度 ≥ 3 分</strong>（不能有短板）：
+                    <table border="1">
+                        <thead>
+                            <tr>
+                                <th style={{width: '15%'}}>维度</th>
+                                <th style={{width: '28%'}}>1 分（差）</th>
+                                <th style={{width: '28%'}}>3 分（合格）</th>
+                                <th style={{width: '29%'}}>5 分（优秀）</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>创意新颖度</strong></td>
+                                <td>烂大街的玩法，毫无新意</td>
+                                <td>有一点自己的想法，但不够突出</td>
+                                <td>让人眼前一亮的全新构思</td>
+                            </tr>
+                            <tr>
+                                <td><strong>制作精良度</strong></td>
+                                <td>画面粗糙，操作卡顿，Bug 多</td>
+                                <td>画面整洁，运行流畅，无明显问题</td>
+                                <td>画面精美，交互细腻，细节用心</td>
+                            </tr>
+                            <tr>
+                                <td><strong>可玩性/观赏性</strong></td>
+                                <td>玩不下去/看不下去</td>
+                                <td>能让人玩完/看完，有一定吸引力</td>
+                                <td>让人玩完还想继续，或看完还想再看</td>
+                            </tr>
+                            <tr>
+                                <td><strong>技术深度</strong></td>
+                                <td>全是顺序结构，无逻辑性</td>
+                                <td>使用了变量、循环、条件等基本结构</td>
+                                <td>使用了克隆、云变量、自定义积木等高级技巧</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </dd>
+                <dd>
+                    <strong>三、评选流程</strong><br />
+                    1. 审核员在审核通过时，如认为作品表现突出，可直接勾选「评为精选」<br />
+                    2. 作品即刻获得精选标记，出现在首页精选区<br />
+                    3. 站长会不定期抽查首页精选作品，确认是否符合标准<br />
+                    4. 如发现名不副实的精选，将记录一次审核员的<strong>「精选误判」</strong><br />
+                    5. 精选误判累计方式与普通审核误判相同（参考《审核流程说明》第 6 条考核机制）
+                </dd>
+                <dd>
+                    <strong>四、评选原则</strong><br />
+                    - <strong>宁缺毋滥：</strong>犹豫“这个算不算精选”时，请选择“不算”<br />
+                    - <strong>对比筛选：</strong>想一想“这个作品和已精选的作品比，够格吗？”<br />
+                    - <strong>严格把关：</strong>不要因为“鼓励新手”或“作者很努力”而降低标准<br />
+                    - 精选是社区的门面，请对自己的选择负责
+                </dd>
+                <dd>
+                    <strong>五、严禁行为</strong><br />
+                    - <strong>互推精选：</strong>审核员之间互相给对方的作品评精选<br />
+                    - <strong>人情精选：</strong>因为认识作者或关系好就给精选<br />
+                    - <strong>滥竽充数：</strong>明知道不够格，却觉得“反正站长会查”就随便选<br />
+                    <span className="red-item">一经发现，按《审核流程说明》第 6 条（考核机制）从重处罚！</span>
+                </dd>
+                <dd>
+                    <strong>六、站长复核机制</strong><br />
+                    - 站长会不定期浏览首页精选作品，发现不符标准的直接取消精选标记<br />
+                    - 站长会记录每位审核员的「精选误判」次数，与普通误判累计计算<br />
+                    - 精选误判会影响审核员整体考核
+                </dd>
+
                 <dt>审核员行为准则</dt>
                 <dd>1. 回避原则：不得审核自己或亲友的作品。如存在关联关系，应主动报备并回避审核。违反者取消审核员资格。</dd>
                 <dd>2. 审核标准：逐项检查作品是否存在违规内容，包括但不限于：抄袭、转载不标注出处、色情、暴力、政治敏感、恶意代码等。谐音、变体字、外链跳转、二维码引导等变相规避行为同样视为违规。</dd>
@@ -191,7 +267,7 @@ const Mechanism = () => (
                 <dd>6. 考核机制：因业务不熟导致误判的，首次给予书面提醒；连续 3 次（30 天内）出现明显误判，取消审核员资格。因主观故意（如徇私、报复）导致的违规操作，一经查实立即取消资格并永久禁止再次申请。</dd>
                 <dd>7. 当前状态：社区目前有约 700 件历史积压作品，暂不设 48 小时审核时限。审核员可利用课余/业余时间按&quot;先投先审&quot;原则处理，不得因赶进度而降低审核质量。积压清空后将另行公告恢复常规时限。</dd>
             </dl>
-            <div className="mechanism-footer">
+            <div className="rules-footer">
                 <img
                     alt="sprites"
                     src="/images/spritesforcommunityguid.png"
@@ -201,4 +277,4 @@ const Mechanism = () => (
     </div>
 );
 
-render(<Page><Mechanism /></Page>, document.getElementById('app'));
+render(<Page><Rules /></Page>, document.getElementById('app'));

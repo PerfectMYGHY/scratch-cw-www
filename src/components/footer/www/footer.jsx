@@ -15,7 +15,7 @@ const getScratchWikiLink = require('../../../lib/scratch-wiki');
 
 require('./footer.scss');
 
-const Footer = props => (
+const Footer = () => (
     <FooterBox>
         <MediaQuery maxWidth={frameless.mobileIntermediate - 1}>
             <div className="lists">
@@ -35,7 +35,7 @@ const Footer = props => (
                     </dd>
                     <dd>
                         <a href="/about_webmaster">
-                            <FormattedMessage id="general.webmaster" defaultMessage="关于站长" />
+                            <FormattedMessage id="general.webmaster" />
                         </a>
                     </dd>
                 </dl>
@@ -49,8 +49,8 @@ const Footer = props => (
                         </a>
                     </dd>
                     <dd>
-                        <a href="/community_mechanism">
-                            <FormattedMessage id="general.mechanism" defaultMessage="社区机制" />
+                        <a href="/community_rules">
+                            <FormattedMessage id="general.rules" />
                         </a>
                     </dd>
                     <dd>
@@ -72,21 +72,6 @@ const Footer = props => (
                             <FormattedMessage id="general.aboutScratch" />
                         </a>
                     </dd>
-                    {/*<dd>
-                        <a href="/parents/">
-                            <FormattedMessage id="general.forParents" />
-                        </a>
-                    </dd>*/}
-                    {/*<dd>
-                        <a href="/educators">
-                            <FormattedMessage id="general.forEducators" />
-                        </a>
-                    </dd>*/}
-                    {/*<dd>
-                        <a href="/developers">
-                            <FormattedMessage id="general.forDevelopers" />
-                        </a>
-                    </dd>*/}
                     <dd>
                         <a href="/credits">
                             <FormattedMessage id="general.credits" />
@@ -94,19 +79,9 @@ const Footer = props => (
                     </dd>
                     <dd>
                         <a href="/about_webmaster">
-                            <FormattedMessage id="general.webmaster" defaultMessage="关于站长" />
+                            <FormattedMessage id="general.webmaster" />
                         </a>
                     </dd>
-                    {/*<dd>
-                        <a href="https://scratchfoundation.org/supporters">
-                            <FormattedMessage id="general.donors" />
-                        </a>
-                    </dd>*/}
-                    {/*<dd>
-                        <a href="https://www.scratchfoundation.org/careers">
-                            <FormattedMessage id="general.jobs" />
-                        </a>
-                    </dd>*/}
                     <dd>
                         <a href="/sponsor">
                             <FormattedMessage id="general.donate" />
@@ -124,28 +99,13 @@ const Footer = props => (
                         </a>
                     </dd>
                     <dd>
-                        <a href="/community_mechanism">
-                            <FormattedMessage id="general.mechanism" defaultMessage="社区机制" />
+                        <a href="/community_rules">
+                            <FormattedMessage id="general.rules" />
                         </a>
                     </dd>
-                    {/*<dd>
-                        <a href="/discuss/">
-                            <FormattedMessage id="footer.discuss" />
-                        </a>
-                    </dd>*/}
-                    {/*<dd>
-                        <a href={props.scratchWikiLink}>
-                            <FormattedMessage id="general.wiki" />
-                        </a>
-                    </dd>*/}
-                    {/*<dd>*/}
-                    {/*    <a href="/statistics/">*/}
-                    {/*        <FormattedMessage id="general.statistics" />*/}
-                    {/*    </a>*/}
-                    {/*</dd>*/}
                     <dd>
                         <a href="/new_description">
-                            {"新手简介"}
+                            <FormattedMessage id="general.new_description" />
                         </a>
                     </dd>
                 </dl>
@@ -154,11 +114,6 @@ const Footer = props => (
                     <dt>
                         <FormattedMessage id="general.support" />
                     </dt>
-                    {/*<dd>*/}
-                    {/*    <a href="/ideas">*/}
-                    {/*        <FormattedMessage id="general.ideas" />*/}
-                    {/*    </a>*/}
-                    {/*</dd>*/}
                     <dd>
                         <a href="/faq">
                             <FormattedMessage id="general.faq" />
@@ -175,69 +130,6 @@ const Footer = props => (
                         </a>
                     </dd>
                 </dl>
-
-                {/*<dl>
-                    <dt>
-                        <FormattedMessage id="general.legal" />
-                    </dt>
-                    <dd>
-                        <a href="/terms_of_use">
-                            <FormattedMessage id="general.termsOfUse" />
-                        </a>
-                    </dd>
-                    <dd>
-                        <a href="/privacy_policy">
-                            <FormattedMessage id="general.privacyPolicy" />
-                        </a>
-                    </dd>
-                    <dd>
-                        <a href="/cookies">
-                            <FormattedMessage id="general.cookies" />
-                        </a>
-                    </dd>
-                    <dd>
-                        <a href="/DMCA">
-                            <FormattedMessage id="general.dmca" />
-                        </a>
-                    </dd>
-                </dl
-
-                <dl>
-                    <dt>
-                        <FormattedMessage id="footer.scratchFamily" />
-                    </dt>
-                    <dd>
-                        <a href="http://scratched.gse.harvard.edu/">
-                            <FormattedMessage id="general.scratchEd" />
-                        </a>
-                    </dd>
-                    <dd>
-                        <a href="https://www.scratchjr.org/">
-                            <FormattedMessage id="general.scratchJr" />
-                        </a>
-                    </dd>
-                    <dd>
-                        <a href="http://day.scratch.mit.edu/">
-                            Scratch Day
-                        </a>
-                    </dd>
-                    <dd>
-                        <a href="https://www.scratchfoundation.org/scratch-conference">
-                            <FormattedMessage id="general.scratchConference" />
-                        </a>
-                    </dd>
-                    <dd>
-                        <a href="http://www.scratchfoundation.org/">
-                            <FormattedMessage id="general.scratchFoundation" />
-                        </a>
-                    </dd>
-                    <dd>
-                        <a href="/store">
-                            <FormattedMessage id="general.scratchStore" />
-                        </a>
-                    </dd>>
-
-                </dl>*/}
             </div>
         </MediaQuery>
         <LanguageChooser locale={getLocale()} />
@@ -245,8 +137,7 @@ const Footer = props => (
 );
 
 Footer.propTypes = {
-    intl: intlShape.isRequired, // eslint-disable-line react/no-unused-prop-types
-    scratchWikiLink: PropTypes.string
+    intl: intlShape.isRequired // eslint-disable-line react/no-unused-prop-types
 };
 
 const mapStateToProps = (state, ownProps) => ({

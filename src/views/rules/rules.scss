@@ -1,8 +1,8 @@
 @import "../../colors";
 @import "../../frameless";
 
-.mechanism {
-    .mechanism-footer {
+.rules {
+    .rules-footer {
         margin-top: 1.5rem;
         text-align: center;
     }
@@ -32,7 +32,7 @@
 }
 
 @media #{$medium-and-smaller}{
-    .mechanism-footer {
+    .rules-footer {
         img {
             display: none;
         }

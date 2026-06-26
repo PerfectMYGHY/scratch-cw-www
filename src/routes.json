@@ -341,11 +341,11 @@
     "redirect": "/projects/331474033/editor/?tutorial=code-cartoon"
   },
   {
-    "name": "mechanism",
-    "pattern": "^/community_mechanism/?$",
-    "routeAlias": "/community_mechanism/?$",
-    "view": "mechanism/mechanism",
-    "title": "社区机制"
+    "name": "rules",
+    "pattern": "^/community_rules/?$",
+    "routeAlias": "/community_rules/?$",
+    "view": "rules/rules",
+    "title": "社区规则"
   },
   {
     "name": "reviewer",
@@ -357,7 +357,7 @@
   {
     "name": "webmaster",
     "pattern": "^/about_webmaster/?$",
-    "routeAlias": "/community_mechanism/?$",
+    "routeAlias": "/about_webmaster/?$",
     "view": "webmaster/webmaster",
     "title": "关于站长"
   },
