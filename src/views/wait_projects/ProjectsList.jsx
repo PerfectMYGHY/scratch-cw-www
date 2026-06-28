@@ -55,14 +55,14 @@ const ProjectType = PropTypes.shape({
 });
 
 const ProjectInfo = ({item, canRemove, canTake, text, onClick, more, getChildren}) => {
-    const modifiedTime = new Date(item.history.modified);
+    const sharedTime = new Date(item.history.shared);
     // 获取年份、月份和日期
-    const year = modifiedTime.getFullYear(); // 获取年份（四位数）
-    const month = `0${modifiedTime.getMonth() + 1}`.slice(-2); // 获取月份（补零）
-    const day = `0${modifiedTime.getDate()}`.slice(-2); // 获取日期（补零）
+    const year = sharedTime.getFullYear(); // 获取年份（四位数）
+    const month = `0${sharedTime.getMonth() + 1}`.slice(-2); // 获取月份（补零）
+    const day = `0${sharedTime.getDate()}`.slice(-2); // 获取日期（补零）
 
     // 拼接成所需格式的字符串
-    const mt = `${year}-${month}-${day}`;
+    const st = `${year}-${month}-${day}`;
     return (
         <div className="info-container">
             <a
@@ -85,7 +85,7 @@ const ProjectInfo = ({item, canRemove, canTake, text, onClick, more, getChildren
                 >
                     {item.title}
                 </a>
-                <p>最后修改日期：{mt}</p>
+                <p>分享日期：{st}</p>
                 <Button
                     onClick={() => {
                         window.open(`/projects/${item.id}/editor`, '_blank');
