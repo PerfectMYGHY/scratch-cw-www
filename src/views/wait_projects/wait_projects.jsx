@@ -273,8 +273,8 @@ class WaitProjects extends React.Component {
         if (item.auto_check_info) {
             children.push(
                 <div key="auto_check">
-                    <p style={{color: 'red'}}>审核时出现错误:</p>
-                    <p style={{color: 'red'}}>{item.auto_check_info}</p>
+                    <p style={{color: 'red'}}>程序审核时出现错误（请报备站长）:</p>
+                    <p style={{color: 'red', whiteSpace: 'pre-wrap'}}>{item.auto_check_info}</p>
                 </div>
             );
         }
@@ -301,7 +301,6 @@ class WaitProjects extends React.Component {
             >
                 <UserBox
                     setInfo={this.setInfo}
-                    // customLoadData={this.loadData} // 已通过componentDidUpdate监听info变化
                     uname={this.props.username}
                 >
                     <div>

@@ -7,7 +7,7 @@
     $project-height: 108px;
     text-align:left;
 
-    div[info=info] {
+    div.info-container {
         position: relative;
         border-bottom: 1px solid #dddddd;
         margin: 5px;
@@ -40,5 +40,9 @@
         margin-right: 10px;
         padding: 5px 10px;
         background: hsl(0, 0%, 98%);
+
+        max-width: calc(100% - $project-width - 10px - 200px - 80px - 20px);
+        max-height: 100px;
+        overflow: auto;
     }
 }
