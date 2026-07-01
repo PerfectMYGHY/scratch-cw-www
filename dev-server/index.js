@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 // ENV设置
 
 process.env.USING_DEV_SERVER = true;
@@ -13,7 +14,7 @@ const handler = require('./handler');
 const log = require('./log');
 const fs = require('fs');
 const files = fs.readdirSync('scratch-gui-chunks');
-var i = 0;
+let i = 0;
 
 process.stdout.write('正在配置规则...\n');
 const taskPerChunk = 4;
@@ -71,7 +72,7 @@ app.use(log());
 
 // Bind routes
 process.stdout.write('正在配置分发URL...\n');
-var i = 0;
+i = 0;
 routes.forEach(route => {
     process.stdout.write(`\r进度：[${'='.repeat(Math.round(((i + 1) / Object.keys(routes).length * 50)))}${' '.repeat(Math.round((1 - (i + 1) / Object.keys(routes).length) * 50))}]    `);
     i++;

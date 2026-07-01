@@ -224,7 +224,36 @@ class Search extends React.Component {
                                         <FormattedMessage id="general.projects" />
                                     </div>
                                 )
-                            }// ,
+                            },
+                            {
+                                name: 'users',
+                                onTrigger: () => {
+                                    const termText = this.encodeSearchTerm();
+                                    let targetUrl = `/search/users`;
+                                    if (termText) targetUrl += `?q=${termText}`;
+                                    window.location = targetUrl;
+                                },
+                                getContent: isActive => (
+                                    <div>
+                                        {isActive ? (
+                                            <img
+                                                className="tab-icon studios"
+                                                src="/svgs/tabs/studios-active.svg"
+                                                alt=""
+                                            />
+                                        ) : (
+                                            <img
+                                                className="tab-icon studios"
+                                                src="/svgs/tabs/studios-inactive.svg"
+                                                alt=""
+                                            />
+                                        )
+                                        }
+                                        <FormattedMessage id="general.studios" />
+                                    </div>
+                                )
+                            }
+                            // ,
                             // {
                             //    name: 'studios',
                             //    onTrigger: () => {
