@@ -26,6 +26,24 @@
         padding-bottom: 4px;
         width: $thumbnail-width;
 
+        &.users {
+            width: 119px;
+            text-align: center;
+
+            .thumbnail-image {
+                width: auto;
+            }
+        
+            .thumbnail-info {
+                width: auto;
+            }
+
+            .thumbnail-title {
+                float: none !important;
+                text-align: center !important;
+            }
+        }
+
         .thumbnail-image {
             margin: 8px auto;
             width: $thumbnail-inner-width;

@@ -37,6 +37,20 @@ const Grid = props => (
                         />
                     );
                 }
+                if (props.itemType === 'users') {
+                    return (
+                        <Thumbnail
+                            className="users"
+                            avatar=""
+                            href={`/${props.itemType}/${item.user.username}/`}
+                            key={key}
+                            src={thumbnailUrl(item.user.id)}
+                            title={item.user.nickname || item.user.username}
+                            type={'user'}
+                            alt={item.alt}
+                        />
+                    );
+                }
                 return (
                     <Thumbnail
                         href={href}

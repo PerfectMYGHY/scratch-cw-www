@@ -35,7 +35,7 @@ class Search extends React.Component {
         ]);
         this.state = this.getSearchState();
         this.state.loaded = [];
-        this.state.loadNumber = 16;
+        this.state.loadNumber = this.state.tab === 'users' ? 14 : 16;
         this.state.mode = 'popular';
         this.state.offset = 0;
         this.state.loadMore = false;
@@ -111,7 +111,7 @@ class Search extends React.Component {
         const type = pathname.substring(start + 1, pathname.length);
         return {
             tab: type,
-            loadNumber: 16
+            loadNumber: type === 'users' ? 14 : 16
         };
     }
     handleChangeSortMode (name, value) {
@@ -237,19 +237,19 @@ class Search extends React.Component {
                                     <div>
                                         {isActive ? (
                                             <img
-                                                className="tab-icon studios"
-                                                src="/svgs/tabs/studios-active.svg"
+                                                className="tab-icon users"
+                                                src="/svgs/tabs/users-active.svg"
                                                 alt=""
                                             />
                                         ) : (
                                             <img
-                                                className="tab-icon studios"
-                                                src="/svgs/tabs/studios-inactive.svg"
+                                                className="tab-icon users"
+                                                src="/svgs/tabs/users-inactive.svg"
                                                 alt=""
                                             />
                                         )
                                         }
-                                        <FormattedMessage id="general.studios" />
+                                        <FormattedMessage id="general.users" />
                                     </div>
                                 )
                             }
