@@ -29,203 +29,28 @@ const About = injectIntl(({intl}) => (
                     )}}
                 /></p>
                 <p><FormattedMessage id="about.introTwo" /></p>
-                {/*<p><FormattedMessage id="about.introThree" /></p>*/}
-                {/*
-                <ul>
-                    <li><a href="/parents/"><FormattedMessage id="about.introParents" /></a></li>
-                    <li><a href="/educators/"><FormattedMessage id="about.introEducators" /></a></li>
-                </ul>*/}
             </div>
-
-            {/*<div className="video-container">
-                <Video
-                    className="about-scratch-video"
-                    videoId="sucupcznsp"
-                />
-                <p>A can-not-see video</p>
-            </div>*/}
         </div>
 
         <div className="body">
-            <ul>{/*
-                <li>
-                    <h2><FormattedMessage id="about.whoUsesScratch" /></h2>
-                    <img
-                        alt=""
-                        src="/images/about/who-uses-scratch.jpg"
-                    />
-                    <p><FormattedMessage id="about.whoUsesScratchDescription" /></p>
-                </li>
-
-                <li>
-                    <h2><FormattedMessage id="about.literacy" /></h2>
-                    <a href="https://www.ted.com/talks/mitch_resnick_let_s_teach_kids_to_code">
-                        <img
-                            alt={intl.formatMessage(
-                                {id: 'about.literacyImageDescription'}
-                            )}
-                            src="/images/about/ted-thumbnail.jpg"
-                        />
-                    </a>
-                    <p>
-                        <FormattedMessage
-                            id="about.literacyDescription"
-                            values={{
-                                a: tedLink
-                            }}
-                        />
-                    </p>
-                </li>
-
-                <li>
-                    <h2><FormattedMessage id="about.aroundTheWorld" /></h2>
-                    <img
-                        alt=""
-                        src="/images/about/around-the-world.png"
-                    />
-                    <p><FormattedMessage
-                        id="about.aroundTheWorldDescription"
-                        values={{
-                            countryCount: 200,
-                            languageCount: 70,
-                            translationLink: (
-                                <a
-                                    href="https://github.com/scratchfoundation/scratch-l10n/wiki/Guide-for-Scratch-Translators"
-                                    rel="noreferrer noopener"
-                                    target="_blank"
-                                >
-                                    <FormattedMessage id="about.translationLinkText" />
-                                </a>
-                            )
-                        }}
-                    /></p>
-                </li>
-                <li>
-                    <h2><FormattedMessage id="about.schools" /></h2>
-                    <img
-                        alt=""
-                        src="/images/about/scratch-in-schools.jpg"
-                    />
-                    <p><FormattedMessage
-                        id="about.schoolsDescription"
-                        values={{
-                            scratchForEducatorsLink: (
-                                <a href="/educators">
-                                    <FormattedMessage id="about.scratchForEducatorsLinkText" />
-                                </a>
-                            )
-                        }}
-                    /></p>
-                </li>
-                <li>
-                    <h2><FormattedMessage id="about.quotes" /></h2>
-                    <img
-                        alt="Quotes about Scratch"
-                        src="/images/about/quotes.gif"
-                    />
-                    <p><FormattedMessage
-                        id="about.quotesDescription"
-                        values={{
-                            quotesLink: (
-                                <a
-                                    href="/info/quotes/"
-                                >
-                                    <FormattedMessage id="about.quotesLinkText" />
-                                </a>
-                            )
-                        }}
-                    /></p>
-                </li>
-
-                <li>
-                    <h2><FormattedMessage id="about.research" /></h2>
-                    <img
-                        alt=""
-                        src="/images/about/research-remix.png"
-                    />
-                    <p><FormattedMessage
-                        id="about.researchDescription"
-                        values={{
-                            researchLink: (
-                                <a href="/research">
-                                    <FormattedMessage id="about.researchLinkText" />
-                                </a>
-                            ),
-                            lifelongKindergartenGroupLink: (
-                                <a
-                                    href="https://www.media.mit.edu/groups/lifelong-kindergarten/overview/"
-                                    rel="noreferrer noopener"
-                                    target="_blank"
-                                >
-                                    <FormattedMessage id="about.lifelongKindergartenGroupLinkText" />
-                                </a>
-                            ),
-                            codingAtACrossroadsLink: (
-                                <a
-                                    href="https://cacm.acm.org/magazines/2020/11/248219-coding-at-a-crossroads/fulltext"
-                                    rel="noreferrer noopener"
-                                    target="_blank"
-                                >
-                                    <FormattedMessage id="about.codingAtACrossroadsLinkText" />
-                                </a>
-                            ),
-                            lifelongKindergartenBookLink: (
-                                <a
-                                    href="https://mitpress.mit.edu/books/lifelong-kindergarten"
-                                    rel="noreferrer noopener"
-                                    target="_blank"
-                                >
-                                    <FormattedMessage id="about.lifelongKindergartenBookLinkText" />
-                                </a>
-                            ),
-                            statisticsLink: (
-                                <a
-                                    href="/statistics"
-                                >
-                                    <FormattedMessage id="about.statisticsLinkText" />
-                                </a>
-                            ),
-                            annualReportLink: (
-                                <a
-                                    href="https://www.scratchfoundation.org/annualreport"
-                                >
-                                    <FormattedMessage id="about.annualReportLinkText" />
-                                </a>
-                            )
-                        }}
-                    /></p>
-                </li>*/}
-
+            <ul>
                 <li>
                     <h2><FormattedMessage id="about.learnMore" /></h2>
                     <ul className="list">
                         <li>
                             <a href="/faq"><FormattedMessage id="about.learnMoreFaq" /></a>
                         </li>
-                        {/*<li>
-                            <a href="/parents"><FormattedMessage id="about.learnMoreParents" /></a>
-                        </li>
-                        <li>
-                            <a href="/educators"><FormattedMessage id="about.learnMoreEducators" /></a>
-                        </li>
-                        <li>
-                            <a href="https://www.scratchfoundation.org/annualreport"><FormattedMessage id="about.learnMoreAnnualReport" /></a>
-                        </li>*/}
-                        {/*<li>*/}
-                        {/*    <a href="/ideas"><FormattedMessage id="general.ideas" /></a>*/}
-                        {/*</li>*/}
                         <li>
                             <a href="/community_guidelines"><FormattedMessage id="general.guidelines" /></a>
                         </li>
                         <li>
-                            <a href="/community_mechanism"><FormattedMessage id="general.mechanism" defaultMessage="社区机制" /></a>
+                            <a href="/community_rules"><FormattedMessage id="general.rules" /></a>
                         </li>
                     </ul>
                 </li>
 
                 <li>
                     <h2><FormattedMessage id="about.support" /></h2>
-                    {/*href="https://www.scratchfoundation.org/supporters"*/}
                     <p><FormattedMessage
                         id="about.supportDescription"
                         values={{
@@ -261,7 +86,6 @@ const About = injectIntl(({intl}) => (
 
                 <li>
                     <h2><FormattedMessage id="about.sourceCode" /></h2>
-                    {/*href="https://www.scratchfoundation.org/supporters"*/}
                     <p><FormattedMessage
                         id="about.sourceCodeDescription"
                     /></p>
@@ -282,6 +106,46 @@ const About = injectIntl(({intl}) => (
                             values={{
                                 link: (
                                     <a href="https://github.com/TurboWarp/scratch-gui">scratch-gui</a>
+                                )
+                            }}
+                        />
+                    </p>
+                    <p>
+                        <FormattedMessage
+                            id="about.sourceCodeThankTurboWarp"
+                            values={{
+                                link: (
+                                    <a href="https://github.com/TurboWarp/scratch-vm">scratch-vm</a>
+                                )
+                            }}
+                        />
+                    </p>
+                    <p>
+                        <FormattedMessage
+                            id="about.sourceCodeThankTurboWarp"
+                            values={{
+                                link: (
+                                    <a href="https://github.com/TurboWarp/scratch-vm">scratch-vm</a>
+                                )
+                            }}
+                        />
+                    </p>
+                    <p>
+                        <FormattedMessage
+                            id="about.sourceCodeThankScratchFoundation"
+                            values={{
+                                link: (
+                                    <a href="https://github.com/scratchfoundation/scratch-storage">scratch-storage</a>
+                                )
+                            }}
+                        />
+                    </p>
+                    <p>
+                        <FormattedMessage
+                            id="about.sourceCodeThankScratchFoundation"
+                            values={{
+                                link: (
+                                    <a href="https://github.com/scratchfoundation/scratch-l10n">scratch-l10n</a>
                                 )
                             }}
                         />
@@ -314,6 +178,36 @@ const About = injectIntl(({intl}) => (
                             values={{
                                 link: (
                                     <a href="https://github.com/PerfectMYGHY/scratch-cw-gui">scratch-cw-gui</a>
+                                )
+                            }}
+                        />
+                    </p>
+                    <p>
+                        <FormattedMessage
+                            id="about.sourceCodeOpenText"
+                            values={{
+                                link: (
+                                    <a href="https://github.com/PerfectMYGHY/scratch-cw-vm">scratch-cw-vm</a>
+                                )
+                            }}
+                        />
+                    </p>
+                    <p>
+                        <FormattedMessage
+                            id="about.sourceCodeOpenText"
+                            values={{
+                                link: (
+                                    <a href="https://github.com/PerfectMYGHY/scratch-cw-storage">scratch-cw-storage</a>
+                                )
+                            }}
+                        />
+                    </p>
+                    <p>
+                        <FormattedMessage
+                            id="about.sourceCodeOpenText"
+                            values={{
+                                link: (
+                                    <a href="https://github.com/PerfectMYGHY/scratch-cw-l10n">scratch-cw-l10n</a>
                                 )
                             }}
                         />
