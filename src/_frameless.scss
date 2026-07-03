@@ -1,26 +1,26 @@
 /*
     Frameless           <http://framelessgrid.com/>
-    by Joni Korpi       <http://jonikorpi.com/>
-    licensed under CC0  <http://creativecommons.org/publicdomain/zero/1.0/>
+    作者：Joni Korpi     <http://jonikorpi.com/>
+    采用 CC0 许可       <http://creativecommons.org/publicdomain/zero/1.0/>
 */
 
 
 //
-// Configuration
+// 配置
 //
 
 @use "sass:math";
 
-$font-size: 16px;       // Your base font-size in pixels
-$em: math.div($font-size, 1em);  // Shorthand for outputting ems
+$font-size: 16px;       // 以像素为单位的基准字号
+$em: math.div($font-size, 1em);  // 输出 em 值的简写形式
 
-$column: 60px;  // The column-width of your grid in pixels
-$gutter: 20px;  // The gutter-width of your grid in pixels
+$column: 60px;  // 网格的列宽（像素）
+$gutter: 20px;  // 网格的列间距（像素）
 
 
 
 //
-// Column-widths in variables, in ems
+// 列宽变量（以 em 为单位）
 //
 
 $cols1: math.div( 1 * ($column + $gutter) - $gutter, $em);
@@ -41,13 +41,13 @@ $tabletPortrait: 768px;
 $mobileIntermediate: 640px;
 $mobile: 480px;
 
-/* Media Queries */
+/* 媒体查询 */
 
-/* Width */
+/* 宽度 */
 /*
-* ... small | medium     | intermediate | big ...
-* ... medium-and-smaller |
-*          ... intermediate-and-smaller |
+* ... 小屏 | 中屏     | 中屏过渡  | 大屏 ...
+* ... 中屏及以下 |
+*          ... 中屏过渡及以下 |
 */
 
 $small: "only screen and (max-width : #{$mobile - 1})";
@@ -60,21 +60,21 @@ $intermediate-and-smaller: "only screen and (max-width : #{$desktop - 1})";
 
 $medium-and-intermediate: "only screen and (min-width : #{$mobile}) and (max-width : #{$desktop - 1})";
 
-/* Height */
+/* 高度 */
 
 $small-height: "only screen and (max-height : #{$mobile - 1})";
 $medium-height: "only screen and (min-height : #{$mobile}) and (max-height : #{$tabletPortrait - 1})";
 
 
 //
-// Column-widths in a function, in ems
+// 列宽函数（以 em 为单位）
 //
 
 @mixin width ($cols: 1) {
     width: math.div($cols * ($column + $gutter) - $gutter, $em);
 }
 
-//4 columns
+//4 列
 @mixin submobile ($parent-selector, $child-selector) {
     @media #{$small} {
         #{$parent-selector} {
@@ -90,7 +90,7 @@ $medium-height: "only screen and (min-height : #{$mobile}) and (max-height : #{$
     }
 }
 
-//6 columns
+//6 列
 @mixin mobile ($parent-selector, $child-selector) {
     @media #{$medium} {
         #{$parent-selector} {
@@ -106,7 +106,7 @@ $medium-height: "only screen and (min-height : #{$mobile}) and (max-height : #{$
     }
 }
 
-//8 columns
+//8 列
 @mixin tablet ($parent-selector, $child-selector) {
     @media #{$intermediate} {
         #{$parent-selector} {
@@ -120,7 +120,7 @@ $medium-height: "only screen and (min-height : #{$mobile}) and (max-height : #{$
     }
 }
 
-//12 columns
+//12 列
 @mixin desktop ($parent-selector, $child-selector) {
     @media #{$big} {
         #{$child-selector} {

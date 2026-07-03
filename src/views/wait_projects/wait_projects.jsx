@@ -288,6 +288,9 @@ class WaitProjects extends React.Component {
             unchecked: '未审核的',
             checked: '已查看的'
         };
+        if (this.state.info && this.state.info.permissions && this.state.info.permissions.webmaster) { // 如果是站长
+            tabToText.escalated = '转争议的';
+        }
         const {tab, projects, loading, loadingMore, hasMore, error} = this.state;
 
         if (error) {

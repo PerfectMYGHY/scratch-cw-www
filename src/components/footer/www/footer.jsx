@@ -38,6 +38,11 @@ const Footer = () => (
                             <FormattedMessage id="general.webmaster" />
                         </a>
                     </dd>
+                    <dd>
+                        <a href="/sponsor">
+                            <FormattedMessage id="general.donate" />
+                        </a>
+                    </dd>
                 </dl>
                 <dl>
                     <dt>
@@ -54,8 +59,8 @@ const Footer = () => (
                         </a>
                     </dd>
                     <dd>
-                        <a href="/statistics/">
-                            <FormattedMessage id="general.statistics" />
+                        <a href="/new_description">
+                            <FormattedMessage id="general.new_description" />
                         </a>
                     </dd>
                 </dl>

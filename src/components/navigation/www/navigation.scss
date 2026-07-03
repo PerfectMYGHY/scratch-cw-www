@@ -36,6 +36,15 @@
                 background-size: 100%;
             }
         }
+
+        @media #{$small} {
+            a {
+                background-image: url("/images/logo_sm_phone.png");
+                background-size: 95%;
+                width: 81px;
+                height: 50px;
+            }
+        }
     }
 
     .inner > ul > li {

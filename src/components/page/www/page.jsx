@@ -57,7 +57,7 @@ const Page = ({
                 </div>
             </aside>
         </div>
-        {semi && <div style={{color: '#fff'}}>{';'}</div>}
+        {semi && <div style={{color: '#fff'}}>;</div>}
     </ErrorBoundary>
 );
 

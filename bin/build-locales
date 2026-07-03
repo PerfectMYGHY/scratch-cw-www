@@ -97,8 +97,7 @@ var globalTemplateFile = path.resolve(__dirname, '../src/l10n.json');
 // every view includes these strings
 var generalLocales = {'en': JSON.parse(fs.readFileSync(globalTemplateFile, 'utf8'))};
 process.stdout.write("正在读取通用配置并应用...\n");
-// for ( var l in languages ) {
-for ( var l=null,i=0; i<Object.keys(languages).length; i++ ) {
+for (var l = null, i = 0; i < Object.keys(languages).length; i++) {
     try {
         l = Object.keys(languages)[i];
         var langTranslations = path.resolve(
@@ -112,7 +111,6 @@ for ( var l=null,i=0; i<Object.keys(languages).length; i++ ) {
         if (l !== 'en') {
             generalLocales[l] = JSON.parse(fs.readFileSync(langTranslations, 'utf8'));
         }
-        // process.stdout.flush();
     process.stdout.write(`\r进度：[${'='.repeat(Math.round(((i+1)/Object.keys(languages).length*50)))}${' '.repeat(Math.round((1-(i+1)/Object.keys(languages).length)*50))}]    `);
     } catch (err) {
         // just use english
@@ -144,9 +142,8 @@ var txMapping = {
     'scratch_1.4': 'scratch_14' // transifex doesn't allow dots in resource names
 };
 // start with english default for all views
-process.stdout.write("正在结合配置...\n");
-// for (var v in routes) {
-for ( var v=null,i=0; i<Object.keys(routes).length; i++ ) {
+process.stdout.write("正在合并配置...\n");
+for (var v = null, i = 0; i < Object.keys(routes).length; i++) {
     v = Object.keys(routes)[i];
     if (typeof routes[v].redirect !== 'undefined') {
         continue;
@@ -205,7 +202,6 @@ for ( var v=null,i=0; i<Object.keys(routes).length; i++ ) {
             throw err;
         }
     }
-    // process.stdout.flush();
     process.stdout.write(`\r进度：[${'='.repeat(Math.round(((i+1)/Object.keys(routes).length*50)))}${' '.repeat(Math.round((1-(i+1)/Object.keys(routes).length)*50))}]    `);
 }
 process.stdout.write("\n");

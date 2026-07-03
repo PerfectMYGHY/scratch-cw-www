@@ -9,6 +9,10 @@
         flex-wrap: nowrap;
         justify-content: space-between;
 
+        @media #{$small} {
+            margin: 0 4rem;
+        }
+
         dl {
             display: inline-block;
             vertical-align: top;

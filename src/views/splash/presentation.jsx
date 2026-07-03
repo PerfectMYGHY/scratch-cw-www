@@ -437,6 +437,9 @@ class SplashPresentation extends React.Component { // eslint-disable-line react/
                                         <li>
                                             <a href="https://projects.scratch-cw.top/scratch-cw-admin/"><FormattedMessage id="splash.adminpanel.backend1name" /></a>
                                         </li>
+                                        <li>
+                                            <a href="https://cloud.scratch-cw.top/scratch-cloud-admin/"><FormattedMessage id="splash.adminpanel.backend2name" /></a>
+                                        </li>
                                     </ul>
                                 </dd>
                             </dl>
