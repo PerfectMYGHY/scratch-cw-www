@@ -72,6 +72,14 @@
     "dynamicMetaTags": true
   },
   {
+    "name": "studio",
+    "pattern": "^/studios/\\d+(/projects|/curators|/activity|/comments)?/?(\\?.*)?$",
+    "routeAlias": "/studios/?$",
+    "view": "studio/studio",
+    "title": "工作室",
+    "dynamicMetaTags": true
+  },
+  {
     "name": "embed",
     "pattern": "^/projects/\\d+/embed/?(\\?.*)?$",
     "routeAlias": "/projects/?$",
