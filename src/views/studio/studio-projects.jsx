@@ -17,7 +17,7 @@ import AlertProvider from '../../components/alert/alert-provider.jsx';
 import Alert from '../../components/alert/alert.jsx';
 
 const StudioProjects = ({
-    canAddProjects, canEditOpenToAll, items, isMuted, error,
+    canAddProjects, items, isMuted, error,
     loading, moreToLoad, onLoadMore, muteExpiresAtMs, showMuteError
 }) => {
     useEffect(() => {
@@ -30,7 +30,6 @@ const StudioProjects = ({
                 <Alert className="studio-alert" />
                 <div className="studio-header-container">
                     <h2><FormattedMessage id="studio.projectsHeader" /></h2>
-                    {canEditOpenToAll && <StudioOpenToAll />}
                 </div>
                 {showMuteError &&
                     <CommentingStatus>
@@ -126,7 +125,6 @@ const StudioProjects = ({
 
 StudioProjects.propTypes = {
     canAddProjects: PropTypes.bool,
-    canEditOpenToAll: PropTypes.bool,
     items: PropTypes.arrayOf(PropTypes.shape({
         avatar: PropTypes.shape({
             '90x90': PropTypes.string
@@ -148,7 +146,6 @@ export default connect(
     state => ({
         ...projects.selector(state),
         canAddProjects: selectCanAddProjects(state),
-        canEditOpenToAll: selectCanEditOpenToAll(state),
         isMuted: selectIsMuted(state),
         showMuteError: selectShowProjectMuteError(state),
         muteExpiresAtMs: (selectMuteStatus(state).muteExpiresAt * 1000 || 0)

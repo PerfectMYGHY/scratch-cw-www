@@ -5,9 +5,9 @@ import {connect} from 'react-redux';
 import classNames from 'classnames';
 import {FormattedMessage, injectIntl} from 'react-intl';
 
-import {useAlertContext} from '../../components/alert/alert-context';
-import {Errors, inviteCurator} from './lib/studio-member-actions';
-import intlShape from '../../lib/intl-shape';
+import {useAlertContext} from '../../components/alert/alert-context.js';
+import {Errors, inviteCurator} from './lib/studio-member-actions.js';
+import intlShape from '../../lib/intl-shape.js';
 import ValidationMessage from '../../components/forms/validation-message.jsx';
 
 const errorToMessageId = error => {

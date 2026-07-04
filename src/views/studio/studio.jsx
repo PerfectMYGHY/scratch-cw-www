@@ -19,10 +19,10 @@ import StudioTabNav from './studio-tab-nav.jsx';
 import StudioProjects from './studio-projects.jsx';
 import StudioInfo from './studio-info.jsx';
 import StudioManagers from './studio-managers.jsx';
-import StudioCurators from './studio-curators.jsx';
+import StudioMembers from './studio-members.jsx';
 import StudioComments from './studio-comments.jsx';
 import StudioActivity from './studio-activity.jsx';
-import StudioCuratorInvite from './studio-curator-invite.jsx';
+import StudioMemberInvite from './studio-member-invite.jsx';
 import StudioMeta from './studio-meta.jsx';
 import StudioAdminPanel from './studio-admin-panel.jsx';
 import StudioDeleted from './studio-deleted.jsx';
@@ -37,7 +37,7 @@ import CommentingStatus from '../../components/commenting-status/commenting-stat
 import {FormattedMessage} from 'react-intl';
 import {selectShowCuratorMuteError} from '../../redux/studio-permissions.js';
 
-const StudioShell = ({isAdmin, showCuratorMuteError, muteExpiresAtMs, studioLoadFailed, onLoadInfo}) => {
+const StudioShell = ({isAdmin, showMemberMuteError, muteExpiresAtMs, studioLoadFailed, onLoadInfo}) => {
     const match = useRouteMatch();
 
     useEffect(() => {
@@ -57,14 +57,14 @@ const StudioShell = ({isAdmin, showCuratorMuteError, muteExpiresAtMs, studioLoad
                     <StudioTabNav />
                     <div>
                         <Switch>
-                            <Route path={`${match.path}/curators`}>
-                                <StudioCuratorInvite />
-                                {showCuratorMuteError &&
+                            <Route path={`${match.path}/members`}>
+                                <StudioMemberInvite />
+                                {showMemberMuteError &&
                                     <CommentingStatus>
                                         <p>
                                             <div>
                                                 <FormattedMessage
-                                                    id="studio.mutedCurators"
+                                                    id="studio.mutedMembers"
                                                     values={{
                                                         inDuration: formatRelativeTime(muteExpiresAtMs, window._locale)
                                                     }}
@@ -75,7 +75,7 @@ const StudioShell = ({isAdmin, showCuratorMuteError, muteExpiresAtMs, studioLoad
                                     </CommentingStatus>
                                 }
                                 <StudioManagers />
-                                <StudioCurators />
+                                <StudioMembers />
                             </Route>
                             <Route path={`${match.path}/comments`}>
                                 <StudioComments />
@@ -99,7 +99,7 @@ const StudioShell = ({isAdmin, showCuratorMuteError, muteExpiresAtMs, studioLoad
 
 StudioShell.propTypes = {
     isAdmin: PropTypes.bool,
-    showCuratorMuteError: PropTypes.bool,
+    showMemberMuteError: PropTypes.bool,
     muteExpiresAtMs: PropTypes.number,
     studioLoadFailed: PropTypes.bool,
     onLoadInfo: PropTypes.func
@@ -107,7 +107,7 @@ StudioShell.propTypes = {
 
 const ConnectedStudioShell = connect(
     state => ({
-        showCuratorMuteError: selectShowCuratorMuteError(state),
+        showMemberMuteError: selectShowCuratorMuteError(state),
         studioLoadFailed: selectStudioLoadFailed(state),
         muteExpiresAtMs: (selectMuteStatus(state).muteExpiresAt * 1000 || 0),
         isAdmin: selectIsAdmin(state)

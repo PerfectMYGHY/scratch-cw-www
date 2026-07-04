@@ -9,7 +9,6 @@
  */
 const keyMirror = require('keymirror');
 const api = require('../lib/api');
-const {selectUsername} = require('./session');
 const {selectStudioId, selectStudioImage, selectStudioOpenToAll, selectStudioCommentsAllowed} = require('./studio');
 
 const Errors = keyMirror({
@@ -124,8 +123,7 @@ const normalizeError = (err, body, res) => {
 const mutateStudioTitle = value => ((dispatch, getState) => {
     dispatch(startMutation('title'));
     api({
-        host: '',
-        uri: `/site-api/galleries/all/${selectStudioId(getState())}/`,
+        uri: `/studios/${selectStudioId(getState())}/update/`,
         method: 'PUT',
         useCsrf: true,
         json: {
@@ -140,8 +138,7 @@ const mutateStudioTitle = value => ((dispatch, getState) => {
 const mutateStudioDescription = value => ((dispatch, getState) => {
     dispatch(startMutation('description'));
     api({
-        host: '',
-        uri: `/site-api/galleries/all/${selectStudioId(getState())}/`,
+        uri: `/studios/${selectStudioId(getState())}/update/`,
         method: 'PUT',
         useCsrf: true,
         json: {
@@ -157,12 +154,9 @@ const mutateFollowingStudio = shouldFollow => ((dispatch, getState) => {
     dispatch(startMutation('following'));
     const state = getState();
     const studioId = selectStudioId(state);
-    const username = selectUsername(state);
-    let uri = `/site-api/users/bookmarkers/${studioId}/`;
+    let uri = `/studios/${studioId}/follow/`;
     uri += shouldFollow ? 'add/' : 'remove/';
-    uri += `?usernames=${username}`;
     api({
-        host: '',
         uri: uri,
         method: 'PUT',
         useCsrf: true
@@ -185,8 +179,7 @@ const mutateStudioImage = input => ((dispatch, getState) => {
     const formData = new FormData();
     formData.append('file', input.files[0]);
     api({
-        host: '',
-        uri: `/site-api/galleries/all/${studioId}/`,
+        uri: `/studios/${studioId}/cover/update/`,
         method: 'POST',
         withCredentials: true,
         useCsrf: true,

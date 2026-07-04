@@ -6,7 +6,7 @@ import classNames from 'classnames';
 
 import {curators} from './lib/redux-modules';
 import {CuratorTile} from './studio-member-tile.jsx';
-import CuratorInviter from './studio-curator-inviter.jsx';
+import CuratorInviter from './studio-member-inviter.jsx';
 import {loadCurators} from './lib/studio-member-actions';
 import {selectCanInviteCurators} from '../../redux/studio-permissions';
 import AlertProvider from '../../components/alert/alert-provider.jsx';

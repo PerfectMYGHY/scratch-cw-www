@@ -20,7 +20,6 @@ const getInitialState = () => ({
     infoStatus: Status.FETCHING,
     title: '',
     description: '',
-    openToAll: false,
     commentsAllowed: false,
     image: '',
     followers: 0,
@@ -98,7 +97,6 @@ const selectStudioId = state => state.studio.id;
 const selectStudioTitle = state => state.studio.title;
 const selectStudioDescription = state => state.studio.description;
 const selectStudioImage = state => state.studio.image;
-const selectStudioOpenToAll = state => state.studio.openToAll;
 const selectStudioCommentsAllowed = state => state.studio.commentsAllowed;
 const selectStudioLastUpdated = state => state.studio.updated;
 const selectStudioLoadFailed = state => state.studio.infoStatus === Status.ERROR;
@@ -128,7 +126,6 @@ const getInfo = () => ((dispatch, getState) => {
             title: body.title,
             description: body.description,
             image: body.image,
-            openToAll: body.open_to_all,
             commentsAllowed: body.comments_allowed,
             updated: new Date(body.history.modified),
             commentCount: body.stats.comments,
@@ -192,7 +189,6 @@ module.exports = {
     selectStudioTitle,
     selectStudioDescription,
     selectStudioImage,
-    selectStudioOpenToAll,
     selectStudioCommentsAllowed,
     selectStudioLastUpdated,
     selectStudioLoadFailed,

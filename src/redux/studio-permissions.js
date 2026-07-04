@@ -12,8 +12,7 @@ const selectCanEditInfo = state => !selectIsMuted(state) && (selectIsAdmin(state
 const selectCanAddProjects = state =>
     !selectIsMuted(state) &&
     (isManager(state) ||
-    isCurator(state) ||
-    (selectIsSocial(state) && state.studio.openToAll));
+    isCurator(state));
 
 // This isn't "canComment" since they could be muted, but comment composer handles that
 const selectShowCommentComposer = state => selectIsSocial(state);
@@ -36,7 +35,6 @@ const selectCanFollowStudio = state => selectIsLoggedIn(state);
 
 // Matching existing behavior, only admin/creator is allowed to toggle comments.
 const selectCanEditCommentsAllowed = state => !selectIsMuted(state) && (selectIsAdmin(state) || isHost(state));
-const selectCanEditOpenToAll = state => !selectIsMuted(state) && isManager(state);
 
 const selectShowCuratorInvite = state => !selectIsMuted(state) && !!state.studio.invited;
 const selectCanInviteCurators = state => !selectIsMuted(state) && isManager(state);
@@ -92,8 +90,7 @@ const selectShowEditMuteError = state => selectIsMuted(state) && (isHost(state) 
 const selectShowProjectMuteError = state => selectIsMuted(state) &&
     (selectIsAdmin(state) ||
     isManager(state) ||
-    isCurator(state) ||
-    (selectIsSocial(state) && state.studio.openToAll));
+    isCurator(state));
 const selectShowCuratorMuteError = state => selectIsMuted(state) && (isManager(state) || selectIsAdmin(state));
 const selectShowCommentsGloballyOffError = state =>
     selectHasFetchedSession(state) && !selectStudioCommentsGloballyEnabled(state);
@@ -108,7 +105,6 @@ export {
     selectCanReportComment,
     selectCanRestoreComment,
     selectCanEditCommentsAllowed,
-    selectCanEditOpenToAll,
     selectShowCuratorInvite,
     selectCanInviteCurators,
     selectCanRemoveCurator,

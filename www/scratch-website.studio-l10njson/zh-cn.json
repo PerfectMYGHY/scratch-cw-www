@@ -1,7 +1,7 @@
 {
     "studio.tabNavProjects": "作品",
     "studio.tabNavProjectsWithCount": "作品 {projectCount}",
-    "studio.tabNavCurators": "策划人",
+    "studio.tabNavMembers": "成员",
     "studio.tabNavComments": "评论",
     "studio.tabNavCommentsWithCount": "评论 {commentCount}",
     "studio.tabNavActivity": "动态",
@@ -121,7 +121,7 @@
     "studio.reportAreThereComments": "该工作室中是否有不恰当的评论？请在相应评论中点击举报按钮以举报。",
     "studio.reportThanksForLettingUsKnow": "谢谢你的反馈！",
     "studio.reportYourFeedback": "你的反馈有助于我们改进Scratch。",
-    "studio.mutedCurators": "你需要在 {inDuration} 后才能再次邀请策划人或者添加管理员。",
+    "studio.mutedMembers": "你需要在 {inDuration} 后才能再次邀请成员或者添加管理员。",
     "studio.mutedProjects": "你需要在 {inDuration} 后才能再次添加或删除作品。",
     "studio.mutedEdit": "你需要在 {inDuration} 后才能再次编辑这个工作室。",
     "studio.mutedPaused": "在此之前你的账号被停止使用工作室。",

@@ -87,11 +87,11 @@ const StudioTabNav = ({isFetchingInfo, commentCount, projectCount}) => {
             <NavLink
                 activeClassName="active"
                 className="nav_link"
-                to={`${base}/curators`}
+                to={`${base}/members`}
             >
                 <li><img
                     src={curatorsIcon}
-                /><FormattedMessage id="studio.tabNavCurators" /></li>
+                /><FormattedMessage id="studio.tabNavMembers" /></li>
             </NavLink>
             <NavLink
                 activeClassName="active"
