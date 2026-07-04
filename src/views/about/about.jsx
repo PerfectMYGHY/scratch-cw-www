@@ -4,13 +4,11 @@ const render = require('../../lib/render.jsx');
 
 const Button = require('../../components/forms/button.jsx');
 const Page = require('../../components/page/www/page.jsx');
-const Video = require('../../components/video/video.jsx');
 const injectIntl = require('react-intl').injectIntl;
 
 require('./about.scss');
 
-const tedLink = chunks => <a href="https://www.ted.com/talks/mitch_resnick_let_s_teach_kids_to_code">{chunks}</a>;
-const About = injectIntl(({intl}) => (
+const About = injectIntl(() => (
     <div className="inner about">
         <h1><FormattedMessage id="general.aboutScratch" /></h1>
 
