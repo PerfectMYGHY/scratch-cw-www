@@ -42,7 +42,6 @@ const EmitFilePlugin = require('emit-file-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-// const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 

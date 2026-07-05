@@ -407,12 +407,6 @@ $radius: 8px;
 }
 
 .studio-adder-section {
-    margin-top: 20px;
-
-    h3 {
-        color: $ui-purple-dark;
-    }
-
     .studio-adder-row {
         display: flex;
         flex-wrap: wrap-reverse; /* so error goes below at small sizes */

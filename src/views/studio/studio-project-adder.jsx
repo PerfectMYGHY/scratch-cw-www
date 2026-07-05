@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import classNames from 'classnames';
 import {FormattedMessage} from 'react-intl';
 
-import {Errors, addProject} from './lib/studio-project-actions';
+import {Errors, createProject} from './lib/studio-project-actions';
 import UserProjectsModal from './modals/user-projects-modal.jsx';
 import ValidationMessage from '../../components/forms/validation-message.jsx';
 import {useAlertContext} from '../../components/alert/alert-context';
@@ -24,7 +24,6 @@ const errorToMessageId = error => {
 };
 
 const StudioProjectAdder = ({onSubmit}) => {
-    const [value, setValue] = useState('');
     const [submitting, setSubmitting] = useState(false);
     const [error, setError] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
@@ -32,29 +31,21 @@ const StudioProjectAdder = ({onSubmit}) => {
     const submit = () => {
         setSubmitting(true);
         setError(null);
-        onSubmit(value)
-            .then(() => {
+        onSubmit()
+            .then(projectId => {
                 successAlert({
-                    id: 'studio.alertProjectAdded',
-                    values: {title: value}
+                    id: 'studio.alertProjectCreated'
                 });
-                setValue('');
+                window.open(`/projects/${projectId}/editor`);
             })
             .catch(e => {
-                // Duplicate project will show success alert
-                if (e === Errors.DUPLICATE) {
-                    successAlert({id: 'studio.alertProjectAlreadyAdded'});
-                    setValue('');
-                } else {
-                    // Other errors are displayed by this component
-                    setError(e);
-                }
+                // Other errors are displayed by this component
+                setError(e);
             })
             .then(() => setSubmitting(false));
     };
     return (
         <div className="studio-adder-section">
-            <h3><FormattedMessage id="studio.addProjectsHeader" /></h3>
             <div className="studio-adder-row">
                 {error && <div className="studio-adder-error">
                     <ValidationMessage
@@ -63,28 +54,21 @@ const StudioProjectAdder = ({onSubmit}) => {
                         message={<FormattedMessage id={errorToMessageId(error)} />}
                     />
                 </div>}
-                <input
-                    className={classNames({'mod-form-error': error})}
-                    disabled={submitting}
-                    type="text"
-                    placeholder="https://scratch.mit.edu/projects/xxxx"
-                    value={value}
-                    onKeyDown={e => e.key === 'Enter' && submit()}
-                    onChange={e => setValue(e.target.value)}
-                />
                 <button
                     className={classNames('button', {
                         'mod-mutating': submitting
                     })}
-                    disabled={submitting || value === ''}
+                    disabled={submitting}
                     onClick={submit}
-                ><FormattedMessage id="studio.addProject" /></button>
+                >
+                    <FormattedMessage id="studio.addProjectNew" />
+                </button>
                 <div className="studio-adder-vertical-divider" />
                 <button
                     className="button"
                     onClick={() => setModalOpen(true)}
                 >
-                    <FormattedMessage id="studio.browseProjects" />
+                    <FormattedMessage id="studio.addProjectFromYours" />
                 </button>
                 {modalOpen && <UserProjectsModal onRequestClose={() => setModalOpen(false)} />}
             </div>
@@ -99,7 +83,7 @@ StudioProjectAdder.propTypes = {
 const mapStateToProps = () => ({});
 
 const mapDispatchToProps = ({
-    onSubmit: addProject
+    onSubmit: createProject
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StudioProjectAdder);

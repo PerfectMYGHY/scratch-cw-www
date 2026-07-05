@@ -1,12 +1,11 @@
 import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import StudioOpenToAll from './studio-open-to-all.jsx';
 import {FormattedMessage} from 'react-intl';
 import classNames from 'classnames';
 
 import {projects} from './lib/redux-modules';
-import {selectCanAddProjects, selectCanEditOpenToAll, selectShowProjectMuteError} from '../../redux/studio-permissions';
+import {selectCanAddProjects, selectShowProjectMuteError} from '../../redux/studio-permissions';
 import StudioProjectAdder from './studio-project-adder.jsx';
 import StudioProjectTile from './studio-project-tile.jsx';
 import {loadProjects} from './lib/studio-project-actions.js';
@@ -30,6 +29,7 @@ const StudioProjects = ({
                 <Alert className="studio-alert" />
                 <div className="studio-header-container">
                     <h2><FormattedMessage id="studio.projectsHeader" /></h2>
+                    {canAddProjects && <StudioProjectAdder />}
                 </div>
                 {showMuteError &&
                     <CommentingStatus>
@@ -46,7 +46,6 @@ const StudioProjects = ({
                         </p>
                     </CommentingStatus>
                 }
-                {canAddProjects && <StudioProjectAdder />}
 
                 {error && <div className="studio-section-load-error studio-info-box studio-info-box-error">
                     <h3><FormattedMessage id="studio.sectionLoadError.projectsHeadline" /></h3>

@@ -67,6 +67,30 @@ const generateProjectListItem = (postBody, infoBody) => ({
     avatar: infoBody.author.profile.images
 });
 
+const createProject = () => ((dispatch, getState) => new Promise((resolve, reject) => {
+    const state = getState();
+    const studioId = selectStudioId(state);
+
+    api({
+        uri: `/studios/${studioId}/create/project/`,
+        method: 'POST'
+    }, (err, body, res) => {
+        const error = normalizeError(err, body, res);
+        if (error) return reject(error);
+
+        const projectId = body.projectId;
+
+        // Would prefer if the POST returned the exact data / format we want...
+        api({uri: `/projects/${projectId}`}, (infoErr, infoBody, infoRes) => {
+            const infoError = normalizeError(infoErr, infoBody, infoRes);
+            if (infoError) return reject(infoError);
+            const newItem = generateProjectListItem(body, infoBody);
+            dispatch(projects.actions.create(newItem));
+            return resolve(projectId);
+        });
+    });
+}));
+
 const addProject = projectIdOrUrl => ((dispatch, getState) => new Promise((resolve, reject) => {
     // Strings are passed by the open input, numbers by the project browser
     let projectId = projectIdOrUrl;
@@ -79,7 +103,6 @@ const addProject = projectIdOrUrl => ((dispatch, getState) => new Promise((resol
 
     const state = getState();
     const studioId = selectStudioId(state);
-    const token = selectToken(state);
 
     // Check for existing duplicates before going to the server
     if (projects.selector(state).items.filter(p => p.id === projectId).length !== 0) {
@@ -87,8 +110,7 @@ const addProject = projectIdOrUrl => ((dispatch, getState) => new Promise((resol
     }
     api({
         uri: `/studios/${studioId}/project/${projectId}`,
-        method: 'POST',
-        authentication: token
+        method: 'POST'
     }, (err, body, res) => {
         const error = normalizeError(err, body, res);
         if (error) return reject(error);
@@ -125,6 +147,7 @@ const removeProject = projectId => ((dispatch, getState) => new Promise((resolve
 export {
     Errors,
     loadProjects,
+    createProject,
     addProject,
     removeProject
 };
