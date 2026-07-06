@@ -1,7 +1,6 @@
 import keyMirror from 'keymirror';
 import api from '../../../lib/api';
-import {selectToken, selectUsername} from '../../../redux/session';
-import {selectClassroomId} from '../../../redux/studio';
+import {selectUserId} from '../../../redux/session';
 import {userProjects, projects} from './redux-modules';
 
 const Errors = keyMirror({
@@ -11,26 +10,20 @@ const Errors = keyMirror({
 });
 
 const Filters = keyMirror({
-    SHARED: null,
-    FAVORITED: null,
-    RECENT: null,
-    STUDENTS: null
+    ALL: null,
+    UNSHARED: null,
+    SHARED: null
 });
 
 const Endpoints = {
+    [Filters.ALL]: state => ({
+        uri: `/users/${selectUserId(state)}/projects/all`
+    }),
+    [Filters.UNSHARED]: state => ({
+        uri: `/users/${selectUserId(state)}/projects/unshared`
+    }),
     [Filters.SHARED]: state => ({
-        uri: `/users/${selectUsername(state)}/projects`
-    }),
-    [Filters.FAVORITED]: state => ({
-        uri: `/users/${selectUsername(state)}/favorites`
-    }),
-    [Filters.RECENT]: state => ({
-        uri: `/users/${selectUsername(state)}/projects/recentlyviewed`,
-        authentication: selectToken(state)
-    }),
-    [Filters.STUDENTS]: state => ({
-        uri: `/classrooms/${selectClassroomId(state)}/projects`,
-        authentication: selectToken(state)
+        uri: `/users/${selectUserId(state)}/projects/shared`
     })
 };
 
@@ -50,7 +43,8 @@ const loadUserProjects = type => ((dispatch, getState) => {
         params: {
             limit: projectsPerPage,
             offset: projectCount
-        }
+        },
+        method: 'POST'
     };
     dispatch(userProjects.actions.loading());
     api(opts, (err, body, res) => {

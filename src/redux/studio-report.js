@@ -99,8 +99,7 @@ const submitStudioReport = () => ((dispatch, getState) => {
     const studioId = selectStudioId(getState());
     const field = selectStudioReportField(getState());
     api({
-        host: '',
-        uri: `/site-api/galleries/all/${studioId}/report/`,
+        uri: `/studios/${studioId}/report/`,
         method: 'POST',
         useCsrf: true,
         formData: {
