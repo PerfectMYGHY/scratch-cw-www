@@ -7,6 +7,9 @@ npm-*
 
 # Build
 /build
+/build.7z
+/build.rar
+/build.zip
 
 # Locales
 # /locales

@@ -27,7 +27,8 @@ class Explore extends React.Component {
             'getExploreState',
             'handleGetExploreMore',
             'handleChangeSortMode',
-            'getBubble'
+            'getBubble',
+            'handleHashChange'
         ]);
 
         this.state = this.getExploreState();
@@ -36,6 +37,19 @@ class Explore extends React.Component {
     }
     componentDidMount () {
         this.handleGetExploreMore();
+        window.addEventListener('hashchange', this.handleHashChange);
+    }
+    componentWillUnmount () {
+        window.removeEventListener('hashchange', this.handleHashChange);
+    }
+    handleHashChange () {
+        this.setState({
+            ...this.getExploreState(),
+            loaded: [],
+            offset: 0
+        }, () => {
+            this.handleGetExploreMore();
+        });
     }
     getExploreState () {
         const categoryOptions = {
@@ -50,7 +64,10 @@ class Explore extends React.Component {
         const typeOptions = ['projects', 'studios'];
         const modeOptions = ['trending', 'popular', 'recent', ''];
 
-        let pathname = window.location.href.toLowerCase().split("/").slice(2).join("/");
+        let pathname = window.location.href.toLowerCase()
+            .split('/')
+            .slice(2)
+            .join('/');
         if (pathname[pathname.length - 1] === '/') {
             pathname = pathname.substring(0, pathname.length - 1);
         }
@@ -97,15 +114,10 @@ class Explore extends React.Component {
 
     handleChangeSortMode (name, value) {
         if (this.state.acceptableModes.indexOf(value) !== -1) {
-            window.location =
-                `${window.location.origin}/explore/${this.state.itemType}/${this.state.category}/#${value}`;
-            if (value == "trending") {
-                window.location =
-                    `${window.location.origin}/explore/${this.state.itemType}/${this.state.category}/`;
+            if (value === 'trending') {
+                window.location.hash = '';
             } else {
-                setTimeout(function () {
-                    window.location.reload();
-                }, 100);
+                window.location.hash = value;
             }
         }
     }
