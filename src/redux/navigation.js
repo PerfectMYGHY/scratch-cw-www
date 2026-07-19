@@ -166,7 +166,7 @@ module.exports.handleLogOut = () => (dispatch => {
         uri: 'api/logout',
         useCsrf: true,
         withCredentials: true
-    }, (err) => {
+    }, err => {
         if (err) return log.error('Error while logging out', err);
         dispatch(sessionActions.refreshSession());
     });

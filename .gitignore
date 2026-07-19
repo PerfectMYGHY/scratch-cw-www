@@ -54,3 +54,6 @@ ENV
 **/*.dmg
 # 存储这玩意儿的目录
 /static-desktop/
+
+# Log File
+**/*.log

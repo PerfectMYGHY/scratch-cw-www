@@ -54,7 +54,7 @@ class Settings extends React.Component {
     handleNicknameChange () {
         const nickname = this.nc_nickname_ref.current.value;
         const password = this.nc_password_ref.current.value;
-        requestAPI('nickname/change/', {username: nickname, password: password}, data => {
+        requestAPI('nickname/change/', {nickname: nickname, password: password}, data => {
             if (data.status === 'success') {
                 alert('设置用户名成功！刷新页面即可生效！');
             } else {
@@ -88,6 +88,7 @@ class Settings extends React.Component {
                         <p>
                             <label htmlFor="new_username">新的用户名：</label>
                             <input
+                                type="text"
                                 name="new_username"
                                 id="new_username"
                                 ref={this.uc_username_ref}
@@ -96,6 +97,7 @@ class Settings extends React.Component {
                         <p>
                             <label htmlFor="uc_password">密码确认：</label>
                             <input
+                                type="password"
                                 name="uc_password"
                                 id="uc_password"
                                 ref={this.uc_password_ref}
@@ -109,6 +111,7 @@ class Settings extends React.Component {
                         <p>
                             <label htmlFor="new_nickname">新的昵称：</label>
                             <input
+                                type="text"
                                 name="new_nickname"
                                 id="new_nickname"
                                 ref={this.nc_nickname_ref}
@@ -117,6 +120,7 @@ class Settings extends React.Component {
                         <p>
                             <label htmlFor="nc_password">密码确认：</label>
                             <input
+                                type="password"
                                 name="nc_password"
                                 id="nc_password"
                                 ref={this.nc_password_ref}
