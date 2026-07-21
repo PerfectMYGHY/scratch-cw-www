@@ -38,7 +38,7 @@ const {inputProjectInformation} = require('../../components/shareInput/shareInpu
 
 const GUI = require('scratch-gui');
 const IntlGUI = injectIntl(GUI.default);
-// const IntlGUI = compose(GUI.AppStateHOC)(injectIntl(GUI.default));
+
 if (GUI.AddonChannels.reloadChannel) {
     GUI.AddonChannels.reloadChannel.addEventListener('message', () => {
         location.reload();

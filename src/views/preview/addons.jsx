@@ -2,7 +2,7 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 // 从scratch-gui引入 导出的Scratch Addons 设置组件和 导出设置 函数
-const ScratchGUI = require("scratch-gui");
+const ScratchGUI = require('scratch-gui');
 const LoadSettings = ScratchGUI.LoadSettings;
 const onExportSettings = ScratchGUI.onExportSettings;
 // 加载Settings组件（函数返回的是一个require的结果）
@@ -15,8 +15,3 @@ ReactDOM.render((
         onExportSettings={onExportSettings}
     />
 ), document.getElementById('app'));
-
-// 停止显示加载界面
-//if (window.SplashEnd) {
-//    window.SplashEnd();
-//}
